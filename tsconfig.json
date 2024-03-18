@@ -13,6 +13,10 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@styles/*": ["./styles/*"],
+      "@constants/*": ["./src/constants/*"],
       "@/*": ["./*"]
     }
   },
