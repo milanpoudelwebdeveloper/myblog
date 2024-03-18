@@ -1,8 +1,17 @@
+import { Box } from "@chakra-ui/react";
+import BlogCard from "@components/Common/BlogCard";
+import MainLayout from "@components/Common/MainLayout";
+import Featured from "@components/Featured";
+import RecentPosts from "@components/RecentPosts";
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const featuredPost = {
+  title: "Is React better than Vue for your project?",
+  desc: "This is a description of the topic which is really good going. lorem ipsum is a dummy text which is used to fill the space of the content.",
+  date: "2021-10-10",
+  image: "/images/image1.webp",
+  categories: ["Programming", "React"],
+};
 
 export default function Home() {
   return (
@@ -13,9 +22,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>hey</h1>
-      </main>
+      <MainLayout>
+        <Box>
+          <BlogCard card={featuredPost} imagHeight={300} />
+          <RecentPosts />
+        </Box>
+      </MainLayout>
     </>
   );
 }
