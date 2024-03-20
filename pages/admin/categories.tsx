@@ -14,13 +14,11 @@ import {
 } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
-import { axiosInstance } from "@/axiosConfig";
-import { useCustomToast } from "@/src/hooks/useCustomToast";
 import { getCategories } from "@/src/services/category";
 
-const tableHeadings = ["ID", "Name", "Image"];
+const tableHeadings = ["ID", "Name", "Image", "Created At"];
 
-const BlogLists = ({ categories }: { categories: any }) => {
+const Categories = ({ categories }: { categories: any }) => {
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA">
@@ -44,13 +42,23 @@ const BlogLists = ({ categories }: { categories: any }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {categories.map((list: any, index: number) => (
+            {categories?.map((list: any, index: number) => (
               <Tr key={index}>
                 <Td>{list?.id}</Td>
-                <Td>{list?.name}</Td>
+                <Link href={`/admin/category/${list?.id}`} key={index}>
+                  <Td>{list?.name}</Td>
+                </Link>
                 <Td>
                   <Image
                     src={list?.image}
+                    alt="avatar"
+                    w={10}
+                    borderRadius="full"
+                  />
+                </Td>
+                <Td>
+                  <Image
+                    src={list?.createdAt}
                     alt="avatar"
                     w={10}
                     borderRadius="full"
@@ -65,7 +73,7 @@ const BlogLists = ({ categories }: { categories: any }) => {
   );
 };
 
-export default BlogLists;
+export default Categories;
 
 export async function getServerSideProps() {
   try {

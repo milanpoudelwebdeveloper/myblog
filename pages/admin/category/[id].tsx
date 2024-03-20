@@ -1,6 +1,10 @@
 import { axiosInstanceFile } from "@/axiosConfig";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
-import { addCategory } from "@/src/services/category";
+import {
+  addCategory,
+  editCategory,
+  getCategoryDetails,
+} from "@/src/services/category";
 import {
   Box,
   Button,
@@ -13,17 +17,22 @@ import {
   Text,
 } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
+import { useRouter } from "next/router";
 import React from "react";
 
-const AddCategory = () => {
-  const [name, setName] = React.useState("");
-  const [image, setImage] = React.useState<File | null | string>(null);
+const CategoryDetails = ({ categoryDetails }: { categoryDetails: any }) => {
+  const [name, setName] = React.useState(categoryDetails?.name);
+  const [image, setImage] = React.useState<File | undefined | string>(
+    categoryDetails?.image
+  );
   let imageUrl = "";
+  const router = useRouter();
+  const { id } = router.query;
   const { showToast } = useCustomToast();
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const editHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addCategory(name, image as File)
+    editCategory(id as string, name)
       .then((res) => {
         showToast(res, "success");
       })
@@ -33,7 +42,7 @@ const AddCategory = () => {
   };
 
   if (image && typeof image !== "string") {
-    imageUrl = URL.createObjectURL(image);
+    imageUrl = URL.createObjectURL(image) as string;
   } else {
     imageUrl = image as string;
   }
@@ -42,7 +51,7 @@ const AddCategory = () => {
     <MainLayout>
       <Box>
         <Text fontSize="lg" fontWeight="500" textAlign="center" color="#1814F3">
-          Add Category
+          Category Details
         </Text>
         <Divider
           mt={3}
@@ -52,7 +61,7 @@ const AddCategory = () => {
           mx="auto"
         />
         <Box mt={10}>
-          <form onSubmit={submitHandler}>
+          <form onSubmit={editHandler}>
             <Box alignItems="center" px={20} gap={20} mx="auto">
               <FormControl maxW={400} mx="auto" mb={10}>
                 <FormLabel color="#232323" fontSize="md">
@@ -69,15 +78,17 @@ const AddCategory = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
               </FormControl>
-              {imageUrl ? (
-                <Image
-                  borderRadius="full"
-                  w={20}
-                  h={20}
-                  src={imageUrl}
-                  alt="placeholder"
-                  mx="auto"
-                />
+              {imageUrl || image ? (
+                <Center>
+                  <Image
+                    borderRadius="full"
+                    w={20}
+                    h={20}
+                    src={imageUrl}
+                    alt="placeholder"
+                  />
+                  <Button onClick={() => setImage("")}>Delete Photo</Button>
+                </Center>
               ) : (
                 <Center mt={4}>
                   <Input
@@ -91,7 +102,7 @@ const AddCategory = () => {
                   />
                 </Center>
               )}
-              <Button type="submit">Submit</Button>
+              <Button type="submit">Edit</Button>
             </Box>
           </form>
         </Box>
@@ -100,4 +111,31 @@ const AddCategory = () => {
   );
 };
 
-export default AddCategory;
+export default CategoryDetails;
+
+export async function getServerSideProps(context: any) {
+  const { id } = context.params;
+  try {
+    const categoryDetails = await getCategoryDetails(id);
+
+    if (categoryDetails) {
+      return {
+        props: {
+          categoryDetails: categoryDetails,
+        },
+      };
+    } else {
+      return {
+        props: {
+          categories: [],
+        },
+      };
+    }
+  } catch (error: any) {
+    return {
+      props: {
+        categories: [],
+      },
+    };
+  }
+}

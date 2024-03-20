@@ -31,3 +31,33 @@ export const addCategory = async (name: string, image: File) => {
     throw message;
   }
 };
+
+export const getCategoryDetails = async (id: string) => {
+  try {
+    const res = await axiosInstance.get(`/category/${id}`);
+    if (res?.data) {
+      return res?.data?.data;
+    }
+  } catch (error: any) {
+    const message =
+      error?.response?.data?.message ||
+      "Something went wrong. Please try again";
+    throw message;
+  }
+};
+
+export const editCategory = async (id: string, name: string) => {
+  try {
+    const res = await axiosInstance.put(`/category/${id}`, {
+      name,
+    });
+    if (res?.data) {
+      return res?.data?.message;
+    }
+  } catch (error: any) {
+    const message =
+      error?.response?.data?.message ||
+      "Something went wrong. Please try again";
+    throw message;
+  }
+};

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Thead,
@@ -15,31 +15,29 @@ import {
 } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
+import { getBlogs } from "@/src/services/blog";
 
-const lists = [
-  {
-    title: "Blog 1",
-    description: "This is the description of Blog 1",
-    avatar: "https://bit.ly/dan-abramov",
-    createdAt: "2021-08-01",
-  },
-  {
-    title: "Blog 2",
-    description: "This is the description of Blog 2",
-    avatar: "https://bit.ly/dan-abramov",
-    createdAt: "2021-08-02",
-  },
-  {
-    title: "Blog 3",
-    description: "This is the description of Blog 3",
-    avatar: "https://bit.ly/dan-abramov",
-    createdAt: "2021-08-03",
-  },
+const tableHeadings = [
+  "Title",
+  "Description",
+  "Cover Image",
+  "Category",
+  "Created At",
 ];
 
-const tableHeadings = ["Title", "Description", "Avatar", "Created At"];
-
 const BlogLists = () => {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    getBlogs()
+      .then((data) => {
+        setBlogs(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA">
@@ -62,19 +60,20 @@ const BlogLists = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {lists.map((list, index) => (
-              <Tr key={index}>
+            {blogs?.map((list: any) => (
+              <Tr key={list?.id}>
                 <Td>{list.title}</Td>
-                <Td>{list.description}</Td>
+                <Td>{list?.content?.slice(0, 8)}</Td>
                 <Td>
                   <Image
-                    src={list.avatar}
+                    src={list?.coverimage}
                     alt="avatar"
                     w={10}
                     borderRadius="full"
                   />
                 </Td>
-                <Td>{list.createdAt}</Td>
+                <Td>{list?.category}</Td>
+                <Td>{list?.createdat}</Td>
               </Tr>
             ))}
           </Tbody>
