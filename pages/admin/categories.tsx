@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   Thead,
@@ -14,31 +14,13 @@ import {
 } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
+import { axiosInstance } from "@/axiosConfig";
+import { useCustomToast } from "@/src/hooks/useCustomToast";
+import { getCategories } from "@/src/services/category";
 
-const lists = [
-  {
-    title: "Category 1",
-    createdBy: "milanwebdev",
-    image: "https://bit.ly/dan-abramov",
-    createdAt: "2021-08-01",
-  },
-  {
-    title: "Category 2",
-    createdBy: "milanwebdev",
-    image: "https://bit.ly/dan-abramov",
-    createdAt: "2021-08-02",
-  },
-  {
-    title: "Category 3",
-    createdBy: "milanwebdev",
-    image: "https://bit.ly/dan-abramov",
-    createdAt: "2021-08-03",
-  },
-];
+const tableHeadings = ["ID", "Name", "Image"];
 
-const tableHeadings = ["Title", "Created By", "Image", "Created At"];
-
-const BlogLists = () => {
+const BlogLists = ({ categories }: { categories: any }) => {
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA">
@@ -62,10 +44,10 @@ const BlogLists = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {lists.map((list, index) => (
+            {categories.map((list: any, index: number) => (
               <Tr key={index}>
-                <Td>{list?.title}</Td>
-                <Td>{list?.createdBy}</Td>
+                <Td>{list?.id}</Td>
+                <Td>{list?.name}</Td>
                 <Td>
                   <Image
                     src={list?.image}
@@ -74,7 +56,6 @@ const BlogLists = () => {
                     borderRadius="full"
                   />
                 </Td>
-                <Td>{list?.createdAt}</Td>
               </Tr>
             ))}
           </Tbody>
@@ -85,3 +66,29 @@ const BlogLists = () => {
 };
 
 export default BlogLists;
+
+export async function getServerSideProps() {
+  try {
+    const categories = await getCategories();
+    console.log("categories", categories);
+    if (categories) {
+      return {
+        props: {
+          categories: categories,
+        },
+      };
+    } else {
+      return {
+        props: {
+          categories: [],
+        },
+      };
+    }
+  } catch (error: any) {
+    return {
+      props: {
+        categories: [],
+      },
+    };
+  }
+}
