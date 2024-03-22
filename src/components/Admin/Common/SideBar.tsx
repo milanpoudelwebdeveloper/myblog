@@ -31,7 +31,7 @@ const SideBar = () => {
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
   return (
-    <Box bg="#FFF" color="#B1B1B1" fontSize="md" p={4}>
+    <Box bg="#FFF" color="#B1B1B1" fontSize="md" p={4} w={240}>
       {items.map((item) => (
         <Link href={item?.path} key={item?.name}>
           <Flex

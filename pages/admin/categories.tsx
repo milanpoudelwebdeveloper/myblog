@@ -15,14 +15,15 @@ import {
 import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
 import { getCategories } from "@/src/services/category";
+import CategoryFilter from "./category/CategoryFilter";
 
 const tableHeadings = ["ID", "Name", "Image", "Created At"];
 
 const Categories = ({ categories }: { categories: any }) => {
   return (
     <MainLayout>
-      <Flex justifyContent="space-between" bg="#F5F7FA">
-        <Text fontSize="lg" color="#333B69" my={4}>
+      <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
+        <Text fontSize="32px" color="#333B69" fontWeight="bold">
           Categories
         </Text>
         <Link href="/admin/category/add">
@@ -31,41 +32,56 @@ const Categories = ({ categories }: { categories: any }) => {
           </Button>
         </Link>
       </Flex>
-
+      <CategoryFilter />
       <TableContainer>
         <Table variant="simple">
           <Thead>
-            <Tr>
+            <Tr
+              bg="#FCFDFD"
+              fontSize="sm"
+              color="#202224"
+              fontWeight="bold"
+              borderWidth="0.6px"
+              borderColor="#D5D5D5"
+              borderRightRadius={14}
+              borderLeftRadius={14}
+            >
               {tableHeadings.map((heading) => (
                 <Th key={heading}>{heading}</Th>
               ))}
             </Tr>
           </Thead>
-          <Tbody>
-            {categories?.map((list: any, index: number) => (
-              <Tr key={index}>
-                <Td>{list?.id}</Td>
-                <Link href={`/admin/category/${list?.id}`} key={index}>
-                  <Td>{list?.name}</Td>
-                </Link>
-                <Td>
-                  <Image
-                    src={list?.image}
-                    alt="avatar"
-                    w={10}
-                    borderRadius="full"
-                  />
-                </Td>
-                <Td>
-                  <Image
-                    src={list?.createdAt}
-                    alt="avatar"
-                    w={10}
-                    borderRadius="full"
-                  />
-                </Td>
-              </Tr>
-            ))}
+          <Tbody bg="white">
+            {categories &&
+              categories?.map((list: any, index: number) => (
+                <Tr key={index} color="#202224" fontSize="sm" fontWeight="600">
+                  <Td paddingY={8}>{list?.id}</Td>
+                  <Td paddingY={8}>
+                    <Link href={`/admin/category/${list?.id}`} key={index}>
+                      {list?.name}
+                    </Link>
+                  </Td>
+
+                  <Td>
+                    <Image
+                      src={list?.image}
+                      alt="avatar"
+                      w={12}
+                      h={12}
+                      borderRadius="full"
+                      objectFit="cover"
+                    />
+                  </Td>
+                  <Td>
+                    <Image
+                      src={list?.createdAt}
+                      alt="avatar"
+                      w={10}
+                      borderRadius="full"
+                    />
+                  </Td>
+                </Tr>
+              ))}
           </Tbody>
         </Table>
       </TableContainer>

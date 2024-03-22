@@ -12,11 +12,11 @@ import {
   Text,
   Button,
   Flex,
+  Box,
 } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
 import { getBlogs } from "@/src/services/blog";
-import BlogFilter from "./blogs/BlogFilter";
 
 const tableHeadings = [
   "Title",
@@ -24,10 +24,9 @@ const tableHeadings = [
   "Cover Image",
   "Category",
   "Created At",
-  "Published Status",
 ];
 
-const BlogLists = () => {
+const RecentBlogs = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
@@ -41,10 +40,16 @@ const BlogLists = () => {
   }, []);
 
   return (
-    <MainLayout>
-      <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
-        <Text fontSize="32px" color="#333B69" fontWeight="bold">
-          Blogs
+    <Box bg="white" mt={8} p={7}>
+      <Flex justifyContent="space-between">
+        <Text
+          fontSize="lg"
+          color="#202224"
+          my={4}
+          fontStyle="24px"
+          fontWeight="bold"
+        >
+          Recent Blogs
         </Text>
         <Link href="/admin/blogs/add">
           <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
@@ -52,50 +57,39 @@ const BlogLists = () => {
           </Button>
         </Link>
       </Flex>
-      <BlogFilter />
       <TableContainer>
         <Table variant="simple">
           <Thead>
-            <Tr
-              bg="#FCFDFD"
-              fontSize="sm"
-              color="#202224"
-              fontWeight="bold"
-              borderWidth="0.6px"
-              borderColor="#D5D5D5"
-              borderRightRadius={14}
-              borderLeftRadius={14}
-            >
+            <Tr bg="#F1F4F9" borderRadius={12} fontSize="sm" fontWeight="bold">
               {tableHeadings.map((heading) => (
-                <Th key={heading}>{heading}</Th>
+                <Th color="#202224" key={heading} fontWeight="bold">
+                  {heading}
+                </Th>
               ))}
             </Tr>
           </Thead>
-          <Tbody bg="white">
+          <Tbody>
             {blogs?.map((list: any) => (
-              <Tr key={list?.id}>
-                <Td paddingY={8}>{list.title}</Td>
-                <Td paddingY={8}>{list?.content?.slice(0, 8)}</Td>
+              <Tr key={list?.id} fontSize="sm" fontWeight="500">
+                <Td>{list.title}</Td>
+                <Td>{list?.content?.slice(0, 8)}</Td>
                 <Td>
                   <Image
                     src={list?.coverimage}
                     alt="avatar"
-                    w={12}
+                    w={10}
                     borderRadius="full"
-                    h={12}
-                    objectFit="cover"
                   />
                 </Td>
-                <Td>{list?.categoryname}</Td>
+                <Td>{list?.category}</Td>
                 <Td>{list?.createdat}</Td>
-                <Td>Published</Td>
               </Tr>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
-    </MainLayout>
+    </Box>
   );
 };
 
-export default BlogLists;
+export default RecentBlogs;

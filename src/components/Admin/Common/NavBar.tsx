@@ -3,7 +3,7 @@ import React from "react";
 
 const NavBar = () => {
   return (
-    <Flex justifyContent="space-between" py={4} bg="#FFF">
+    <Flex justifyContent="space-between" py={4} bg="#FFF" maxW={1200} mx="auto">
       <Flex fontSize="xl" fontWeight="bold" gap={1}>
         <Text color="#4880FF">Blog</Text>
         <Text color="#202224">Admin</Text>

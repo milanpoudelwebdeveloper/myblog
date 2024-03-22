@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
+import UserFilter from "./users/UserFilter";
 
 const lists = [
   {
@@ -44,8 +45,8 @@ const tableHeadings = ["ID", "Name", "Role", "Avatar", "Created At"];
 const Users = () => {
   return (
     <MainLayout>
-      <Flex justifyContent="space-between" bg="#F5F7FA">
-        <Text fontSize="lg" color="#333B69" my={4}>
+      <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
+        <Text fontSize="32px" color="#333B69" fontWeight="bold">
           Users
         </Text>
         <Link href="/admin/category/add">
@@ -54,17 +55,27 @@ const Users = () => {
           </Button>
         </Link>
       </Flex>
+      <UserFilter />
       <TableContainer>
         <Table variant="simple">
           <Thead>
-            <Tr>
+            <Tr
+              bg="#FCFDFD"
+              fontSize="sm"
+              color="#202224"
+              fontWeight="bold"
+              borderWidth="0.6px"
+              borderColor="#D5D5D5"
+              borderRightRadius={14}
+              borderLeftRadius={14}
+            >
               {tableHeadings.map((heading) => (
                 <Th key={heading}>{heading}</Th>
               ))}
             </Tr>
           </Thead>
-          <Tbody>
-            {lists.map((list, index) => (
+          <Tbody bg="white">
+            {lists.map((list) => (
               <Tr key={list?.id}>
                 <Td>{list?.id}</Td>
                 <Td>{list?.name}</Td>

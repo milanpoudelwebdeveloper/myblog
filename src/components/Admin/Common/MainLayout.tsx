@@ -9,12 +9,12 @@ interface Props {
 
 const MainLayout = ({ children }: Props) => {
   return (
-    <Box maxW={1200} mx="auto">
+    <Box mx="auto">
       <NavBar />
       <Flex>
         <SideBar />
-        <Box flex={1} p={4} bg="#F5F7FA" h="87vh">
-          <Box bg="white" h="80vh" py={14}>
+        <Box flex={1} bg="#F5F7FA" h="87vh">
+          <Box py={8} px={8} maxW={{ base: 900, "1xl": 1200 }} mx="auto">
             {children}
           </Box>
         </Box>

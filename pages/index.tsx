@@ -7,10 +7,11 @@ import Head from "next/head";
 
 const featuredPost = {
   title: "Is React better than Vue for your project?",
-  desc: "This is a description of the topic which is really good going. lorem ipsum is a dummy text which is used to fill the space of the content.",
-  date: "2021-10-10",
-  image: "/images/image1.webp",
-  categories: ["Programming", "React"],
+  content:
+    "This is a description of the topic which is really good going. lorem ipsum is a dummy text which is used to fill the space of the content.",
+  createdat: "2021-10-10",
+  coverimage: "/images/image1.webp",
+  category: "React",
 };
 
 export default function Home() {

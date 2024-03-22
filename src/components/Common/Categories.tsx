@@ -2,6 +2,7 @@ import { Box, Divider, Text } from "@chakra-ui/react";
 import React from "react";
 
 const categories = ["Programming", "React", "Vue", "Next.js", "Chakra UI"];
+
 const Categories = () => {
   return (
     <Box
