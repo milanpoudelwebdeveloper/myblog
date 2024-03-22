@@ -3,6 +3,10 @@ import MainLayout from "@components/Admin/Common/MainLayout";
 
 import React from "react";
 
+const BoxContainer = () => {};
+
+
+
 const admin = () => {
   return (
     <MainLayout>
