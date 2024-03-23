@@ -1,8 +1,25 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import MainLayout from "@components/Common/MainLayout";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { getBlogDetails } from "@/src/services/blog";
 
-const details = () => {
+const BlogDetails = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const [blogDetail, setBlogDetail] = useState({} as any);
+
+  useEffect(() => {
+    if (id) {
+      getBlogDetails(id)
+        .then((data) => {
+          setBlogDetail({ ...blogDetail, ...data });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [id]);
   return (
     <MainLayout>
       <Box mt={4}>

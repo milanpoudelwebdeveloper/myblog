@@ -15,10 +15,63 @@ import MainLayout from "@components/Admin/Common/MainLayout";
 import { getCategories } from "@/src/services/category";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
 import dynamic from "next/dynamic";
+import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.snow.css";
+import "highlight.js/styles/atom-one-dark.css";
 import { addBlog } from "@/src/services/blog";
+import hljs from "highlight.js";
+import {
+  headingsPlugin,
+  listsPlugin,
+  quotePlugin,
+  thematicBreakPlugin,
+  markdownShortcutPlugin,
+  MDXEditor,
+  type MDXEditorMethods,
+  type MDXEditorProps,
+} from "@mdxeditor/editor";
 
-const AddBlog = () => {
+const toolbarOptions = [
+  ["bold", "italic", "underline", "strike"],
+  ["blockquote", "code-block"],
+
+  [{ list: "ordered" }, { list: "bullet" }],
+  ["link"],
+  [{ indent: "-1" }, { indent: "+1" }],
+
+  [{ header: [1, 2, 3, false] }],
+
+  [{ align: [] }],
+];
+const modules = {
+  syntax: {
+    highlight: (text) => hljs.highlightAuto(text).value,
+  },
+  toolbar: toolbarOptions,
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+};
+
+hljs.configure({
+  // optionally configure hljs
+  languages: [
+    "javascript",
+    "python",
+    "c",
+    "c++",
+    "java",
+    "HTML",
+    "css",
+    "matlab",
+  ],
+});
+
+const AddBlog = ({
+  editorRef,
+  ...props
+}: { editorRef: ForwardedRef<MDXEditorMethods> | null } & MDXEditorProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [coverImage, setCoverImage] = useState<File | null | string>(null);
@@ -29,6 +82,11 @@ const AddBlog = () => {
   const { showToast } = useCustomToast();
   const ReactQuill = useMemo(
     () => dynamic(() => import("react-quill"), { ssr: false }),
+    []
+  );
+
+  const MDXEditor = useMemo(
+    () => dynamic(() => import("@mdxeditor/editor"), { ssr: false }),
     []
   );
 
@@ -127,8 +185,25 @@ const AddBlog = () => {
                   </option>
                 ))}
               </Select>
-              <ReactQuill theme="snow" value={content} onChange={setContent} />;
+              <ReactQuill
+                theme="snow"
+                value={content}
+                onChange={setContent}
+                modules={modules}
+              />
               <Button type="submit">Submit</Button>
+              <MDXEditor
+                plugins={[
+                  // Example Plugin Usage
+                  headingsPlugin(),
+                  listsPlugin(),
+                  quotePlugin(),
+                  thematicBreakPlugin(),
+                  markdownShortcutPlugin(),
+                ]}
+                {...props}
+                ref={editorRef}
+              />
             </Box>
           </form>
         </Box>
