@@ -1,63 +1,55 @@
-import { axiosInstance, axiosInstanceFile } from '@/axiosConfig';
+import { axiosInstance, axiosInstanceFile } from '@/axiosConfig'
 
 export const getCategories = async () => {
   try {
-    const res = await axiosInstance.get('/category');
+    const res = await axiosInstance.get('/category')
     if (res?.data) {
-      return res?.data?.data;
+      return res?.data?.data
     }
   } catch (error: any) {
-    const message =
-      error?.response?.data?.message ||
-      'Something went wrong. Please try again';
-    throw message;
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
   }
-};
+}
 
 export const addCategory = async (name: string, image: File) => {
   try {
     const res = await axiosInstanceFile.post('/category', {
       name,
-      image,
-    });
+      image
+    })
 
     if (res?.data) {
-      return res?.data?.message;
+      return res?.data?.message
     }
   } catch (error: any) {
-    const message =
-      error?.response?.data?.message ||
-      'Something went wrong. Please try again';
-    throw message;
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
   }
-};
+}
 
 export const getCategoryDetails = async (id: string) => {
   try {
-    const res = await axiosInstance.get(`/category/${id}`);
+    const res = await axiosInstance.get(`/category/${id}`)
     if (res?.data) {
-      return res?.data?.data;
+      return res?.data?.data
     }
   } catch (error: any) {
-    const message =
-      error?.response?.data?.message ||
-      'Something went wrong. Please try again';
-    throw message;
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
   }
-};
+}
 
 export const editCategory = async (id: string, name: string) => {
   try {
     const res = await axiosInstance.put(`/category/${id}`, {
-      name,
-    });
+      name
+    })
     if (res?.data) {
-      return res?.data?.message;
+      return res?.data?.message
     }
   } catch (error: any) {
-    const message =
-      error?.response?.data?.message ||
-      'Something went wrong. Please try again';
-    throw message;
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
   }
-};
+}
