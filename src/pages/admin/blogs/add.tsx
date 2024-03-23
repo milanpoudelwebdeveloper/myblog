@@ -20,16 +20,6 @@ import "react-quill/dist/quill.snow.css";
 import "highlight.js/styles/atom-one-dark.css";
 import { addBlog } from "@/src/services/blog";
 import hljs from "highlight.js";
-import {
-  headingsPlugin,
-  listsPlugin,
-  quotePlugin,
-  thematicBreakPlugin,
-  markdownShortcutPlugin,
-  MDXEditor,
-  type MDXEditorMethods,
-  type MDXEditorProps,
-} from "@mdxeditor/editor";
 
 const toolbarOptions = [
   ["bold", "italic", "underline", "strike"],
@@ -45,33 +35,19 @@ const toolbarOptions = [
 ];
 const modules = {
   syntax: {
-    highlight: (text) => hljs.highlightAuto(text).value,
+    highlight: (text: string) => hljs.highlightAuto(text).value,
   },
   toolbar: toolbarOptions,
   clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
 };
 
 hljs.configure({
-  // optionally configure hljs
-  languages: [
-    "javascript",
-    "python",
-    "c",
-    "c++",
-    "java",
-    "HTML",
-    "css",
-    "matlab",
-  ],
+  languages: ["javascript", "HTML", "css"],
 });
 
-const AddBlog = ({
-  editorRef,
-  ...props
-}: { editorRef: ForwardedRef<MDXEditorMethods> | null } & MDXEditorProps) => {
+const AddBlog = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [coverImage, setCoverImage] = useState<File | null | string>(null);
@@ -82,11 +58,6 @@ const AddBlog = ({
   const { showToast } = useCustomToast();
   const ReactQuill = useMemo(
     () => dynamic(() => import("react-quill"), { ssr: false }),
-    []
-  );
-
-  const MDXEditor = useMemo(
-    () => dynamic(() => import("@mdxeditor/editor"), { ssr: false }),
     []
   );
 
@@ -192,18 +163,6 @@ const AddBlog = ({
                 modules={modules}
               />
               <Button type="submit">Submit</Button>
-              <MDXEditor
-                plugins={[
-                  // Example Plugin Usage
-                  headingsPlugin(),
-                  listsPlugin(),
-                  quotePlugin(),
-                  thematicBreakPlugin(),
-                  markdownShortcutPlugin(),
-                ]}
-                {...props}
-                ref={editorRef}
-              />
             </Box>
           </form>
         </Box>

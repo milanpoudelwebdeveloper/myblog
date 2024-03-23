@@ -2,7 +2,6 @@ import { Box, Flex, Image } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { FaList } from "react-icons/fa";
 
 const items = [
   {
