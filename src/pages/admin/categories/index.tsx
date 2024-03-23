@@ -15,18 +15,18 @@ import {
 import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
 import { getCategories } from "@/src/services/category";
-import CategoryFilter from "./category/CategoryFilter";
+import CategoryFilter from "@components/Admin/Category/CategoryFilter";
 
 const tableHeadings = ["ID", "Name", "Image", "Created At"];
 
-const Categories = ({ categories }: { categories: any }) => {
+const Categories = ({ categories }: { categories: ICategory[] }) => {
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
         <Text fontSize="32px" color="#333B69" fontWeight="bold">
           Categories
         </Text>
-        <Link href="/admin/category/add">
+        <Link href="/admin/categories/add">
           <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
             Add category
           </Button>
@@ -53,11 +53,16 @@ const Categories = ({ categories }: { categories: any }) => {
           </Thead>
           <Tbody bg="white">
             {categories &&
-              categories?.map((list: any, index: number) => (
-                <Tr key={index} color="#202224" fontSize="sm" fontWeight="600">
+              categories?.map((list) => (
+                <Tr
+                  key={list?.id}
+                  color="#202224"
+                  fontSize="sm"
+                  fontWeight="600"
+                >
                   <Td paddingY={8}>{list?.id}</Td>
                   <Td paddingY={8}>
-                    <Link href={`/admin/category/${list?.id}`} key={index}>
+                    <Link href={`/admin/category/${list?.id}`}>
                       {list?.name}
                     </Link>
                   </Td>
@@ -74,7 +79,7 @@ const Categories = ({ categories }: { categories: any }) => {
                   </Td>
                   <Td>
                     <Image
-                      src={list?.createdAt}
+                      src={list?.createdat}
                       alt="avatar"
                       w={10}
                       borderRadius="full"
@@ -94,7 +99,6 @@ export default Categories;
 export async function getServerSideProps() {
   try {
     const categories = await getCategories();
-    console.log("categories", categories);
     if (categories) {
       return {
         props: {
@@ -108,7 +112,7 @@ export async function getServerSideProps() {
         },
       };
     }
-  } catch (error: any) {
+  } catch (error) {
     return {
       props: {
         categories: [],

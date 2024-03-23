@@ -3,7 +3,6 @@ import MainLayout from "@components/Common/MainLayout";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getBlogDetails } from "@/src/services/blog";
-import Markdown from "markdown-to-jsx";
 import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.snow.css";
 import "highlight.js/styles/atom-one-dark.css";
@@ -11,7 +10,7 @@ import "highlight.js/styles/atom-one-dark.css";
 const BlogDetails = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [blogDetail, setBlogDetail] = useState({} as any);
+  const [blogDetail, setBlogDetail] = useState<IBlog>({} as IBlog);
 
   useEffect(() => {
     if (id) {

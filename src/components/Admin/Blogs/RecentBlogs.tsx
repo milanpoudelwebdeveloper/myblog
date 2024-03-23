@@ -6,7 +6,6 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
   Image,
   Text,
@@ -14,9 +13,9 @@ import {
   Flex,
   Box,
 } from "@chakra-ui/react";
-import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
 import { getBlogs } from "@/src/services/blog";
+import { useCustomToast } from "@/src/hooks/useCustomToast";
 
 const tableHeadings = [
   "Title",
@@ -27,15 +26,16 @@ const tableHeadings = [
 ];
 
 const RecentBlogs = () => {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<IBlog[]>([]);
+  const { showToast } = useCustomToast();
 
   useEffect(() => {
     getBlogs()
       .then((data) => {
         setBlogs(data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((e) => {
+        showToast(e, "error");
       });
   }, []);
 
@@ -69,7 +69,7 @@ const RecentBlogs = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {blogs?.map((list: any) => (
+            {blogs?.map((list) => (
               <Tr key={list?.id} fontSize="sm" fontWeight="500">
                 <Td>{list.title}</Td>
                 <Td>{list?.content?.slice(0, 8)}</Td>

@@ -1,17 +1,12 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import Markdown from "markdown-to-jsx";
 import Link from "next/link";
 import React from "react";
+import "react-quill/dist/quill.core.css";
+import "react-quill/dist/quill.snow.css";
+import "highlight.js/styles/atom-one-dark.css";
 
 interface Props {
-  card: {
-    id: number;
-    title: string;
-    content: string;
-    coverimage: string;
-    category: string;
-    createdat: string;
-  };
+  card: IBlog;
   imagHeight?: number;
 }
 
@@ -44,12 +39,15 @@ const BlogCard = ({ card, imagHeight }: Props) => {
         >
           {title}
         </Text>
-        <Box
-          color="#667085"
-          fontSize={{ base: "xs", md: "sm", "1xl": "md" }}
-          my={2}
-        >
-          <Markdown>{content?.slice(0, 200)}</Markdown>
+        <Box className="ql-snow">
+          <Box
+            className="ql-editor"
+            dangerouslySetInnerHTML={{
+              __html: content?.slice(0, 200),
+            }}
+            color="#667085"
+            fontSize={{ base: "xs", md: "sm", "1xl": "md" }}
+          />
         </Box>
       </Link>
       <Flex gap={2} fontSize={{ base: "xs", md: "sm", "1xl": "md" }}>

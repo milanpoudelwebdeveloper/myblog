@@ -1,17 +1,19 @@
 import { Box, Divider, Flex, Grid, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import BlogCard from "./Common/BlogCard";
-import { getBlogs } from "../services/blog";
+import BlogCard from "../Common/BlogCard";
+import { getBlogs } from "../../services/blog";
+import { useCustomToast } from "@/src/hooks/useCustomToast";
 
 const RecentPosts = () => {
-  const [blogs, setBlogs] = React.useState([]);
+  const [blogs, setBlogs] = React.useState<IBlog[]>([]);
+  const { showToast } = useCustomToast();
   useEffect(() => {
     getBlogs()
       .then((data) => {
         setBlogs(data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((e) => {
+        showToast(e, "error");
       });
   }, []);
   return (
@@ -29,7 +31,7 @@ const RecentPosts = () => {
         templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
         gap={7}
       >
-        {blogs?.map((blog: any) => (
+        {blogs?.map((blog) => (
           <BlogCard card={blog} key={blog?.id} />
         ))}
       </Grid>

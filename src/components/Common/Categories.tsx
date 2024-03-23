@@ -1,16 +1,19 @@
+import { useCustomToast } from "@/src/hooks/useCustomToast";
 import { getCategories } from "@/src/services/category";
 import { Box, Divider, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
 const Categories = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
+  const { showToast } = useCustomToast();
   useEffect(() => {
     getCategories()
       .then((data) => setCategories(data))
-      .catch((error) => {
-        console.log(error);
+      .catch((e) => {
+        showToast(e, "error");
       });
   }, []);
+
   return (
     <Box
       p={{ base: 5, lg: 8 }}
@@ -34,8 +37,8 @@ const Categories = () => {
         mb={6}
         mt={2}
       />
-      {categories.map((category) => (
-        <Box key={category}>
+      {categories?.map((category) => (
+        <Box key={category?.id}>
           <Box
             width="max-content"
             fontSize={{ base: "sm", lg: "md", "1xl": "lg" }}

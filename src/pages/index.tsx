@@ -1,17 +1,18 @@
 import { Box } from "@chakra-ui/react";
 import BlogCard from "@components/Common/BlogCard";
 import MainLayout from "@components/Common/MainLayout";
-import Featured from "@components/Featured";
-import RecentPosts from "@components/RecentPosts";
+import RecentPosts from "@components/HomePage/RecentPosts";
 import Head from "next/head";
 
 const featuredPost = {
+  id: 1,
   title: "Is React better than Vue for your project?",
   content:
     "This is a description of the topic which is really good going. lorem ipsum is a dummy text which is used to fill the space of the content.",
   createdat: "2021-10-10",
   coverimage: "/images/image1.webp",
-  category: "React",
+  category: 1,
+  categoryname: "React",
 };
 
 export default function Home() {

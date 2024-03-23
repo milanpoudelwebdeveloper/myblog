@@ -1,4 +1,3 @@
-import { axiosInstanceFile } from "@/axiosConfig";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
 import { addCategory } from "@/src/services/category";
 import {
@@ -13,11 +12,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
-import React from "react";
+import React, { useState } from "react";
 
 const AddCategory = () => {
-  const [name, setName] = React.useState("");
-  const [image, setImage] = React.useState<File | null | string>(null);
+  const [name, setName] = useState("");
+  const [image, setImage] = useState<File | null | string>(null);
   let imageUrl = "";
   const { showToast } = useCustomToast();
 

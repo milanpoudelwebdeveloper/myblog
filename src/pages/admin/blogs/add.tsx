@@ -162,6 +162,7 @@ const AddBlog = () => {
                 onChange={setContent}
                 modules={modules}
               />
+
               <Button type="submit">Submit</Button>
             </Box>
           </form>

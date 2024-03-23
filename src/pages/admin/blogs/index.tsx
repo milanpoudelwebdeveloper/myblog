@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Thead,
@@ -9,53 +9,51 @@ import {
   TableContainer,
   Image,
   Text,
-  Flex,
   Button,
+  Flex,
 } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
-import UserFilter from "./users/UserFilter";
+import { getBlogs } from "@/src/services/blog";
+import BlogFilter from "@components/Admin/Blogs/BlogFilter";
+import { useCustomToast } from "@/src/hooks/useCustomToast";
 
-const lists = [
-  {
-    id: 1,
-    name: "User 1",
-    role: "Admin",
-    avatar: "https://bit.ly/dan-abramov",
-    createdAt: "2021-08-01",
-  },
-  {
-    id: 2,
-    name: "Category 2",
-    role: "milanwebdev",
-    avatar: "https://bit.ly/dan-abramov",
-    createdAt: "2021-08-02",
-  },
-  {
-    id: 3,
-    name: "Category 3",
-    role: "milanwebdev",
-    avatar: "https://bit.ly/dan-abramov",
-    createdAt: "2021-08-03",
-  },
+const tableHeadings = [
+  "Title",
+  "Description",
+  "Cover Image",
+  "Category",
+  "Created At",
+  "Published Status",
 ];
 
-const tableHeadings = ["ID", "Name", "Role", "Avatar", "Created At"];
+const Blogs = () => {
+  const [blogs, setBlogs] = useState<IBlog[]>([]);
+  const { showToast } = useCustomToast();
 
-const Users = () => {
+  useEffect(() => {
+    getBlogs()
+      .then((data) => {
+        setBlogs(data);
+      })
+      .catch((e) => {
+        showToast(e, "error");
+      });
+  }, []);
+
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
         <Text fontSize="32px" color="#333B69" fontWeight="bold">
-          Users
+          Blogs
         </Text>
-        <Link href="/admin/category/add">
+        <Link href="/admin/blogs/add">
           <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
-            Add user
+            Add blog
           </Button>
         </Link>
       </Flex>
-      <UserFilter />
+      <BlogFilter />
       <TableContainer>
         <Table variant="simple">
           <Thead>
@@ -75,20 +73,23 @@ const Users = () => {
             </Tr>
           </Thead>
           <Tbody bg="white">
-            {lists.map((list) => (
+            {blogs?.map((list) => (
               <Tr key={list?.id}>
-                <Td>{list?.id}</Td>
-                <Td>{list?.name}</Td>
-                <Td>{list?.role}</Td>
+                <Td paddingY={8}>{list.title}</Td>
+                <Td paddingY={8}>{list?.content?.slice(0, 8)}</Td>
                 <Td>
                   <Image
-                    src={list?.avatar}
+                    src={list?.coverimage}
                     alt="avatar"
-                    w={10}
+                    w={12}
                     borderRadius="full"
+                    h={12}
+                    objectFit="cover"
                   />
                 </Td>
-                <Td>{list?.createdAt}</Td>
+                <Td>{list?.categoryname}</Td>
+                <Td>{list?.createdat}</Td>
+                <Td>Published</Td>
               </Tr>
             ))}
           </Tbody>
@@ -98,4 +99,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Blogs;

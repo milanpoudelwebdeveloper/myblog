@@ -1,10 +1,5 @@
-import { axiosInstanceFile } from "@/axiosConfig";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
-import {
-  addCategory,
-  editCategory,
-  getCategoryDetails,
-} from "@/src/services/category";
+import { editCategory, getCategoryDetails } from "@/src/services/category";
 import {
   Box,
   Button,
@@ -20,7 +15,11 @@ import MainLayout from "@components/Admin/Common/MainLayout";
 import { useRouter } from "next/router";
 import React from "react";
 
-const CategoryDetails = ({ categoryDetails }: { categoryDetails: any }) => {
+const CategoryDetails = ({
+  categoryDetails,
+}: {
+  categoryDetails: ICategory;
+}) => {
   const [name, setName] = React.useState(categoryDetails?.name);
   const [image, setImage] = React.useState<File | undefined | string>(
     categoryDetails?.image
@@ -131,7 +130,7 @@ export async function getServerSideProps(context: any) {
         },
       };
     }
-  } catch (error: any) {
+  } catch (error) {
     return {
       props: {
         categories: [],

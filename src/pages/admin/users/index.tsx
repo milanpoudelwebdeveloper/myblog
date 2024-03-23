@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Table,
   Thead,
@@ -6,53 +6,56 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
   Image,
   Text,
-  Button,
   Flex,
+  Button,
 } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
 import Link from "next/link";
-import { getBlogs } from "@/src/services/blog";
-import BlogFilter from "./blogs/BlogFilter";
+import UserFilter from "@components/Admin/Users/UserFilter";
 
-const tableHeadings = [
-  "Title",
-  "Description",
-  "Cover Image",
-  "Category",
-  "Created At",
-  "Published Status",
+const lists = [
+  {
+    id: 1,
+    name: "User 1",
+    role: "Admin",
+    avatar: "https://bit.ly/dan-abramov",
+    createdAt: "2021-08-01",
+  },
+  {
+    id: 2,
+    name: "Category 2",
+    role: "milanwebdev",
+    avatar: "https://bit.ly/dan-abramov",
+    createdAt: "2021-08-02",
+  },
+  {
+    id: 3,
+    name: "Category 3",
+    role: "milanwebdev",
+    avatar: "https://bit.ly/dan-abramov",
+    createdAt: "2021-08-03",
+  },
 ];
 
-const BlogLists = () => {
-  const [blogs, setBlogs] = useState([]);
+const tableHeadings = ["ID", "Name", "Role", "Avatar", "Created At"];
 
-  useEffect(() => {
-    getBlogs()
-      .then((data) => {
-        setBlogs(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
+const Users = () => {
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
         <Text fontSize="32px" color="#333B69" fontWeight="bold">
-          Blogs
+          Users
         </Text>
-        <Link href="/admin/blogs/add">
+        <Link href="/admin/category/add">
           <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
-            Add blog
+            Add user
           </Button>
         </Link>
       </Flex>
-      <BlogFilter />
+      <UserFilter />
       <TableContainer>
         <Table variant="simple">
           <Thead>
@@ -72,23 +75,20 @@ const BlogLists = () => {
             </Tr>
           </Thead>
           <Tbody bg="white">
-            {blogs?.map((list: any) => (
+            {lists.map((list) => (
               <Tr key={list?.id}>
-                <Td paddingY={8}>{list.title}</Td>
-                <Td paddingY={8}>{list?.content?.slice(0, 8)}</Td>
+                <Td>{list?.id}</Td>
+                <Td>{list?.name}</Td>
+                <Td>{list?.role}</Td>
                 <Td>
                   <Image
-                    src={list?.coverimage}
+                    src={list?.avatar}
                     alt="avatar"
-                    w={12}
+                    w={10}
                     borderRadius="full"
-                    h={12}
-                    objectFit="cover"
                   />
                 </Td>
-                <Td>{list?.categoryname}</Td>
-                <Td>{list?.createdat}</Td>
-                <Td>Published</Td>
+                <Td>{list?.createdAt}</Td>
               </Tr>
             ))}
           </Tbody>
@@ -98,4 +98,4 @@ const BlogLists = () => {
   );
 };
 
-export default BlogLists;
+export default Users;

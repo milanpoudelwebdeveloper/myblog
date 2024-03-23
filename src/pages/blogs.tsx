@@ -4,11 +4,13 @@ import { Box, Grid, Flex } from "@chakra-ui/react";
 import BlogCard from "@components/Common/BlogCard";
 import MainLayout from "@components/Common/MainLayout";
 import React, { useEffect, useState } from "react";
+import { useCustomToast } from "../hooks/useCustomToast";
 
 const Blogs = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<IBlog[]>([]);
+  const { showToast } = useCustomToast();
 
   const finalCategories = [
     {
@@ -22,11 +24,10 @@ const Blogs = () => {
     if (selectedCategory) {
       getBlogs(selectedCategory)
         .then((data) => {
-          console.log(data);
           setBlogs(data);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          showToast(e, "error");
         });
     }
   }, [selectedCategory]);
@@ -63,7 +64,7 @@ const Blogs = () => {
               py={{ base: 2, "1xl": 3 }}
               px={{ base: 4, "1xl": 5 }}
               cursor="pointer"
-              onClick={() => setSelectedCategory(category?.id)}
+              onClick={() => setSelectedCategory(category?.id as string)}
             >
               {category?.name}
             </Box>
@@ -76,7 +77,7 @@ const Blogs = () => {
         mt={{ base: 5, lg: 10 }}
       >
         {blogs?.map((post) => (
-          <BlogCard card={post} key={post?.title} />
+          <BlogCard card={post} key={post?.id} />
         ))}
       </Grid>
     </MainLayout>

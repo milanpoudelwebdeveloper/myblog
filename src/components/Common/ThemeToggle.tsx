@@ -1,10 +1,4 @@
-import {
-  Box,
-  HStack,
-  IconButton,
-  Switch,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Box, IconButton, Switch, useColorMode } from "@chakra-ui/react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const ThemeToggle = () => {

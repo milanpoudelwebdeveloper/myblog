@@ -2,11 +2,9 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import MainLayout from "@components/Admin/Common/MainLayout";
 
 import React from "react";
-import RecentBlogs from "./admin/blogs/RecentBlogs";
+import RecentBlogs from "../components/Admin/Blogs/RecentBlogs";
 
-const BoxContainer = () => {};
-
-const admin = () => {
+const AdminHome = () => {
   return (
     <MainLayout>
       <Box color="#202224">
@@ -87,4 +85,4 @@ const admin = () => {
   );
 };
 
-export default admin;
+export default AdminHome;
