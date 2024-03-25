@@ -1,45 +1,26 @@
-import React, { useEffect, useState } from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Image,
-  Text,
-  Button,
-  Flex,
-} from "@chakra-ui/react";
-import MainLayout from "@components/Admin/Common/MainLayout";
-import Link from "next/link";
-import { getBlogs } from "@/src/services/blog";
-import BlogFilter from "@components/Admin/Blogs/BlogFilter";
-import { useCustomToast } from "@/src/hooks/useCustomToast";
+import React, { useEffect, useState } from 'react'
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Image, Text, Button, Flex } from '@chakra-ui/react'
+import MainLayout from '@components/Admin/Common/MainLayout'
+import Link from 'next/link'
+import { getBlogs } from '@/src/services/blog'
+import BlogFilter from '@components/Admin/Blogs/BlogFilter'
+import { useCustomToast } from '@/src/hooks/useCustomToast'
 
-const tableHeadings = [
-  "Title",
-  "Description",
-  "Cover Image",
-  "Category",
-  "Created At",
-  "Published Status",
-];
+const tableHeadings = ['ID', 'Title', 'Description', 'Cover Image', 'Category', 'Created At', 'Published Status']
 
 const Blogs = () => {
-  const [blogs, setBlogs] = useState<IBlog[]>([]);
-  const { showToast } = useCustomToast();
+  const [blogs, setBlogs] = useState<IBlog[]>([])
+  const { showToast } = useCustomToast()
 
   useEffect(() => {
     getBlogs()
       .then((data) => {
-        setBlogs(data);
+        setBlogs(data)
       })
       .catch((e) => {
-        showToast(e, "error");
-      });
-  }, []);
+        showToast(e, 'error')
+      })
+  }, [])
 
   return (
     <MainLayout>
@@ -75,28 +56,22 @@ const Blogs = () => {
           <Tbody bg="white">
             {blogs?.map((list) => (
               <Tr key={list?.id}>
+                <Td>{list?.id}</Td>
                 <Td paddingY={8}>{list.title}</Td>
                 <Td paddingY={8}>{list?.content?.slice(0, 8)}</Td>
                 <Td>
-                  <Image
-                    src={list?.coverimage}
-                    alt="avatar"
-                    w={12}
-                    borderRadius="full"
-                    h={12}
-                    objectFit="cover"
-                  />
+                  <Image src={list?.coverimage} alt="avatar" w={12} borderRadius="full" h={12} objectFit="cover" />
                 </Td>
                 <Td>{list?.categoryname}</Td>
                 <Td>{list?.createdat}</Td>
-                <Td>Published</Td>
+                <Td>{list?.published ? 'Yes' : 'No'}</Td>
               </Tr>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
     </MainLayout>
-  );
-};
+  )
+}
 
-export default Blogs;
+export default Blogs

@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-dark.css'
-import { addBlog } from '@/src/services/blog'
+import { getBlogDetails, updateBlog } from '@/src/services/blog'
 import hljs from 'highlight.js'
 import ImageUploader from '@components/Admin/Common/ImageUploader'
 import { useRouter } from 'next/router'
@@ -38,16 +38,16 @@ hljs.configure({
   languages: ['javascript', 'HTML', 'css']
 })
 
-const AddBlog = () => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [coverImage, setCoverImage] = useState<File | null | string>(null)
+const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
+  const [title, setTitle] = useState(blogDetails?.title || '')
+  const [content, setContent] = useState(blogDetails?.content || '')
+  const [coverImage, setCoverImage] = useState<File | null | string>(blogDetails?.coverimage || null)
   const [categories, setCategories] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState(blogDetails?.category || '')
   let imageUrl = ''
-  const router = useRouter()
 
   const { showToast } = useCustomToast()
+  const router = useRouter()
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
 
   useEffect(() => {
@@ -62,12 +62,10 @@ const AddBlog = () => {
 
   const submitHandler = async (published: boolean) => {
     try {
-      const response = await addBlog(title, coverImage as File, content, selectedCategory, published)
+      const response = await updateBlog(blogDetails?.id, title, coverImage as File, content, selectedCategory, published)
       if (response) {
         showToast(response?.message, 'success')
-        if (!published) {
-          router.push(`/admin/blogs/${response?.blog?.id}`)
-        } else {
+        if (published) {
           router.push('/admin/blogs')
         }
       }
@@ -88,13 +86,19 @@ const AddBlog = () => {
         <Flex justifyContent="space-between" alignItems="center">
           <Box>
             <Text fontSize="lg" fontWeight="500" color="#1814F3">
-              Add Blog
+              Edit Blog
             </Text>
             <Divider mt={3} borderColor="#1814F3" w={10} borderWidth={2} />
           </Box>
           <Flex gap={5}>
-            <Button bg="#4880FF" color="white" fontWeight="normal" onClick={() => submitHandler(false)}>
-              Save As Draft
+            <Button
+              bg="#4880FF"
+              color="white"
+              fontWeight="normal"
+              onClick={() => submitHandler(false)}
+              display={blogDetails?.published ? 'none' : 'block'}
+            >
+              Save (Update Draft)
             </Button>
             <Button
               bg="#4880FF"
@@ -104,7 +108,7 @@ const AddBlog = () => {
                 submitHandler(true)
               }}
             >
-              Publish
+              {blogDetails?.published ? 'Update' : 'Publish'}
             </Button>
           </Flex>
         </Flex>
@@ -137,9 +141,15 @@ const AddBlog = () => {
                 <FormLabel color="#232323" fontSize="md" mb={3}>
                   Category
                 </FormLabel>
-                <Select onChange={(e) => setSelectedCategory(e.target.value)} placeholder="Select Category" borderRadius={12} bg="#F5F6FA">
+                <Select
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  placeholder="Select Category"
+                  borderRadius={12}
+                  bg="#F5F6FA"
+                  value={selectedCategory}
+                >
                   {categories.map((category: any, index: number) => (
-                    <option key={index} value={category.id}>
+                    <option key={index} value={category?.id}>
                       {category.name}
                     </option>
                   ))}
@@ -162,4 +172,31 @@ const AddBlog = () => {
   )
 }
 
-export default AddBlog
+export default BlogDetails
+
+export async function getServerSideProps(context: any) {
+  const { id } = context.params
+  try {
+    const blogDetails = await getBlogDetails(id)
+
+    if (blogDetails) {
+      return {
+        props: {
+          blogDetails
+        }
+      }
+    } else {
+      return {
+        props: {
+          blogDetails: []
+        }
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+        blogDetails: []
+      }
+    }
+  }
+}

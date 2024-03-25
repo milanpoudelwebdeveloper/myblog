@@ -40,10 +40,11 @@ export const getCategoryDetails = async (id: string) => {
   }
 }
 
-export const editCategory = async (id: string, name: string) => {
+export const editCategory = async (categoryId: string, name: string, image: File | string) => {
   try {
-    const res = await axiosInstance.put(`/category/${id}`, {
-      name
+    const res = await axiosInstanceFile.put(`/category/${categoryId}`, {
+      name,
+      image
     })
     if (res?.data) {
       return res?.data?.message

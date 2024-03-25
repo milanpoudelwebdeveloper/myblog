@@ -1,23 +1,11 @@
-import React, { useEffect } from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Image,
-  Button,
-  Text,
-  Flex,
-} from "@chakra-ui/react";
-import MainLayout from "@components/Admin/Common/MainLayout";
-import Link from "next/link";
-import { getCategories } from "@/src/services/category";
-import CategoryFilter from "@components/Admin/Category/CategoryFilter";
+import React from 'react'
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Image, Button, Text, Flex } from '@chakra-ui/react'
+import MainLayout from '@components/Admin/Common/MainLayout'
+import Link from 'next/link'
+import { getCategories } from '@/src/services/category'
+import CategoryFilter from '@components/Admin/Category/CategoryFilter'
 
-const tableHeadings = ["ID", "Name", "Image", "Created At"];
+const tableHeadings = ['ID', 'Name', 'Image', 'Created At']
 
 const Categories = ({ categories }: { categories: ICategory[] }) => {
   return (
@@ -54,36 +42,17 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
           <Tbody bg="white">
             {categories &&
               categories?.map((list) => (
-                <Tr
-                  key={list?.id}
-                  color="#202224"
-                  fontSize="sm"
-                  fontWeight="600"
-                >
+                <Tr key={list?.id} color="#202224" fontSize="sm" fontWeight="600">
                   <Td paddingY={8}>{list?.id}</Td>
                   <Td paddingY={8}>
-                    <Link href={`/admin/category/${list?.id}`}>
-                      {list?.name}
-                    </Link>
+                    <Link href={`/admin/categories/${list?.id}`}>{list?.name}</Link>
                   </Td>
 
                   <Td>
-                    <Image
-                      src={list?.image}
-                      alt="avatar"
-                      w={12}
-                      h={12}
-                      borderRadius="full"
-                      objectFit="cover"
-                    />
+                    <Image src={list?.image} alt="avatar" w={12} h={12} borderRadius="full" objectFit="cover" />
                   </Td>
                   <Td>
-                    <Image
-                      src={list?.createdat}
-                      alt="avatar"
-                      w={10}
-                      borderRadius="full"
-                    />
+                    <Image src={list?.createdat} alt="avatar" w={10} borderRadius="full" />
                   </Td>
                 </Tr>
               ))}
@@ -91,32 +60,32 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
         </Table>
       </TableContainer>
     </MainLayout>
-  );
-};
+  )
+}
 
-export default Categories;
+export default Categories
 
 export async function getServerSideProps() {
   try {
-    const categories = await getCategories();
+    const categories = await getCategories()
     if (categories) {
       return {
         props: {
-          categories: categories,
-        },
-      };
+          categories: categories
+        }
+      }
     } else {
       return {
         props: {
-          categories: [],
-        },
-      };
+          categories: []
+        }
+      }
     }
   } catch (error) {
     return {
       props: {
-        categories: [],
-      },
-    };
+        categories: []
+      }
+    }
   }
 }
