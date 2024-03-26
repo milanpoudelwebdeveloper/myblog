@@ -1,6 +1,7 @@
 import { useCustomToast } from '@/src/hooks/useCustomToast'
-import { editCategory, getCategoryDetails } from '@/src/services/category'
+import { deleteCategory, editCategory, getCategoryDetails } from '@/src/services/category'
 import { Box, Button, Center, Divider, FormControl, FormLabel, Image, Input, Text, useDisclosure } from '@chakra-ui/react'
+import DeleteModal from '@components/Admin/Common/DeleteModal'
 import ImageUploader from '@components/Admin/Common/ImageUploader'
 import MainLayout from '@components/Admin/Common/MainLayout'
 import { useRouter } from 'next/router'
@@ -26,12 +27,21 @@ const CategoryDetails = ({ categoryDetails }: { categoryDetails: ICategory }) =>
       })
   }
 
-  const deleteHandler = () => {}
-
   if (image && typeof image !== 'string') {
     imageUrl = URL.createObjectURL(image) as string
   } else {
     imageUrl = image as string
+  }
+
+  const deleteHandler = () => {
+    deleteCategory(id as string)
+      .then((res) => {
+        showToast(res, 'success')
+        router.push('/admin/categories')
+      })
+      .catch((error) => {
+        showToast(error, 'error')
+      })
   }
 
   return (
@@ -88,6 +98,7 @@ const CategoryDetails = ({ categoryDetails }: { categoryDetails: ICategory }) =>
               </Center>
             </Box>
           </form>
+          <DeleteModal isOpen={isOpen} onClose={onClose} action={deleteHandler} />
         </Box>
       </Box>
     </MainLayout>

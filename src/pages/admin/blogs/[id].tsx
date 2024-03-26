@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Box, Button, Divider, Flex, FormControl, FormLabel, Image, Input, Select, Text } from '@chakra-ui/react'
+import { Box, Button, Divider, Flex, FormControl, FormLabel, Image, Input, Select, Text, useDisclosure } from '@chakra-ui/react'
 import MainLayout from '@components/Admin/Common/MainLayout'
 import { getCategories } from '@/src/services/category'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
@@ -7,10 +7,11 @@ import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-dark.css'
-import { getBlogDetails, updateBlog } from '@/src/services/blog'
+import { deleteBlog, getBlogDetails, updateBlog } from '@/src/services/blog'
 import hljs from 'highlight.js'
 import ImageUploader from '@components/Admin/Common/ImageUploader'
 import { useRouter } from 'next/router'
+import DeleteModal from '@components/Admin/Common/DeleteModal'
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],
@@ -49,6 +50,7 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
   const { showToast } = useCustomToast()
   const router = useRouter()
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   useEffect(() => {
     getCategories()
@@ -80,6 +82,17 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
     imageUrl = coverImage as string
   }
 
+  const deleteHandler = () => {
+    deleteBlog(blogDetails?.id as string)
+      .then((res) => {
+        showToast(res, 'success')
+        router.push('/admin/blogs')
+      })
+      .catch((error) => {
+        showToast(error, 'error')
+      })
+  }
+
   return (
     <MainLayout>
       <Box>
@@ -91,6 +104,9 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
             <Divider mt={3} borderColor="#1814F3" w={10} borderWidth={2} />
           </Box>
           <Flex gap={5}>
+            <Button bg="red.500" color="white" fontWeight="normal" onClick={onOpen}>
+              Delete
+            </Button>
             <Button
               bg="#4880FF"
               color="white"
@@ -168,6 +184,7 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
           </Box>
         </Box>
       </Box>
+      <DeleteModal type="blog" isOpen={isOpen} onClose={onClose} action={deleteHandler} />
     </MainLayout>
   )
 }

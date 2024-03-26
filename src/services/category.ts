@@ -54,3 +54,15 @@ export const editCategory = async (categoryId: string, name: string, image: File
     throw message
   }
 }
+
+export const deleteCategory = async (categoryId: string) => {
+  try {
+    const res = await axiosInstance.delete(`/category/${categoryId}`)
+    if (res?.data) {
+      return res?.data?.message
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}

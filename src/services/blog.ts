@@ -42,9 +42,10 @@ export const updateBlog = async (
     throw message
   }
 }
-export const getBlogs = async (category: number | string | null = 'all') => {
+
+export const getBlogs = async (category: number | string | null = 'all', publishedStatus: boolean | null = true) => {
   try {
-    const res = await axiosInstance.get(`/blog?categoryId=${category}`)
+    const res = await axiosInstance.get(`/blog?categoryId=${category}&published=${publishedStatus}`)
     if (res?.data) {
       return res?.data?.data
     }
@@ -71,6 +72,18 @@ export const getCategoryDetails = async (id: string) => {
     const res = await axiosInstance.get(`/category/${id}`)
     if (res?.data) {
       return res?.data?.data
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}
+
+export const deleteBlog = async (blogId: string) => {
+  try {
+    const res = await axiosInstance.delete(`/blog/${blogId}`)
+    if (res?.data) {
+      return res?.data?.message
     }
   } catch (error: any) {
     const message = error?.response?.data?.message || 'Something went wrong. Please try again'

@@ -11,16 +11,17 @@ const tableHeadings = ['ID', 'Title', 'Description', 'Cover Image', 'Category', 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<IBlog[]>([])
   const { showToast } = useCustomToast()
+  const [publishedStatus, setPublishedStatus] = useState<boolean | undefined>()
 
   useEffect(() => {
-    getBlogs()
+    getBlogs('all', publishedStatus)
       .then((data) => {
         setBlogs(data)
       })
       .catch((e) => {
         showToast(e, 'error')
       })
-  }, [])
+  }, [publishedStatus])
 
   return (
     <MainLayout>
@@ -34,7 +35,7 @@ const Blogs = () => {
           </Button>
         </Link>
       </Flex>
-      <BlogFilter />
+      <BlogFilter setPublishedStatus={setPublishedStatus} />
       <TableContainer>
         <Table variant="simple">
           <Thead>

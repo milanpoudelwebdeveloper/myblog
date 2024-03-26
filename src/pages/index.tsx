@@ -12,7 +12,8 @@ const featuredPost = {
   createdat: '2021-10-10',
   coverimage: '/images/image1.webp',
   category: 1,
-  categoryname: 'React'
+  categoryname: 'React',
+  published: true
 }
 
 export default function Home() {
