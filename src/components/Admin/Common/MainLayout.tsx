@@ -2,6 +2,7 @@ import { Box, Flex } from '@chakra-ui/react'
 import React from 'react'
 import NavBar from './NavBar'
 import SideBar from './SideBar'
+import { AdminProtectedRoute } from '@components/RouteAccess'
 
 interface Props {
   children: React.ReactNode
@@ -9,17 +10,19 @@ interface Props {
 
 const MainLayout = ({ children }: Props) => {
   return (
-    <Box mx="auto">
-      <NavBar />
-      <Flex>
-        <SideBar />
-        <Box flex={1} bg="#F5F7FA" h="87vh" overflowY="scroll">
-          <Box py={8} px={8} maxW={{ base: 900, '1xl': 1200 }} mx="auto">
-            {children}
+    <AdminProtectedRoute>
+      <Box mx="auto">
+        <NavBar />
+        <Flex>
+          <SideBar />
+          <Box flex={1} bg="#F5F7FA" h="87vh" overflowY="scroll">
+            <Box py={8} px={8} maxW={{ base: 900, '1xl': 1200 }} mx="auto">
+              {children}
+            </Box>
           </Box>
-        </Box>
-      </Flex>
-    </Box>
+        </Flex>
+      </Box>
+    </AdminProtectedRoute>
   )
 }
 

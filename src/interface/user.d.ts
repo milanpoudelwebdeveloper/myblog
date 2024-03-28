@@ -1,5 +1,5 @@
 interface IUser {
-  id: number | string
+  id: string | number
   name: string
   profileimage: string
   email: string

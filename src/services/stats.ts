@@ -1,10 +1,10 @@
 import { axiosInstance } from '@/axiosConfig'
 
-export const getAllUsers = async () => {
+export const getStats = async () => {
   try {
-    const res = await axiosInstance.get('/users')
+    const res = await axiosInstance.get('/stats')
     if (res?.data) {
-      return res?.data?.users
+      return res.data
     }
   } catch (e: any) {
     const message = e?.response?.data?.message || 'Something went wrong. Please try again'

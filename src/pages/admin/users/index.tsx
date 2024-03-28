@@ -8,7 +8,6 @@ import { getAllUsers } from '@/src/services/user'
 const tableHeadings = ['ID', 'Name', 'Email', 'Role', 'Avatar', 'Status']
 
 const Users = ({ users }: { users: IUser[] }) => {
-  console.log('users', users[0].verified)
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>

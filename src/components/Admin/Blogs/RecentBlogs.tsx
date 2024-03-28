@@ -1,54 +1,29 @@
-import React, { useEffect, useState } from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Image,
-  Text,
-  Button,
-  Flex,
-  Box,
-} from "@chakra-ui/react";
-import Link from "next/link";
-import { getBlogs } from "@/src/services/blog";
-import { useCustomToast } from "@/src/hooks/useCustomToast";
+import React, { useEffect, useState } from 'react'
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Image, Text, Button, Flex, Box } from '@chakra-ui/react'
+import Link from 'next/link'
+import { getBlogs } from '@/src/services/blog'
+import { useCustomToast } from '@/src/hooks/useCustomToast'
 
-const tableHeadings = [
-  "Title",
-  "Description",
-  "Cover Image",
-  "Category",
-  "Created At",
-];
+const tableHeadings = ['Title', 'Description', 'Cover Image', 'Category', 'Created At']
 
 const RecentBlogs = () => {
-  const [blogs, setBlogs] = useState<IBlog[]>([]);
-  const { showToast } = useCustomToast();
+  const [blogs, setBlogs] = useState<IBlog[]>([])
+  const { showToast } = useCustomToast()
 
   useEffect(() => {
     getBlogs()
       .then((data) => {
-        setBlogs(data);
+        setBlogs(data)
       })
       .catch((e) => {
-        showToast(e, "error");
-      });
-  }, []);
+        showToast(e, 'error')
+      })
+  }, [])
 
   return (
     <Box bg="white" mt={8} p={7}>
       <Flex justifyContent="space-between">
-        <Text
-          fontSize="lg"
-          color="#202224"
-          my={4}
-          fontStyle="24px"
-          fontWeight="bold"
-        >
+        <Text fontSize="lg" color="#202224" my={4} fontStyle="24px" fontWeight="bold">
           Recent Blogs
         </Text>
         <Link href="/admin/blogs/add">
@@ -74,12 +49,7 @@ const RecentBlogs = () => {
                 <Td>{list.title}</Td>
                 <Td>{list?.content?.slice(0, 8)}</Td>
                 <Td>
-                  <Image
-                    src={list?.coverimage}
-                    alt="avatar"
-                    w={10}
-                    borderRadius="full"
-                  />
+                  <Image src={list?.coverimage} alt="avatar" w={10} borderRadius="full" />
                 </Td>
                 <Td>{list?.category}</Td>
                 <Td>{list?.createdat}</Td>
@@ -89,7 +59,7 @@ const RecentBlogs = () => {
         </Table>
       </TableContainer>
     </Box>
-  );
-};
+  )
+}
 
-export default RecentBlogs;
+export default RecentBlogs
