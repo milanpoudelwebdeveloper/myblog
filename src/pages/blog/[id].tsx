@@ -14,7 +14,7 @@ const BlogDetails = () => {
 
   useEffect(() => {
     if (id) {
-      getBlogDetails(id)
+      getBlogDetails(id as string)
         .then((data) => {
           setBlogDetail({ ...blogDetail, ...data })
         })
