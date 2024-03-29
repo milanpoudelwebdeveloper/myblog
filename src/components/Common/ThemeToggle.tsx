@@ -1,14 +1,8 @@
-import {
-  Box,
-  HStack,
-  IconButton,
-  Switch,
-  useColorMode,
-} from "@chakra-ui/react";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { Box, IconButton, Switch, useColorMode } from '@chakra-ui/react'
+import { FaMoon, FaSun } from 'react-icons/fa'
 
 const ThemeToggle = () => {
-  const { toggleColorMode, colorMode } = useColorMode();
+  const { toggleColorMode, colorMode } = useColorMode()
 
   return (
     <Box position="relative" h="max-content">
@@ -22,10 +16,10 @@ const ThemeToggle = () => {
         bottom={4}
         left={4}
         onClick={toggleColorMode}
-        icon={colorMode === "dark" ? <FaSun /> : <FaMoon />}
+        icon={colorMode === 'dark' ? <FaSun /> : <FaMoon />}
       />
     </Box>
-  );
-};
+  )
+}
 
-export default ThemeToggle;
+export default ThemeToggle
