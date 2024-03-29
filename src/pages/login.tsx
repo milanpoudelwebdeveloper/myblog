@@ -10,11 +10,13 @@ import { useCustomToast } from '../hooks/useCustomToast'
 import { AuthContext } from '../context/authContext'
 import { useRouter } from 'next/router'
 import { PublicRoute } from '@components/RouteAccess'
+import Link from 'next/link'
 
 const UserLogin = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const { showToast } = useCustomToast()
   const { setUserData, setIsLoading } = useContext(AuthContext)
+  const [showResendLink, setShowResetLink] = useState(false)
   const router = useRouter()
   const {
     register,
@@ -38,7 +40,13 @@ const UserLogin = () => {
           }, 700)
         }
       })
-      .catch((e) => showToast(e, 'error'))
+      .catch((e) => {
+        console.log('the error is', e)
+        showToast(e?.data?.message, 'error')
+        if (e.status) {
+          setShowResetLink(true)
+        }
+      })
       .finally(() => setIsLoading(false))
   }
 
@@ -88,6 +96,16 @@ const UserLogin = () => {
               <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
                 Forgot Password?
               </Text>
+              {showResendLink && (
+                <Link href="/sendVerification">
+                  <Button variant="unstyled">
+                    <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
+                      Resend verification link
+                    </Text>
+                  </Button>
+                </Link>
+              )}
+
               <Button bg="#4880FF" color="white" fontWeight="normal" type="submit" w="80%" mt={10}>
                 Sign In
               </Button>

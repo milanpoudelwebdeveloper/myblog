@@ -42,7 +42,7 @@ export const loginUser = async (data: ILogin) => {
       return res.data
     }
   } catch (e: any) {
-    const message = e?.response?.data?.message || 'Something went wrong while verifying account. Please try again'
+    const message = e?.response || 'Something went wrong while verifying account. Please try again'
     throw message
   }
 }
@@ -64,6 +64,18 @@ export const logoutUser = async () => {
     const res = await axiosInstance.get('/auth/logout')
     if (res?.data) {
       return res.data
+    }
+  } catch (e: any) {
+    const message = e?.response?.data?.message || 'Something went wrong while verifying account. Please try again'
+    throw message
+  }
+}
+
+export const sendVerificationLink = async (email: string) => {
+  try {
+    const res = await axiosInstance.post('/auth/sendverification', { email })
+    if (res?.data) {
+      return res?.data?.message
     }
   } catch (e: any) {
     const message = e?.response?.data?.message || 'Something went wrong while verifying account. Please try again'

@@ -12,7 +12,7 @@ const MainLayout = ({ children }: Props) => {
     <Box maxW={{ base: 1080, '1xl': 1280 }} mx="auto" px={{ base: 4, xl: 0 }}>
       <NavBar />
       <Flex gap={10} mt={{ base: 16, xl: 32 }} direction={{ base: 'column', md: 'row' }}>
-        <Box minW={{ base: 'full', xl: 660, '1xl': 760 }} maxW={{ base: 660, '1xl': 760 }}>
+        <Box minW={{ base: 'full', xl: 660, '1xl': 790 }} maxW={{ base: 660, '1xl': 760 }}>
           {children}
         </Box>
         <SideBar />

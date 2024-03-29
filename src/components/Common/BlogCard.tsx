@@ -11,27 +11,29 @@ interface Props {
 }
 
 const BlogCard = ({ card, imagHeight }: Props) => {
-  const { title, content, coverimage, category, createdat, id } = card
+  const { title, content, coverimage, categoryname, createdat, id } = card
   return (
-    <Box my={4} overflow="hidden">
+    <Box my={4} overflow="hidden" boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={10}>
       <Link href={`/blog/${id}`}>
-        <Image src={coverimage} alt="post" h={imagHeight ? imagHeight : 200} borderRadius={10} objectFit="cover" w="full" />
-        <Text color="#6941C6" fontSize={{ base: 'xs', lg: 'sm' }} fontWeight="600" my={4}>
-          Milan Poudel &#x2022; {createdat}
-        </Text>
-        <Text color="#1A1A1A" fontSize={{ base: 'md', md: 'lg', '1xl': 'xl' }} fontWeight="bold" my={2}>
-          {title}
-        </Text>
-        <Box className="ql-snow" w="full">
-          <Box
-            className="ql-editor"
-            dangerouslySetInnerHTML={{
-              __html: content?.slice(0, 200)
-            }}
-            color="#667085"
-            fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }}
-            w="full"
-          />
+        <Image src={coverimage} alt="post" h={imagHeight ? imagHeight : 200} objectFit="cover" w="full" />
+        <Box px={6}>
+          <Text color="#6941C6" fontSize={{ base: 'xs', lg: 'sm' }} fontWeight="600" my={4}>
+            Milan Poudel &#x2022; {createdat}
+          </Text>
+          <Text color="#1A1A1A" mb={4} fontSize={{ base: 'md', md: 'lg', '1xl': 'xl' }} fontWeight="bold" my={2}>
+            {title}
+          </Text>
+          <Box className="ql-snow" w="full">
+            <Box
+              className="ql-editor"
+              dangerouslySetInnerHTML={{
+                __html: content?.slice(0, 200)
+              }}
+              color="rgba(35, 35, 35)"
+              fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }}
+              w="full"
+            />
+          </Box>
         </Box>
       </Link>
       <Flex gap={2} fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }}>
@@ -43,7 +45,7 @@ const BlogCard = ({ card, imagHeight }: Props) => {
           borderRadius={14}
           p={2}
         >
-          <Text>{category}</Text>
+          <Text>{categoryname}</Text>
         </Box>
         {/* ))} */}
       </Flex>
