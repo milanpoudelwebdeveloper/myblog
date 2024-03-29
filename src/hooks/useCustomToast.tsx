@@ -1,16 +1,12 @@
-import { useToast } from "@chakra-ui/react";
+import { useToast } from '@chakra-ui/react'
 
 export const useCustomToast = () => {
-  const toast = useToast();
+  const toast = useToast()
 
-  const showToast = (
-    title: string | object | any,
-    status: "info" | "warning" | "success" | "error" | undefined,
-    description?: string
-  ) => {
-    let finalTitle = title;
-    if (typeof finalTitle === "object") {
-      finalTitle = Object.values(title).join("\n");
+  const showToast = (title: string | object | any, status: 'info' | 'warning' | 'success' | 'error' | undefined, description?: string) => {
+    let finalTitle = title
+    if (typeof finalTitle === 'object') {
+      finalTitle = Object.values(title).join('\n')
     }
     toast({
       title: finalTitle,
@@ -18,9 +14,9 @@ export const useCustomToast = () => {
       status,
       duration: 3000,
       isClosable: true,
-      position: "top-left",
-    });
-  };
+      position: 'top-left'
+    })
+  }
 
-  return { showToast };
-};
+  return { showToast }
+}
