@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { getBlogDetails } from '@/src/services/blog'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
-import 'highlight.js/styles/a11y-dark.css'
+import 'highlight.js/styles/atom-one-light.css'
 
 const BlogDetails = () => {
   const router = useRouter()

@@ -10,6 +10,11 @@ const defaultUserData = {
   verified: false
 }
 
+export interface IUpdateUser {
+  name: string
+  country: string
+}
+
 export interface AuthContext {
   user: IUser
   isLoggedIn: boolean | undefined
@@ -17,6 +22,7 @@ export interface AuthContext {
   loading: boolean
   setIsLoading: (loading: boolean) => void
   setLogOut: () => void
+  updateUserInformation?: (data: IUpdateUser) => void
 }
 
 export const AuthContext = createContext<AuthContext>({
@@ -25,7 +31,8 @@ export const AuthContext = createContext<AuthContext>({
   loading: true,
   setUserData: (_: IUser) => {},
   setIsLoading: (_: boolean) => {},
-  setLogOut: () => {}
+  setLogOut: () => {},
+  updateUserInformation: (_: IUpdateUser) => {}
 })
 
 interface AuthProviderProps {
@@ -49,13 +56,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setLoading(loading)
   }
 
+  const updateUserInformation = (data: IUpdateUser) => {
+    setUser((prev) => ({ ...prev, ...data }))
+  }
+
   const value = {
     user,
     isLoggedIn,
     setUserData,
     loading: isLoading,
     setIsLoading,
-    setLogOut
+    setLogOut,
+    updateUserInformation
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

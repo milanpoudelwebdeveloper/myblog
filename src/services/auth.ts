@@ -82,3 +82,15 @@ export const sendVerificationLink = async (email: string) => {
     throw message
   }
 }
+
+export const changePassword = async (password: string, token: string) => {
+  try {
+    const res = await axiosInstance.post('/auth/changepassword', { password, token })
+    if (res?.data) {
+      return res.data
+    }
+  } catch (e: any) {
+    const message = e?.response?.data?.message || 'Something went wrong while verifying account. Please try again'
+    throw message
+  }
+}
