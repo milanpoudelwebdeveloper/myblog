@@ -1,4 +1,6 @@
+
 import React, { useContext, useEffect, useState } from 'react'
+
 import {
   Modal,
   ModalOverlay,
@@ -34,8 +36,10 @@ const UpdateInfo = ({ isOpen, onClose }: DeleteModalProps) => {
   const {
     register,
     handleSubmit,
+
     formState: { errors },
     setValue
+
   } = useForm({
     defaultValues: {
       country: 'Nepal'
@@ -48,6 +52,7 @@ const UpdateInfo = ({ isOpen, onClose }: DeleteModalProps) => {
       setValue('name', user?.name)
     }
   }, [user?.name])
+
 
   const submitHandler = (data: FieldValues) => {
     updateInformation({ id: user?.id, ...data } as IUpdateUser)
