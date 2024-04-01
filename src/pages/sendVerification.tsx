@@ -18,7 +18,6 @@ const SendVerificationLink = () => {
   } = useForm()
 
   const resendLink = (data: FieldValues) => {
-    console.log('the data is', data)
     sendVerificationLink(data?.email)
       .then((message) => {
         !enabled && setEnabled(true)

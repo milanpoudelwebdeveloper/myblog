@@ -20,8 +20,6 @@ export const PublicRoute = ({ children }: { children: React.ReactNode }) => {
   const { isLoggedIn } = useContext(AuthContext)
   const router = useRouter()
 
-  console.log('is logged in', isLoggedIn)
-
   useEffect(() => {
     if (isLoggedIn) {
       router.push('/')
@@ -33,7 +31,6 @@ export const PublicRoute = ({ children }: { children: React.ReactNode }) => {
 
 export const AdminProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useContext(AuthContext)
-  console.log('user role in context is', user)
   const router = useRouter()
   const isAdmin = user?.role === 'admin' || user?.role === 'superadmin'
   const { showToast } = useCustomToast()
