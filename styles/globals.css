@@ -14,3 +14,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.ql-editor {
+  padding: 0px 0px !important;
+}

@@ -13,9 +13,13 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@styles/*": ["./styles/*"],
+      "@constants/*": ["./src/constants/*"],
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../myblogserver/src/seed.mjs"],
   "exclude": ["node_modules"]
 }
