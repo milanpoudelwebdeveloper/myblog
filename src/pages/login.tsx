@@ -29,7 +29,6 @@ const UserLogin = () => {
   const loginHandler = (data: FieldValues) => {
     loginUser(data as ILogin)
       .then((res) => {
-        console.log('the response is', res)
         showToast(res?.message, 'success')
         if (res?.user) {
           const user = res?.user
@@ -41,7 +40,6 @@ const UserLogin = () => {
         }
       })
       .catch((e) => {
-        console.log('the error is', e)
         showToast(e?.data?.message, 'error')
         if (e.status) {
           setShowResetLink(true)
