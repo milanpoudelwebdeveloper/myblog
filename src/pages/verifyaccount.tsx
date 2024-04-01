@@ -22,6 +22,9 @@ const VerifyAccount = () => {
           showToast(res.message, 'success')
           setVerifying(false)
           setSuccess(true)
+          if (res?.redirectUrl) {
+            router.push(res?.redirectUrl)
+          }
         })
         .catch(() => {
           setVerifying(false)

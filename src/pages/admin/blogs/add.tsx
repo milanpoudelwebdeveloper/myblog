@@ -6,9 +6,10 @@ import { useCustomToast } from '@/src/hooks/useCustomToast'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
-import 'highlight.js/styles/atom-one-dark.css'
+
 import { addBlog } from '@/src/services/blog'
 import hljs from 'highlight.js'
+import 'highlight.js/styles/atom-one-dark.css'
 import ImageUploader from '@components/Admin/Common/ImageUploader'
 import { useRouter } from 'next/router'
 
