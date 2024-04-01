@@ -8,7 +8,6 @@ const headers = {
 }
 
 export const axiosInstance = axios.create({
-  withCredentials: true,
   baseURL,
   headers
 })
