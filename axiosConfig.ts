@@ -3,7 +3,8 @@ const baseURL = process.env.NEXT_PUBLIC_API_URL
 
 const headers = {
   'Content-Type': 'application/json',
-  accept: 'application/json, text/plain, */*'
+  accept: 'application/json, text/plain, */*',
+  'Access-Control-Allow-Origin': '*'
 }
 
 export const axiosInstance = axios.create({
