@@ -3,7 +3,6 @@ const baseURL = process.env.NEXT_PUBLIC_API_URL
 
 const headers = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
   accept: 'application/json, text/plain, */*'
 }
 
