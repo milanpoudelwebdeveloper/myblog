@@ -1,21 +1,8 @@
 import { Box, Divider, Grid, Text } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import BlogCard from '../Common/BlogCard'
-import { getBlogs } from '../../services/blog'
-import { useCustomToast } from '@/src/hooks/useCustomToast'
 
-const RecentPosts = () => {
-  const [blogs, setBlogs] = React.useState<IBlog[]>([])
-  const { showToast } = useCustomToast()
-  useEffect(() => {
-    getBlogs()
-      .then((data) => {
-        setBlogs(data)
-      })
-      .catch((e) => {
-        showToast(e, 'error')
-      })
-  }, [])
+const RecentPosts = ({ blogs }: { blogs: IBlog[] }) => {
   return (
     <Box mt={{ base: 7, lg: 10 }}>
       <Text color="#1A1A1A" fontSize={{ base: 'lg', md: 'xl', '1xl': '24px' }} fontWeight="600" my={3}>

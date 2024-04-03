@@ -90,3 +90,27 @@ export const deleteBlog = async (blogId: string) => {
     throw message
   }
 }
+
+export const updateReadCount = async (blogId: string) => {
+  try {
+    const res = await axiosInstance.put(`/blog/read/${blogId}`)
+    if (res?.data) {
+      return res?.data?.message
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}
+
+export const getPopularBlogs = async () => {
+  try {
+    const res = await axiosInstance.get('/blog/popular')
+    if (res?.data) {
+      return res?.data?.data
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}

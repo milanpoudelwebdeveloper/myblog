@@ -3,6 +3,7 @@ import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
 import RecentPosts from '@components/HomePage/RecentPosts'
 import Head from 'next/head'
+import { getBlogs } from '../services/blog'
 
 const featuredPost = {
   id: 1,
@@ -16,7 +17,7 @@ const featuredPost = {
   published: true
 }
 
-export default function Home() {
+export default function Home({ blogs }: { blogs: IBlog[] }) {
   return (
     <>
       <Head>
@@ -28,9 +29,35 @@ export default function Home() {
       <MainLayout>
         <Box>
           <BlogCard card={featuredPost} imagHeight={300} />
-          <RecentPosts />
+          <RecentPosts blogs={blogs} />
         </Box>
       </MainLayout>
     </>
   )
+}
+
+export async function getServerSideProps() {
+  try {
+    const blogs = await getBlogs()
+
+    if (blogs) {
+      return {
+        props: {
+          blogs: blogs
+        }
+      }
+    } else {
+      return {
+        props: {
+          blogs: []
+        }
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+        blogs: []
+      }
+    }
+  }
 }
