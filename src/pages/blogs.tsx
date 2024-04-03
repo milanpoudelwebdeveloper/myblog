@@ -6,8 +6,7 @@ import MainLayout from '@components/Common/MainLayout'
 import React, { useEffect, useState } from 'react'
 import { useCustomToast } from '../hooks/useCustomToast'
 
-const Blogs = () => {
-  const [categories, setCategories] = useState<ICategory[]>([])
+const Blogs = ({ categories }: { categories: ICategory[] }) => {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [blogs, setBlogs] = useState<IBlog[]>([])
   const { showToast } = useCustomToast()
@@ -31,14 +30,6 @@ const Blogs = () => {
         })
     }
   }, [selectedCategory])
-
-  useEffect(() => {
-    getCategories()
-      .then((data) => setCategories(data))
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
 
   return (
     <MainLayout>
@@ -71,3 +62,29 @@ const Blogs = () => {
 }
 
 export default Blogs
+
+export async function getStaticProps() {
+  try {
+    const categories = await getCategories()
+
+    if (categories) {
+      return {
+        props: {
+          categories: categories
+        }
+      }
+    } else {
+      return {
+        props: {
+          categories: []
+        }
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+        categories: []
+      }
+    }
+  }
+}
