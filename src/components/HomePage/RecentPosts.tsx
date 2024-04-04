@@ -9,7 +9,7 @@ const RecentPosts = ({ blogs }: { blogs: IBlog[] }) => {
         Recent Posts
       </Text>
       <Divider borderColor="#6941C6" w={9} borderWidth={2} />
-      <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} gap={7}>
+      <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={7}>
         {blogs?.map((blog) => <BlogCard card={blog} key={blog?.id} />)}
       </Grid>
     </Box>
