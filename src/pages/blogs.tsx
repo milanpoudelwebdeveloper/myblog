@@ -23,7 +23,9 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
     if (selectedCategory) {
       getBlogs(selectedCategory)
         .then((data) => {
-          setBlogs(data)
+          if (data) {
+            setBlogs(data)
+          }
         })
         .catch((e) => {
           showToast(e, 'error')
