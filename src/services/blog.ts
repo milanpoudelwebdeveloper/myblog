@@ -12,22 +12,9 @@ export const addBlog = async (data: IAddBlog) => {
   }
 }
 
-export const updateBlog = async (
-  blogId: number | string,
-  title: string,
-  coverImage: File,
-  content: string,
-  category: number | string,
-  published: boolean
-) => {
+export const updateBlog = async (blogId: number | string, data: IAddBlog) => {
   try {
-    const res = await axiosInstanceFile.put(`/blog/${blogId}`, {
-      title,
-      coverImage,
-      content,
-      category,
-      published
-    })
+    const res = await axiosInstanceFile.put(`/blog/${blogId}`, data)
     if (res?.data) {
       return res.data
     }

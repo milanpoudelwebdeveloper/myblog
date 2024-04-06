@@ -5,14 +5,13 @@ import { useRouter } from 'next/router'
 import { getBlogDetails, updateReadCount } from '@/src/services/blog'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
-import 'highlight.js/styles/atom-one-light.css'
+import 'highlight.js/styles/atom-one-dark.css'
+import { convertDate } from '@/src/utils/convertDate'
 
 const BlogDetails = () => {
   const router = useRouter()
   const { id } = router.query
   const [blogDetail, setBlogDetail] = useState<IBlog>({} as IBlog)
-
-  console.log('id is', id)
 
   const parentRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -21,10 +20,7 @@ const BlogDetails = () => {
       threshold: 1
     }
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        console.log('intersecting')
-      } else if (entry.boundingClientRect.top < 0) {
-        console.log('up')
+      if (entry.boundingClientRect.top < 0) {
         updateReadCount(id as string)
         observer.disconnect()
       }
@@ -48,12 +44,13 @@ const BlogDetails = () => {
   }, [id])
   return (
     <MainLayout>
-      <Box mt={4}>
-        <Text color="#1A1A1A" fontSize={{ base: '30px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
+      <Box mt={2}>
+        <Text color="#1A1A1A" fontSize={{ base: '30px', '1xl': '35px' }} fontWeight="bold" lineHeight={1.4}>
           {blogDetail?.title}
         </Text>
-        <Text color="#6941C6" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600" my={2}>
-          Milan Poudel &#x2022; 2021-10-11
+        <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600" my={2}>
+          Milan Poudel &#x2022;
+          {convertDate(blogDetail?.createdat)}
         </Text>
         <Box>
           <Image src={blogDetail?.coverimage} alt="featured" borderRadius={10} my={4} width="100%" objectFit="cover" h={380} />
@@ -63,6 +60,7 @@ const BlogDetails = () => {
           <Box
             className="ql-editor"
             fontSize={{ base: 'md', '1xl': 'lg' }}
+            lineHeight={1.7}
             dangerouslySetInnerHTML={{
               __html: blogDetail?.content
             }}

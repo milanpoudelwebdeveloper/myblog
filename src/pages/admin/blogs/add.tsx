@@ -9,7 +9,6 @@ import 'react-quill/dist/quill.snow.css'
 import { Select } from 'chakra-react-select'
 import { addBlog } from '@/src/services/blog'
 import hljs from 'highlight.js'
-import 'highlight.js/styles/atom-one-dark.css'
 import ImageUploader from '@components/Admin/Common/ImageUploader'
 import { useRouter } from 'next/router'
 import { Controller, FieldValues, useForm } from 'react-hook-form'
@@ -34,10 +33,7 @@ const modules = {
   syntax: {
     highlight: (text: string) => hljs.highlightAuto(text).value
   },
-  toolbar: toolbarOptions,
-  clipboard: {
-    matchVisual: false
-  }
+  toolbar: toolbarOptions
 }
 
 hljs.configure({
@@ -115,14 +111,7 @@ const AddBlog = () => {
             <Button bg="#4880FF" color="white" fontWeight="normal" onClick={handleSubmit((data) => submitHandler(data, false))}>
               Save As Draft
             </Button>
-            <Button
-              bg="#4880FF"
-              color="white"
-              fontWeight="normal"
-              onClick={handleSubmit((data) => {
-                submitHandler(data, true)
-              })}
-            >
+            <Button bg="#4880FF" color="white" fontWeight="normal" onClick={handleSubmit((data) => submitHandler(data, true))}>
               Publish
             </Button>
           </Flex>

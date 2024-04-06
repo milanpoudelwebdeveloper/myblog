@@ -15,7 +15,7 @@ export const navLinks = [
 ]
 
 const NavBar = () => {
-  const { user, setLogOut, isLoggedIn } = useContext(AuthContext)
+  const { setLogOut, isLoggedIn } = useContext(AuthContext)
   const { showToast } = useCustomToast()
 
   const logOutHandler = () => {
@@ -41,7 +41,7 @@ const NavBar = () => {
             </Link>
           ))}
           <ThemeToggle />
-          <Text color="red">{user?.name}</Text>
+
           {isLoggedIn ? (
             <Button bg="#1814F3" color="#fff" fontSize="md" onClick={logOutHandler}>
               Logout
