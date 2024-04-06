@@ -3,9 +3,8 @@ interface IBlog {
   title: string
   content: string
   coverimage: string
-  category: number
   createdat: string
-  categoryname: string
+  categories: string[]
   published: boolean
 }
 
@@ -14,4 +13,12 @@ interface ICategory {
   name: string
   image: string
   createdat: string
+}
+
+interface IAddBlog {
+  title: string
+  coverImage: File | string
+  content: string
+  categories: string[] | number[]
+  published: boolean
 }

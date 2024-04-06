@@ -12,7 +12,7 @@ interface Props {
 }
 
 const BlogCard = ({ card, imagHeight }: Props) => {
-  const { title, content, coverimage, categoryname, createdat, id } = card
+  const { title, content, coverimage, categories, createdat, id } = card
 
   return (
     <Box my={4} pb={7} overflow="hidden" boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={10}>
@@ -27,7 +27,6 @@ const BlogCard = ({ card, imagHeight }: Props) => {
           </Text>
           <Box className="ql-snow" w="full">
             <Box
-              className="ql-editor"
               dangerouslySetInnerHTML={{
                 __html: content?.slice(0, 200)
               }}
@@ -37,9 +36,11 @@ const BlogCard = ({ card, imagHeight }: Props) => {
             />
           </Box>
           <Flex gap={2} fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }} mt={4}>
-            <Box bg="#FDF2FA" color={'#C11574'} borderRadius={10} p={2}>
-              <Text>{categoryname}</Text>
-            </Box>
+            {categories?.map((categoryname) => (
+              <Box bg="#FDF2FA" color="#C11574" borderRadius={10} p={2} key={categoryname}>
+                <Text>{categoryname}</Text>
+              </Box>
+            ))}
           </Flex>
         </Box>
       </Link>
