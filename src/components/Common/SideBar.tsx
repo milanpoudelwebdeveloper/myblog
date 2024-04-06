@@ -20,11 +20,11 @@ const SideBar = () => {
 
   return (
     <Box flex={1}>
-      <Box p={{ base: 5, lg: 8 }} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10}>
-        <Text textAlign="center" mb={4} color="#1A1A1A" fontSize={{ base: 'lg', lg: 'xl', '1xl': '24px' }} fontWeight="600">
+      <Box pt={4} pb={4} px={6} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10}>
+        <Text textAlign="center" mb={2} color="#1A1A1A" fontSize={{ base: 'lg', lg: 'xl' }} fontWeight="700">
           Popular Posts
         </Text>
-        <Divider borderColor="#6941C6" w={20} borderWidth={2} mx="auto" mb={6} mt={2} />
+        <Divider borderColor="#6941C6" w={12} borderWidth={2} mx="auto" mb={8} />
         {data?.map((blog: IBlog) => (
           <Box key={blog?.id} mb={4}>
             <Flex alignItems="start" gap={{ base: 4, lg: 6 }}>
@@ -32,21 +32,21 @@ const SideBar = () => {
                 src={blog.coverimage}
                 alt="featured"
                 borderRadius="full"
-                width={{ base: 14, md: 16, '1xl': 20 }}
-                height={{ base: 14, md: 16, '1xl': 20 }}
+                width={{ base: 12, md: 16 }}
+                height={{ base: 12, md: 16 }}
                 objectFit="cover"
               />
               <Box>
-                <Text fontSize={{ base: 'sm', lg: 'md', '1xl': 'lg' }} mb={3} fontWeight="bold">
+                <Text fontSize={{ base: 'sm', lg: 'md' }} mb={1} fontWeight="600">
                   {blog.title}
                 </Text>
 
-                <Text color="#6941C6" fontSize={{ base: 'xs', lg: 'sm', '1xl': 'md' }}>
+                <Text color="#6941C6" fontSize="xs">
                   {convertDate(blog?.createdat)}
                 </Text>
-                <Divider my={3} />
               </Box>
             </Flex>
+            <Divider my={3} borderColor="rgba(0, 0, 0, 0.15)" />
           </Box>
         ))}
       </Box>

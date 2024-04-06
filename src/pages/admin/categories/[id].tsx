@@ -19,12 +19,8 @@ const CategoryDetails = ({ categoryDetails }: { categoryDetails: ICategory }) =>
   const editHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     editCategory(id as string, name, image as File)
-      .then((res) => {
-        showToast(res, 'success')
-      })
-      .catch((error) => {
-        showToast(error, 'error')
-      })
+      .then((res) => showToast(res, 'success'))
+      .catch((error) => showToast(error, 'error'))
   }
 
   if (image && typeof image !== 'string') {
@@ -39,9 +35,7 @@ const CategoryDetails = ({ categoryDetails }: { categoryDetails: ICategory }) =>
         showToast(res, 'success')
         router.push('/admin/categories')
       })
-      .catch((error) => {
-        showToast(error, 'error')
-      })
+      .catch((error) => showToast(error, 'error'))
   }
 
   return (

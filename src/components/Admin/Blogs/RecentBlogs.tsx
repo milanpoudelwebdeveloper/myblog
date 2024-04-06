@@ -51,7 +51,15 @@ const RecentBlogs = () => {
                 <Td>
                   <Image src={list?.coverimage} alt="avatar" w={10} borderRadius="full" />
                 </Td>
-                <Td>{list?.category}</Td>
+                <Td>
+                  <Flex gap={2} fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }} mt={4}>
+                    {list?.categories?.map((categoryname) => (
+                      <Box bg="#FDF2FA" color="#C11574" borderRadius={10} p={2} key={categoryname}>
+                        <Text>{categoryname}</Text>
+                      </Box>
+                    ))}
+                  </Flex>
+                </Td>
                 <Td>{list?.createdat}</Td>
               </Tr>
             ))}

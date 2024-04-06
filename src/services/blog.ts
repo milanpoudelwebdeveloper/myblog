@@ -1,14 +1,8 @@
 import { axiosInstance, axiosInstanceFile } from '@/axiosConfig'
 
-export const addBlog = async (title: string, coverImage: File, content: string, category: number | string, published: boolean) => {
+export const addBlog = async (data: IAddBlog) => {
   try {
-    const res = await axiosInstanceFile.post('/blog', {
-      title,
-      coverImage,
-      content,
-      category,
-      published
-    })
+    const res = await axiosInstanceFile.post('/blog', data)
     if (res?.data) {
       return res.data
     }
@@ -18,22 +12,9 @@ export const addBlog = async (title: string, coverImage: File, content: string, 
   }
 }
 
-export const updateBlog = async (
-  blogId: number | string,
-  title: string,
-  coverImage: File,
-  content: string,
-  category: number | string,
-  published: boolean
-) => {
+export const updateBlog = async (blogId: number | string, data: IAddBlog) => {
   try {
-    const res = await axiosInstanceFile.put(`/blog/${blogId}`, {
-      title,
-      coverImage,
-      content,
-      category,
-      published
-    })
+    const res = await axiosInstanceFile.put(`/blog/${blogId}`, data)
     if (res?.data) {
       return res.data
     }

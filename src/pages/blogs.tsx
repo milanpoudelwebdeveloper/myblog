@@ -22,11 +22,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
   useEffect(() => {
     if (selectedCategory) {
       getBlogs(selectedCategory)
-        .then((data) => {
-          if (data) {
-            setBlogs(data)
-          }
-        })
+        .then((data) => setBlogs(data))
         .catch((e) => {
           showToast(e, 'error')
         })

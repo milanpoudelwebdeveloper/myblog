@@ -1,29 +1,33 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Box, Button, Divider, Flex, FormControl, FormLabel, Image, Input, Select, Text, useDisclosure } from '@chakra-ui/react'
+import React, { useMemo, useState } from 'react'
+import { Box, Button, Divider, Flex, FormControl, FormLabel, Image, Input, Text, useDisclosure } from '@chakra-ui/react'
 import MainLayout from '@components/Admin/Common/MainLayout'
 import { getCategories } from '@/src/services/category'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
-import 'highlight.js/styles/atom-one-dark.css'
 import { deleteBlog, getBlogDetails, updateBlog } from '@/src/services/blog'
 import hljs from 'highlight.js'
 import ImageUploader from '@components/Admin/Common/ImageUploader'
 import { useRouter } from 'next/router'
 import DeleteModal from '@components/Admin/Common/DeleteModal'
+import 'highlight.js/styles/monokai-sublime.css'
+import { Controller, FieldValues, useForm } from 'react-hook-form'
+import ErrorText from '@components/Common/ErrorText'
+import { useQuery } from '@tanstack/react-query'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { blogSchema } from '@/src/validations/blogValidations'
+import { Select } from 'chakra-react-select'
 
 const toolbarOptions = [
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
   ['bold', 'italic', 'underline', 'strike'],
+  [{ color: [] }, { background: [] }],
+  [{ script: 'sub' }, { script: 'super' }],
   ['blockquote', 'code-block'],
-
   [{ list: 'ordered' }, { list: 'bullet' }],
-  ['link'],
-  [{ indent: '-1' }, { indent: '+1' }],
-
-  [{ header: [1, 2, 3, false] }],
-
-  [{ align: [] }]
+  [{ indent: '-1' }, { indent: '+1' }, { align: [] }],
+  ['link', 'image']
 ]
 const modules = {
   syntax: {
@@ -40,31 +44,44 @@ hljs.configure({
 })
 
 const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
-  const [title, setTitle] = useState(blogDetails?.title || '')
-  const [content, setContent] = useState(blogDetails?.content || '')
   const [coverImage, setCoverImage] = useState<File | null | string>(blogDetails?.coverimage || null)
-  const [categories, setCategories] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState(blogDetails?.category || '')
-  let imageUrl = ''
+
+  const { data: categories } = useQuery({
+    queryKey: ['getCategoryInDetails'],
+    queryFn: getCategories,
+    staleTime: Infinity
+  })
+
+  const {
+    handleSubmit,
+    register,
+    control,
+    watch,
+
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(blogSchema),
+    defaultValues: {
+      ...blogDetails,
+      categories: blogDetails?.categories
+    }
+  })
+  const categorsiWatch = watch('categories')
+  console.log(categorsiWatch, 'watch')
 
   const { showToast } = useCustomToast()
   const router = useRouter()
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
   const { isOpen, onClose, onOpen } = useDisclosure()
 
-  useEffect(() => {
-    getCategories()
-      .then((data) => {
-        setCategories(data)
-      })
-      .catch((error) => {
-        showToast(error, 'error')
-      })
-  }, [])
-
-  const submitHandler = async (published: boolean) => {
+  const submitHandler = async (data: FieldValues, published: boolean) => {
+    if (!coverImage) {
+      return showToast('Please add cover image', 'error')
+    }
+    const categories = data?.categories?.map((category: { label: string; value: string }) => category.value)
     try {
-      const response = await updateBlog(blogDetails?.id, title, coverImage as File, content, selectedCategory, published)
+      const values = { ...data, categories, published, coverImage } as IAddBlog
+      const response = await updateBlog(blogDetails?.id, values)
       if (response) {
         showToast(response?.message, 'success')
         if (published) {
@@ -75,6 +92,8 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
       showToast(error, 'error')
     }
   }
+
+  let imageUrl = ''
 
   if (coverImage && typeof coverImage !== 'string') {
     imageUrl = URL.createObjectURL(coverImage)
@@ -88,10 +107,13 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
         showToast(res, 'success')
         router.push('/admin/blogs')
       })
-      .catch((error) => {
-        showToast(error, 'error')
-      })
+      .catch((error) => showToast(error, 'error'))
   }
+
+  const categoriesFormatted = categories?.map((category: ICategory) => ({
+    value: category.id,
+    label: category.name
+  }))
 
   return (
     <MainLayout>
@@ -111,19 +133,12 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
               bg="#4880FF"
               color="white"
               fontWeight="normal"
-              onClick={() => submitHandler(false)}
+              onClick={handleSubmit((data) => submitHandler(data, false))}
               display={blogDetails?.published ? 'none' : 'block'}
             >
               Save (Update Draft)
             </Button>
-            <Button
-              bg="#4880FF"
-              color="white"
-              fontWeight="normal"
-              onClick={() => {
-                submitHandler(true)
-              }}
-            >
+            <Button bg="#4880FF" color="white" fontWeight="normal" onClick={handleSubmit((data) => submitHandler(data, true))}>
               {blogDetails?.published ? 'Update' : 'Publish'}
             </Button>
           </Flex>
@@ -149,38 +164,54 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
                   bg="#F5F6FA"
                   _placeholder={{ color: '#718EBF' }}
                   placeholder="Enter title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  {...register('title')}
                 />
+                {errors?.title && <ErrorText message={errors?.title?.message} />}
               </FormControl>
               <FormControl>
                 <FormLabel color="#232323" fontSize="md" mb={3}>
                   Category
                 </FormLabel>
-                <Select
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  placeholder="Select Category"
-                  borderRadius={12}
-                  bg="#F5F6FA"
-                  value={selectedCategory}
-                >
-                  {categories.map((category: any, index: number) => (
-                    <option key={index} value={category?.id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </Select>
+                <Controller
+                  control={control}
+                  name="categories"
+                  render={({ field: { onChange, value, name, ref } }) => (
+                    <Select
+                      ref={ref}
+                      isMulti
+                      size="sm"
+                      colorScheme="purple"
+                      options={categoriesFormatted}
+                      placeholder="Select Category (mutiple)"
+                      selectedOptionColorScheme="blue"
+                      onChange={onChange}
+                      value={value}
+                      name={name}
+                      instanceId="categories"
+                    />
+                  )}
+                />
+                {errors?.categories && <ErrorText message={errors?.categories?.message} />}
               </FormControl>
             </Flex>
-            <ReactQuill
-              theme="snow"
-              value={content}
-              onChange={setContent}
-              modules={modules}
-              style={{
-                height: '250px'
-              }}
+            <Controller
+              name="content"
+              control={control}
+              render={({ field }) => (
+                <ReactQuill
+                  id="content"
+                  theme="snow"
+                  modules={modules}
+                  placeholder="Write Content Here"
+                  onChange={(text) => {
+                    field.onChange(text)
+                  }}
+                  className="react-quill"
+                  value={field?.value as string}
+                />
+              )}
             />
+            {errors?.content && <ErrorText message={errors?.content?.message} />}
           </Box>
         </Box>
       </Box>

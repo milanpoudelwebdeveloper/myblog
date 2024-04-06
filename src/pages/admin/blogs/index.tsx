@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Image, Text, Button, Flex } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Image, Text, Button, Flex, Box } from '@chakra-ui/react'
 import MainLayout from '@components/Admin/Common/MainLayout'
 import Link from 'next/link'
 import { getBlogs } from '@/src/services/blog'
@@ -63,7 +63,15 @@ const Blogs = () => {
                 <Td>
                   <Image src={list?.coverimage} alt="avatar" w={12} borderRadius="full" h={12} objectFit="cover" />
                 </Td>
-                <Td>{list?.categoryname}</Td>
+                <Td>
+                  <Flex gap={2} fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }} mt={4}>
+                    {list?.categories?.map((categoryname) => (
+                      <Box bg="#FDF2FA" color="#C11574" borderRadius={10} p={2} key={categoryname}>
+                        <Text>{categoryname}</Text>
+                      </Box>
+                    ))}
+                  </Flex>
+                </Td>
                 <Td>{list?.createdat}</Td>
                 <Td>{list?.published ? 'Yes' : 'No'}</Td>
               </Tr>

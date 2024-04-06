@@ -15,6 +15,6 @@ a {
   text-decoration: none;
 }
 
-.ql-editor {
-  padding: 0px 0px !important;
+.react .ql-editor {
+  height: 200px !important;
 }

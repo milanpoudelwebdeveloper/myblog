@@ -13,13 +13,13 @@ const AddCategory = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!name || !image) {
+      return showToast('Both title and cover image is required', 'error')
+    }
+
     addCategory(name, image as File)
-      .then((res) => {
-        showToast(res, 'success')
-      })
-      .catch((error) => {
-        showToast(error, 'error')
-      })
+      .then((res) => showToast(res, 'success'))
+      .catch((error) => showToast(error, 'error'))
   }
 
   if (image && typeof image !== 'string') {
@@ -45,7 +45,7 @@ const AddCategory = () => {
                   <ImageUploader setCoverImage={setImage} />
                 )}
               </Box>
-              <FormControl maxW={400} mx="auto">
+              <FormControl maxW={400} mx="auto" isRequired>
                 <FormLabel color="#232323" fontSize="md">
                   Title
                 </FormLabel>
