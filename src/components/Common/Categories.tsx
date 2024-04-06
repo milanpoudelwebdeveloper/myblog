@@ -1,12 +1,14 @@
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { getCategories } from '@/src/services/category'
-import { Box, Divider, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Divider, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 
 const Categories = () => {
   const { showToast } = useCustomToast()
+  const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
+  const dividerColor = useColorModeValue('rgba(0, 0, 0, 0.15)', 'rgba(255, 255, 255, 0.15)')
   const { error, data: categories } = useQuery({
     queryKey: ['getCategories'],
     queryFn: getCategories,
@@ -18,7 +20,7 @@ const Categories = () => {
   }
   return (
     <Box p={{ base: 5, lg: 8 }} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10}>
-      <Text textAlign="center" color="#1A1A1A" fontSize={{ base: 'lg', lg: 'xl', '1xl': '24px' }} fontWeight="600">
+      <Text textAlign="center" color={headingColor} fontSize={{ base: 'lg', lg: 'xl', '1xl': '24px' }} fontWeight="600">
         Categories
       </Text>
       <Divider borderColor="#6941C6" w={20} borderWidth={2} mx="auto" mb={6} mt={2} />
@@ -35,7 +37,7 @@ const Categories = () => {
               <FaChevronRight color="rgb(165, 94, 234)" />
             </Flex>
 
-            <Divider my={{ base: 2, '1xl': 3 }} borderColor="rgba(0, 0, 0, 0.15)" />
+            <Divider my={{ base: 2, '1xl': 3 }} borderColor={dividerColor} />
           </Box>
         ))}
       </Box>
