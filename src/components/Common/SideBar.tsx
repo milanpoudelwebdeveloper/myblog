@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Divider, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import Categories from './Categories'
 import { useQuery } from '@tanstack/react-query'
@@ -8,6 +8,10 @@ import { useCustomToast } from '@/src/hooks/useCustomToast'
 
 const SideBar = () => {
   const { showToast } = useCustomToast()
+  const bgColor = useColorModeValue('white', '#1a1a1a')
+  const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
+  const dividerColor = useColorModeValue('rgba(0, 0, 0, 0.15)', 'rgba(255, 255, 255, 0.15)')
+
   const { error, data } = useQuery({
     queryKey: ['getPopularPosts'],
     queryFn: getPopularBlogs,
@@ -20,8 +24,8 @@ const SideBar = () => {
 
   return (
     <Box flex={1}>
-      <Box pt={4} pb={4} px={6} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10}>
-        <Text textAlign="center" mb={2} color="#1A1A1A" fontSize={{ base: 'lg', lg: 'xl' }} fontWeight="700">
+      <Box pt={4} pb={4} px={6} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
+        <Text textAlign="center" mb={2} color={headingColor} fontSize={{ base: 'lg', lg: 'xl' }} fontWeight="700">
           Popular Posts
         </Text>
         <Divider borderColor="#6941C6" w={12} borderWidth={2} mx="auto" mb={8} />
@@ -46,7 +50,7 @@ const SideBar = () => {
                 </Text>
               </Box>
             </Flex>
-            <Divider my={3} borderColor="rgba(0, 0, 0, 0.15)" />
+            <Divider my={3} borderColor={dividerColor} />
           </Box>
         ))}
       </Box>

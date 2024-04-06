@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import React, { useContext } from 'react'
 import ThemeToggle from './ThemeToggle'
 import { ABOUT, BLOGS, CONTACT, HOME } from '@/src/constants/routes'
@@ -17,6 +17,7 @@ export const navLinks = [
 const NavBar = () => {
   const { setLogOut, isLoggedIn } = useContext(AuthContext)
   const { showToast } = useCustomToast()
+  const bg = useColorModeValue('white', '#141414')
 
   const logOutHandler = () => {
     logoutUser()
@@ -29,7 +30,7 @@ const NavBar = () => {
       })
   }
   return (
-    <Box bg="white" boxShadow="rgba(0, 0, 0, 0.05) 0px 2px 4px 0px" w="full" position="fixed" zIndex={10} top={0}>
+    <Box bg={bg} boxShadow="rgba(0, 0, 0, 0.05) 0px 2px 4px 0px" w="full" position="fixed" zIndex={10} top={0}>
       <Flex justifyContent="space-between" py={{ base: 4, xl: 7 }} width="full" maxW={{ base: 1080, '1xl': 1280 }}>
         <Text fontSize={{ base: 'sm', md: 'md', '1xl': 'xl' }} fontWeight="medium">
           Milan

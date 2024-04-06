@@ -1,4 +1,4 @@
-import { Box, Image, Text } from '@chakra-ui/react'
+import { Box, Image, Text, useColorModeValue } from '@chakra-ui/react'
 import MainLayout from '@components/Common/MainLayout'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -9,9 +9,10 @@ import 'highlight.js/styles/atom-one-dark.css'
 import { convertDate } from '@/src/utils/convertDate'
 
 const BlogDetails = () => {
+  const [blogDetail, setBlogDetail] = useState<IBlog>({} as IBlog)
+  const titleColor = useColorModeValue('#1A1A1A', 'rgb(237, 242, 247)')
   const router = useRouter()
   const { id } = router.query
-  const [blogDetail, setBlogDetail] = useState<IBlog>({} as IBlog)
 
   const parentRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -45,7 +46,7 @@ const BlogDetails = () => {
   return (
     <MainLayout>
       <Box mt={2}>
-        <Text color="#1A1A1A" fontSize={{ base: '30px', '1xl': '35px' }} fontWeight="bold" lineHeight={1.4}>
+        <Text color={titleColor} fontSize={{ base: '30px', '1xl': '35px' }} fontWeight="bold" lineHeight={1.4}>
           {blogDetail?.title}
         </Text>
         <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600" my={2}>
