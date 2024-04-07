@@ -47,7 +47,7 @@ const Users = ({ users }: { users: IUser[] }) => {
                 <Td>{user?.email}</Td>
                 <Td>{user?.role}</Td>
                 <Td>
-                  <Image src={user?.profileimage} alt="avatar" w={10} borderRadius="full" />
+                  <Image src={user?.profileimage} alt="avatar" w={10} h="auto" borderRadius="full" />
                 </Td>
                 <Td>
                   <Text color={user?.verified ? 'green' : 'red'}>{user?.verified ? 'Verified' : 'Pending'}</Text>

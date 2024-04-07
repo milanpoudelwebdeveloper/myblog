@@ -44,7 +44,7 @@ const SideBar = () => {
             pr={7}
             borderRadius={10}
           >
-            <Image src={item.icon} alt={item.name} w={6} objectFit="contain" />
+            <Image src={item.icon} alt={item.name} w={6} h="auto" objectFit="contain" />
             <Box fontSize="sm" fontWeight="600" color={isActive(item?.path) ? 'white' : '#202224'}>
               {item.name}
             </Box>

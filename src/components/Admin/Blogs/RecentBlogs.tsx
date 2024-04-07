@@ -49,7 +49,7 @@ const RecentBlogs = () => {
                 <Td>{list.title}</Td>
                 <Td>{list?.content?.slice(0, 8)}</Td>
                 <Td>
-                  <Image src={list?.coverimage} alt="avatar" w={10} borderRadius="full" objectFit="cover" />
+                  <Image src={list?.coverimage} alt="avatar" w={10} h="auto" borderRadius="full" objectFit="cover" />
                 </Td>
                 <Td>
                   <Flex gap={2} fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }} mt={4}>

@@ -27,7 +27,7 @@ const ImageUploader = ({ setCoverImage }: ImageUploaderProps) => {
         direction="column"
         align="center"
       >
-        <Image src="/images/uploadphoto.png" alt="file-upload" w={20} />
+        <Image src="/images/uploadphoto.png" alt="file-upload" w={20} h="auto" />
         <Flex gap={1} fontSize="sm" cursor="pointer" color="#4379EE">
           <Text>Click to upload</Text>
           <Text>or drag and drop cover photo</Text>

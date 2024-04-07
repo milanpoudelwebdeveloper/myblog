@@ -43,7 +43,7 @@ const AdminHome = () => {
                 </Text>
               </Box>
 
-              <Image src="/images/usericon1.png" alt="user" w={14} objectFit="contain" />
+              <Image src="/images/usericon1.png" alt="user" w={14} h="auto" objectFit="contain" />
             </Flex>
           </Link>
           <Link href="/admin/blogs">
@@ -56,7 +56,7 @@ const AdminHome = () => {
                   {statsData?.totalBlogs}
                 </Text>
               </Box>
-              <Image src="/images/usericon1.png" alt="user" w={14} objectFit="contain" />
+              <Image src="/images/usericon1.png" alt="user" w={14} h="auto" objectFit="contain" />
             </Flex>
           </Link>
           <Link href="/admin/categories">
@@ -69,7 +69,7 @@ const AdminHome = () => {
                   {statsData?.totalCategories}
                 </Text>
               </Box>
-              <Image src="/images/usericon1.png" alt="user" w={14} objectFit="contain" />
+              <Image src="/images/usericon1.png" alt="user" w={14} h="auto" objectFit="contain" />
             </Flex>
           </Link>
         </Flex>

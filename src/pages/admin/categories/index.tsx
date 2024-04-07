@@ -52,7 +52,7 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
                     <Image src={list?.image} alt="avatar" w={12} h={12} borderRadius="full" objectFit="cover" />
                   </Td>
                   <Td>
-                    <Image src={list?.createdat} alt="avatar" w={10} borderRadius="full" />
+                    <Image src={list?.createdat} alt="avatar" w={10} h="auto" borderRadius="full" />
                   </Td>
                 </Tr>
               ))}
