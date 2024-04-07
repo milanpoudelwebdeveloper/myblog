@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import 'react-quill/dist/quill.core.css'
@@ -6,6 +6,7 @@ import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-light.css'
 import { convertDate } from '@/src/utils/convertDate'
 import Markdown from 'markdown-to-jsx'
+import Image from 'next/image'
 
 interface Props {
   card: IBlog
@@ -22,7 +23,9 @@ const BlogCard = ({ card, imagHeight }: Props) => {
   return (
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={`/blog/${id}`}>
-        <Image src={coverimage} alt="post" h={imagHeight ? imagHeight : 200} objectFit="cover" w="full" />
+        <Box w="full" h={imagHeight ? imagHeight : 200} position="relative">
+          <Image src={coverimage} alt="post" objectFit="cover" layout="fill" />
+        </Box>
         <Box px={6}>
           <Text color="#6941C6" fontSize={{ base: 'xs', lg: 'sm' }} fontWeight="600" my={4}>
             Milan Poudel &#x2022; {convertDate(createdat)}
