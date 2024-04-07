@@ -37,7 +37,7 @@ const VerifyAccount = () => {
       <Flex justifyContent="center" alignItems="center" h="100vh" overflowY="hidden">
         {verifying ? (
           <Box textAlign="center">
-            <Image src="/images/waiting.svg" alt="verified" w={350} mx="auto" />
+            <Image src="/images/waiting.svg" alt="verified" w={350} h="auto" mx="auto" />
             <Flex alignItems="center" gap={3}>
               <Text fontSize="xl">Please wait while we are verifying your account</Text>
               <Spinner color="blue.500" />
@@ -45,7 +45,7 @@ const VerifyAccount = () => {
           </Box>
         ) : success ? (
           <Box textAlign="center">
-            <Image src="/images/success.svg" alt="verified" w={350} mx="auto" />
+            <Image src="/images/success.svg" alt="verified" w={350} h="auto" mx="auto" />
             <Text fontSize="xl">Account verified successfully</Text>
             <Link href="/login">
               <Button variant="unstyled" color="blue.500" textDecoration="underline">
@@ -55,7 +55,7 @@ const VerifyAccount = () => {
           </Box>
         ) : (
           <Box textAlign="center">
-            <Image src="/images/failed.webp" alt="verified" w={300} mx="auto" />
+            <Image src="/images/failed.webp" alt="verified" w={300} h="auto" mx="auto" />
             <Text fontSize="lg" my={5}>
               Oops! Something went wrong while verifying your account
             </Text>

@@ -9,7 +9,6 @@ import 'highlight.js/styles/atom-one-dark.css'
 import { convertDate } from '@/src/utils/convertDate'
 import HeadingSeo from '@components/Common/HeadingSeo'
 
-
 const BlogDetails = () => {
   const [blogDetail, setBlogDetail] = useState<IBlog>({} as IBlog)
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(237, 242, 247)')
@@ -50,7 +49,6 @@ const BlogDetails = () => {
       <HeadingSeo
         title={blogDetail?.title}
         description={blogDetail?.content?.slice(0, 140)}
-
         link={`https://codewithmilan.com/blog/${id}`}
       />
       <MainLayout>
@@ -65,7 +63,6 @@ const BlogDetails = () => {
 
           <Box>
             <Image src={blogDetail?.coverimage} alt="featured" borderRadius={10} my={4} width="100%" objectFit="cover" h={380} />
-
           </Box>
           <Box ref={parentRef} />
           <Box className="ql-snow">

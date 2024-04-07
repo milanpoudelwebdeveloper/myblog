@@ -19,7 +19,7 @@ const BlogFilter = ({ setPublishedStatus }: BlogFilterProps) => {
   return (
     <Flex bg="white" mb={7} fontSize="sm" fontWeight="bold" borderRadius={10} w="max-content" borderWidth="0.6px" borderColor="#D5D5D5">
       <Box p={5}>
-        <Image src="/images/filtericon.webp" w={6} alt="filter" objectFit="cover" />
+        <Image src="/images/filtericon.webp" w={6} h="auto" alt="filter" objectFit="cover" />
       </Box>
       <Divider orientation="vertical" borderColor="#D5D5D5" h="16" opacity={0.7} />
       <Text p={5}>Filter By</Text>
@@ -46,7 +46,7 @@ const BlogFilter = ({ setPublishedStatus }: BlogFilterProps) => {
       </Select>
       <Divider orientation="vertical" borderColor="#D5D5D5" h="16" opacity={0.7} />
       <Flex color="#EA0234" p={5} gap={2} alignItems="center">
-        <Image src="/images/replay.webp" w={4} alt="reset" objectFit="cover" />
+        <Image src="/images/replay.webp" w={4} h="auto" alt="reset" objectFit="cover" />
         <Text>Reset Filter</Text>
       </Flex>
     </Flex>
