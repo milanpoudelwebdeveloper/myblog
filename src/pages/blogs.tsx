@@ -31,17 +31,17 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
 
   return (
     <MainLayout>
-      <Box mt={{ base: 6, md: 2 }}>
-        <Flex my={4} gap={4}>
+      <Box mt={{ base: 5, md: 1 }}>
+        <Flex my={1} gap={4}>
           {finalCategories?.map((category) => (
             <Box
               key={category?.id}
               bg={category?.id === selectedCategory ? 'rgb(165, 94, 234)' : 'white'}
-              color={category?.id === selectedCategory ? 'rgb(255, 255, 255)' : 'rgb(165, 94, 234)'}
-              boxShadow="rgba(165, 94, 234, 0.25) 0px 8px 20px"
+              color={category?.id === selectedCategory ? 'rgb(255, 255, 255)' : 'rgb(35, 35, 35)'}
+              boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
               borderRadius={12}
-              fontWeight="600"
-              fontSize={{ base: 'sm', md: 'md', '1xl': 'lg' }}
+              fontWeight="500"
+              fontSize={{ base: 'sm', md: 'md' }}
               py={{ base: 2, '1xl': 3 }}
               px={{ base: 4, '1xl': 5 }}
               cursor="pointer"
@@ -52,7 +52,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
           ))}
         </Flex>
       </Box>
-      <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={{ base: 5, lg: 10 }}>
+      <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={5}>
         {blogs?.map((post) => <BlogCard card={post} key={post?.id} />)}
       </Grid>
     </MainLayout>

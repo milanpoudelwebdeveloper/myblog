@@ -44,6 +44,14 @@ export const countrySchema = yup.object().shape({
   country: yup.string().required('Country is required')
 })
 
+export const subjectSchema = yup.object().shape({
+  subject: yup.string().required('Subject is required')
+})
+
+export const messageSchema = yup.object().shape({
+  message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters long')
+})
+
 export const signUpSchema = yup.object().shape({
   ...emailSchema.fields,
   ...nameSchema.fields,
@@ -71,4 +79,11 @@ export const resetPasswordSchema = yup.object().shape({
 export const editProfileSchema = yup.object().shape({
   ...nameSchema.fields,
   ...countrySchema.fields
+})
+
+export const contactSchema = yup.object().shape({
+  ...nameSchema.fields,
+  ...emailSchema.fields,
+  ...subjectSchema.fields,
+  ...messageSchema.fields
 })

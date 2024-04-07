@@ -6,18 +6,22 @@ import Footer from './Footer'
 
 interface Props {
   children: React.ReactNode
+  hideSidebar?: boolean
 }
 
-const MainLayout = ({ children }: Props) => {
+const MainLayout = ({ children, hideSidebar = false }: Props) => {
   return (
-    <Box maxW={{ base: 1090, '1xl': 1240 }} mx="auto" px={{ base: 4, xl: 0 }}>
+    <Box maxW={{ base: 1090, '1xl': 1230 }} mx="auto" px={{ base: 4, xl: 0 }}>
       <NavBar />
-      <Flex gap={10} mt={{ base: 16, xl: 32 }} direction={{ base: 'column', md: 'row' }}>
+      <Flex gap={10} mt={{ base: 16, xl: 32 }} direction={{ base: 'column', md: 'row' }} justifyContent="center">
         <Box minW={{ base: 'full', xl: 660, '1xl': 760 }} maxW={{ base: 'full', xl: 660, '1xl': 760 }}>
           {children}
         </Box>
-        <SideBar />
+        <Box display={hideSidebar ? 'none' : 'block'}>
+          <SideBar />
+        </Box>
       </Flex>
+
       <Footer />
     </Box>
   )
