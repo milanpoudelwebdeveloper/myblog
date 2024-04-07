@@ -25,7 +25,7 @@ const SideBar = () => {
   return (
     <Box flex={1}>
       <Box pt={4} pb={4} px={6} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
-        <Text textAlign="center" mb={2} color={headingColor} fontSize={{ base: 'lg', lg: 'xl' }} fontWeight="700">
+        <Text as="h2" textAlign="center" mb={2} color={headingColor} fontSize={{ base: 'lg', lg: 'xl' }} fontWeight="700">
           Popular Posts
         </Text>
         <Divider borderColor="#6941C6" w={12} borderWidth={2} mx="auto" mb={8} />

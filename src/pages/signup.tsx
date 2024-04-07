@@ -47,10 +47,10 @@ const SignUp = () => {
       <PublicRoute>
         <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
           <Box borderRadius={24} bg="white" px={14} py={20} textAlign="center" w={580} maxH={540} overflowY="scroll">
-            <Text color="#202224" fontSize="24px" fontWeight="600">
+            <Text color="#202224" fontSize="24px" fontWeight="600" as="h1">
               Create an Account
             </Text>
-            <Text fontSize="md" fontWeight="500" mt={4}>
+            <Text fontSize="md" fontWeight="500" mt={4} as="h2">
               Create a account to continue
             </Text>
             <form onSubmit={handleSubmit(submitHandler)}>
@@ -139,14 +139,14 @@ const SignUp = () => {
                   <PasswordVisibilty visibility={confirmPasswordVisible} toggle={setConfirmPasswordVisible} />
                   {errors?.confirmPassword && <ErrorText message={errors?.confirmPassword?.message} />}
                 </FormControl>
-                <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
+                <Text as="h2" color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
                   Forgot Password?
                 </Text>
                 <Button bg="#4880FF" color="white" fontWeight="normal" type="submit" w="80%" mt={10}>
                   Sign Up
                 </Button>
                 <Flex justifyContent="center" mt={4}>
-                  <Text>Already have an account?</Text>
+                  <Text as="h2">Already have an account?</Text>
                   <Link href="/login">
                     <Button variant="link" color="#4880FF" ml={1} textDecoration="underline">
                       Sign In
