@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Text, Button, Flex, Box } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Text, Button, Flex, Box, Image } from '@chakra-ui/react'
 import Link from 'next/link'
 import { getBlogs } from '@/src/services/blog'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
-import Image from 'next/image'
 
 const tableHeadings = ['Title', 'Description', 'Cover Image', 'Category', 'Created At']
 
@@ -50,9 +49,7 @@ const RecentBlogs = () => {
                 <Td>{list.title}</Td>
                 <Td>{list?.content?.slice(0, 8)}</Td>
                 <Td>
-                  <Box w={10} h="auto" position="relative" borderRadius="full">
-                    <Image src={list?.coverimage} alt="avatar" objectFit="cover" layout="fill" />
-                  </Box>
+                  <Image src={list?.coverimage} alt="avatar" w={10} borderRadius="full" objectFit="cover" />
                 </Td>
                 <Td>
                   <Flex gap={2} fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }} mt={4}>

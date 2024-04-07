@@ -1,8 +1,7 @@
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { getCategories } from '@/src/services/category'
-import { Box, Divider, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { FaChevronRight } from 'react-icons/fa'
@@ -35,9 +34,7 @@ const Categories = () => {
           <Box key={category?.id}>
             <Flex alignItems="center" justifyContent="space-between">
               <Flex alignItems="center" gap={4}>
-                <Box w={10} h={10} position="relative" borderRadius="full" overflow="hidden">
-                  <Image src={category?.image} alt="category" objectFit="cover" layout="fill" />
-                </Box>
+                <Image src={category?.image} alt="category" borderRadius="full" width={10} h={10} objectFit="cover" />
                 <Box width="max-content" fontSize={{ base: 'sm', lg: 'md' }} fontWeight="600">
                   {category?.name}
                 </Box>
