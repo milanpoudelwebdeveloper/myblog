@@ -1,11 +1,10 @@
-import { Box, Divider, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import Categories from './Categories'
 import { useQuery } from '@tanstack/react-query'
 import { getPopularBlogs } from '@/src/services/blog'
 import { convertDate } from '@/src/utils/convertDate'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
-import Image from 'next/image'
 
 const SideBar = () => {
   const { showToast } = useCustomToast()
@@ -33,9 +32,14 @@ const SideBar = () => {
         {data?.map((blog: IBlog) => (
           <Box key={blog?.id} mb={4}>
             <Flex alignItems="start" gap={{ base: 4, lg: 6 }}>
-              <Box width={{ base: 12, md: 16 }} height={{ base: 12, md: 16 }} borderRadius="full" position="relative" overflow="hidden">
-                <Image src={blog.coverimage} alt="featured" objectFit="cover" layout="fill" />
-              </Box>
+              <Image
+                src={blog?.coverimage}
+                alt="featured"
+                borderRadius="full"
+                width={{ base: 12, md: 16 }}
+                height={{ base: 12, md: 16 }}
+                objectFit="cover"
+              />
               <Box>
                 <Text fontSize={{ base: 'sm', lg: 'md' }} mb={1} fontWeight="600">
                   {blog.title}

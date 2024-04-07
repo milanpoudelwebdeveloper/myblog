@@ -1,11 +1,10 @@
-import { Box, Button, Flex, Link, Spinner, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Image, Link, Spinner, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import { verifyAccount } from '../services/auth'
 import { useCustomToast } from '../hooks/useCustomToast'
 import { PublicRoute } from '@components/RouteAccess'
 import { AuthContext } from '../context/authContext'
-import Image from 'next/image'
 
 const VerifyAccount = () => {
   const [verifying, setVerifying] = useState(true)
@@ -38,9 +37,7 @@ const VerifyAccount = () => {
       <Flex justifyContent="center" alignItems="center" h="100vh" overflowY="hidden">
         {verifying ? (
           <Box textAlign="center">
-            <Box position="relative" w={350} mx="auto">
-              <Image src="/images/waiting.svg" alt="verified" layout="fill" objectFit="cover" />
-            </Box>
+            <Image src="/images/waiting.svg" alt="verified" w={350} mx="auto" />
             <Flex alignItems="center" gap={3}>
               <Text fontSize="xl">Please wait while we are verifying your account</Text>
               <Spinner color="blue.500" />
@@ -48,9 +45,7 @@ const VerifyAccount = () => {
           </Box>
         ) : success ? (
           <Box textAlign="center">
-            <Box position="relative" w={350} mx="auto">
-              <Image src="/images/success.svg" alt="verified" objectFit="cover" layout="fill" />
-            </Box>
+            <Image src="/images/success.svg" alt="verified" w={350} mx="auto" />
             <Text fontSize="xl">Account verified successfully</Text>
             <Link href="/login">
               <Button variant="unstyled" color="blue.500" textDecoration="underline">
@@ -60,9 +55,7 @@ const VerifyAccount = () => {
           </Box>
         ) : (
           <Box textAlign="center">
-            <Box position="relative" w={300} mx="auto">
-              <Image src="/images/failed.webp" alt="verified" layout="fill" objectFit="cover" />
-            </Box>
+            <Image src="/images/failed.webp" alt="verified" w={300} mx="auto" />
             <Text fontSize="lg" my={5}>
               Oops! Something went wrong while verifying your account
             </Text>
