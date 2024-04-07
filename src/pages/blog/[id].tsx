@@ -1,4 +1,4 @@
-import { Box, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Image, Text, useColorModeValue } from '@chakra-ui/react'
 import MainLayout from '@components/Common/MainLayout'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
