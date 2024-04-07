@@ -59,10 +59,10 @@ const UserLogin = () => {
       <PublicRoute>
         <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
           <Box borderRadius={24} bg="white" px={14} py={20} textAlign="center">
-            <Text color="#202224" fontSize="24px" fontWeight="600">
+            <Text color="#202224" fontSize="24px" fontWeight="600" as="h1">
               Login to Account
             </Text>
-            <Text fontSize="md" fontWeight="500" mt={4}>
+            <Text fontSize="md" fontWeight="500" mt={4} as="h2">
               Please enter your email and password to continue
             </Text>
             <form onSubmit={handleSubmit(loginHandler)}>
@@ -115,7 +115,7 @@ const UserLogin = () => {
                   Sign In
                 </Button>
                 <Flex justifyContent="center" mt={4}>
-                  <Text>Don&apos;t have an account?</Text>
+                  <Text as="h2">Don&apos;t have an account?</Text>
                   <Button variant="link" color="#4880FF" ml={1} textDecoration="underline">
                     Create an account
                   </Button>

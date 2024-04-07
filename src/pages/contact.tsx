@@ -30,8 +30,11 @@ const Contact = () => {
       />
       <MainLayout>
         <Box>
-          <Text fontSize="40px" fontWeight="700" letterSpacing="2px" my={7}>
+          <Text fontSize="40px" fontWeight="700" letterSpacing="2px" mt={3} as="h1">
             Contact Us
+          </Text>
+          <Text fontSize="md" mt={4} mb={7} as="h2">
+            Please feel out valid contact information
           </Text>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Flex gap={7} mb={7}>
