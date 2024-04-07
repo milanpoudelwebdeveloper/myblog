@@ -7,6 +7,7 @@ import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-dark.css'
 import { convertDate } from '@/src/utils/convertDate'
+import HeadingSeo from '@components/Common/HeadingSeo'
 
 const BlogDetails = () => {
   const [blogDetail, setBlogDetail] = useState<IBlog>({} as IBlog)
@@ -44,31 +45,38 @@ const BlogDetails = () => {
     }
   }, [id])
   return (
-    <MainLayout>
-      <Box mt={2}>
-        <Text color={titleColor} fontSize={{ base: '30px', '1xl': '35px' }} fontWeight="bold" lineHeight={1.4}>
-          {blogDetail?.title}
-        </Text>
-        <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600" my={2}>
-          Milan Poudel &#x2022;
-          {convertDate(blogDetail?.createdat)}
-        </Text>
-        <Box>
-          <Image src={blogDetail?.coverimage} alt="featured" borderRadius={10} my={4} width="100%" objectFit="cover" h={380} />
+    <>
+      <HeadingSeo
+        title={blogDetail?.title}
+        description={blogDetail?.content?.slice(0, 140)}
+        link={`https://codewithmilan.com/blog/${id}`}
+      />
+      <MainLayout>
+        <Box mt={2}>
+          <Text color={titleColor} fontSize={{ base: '30px', '1xl': '35px' }} fontWeight="bold" lineHeight={1.4}>
+            {blogDetail?.title}
+          </Text>
+          <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600" my={2}>
+            Milan Poudel &#x2022;
+            {convertDate(blogDetail?.createdat)}
+          </Text>
+          <Box>
+            <Image src={blogDetail?.coverimage} alt="featured" borderRadius={10} my={4} width="100%" objectFit="cover" h={380} />
+          </Box>
+          <Box ref={parentRef} />
+          <Box className="ql-snow">
+            <Box
+              className="ql-editor"
+              fontSize={{ base: 'md', '1xl': 'lg' }}
+              lineHeight={1.7}
+              dangerouslySetInnerHTML={{
+                __html: blogDetail?.content
+              }}
+            />
+          </Box>
         </Box>
-        <Box ref={parentRef} />
-        <Box className="ql-snow">
-          <Box
-            className="ql-editor"
-            fontSize={{ base: 'md', '1xl': 'lg' }}
-            lineHeight={1.7}
-            dangerouslySetInnerHTML={{
-              __html: blogDetail?.content
-            }}
-          />
-        </Box>
-      </Box>
-    </MainLayout>
+      </MainLayout>
+    </>
   )
 }
 
