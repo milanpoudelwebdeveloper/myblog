@@ -11,6 +11,7 @@ import { AuthContext } from '../context/authContext'
 import { useRouter } from 'next/router'
 import { PublicRoute } from '@components/RouteAccess'
 import Link from 'next/link'
+import HeadingSeo from '@components/Common/HeadingSeo'
 
 const UserLogin = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -49,75 +50,82 @@ const UserLogin = () => {
   }
 
   return (
-    <PublicRoute>
-      <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
-        <Box borderRadius={24} bg="white" px={14} py={20} textAlign="center">
-          <Text color="#202224" fontSize="24px" fontWeight="600">
-            Login to Account
-          </Text>
-          <Text fontSize="md" fontWeight="500" mt={4}>
-            Please enter your email and password to continue
-          </Text>
-          <form onSubmit={handleSubmit(loginHandler)}>
-            <Box mt={6}>
-              <FormControl mb={5}>
-                <FormLabel opacity={0.8} color="#202224">
-                  Email
-                </FormLabel>
-                <Input
-                  type="email"
-                  borderColor="#DFEAF2"
-                  borderRadius={8}
-                  bg="#F1F4F9"
-                  _placeholder={{ color: '#718EBF' }}
-                  placeholder="Enter Email"
-                  {...register('email')}
-                />
-                {errors?.email && <ErrorText message={errors.email.message} />}
-              </FormControl>
-              <FormControl position="relative">
-                <FormLabel opacity={0.8} color="#202224">
-                  Password
-                </FormLabel>
-                <Input
-                  type={passwordVisible ? 'text' : 'password'}
-                  borderColor="#DFEAF2"
-                  borderRadius={8}
-                  bg="#F1F4F9"
-                  _placeholder={{ color: '#718EBF' }}
-                  placeholder="Enter Password"
-                  {...register('password')}
-                />
-                <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
-                {errors?.password && <ErrorText message={errors.password.message} />}
-              </FormControl>
-              <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
-                Forgot Password?
-              </Text>
-              {showResendLink && (
-                <Link href="/sendVerification">
-                  <Button variant="unstyled">
-                    <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
-                      Resend verification link
-                    </Text>
-                  </Button>
-                </Link>
-              )}
+    <>
+      <HeadingSeo
+        title="Login | Code With Milan"
+        description="Login to your account to continue reading the blogs"
+        link="https://codewithmilan.com/login"
+      />
+      <PublicRoute>
+        <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
+          <Box borderRadius={24} bg="white" px={14} py={20} textAlign="center">
+            <Text color="#202224" fontSize="24px" fontWeight="600">
+              Login to Account
+            </Text>
+            <Text fontSize="md" fontWeight="500" mt={4}>
+              Please enter your email and password to continue
+            </Text>
+            <form onSubmit={handleSubmit(loginHandler)}>
+              <Box mt={6}>
+                <FormControl mb={5}>
+                  <FormLabel opacity={0.8} color="#202224">
+                    Email
+                  </FormLabel>
+                  <Input
+                    type="email"
+                    borderColor="#DFEAF2"
+                    borderRadius={8}
+                    bg="#F1F4F9"
+                    _placeholder={{ color: '#718EBF' }}
+                    placeholder="Enter Email"
+                    {...register('email')}
+                  />
+                  {errors?.email && <ErrorText message={errors.email.message} />}
+                </FormControl>
+                <FormControl position="relative">
+                  <FormLabel opacity={0.8} color="#202224">
+                    Password
+                  </FormLabel>
+                  <Input
+                    type={passwordVisible ? 'text' : 'password'}
+                    borderColor="#DFEAF2"
+                    borderRadius={8}
+                    bg="#F1F4F9"
+                    _placeholder={{ color: '#718EBF' }}
+                    placeholder="Enter Password"
+                    {...register('password')}
+                  />
+                  <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
+                  {errors?.password && <ErrorText message={errors.password.message} />}
+                </FormControl>
+                <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
+                  Forgot Password?
+                </Text>
+                {showResendLink && (
+                  <Link href="/sendVerification">
+                    <Button variant="unstyled">
+                      <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
+                        Resend verification link
+                      </Text>
+                    </Button>
+                  </Link>
+                )}
 
-              <Button bg="#4880FF" color="white" fontWeight="normal" type="submit" w="80%" mt={10}>
-                Sign In
-              </Button>
-              <Flex justifyContent="center" mt={4}>
-                <Text>Don&apos;t have an account?</Text>
-                <Button variant="link" color="#4880FF" ml={1} textDecoration="underline">
-                  Create an account
+                <Button bg="#4880FF" color="white" fontWeight="normal" type="submit" w="80%" mt={10}>
+                  Sign In
                 </Button>
-              </Flex>
-            </Box>
-          </form>
-        </Box>
-      </Flex>
-    </PublicRoute>
+                <Flex justifyContent="center" mt={4}>
+                  <Text>Don&apos;t have an account?</Text>
+                  <Button variant="link" color="#4880FF" ml={1} textDecoration="underline">
+                    Create an account
+                  </Button>
+                </Flex>
+              </Box>
+            </form>
+          </Box>
+        </Flex>
+      </PublicRoute>
+    </>
   )
 }
 
