@@ -25,7 +25,7 @@ const HeadingSeo = ({ title, description, link }: HeadingSeoProps) => {
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={link} />
-      <meta property="og:image" content="/images/blogimage.jpg" />
+      <meta property="og:image" content="/images/blogimage.webp" />
       <meta property="og:image:alt" content="Nextjs Reactjs Nodejs AWS" />
       <meta property="og:image:type" content="image/jpg" />
       <meta property="og:image:width" content="1200" />
@@ -35,7 +35,7 @@ const HeadingSeo = ({ title, description, link }: HeadingSeoProps) => {
       <meta name="twitter:creator" content="@milanpoudel" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content="/images/blogimage.jpg" />
+      <meta name="twitter:image" content="/images/blogimage.webp" />
     </Head>
   )
 }

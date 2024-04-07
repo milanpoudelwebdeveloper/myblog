@@ -55,7 +55,7 @@ const VerifyAccount = () => {
           </Box>
         ) : (
           <Box textAlign="center">
-            <Image src="/images/failed.svg" alt="verified" w={300} mx="auto" />
+            <Image src="/images/failed.webp" alt="verified" w={300} mx="auto" />
             <Text fontSize="lg" my={5}>
               Oops! Something went wrong while verifying your account
             </Text>

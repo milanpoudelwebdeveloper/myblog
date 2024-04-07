@@ -7,22 +7,22 @@ const items = [
   {
     name: 'Dashboard',
     path: '/admin',
-    icon: '/images/dashboardicon.svg'
+    icon: '/images/dashboardicon.webp'
   },
   {
     name: 'Categories',
     path: '/admin/categories',
-    icon: '/images/categoryicon.svg'
+    icon: '/images/categoryicon.webp'
   },
   {
     name: 'Blogs',
     path: '/admin/blogs',
-    icon: '/images/blogicon.svg'
+    icon: '/images/blogicon.webp'
   },
   {
     name: 'Users',
     path: '/admin/users',
-    icon: '/images/usericon.svg'
+    icon: '/images/usericon.webp'
   }
 ]
 

@@ -14,7 +14,7 @@ const PageNotFound = () => {
           <Text fontSize="280px" zIndex={10}>
             0
           </Text>
-          <Image src="/images/404.png" alt="404" position="absolute" top={40} left="0" zIndex={-1} />
+          <Image src="/images/404.webp" alt="404" position="absolute" top={40} left="0" zIndex={-1} />
         </Box>
         <Text fontSize="230px" transform="rotate(10deg)">
           4

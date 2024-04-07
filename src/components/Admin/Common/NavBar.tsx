@@ -28,7 +28,7 @@ const NavBar = () => {
       </Flex>
       <Flex gap={10} alignItems="center">
         <Box w="max-content">
-          <Image src="/images/notification.png" alt="notification" w={7} objectFit="cover" />
+          <Image src="/images/notification.webp" alt="notification" w={7} objectFit="cover" />
         </Box>
 
         <Flex gap={4}>
