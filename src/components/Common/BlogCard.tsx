@@ -22,7 +22,7 @@ const BlogCard = ({ card, imagHeight }: Props) => {
   return (
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={`/blog/${id}`}>
-        <Image src={coverimage} alt="post" h={imagHeight ? imagHeight : 200} objectFit="cover" w="100%" maxW="full" />
+        <Image src={coverimage} alt="post" h={imagHeight ? imagHeight : 200} maxH="full" objectFit="cover" w="100%" maxW="full" />
         <Box px={6}>
           <Text color="#6941C6" fontSize={{ base: 'xs', lg: 'sm' }} fontWeight="600" my={4}>
             Milan Poudel &#x2022; {convertDate(createdat)}
