@@ -1,6 +1,6 @@
 import { Box, Text, useColorModeValue, Image } from '@chakra-ui/react'
 import MainLayout from '@components/Common/MainLayout'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { getBlogDetails, updateReadCount } from '@/src/services/blog'
 import 'react-quill/dist/quill.core.css'
@@ -9,8 +9,7 @@ import 'highlight.js/styles/atom-one-dark.css'
 import { convertDate } from '@/src/utils/convertDate'
 import HeadingSeo from '@components/Common/HeadingSeo'
 
-const BlogDetails = () => {
-  const [blogDetail, setBlogDetail] = useState<IBlog>({} as IBlog)
+const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(237, 242, 247)')
   const router = useRouter()
   const { id } = router.query
@@ -33,17 +32,6 @@ const BlogDetails = () => {
     }
   }, [parentRef, id])
 
-  useEffect(() => {
-    if (id) {
-      getBlogDetails(id as string)
-        .then((data) => {
-          setBlogDetail({ ...blogDetail, ...data })
-        })
-        .catch((e) => {
-          console.log(e)
-        })
-    }
-  }, [id])
   return (
     <>
       <HeadingSeo
@@ -92,3 +80,30 @@ const BlogDetails = () => {
 }
 
 export default BlogDetails
+
+export async function getServerSideProps(context: { params: { id: string } }) {
+  const { id } = context.params
+  try {
+    const blogDetails = await getBlogDetails(id)
+
+    if (blogDetails) {
+      return {
+        props: {
+          blogDetail: blogDetails
+        }
+      }
+    } else {
+      return {
+        props: {
+          blogDetail: {}
+        }
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+        blogDetail: {}
+      }
+    }
+  }
+}

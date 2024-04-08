@@ -49,6 +49,7 @@ const Categories = () => {
                     h={10}
                     maxH="full"
                     objectFit="cover"
+                    loading="lazy"
                   />
                   <Box width="max-content" fontSize={{ base: 'sm', lg: 'md' }} fontWeight="600">
                     {category?.name}
