@@ -1,9 +1,9 @@
 import { Box } from '@chakra-ui/react'
 import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
-import RecentPosts from '@components/HomePage/RecentPosts'
 import { getBlogs } from '../services/blog'
 import HeadingSeo from '@components/Common/HeadingSeo'
+import dynamic from 'next/dynamic'
 
 const featuredPost = {
   id: 1,
@@ -16,6 +16,8 @@ const featuredPost = {
   published: true
 }
 
+const RecentBlogs = dynamic(() => import('../components/HomePage/RecentPosts'))
+
 export default function Home({ blogs }: { blogs: IBlog[] }) {
   return (
     <>
@@ -27,7 +29,7 @@ export default function Home({ blogs }: { blogs: IBlog[] }) {
       <MainLayout>
         <Box>
           <BlogCard card={featuredPost} imagHeight={300} />
-          <RecentPosts blogs={blogs} />
+          <RecentBlogs blogs={blogs} />
         </Box>
       </MainLayout>
     </>
