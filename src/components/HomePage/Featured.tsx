@@ -4,7 +4,16 @@ import { Box, Flex, Image, Text } from '@chakra-ui/react'
 const Featured = () => {
   return (
     <Box>
-      <Image src="/images/image1.webp" alt="featured" borderRadius="10px" width="100%" maxW="full" height={300} objectFit="cover" />
+      <Image
+        src="/images/image1.webp"
+        loading="eager"
+        alt="featured"
+        borderRadius="10px"
+        width="100%"
+        maxW="full"
+        height={300}
+        objectFit="cover"
+      />
       <Text color="#6941C6" fontSize="sm" fontWeight="600" my={4}>
         Milan Poudel &#x2022; 2021-10-11
       </Text>
