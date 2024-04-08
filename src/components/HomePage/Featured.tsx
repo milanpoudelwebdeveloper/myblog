@@ -1,19 +1,13 @@
 import React from 'react'
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
+import Image from 'next/image'
 
 const Featured = () => {
   return (
     <Box>
-      <Image
-        src="/images/image1.webp"
-        loading="eager"
-        alt="featured"
-        borderRadius="10px"
-        width="100%"
-        maxW="full"
-        height={300}
-        objectFit="cover"
-      />
+      <Box w="full" h={{ base: 220, xl: 300 }} borderRadius={10} overflow="hidden">
+        <Image src="/images/image1.webp" alt="featuredimage" objectFit="cover" layout="fill" priority />
+      </Box>
       <Text color="#6941C6" fontSize="sm" fontWeight="600" my={4}>
         Milan Poudel &#x2022; 2021-10-11
       </Text>
