@@ -31,7 +31,7 @@ const SideBar = () => {
           Popular Posts
         </Text>
         <Divider borderColor="#6941C6" w={12} borderWidth={2} mx="auto" mb={8} />
-        {isLoading && <Skeleton h={500} borderRadius={20} mb={6} />}
+        {isLoading && <Skeleton h={470} borderRadius={20} mb={6} />}
         {data?.map((blog: IBlog) => (
           <Box key={blog?.id} mb={4}>
             <Flex alignItems="start" gap={{ base: 4, lg: 6 }}>

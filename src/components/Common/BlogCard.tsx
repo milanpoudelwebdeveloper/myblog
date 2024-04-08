@@ -27,10 +27,10 @@ const BlogCard = ({ card, imagHeight }: Props) => {
           <Text color="#6941C6" fontSize={{ base: 'xs', lg: 'sm' }} fontWeight="600" my={4}>
             Milan Poudel &#x2022; {convertDate(createdat)}
           </Text>
-          <Text as="h3" color={titleColor} mb={4} fontSize={{ base: 'md', md: 'lg', '1xl': 'xl' }} fontWeight="700" my={2} lineHeight="1.2">
+          <Text as="h3" color={titleColor} mb={4} fontSize={{ base: 'lg', '1xl': 'xl' }} fontWeight="700" my={2} lineHeight="1.2">
             {title}
           </Text>
-          <Box color={contentColor} fontSize="md" fontWeight="300">
+          <Box color={contentColor} fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="300">
             <Markdown>{content?.slice(0, 150)}</Markdown>
           </Box>
           <Flex gap={2} fontSize={{ base: 'xs', md: 'sm' }} mt={4}>
