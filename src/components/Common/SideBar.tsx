@@ -43,6 +43,7 @@ const SideBar = () => {
                 height={{ base: 12, md: 16 }}
                 objectFit="cover"
                 maxW="full"
+                maxH="full"
               />
               <Box>
                 <Text fontSize={{ base: 'sm', lg: 'md' }} mb={1} fontWeight="600">

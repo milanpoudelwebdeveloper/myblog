@@ -71,6 +71,7 @@ const BlogDetails = () => {
               maxW="full"
               objectFit="cover"
               h={380}
+              maxH="full"
             />
           </Box>
           <Box ref={parentRef} />
