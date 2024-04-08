@@ -27,7 +27,7 @@ export default function Home() {
       />
       <MainLayout>
         <Box>
-          <BlogCard card={featuredPost} imagHeight={300} />
+          <BlogCard card={featuredPost} imagHeight={300} imageLoadFast={true} />
           <RecentBlogs />
         </Box>
       </MainLayout>
