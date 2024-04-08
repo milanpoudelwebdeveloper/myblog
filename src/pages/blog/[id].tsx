@@ -62,7 +62,16 @@ const BlogDetails = () => {
           </Text>
 
           <Box>
-            <Image src={blogDetail?.coverimage} alt="featured" borderRadius={10} my={4} width="100%" objectFit="cover" h={380} />
+            <Image
+              src={blogDetail?.coverimage}
+              alt="featured"
+              borderRadius={10}
+              my={4}
+              width="100%"
+              maxW="full"
+              objectFit="cover"
+              h={380}
+            />
           </Box>
           <Box ref={parentRef} />
           <Box className="ql-snow">

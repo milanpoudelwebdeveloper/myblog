@@ -17,7 +17,7 @@ const MainLayout = ({ children, hideSidebar = false }: Props) => {
         <Box minW={{ base: 'full', xl: 660, '1xl': 760 }} maxW={{ base: 'full', xl: 660, '1xl': 760 }}>
           {children}
         </Box>
-        <Box display={hideSidebar ? 'none' : 'block'}>
+        <Box display={hideSidebar ? 'none' : 'block'} flex={1}>
           <SideBar />
         </Box>
       </Flex>
