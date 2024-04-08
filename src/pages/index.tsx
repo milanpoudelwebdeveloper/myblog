@@ -1,7 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
-import { getBlogs } from '../services/blog'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import dynamic from 'next/dynamic'
 
@@ -18,7 +17,7 @@ const featuredPost = {
 
 const RecentBlogs = dynamic(() => import('../components/HomePage/RecentPosts'))
 
-export default function Home({ blogs }: { blogs: IBlog[] }) {
+export default function Home() {
   return (
     <>
       <HeadingSeo
@@ -29,35 +28,35 @@ export default function Home({ blogs }: { blogs: IBlog[] }) {
       <MainLayout>
         <Box>
           <BlogCard card={featuredPost} imagHeight={300} />
-          <RecentBlogs blogs={blogs} />
+          <RecentBlogs />
         </Box>
       </MainLayout>
     </>
   )
 }
 
-export async function getServerSideProps() {
-  try {
-    const blogs = await getBlogs()
+// export async function getServerSideProps() {
+//   try {
+//     const blogs = await getBlogs()
 
-    if (blogs) {
-      return {
-        props: {
-          blogs: blogs
-        }
-      }
-    } else {
-      return {
-        props: {
-          blogs: []
-        }
-      }
-    }
-  } catch (error) {
-    return {
-      props: {
-        blogs: []
-      }
-    }
-  }
-}
+//     if (blogs) {
+//       return {
+//         props: {
+//           blogs: blogs
+//         }
+//       }
+//     } else {
+//       return {
+//         props: {
+//           blogs: []
+//         }
+//       }
+//     }
+//   } catch (error) {
+//     return {
+//       props: {
+//         blogs: []
+//       }
+//     }
+//   }
+// }
