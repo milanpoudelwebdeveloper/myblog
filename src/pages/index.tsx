@@ -10,7 +10,7 @@ const featuredPost = {
   content:
     'This is a description of the topic which is really good going. lorem ipsum is a dummy text which is used to fill the space of the content.',
   createdat: '2021-10-10',
-  coverimage: '/images/blogimage.webp',
+  coverimage: '/images/image1.webp',
   categories: ['React'],
   published: true
 }
