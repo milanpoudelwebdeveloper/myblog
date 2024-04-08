@@ -24,7 +24,7 @@ const BlogCard = ({ card, imagHeight }: Props) => {
   return (
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={`/blog/${id}`}>
-        <Box w="full" h={imagHeight ? imagHeight : 200} maxH="full">
+        <Box maxW="full" h={imagHeight ? imagHeight : 200} position="relative">
           <Image src={coverimage} alt="post" objectFit="cover" layout="fill" priority />
         </Box>
 
