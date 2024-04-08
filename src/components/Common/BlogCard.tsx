@@ -11,9 +11,10 @@ import Image from 'next/image'
 interface Props {
   card: IBlog
   imagHeight?: number
+  imageLoadFast?: boolean
 }
 
-const BlogCard = ({ card, imagHeight }: Props) => {
+const BlogCard = ({ card, imagHeight, imageLoadFast }: Props) => {
   const { title, content, coverimage, categories, createdat, id } = card
   const bgColor = useColorModeValue('white', '#1a1a1a')
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
@@ -23,9 +24,11 @@ const BlogCard = ({ card, imagHeight }: Props) => {
   return (
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={`/blog/${id}`}>
+
         <Box w="full" h={imagHeight ? imagHeight : 200} maxH="full">
           <Image src={coverimage} alt="post" objectFit="cover" layout="fill" priority />
         </Box>
+
 
         <Box px={6}>
           <Text color="#6941C6" fontSize={{ base: 'xs', lg: 'sm' }} fontWeight="600" my={4}>
