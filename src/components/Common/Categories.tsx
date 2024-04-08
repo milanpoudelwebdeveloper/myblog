@@ -40,7 +40,7 @@ const Categories = () => {
             <Box key={category?.id}>
               <Flex alignItems="center" justifyContent="space-between">
                 <Flex alignItems="center" gap={4}>
-                  <Image src={category?.image} alt="category" borderRadius="full" width={10} h={10} objectFit="cover" />
+                  <Image src={category?.image} alt="category" borderRadius="full" maxW="full" width={10} h={10} objectFit="cover" />
                   <Box width="max-content" fontSize={{ base: 'sm', lg: 'md' }} fontWeight="600">
                     {category?.name}
                   </Box>
