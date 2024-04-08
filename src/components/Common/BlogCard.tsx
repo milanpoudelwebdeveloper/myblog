@@ -14,7 +14,7 @@ interface Props {
   imageLoadFast?: boolean
 }
 
-const BlogCard = ({ card, imagHeight }: Props) => {
+const BlogCard = ({ card, imagHeight, imageLoadFast = false }: Props) => {
   const { title, content, coverimage, categories, createdat, id } = card
   const bgColor = useColorModeValue('white', '#1a1a1a')
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
@@ -25,7 +25,7 @@ const BlogCard = ({ card, imagHeight }: Props) => {
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={`/blog/${id}`}>
         <Box maxW="full" h={imagHeight ? imagHeight : 200} position="relative">
-          <Image src={coverimage} alt="post" objectFit="cover" layout="fill" priority />
+          <Image src={coverimage} alt="post" objectFit="cover" layout="fill" priority={imageLoadFast} />
         </Box>
 
         <Box px={6}>
