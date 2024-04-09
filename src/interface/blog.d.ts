@@ -21,4 +21,5 @@ interface IAddBlog {
   content: string
   categories: string[] | number[]
   published: boolean
+  featured: boolean
 }

@@ -36,6 +36,19 @@ export const getBlogs = async (category: number | string | null = 'all', publish
   }
 }
 
+export const getFeaturedBlog = async () => {
+  try {
+    const res = await axiosInstance.get('/blog/featured')
+    console.log('res', res)
+    if (res?.data) {
+      return res?.data?.data
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong while fetching blogs. Please try again'
+    throw message
+  }
+}
+
 export const getBlogDetails = async (blogId: number | string) => {
   try {
     const res = await axiosInstance.get(`/blog/details/${blogId}`)
