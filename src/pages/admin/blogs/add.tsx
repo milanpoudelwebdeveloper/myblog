@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Box, Button, Divider, Flex, FormControl, FormLabel, Image, Input, Text } from '@chakra-ui/react'
+import { Box, Button, Divider, Flex, FormControl, FormLabel, Image, Input, Text, Select as ChakraSelect } from '@chakra-ui/react'
 import MainLayout from '@components/Admin/Common/MainLayout'
 import { getCategories } from '@/src/services/category'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
@@ -58,7 +58,8 @@ const AddBlog = () => {
   } = useForm({
     resolver: yupResolver(blogSchema),
     defaultValues: {
-      categories: []
+      categories: [],
+      featured: 'false'
     }
   })
 
@@ -67,8 +68,11 @@ const AddBlog = () => {
       return showToast('Please add cover image', 'error')
     }
     const categories = data?.categories?.map((category: { label: string; value: string }) => category.value)
+
     try {
-      const values = { ...data, categories, published, coverImage } as IAddBlog
+      const featured = data?.featured === 'true' ? true : false
+
+      const values = { ...data, categories, published, coverImage, featured } as IAddBlog
       const response = await addBlog(values)
       if (response) {
         showToast(response?.message, 'success')
@@ -141,6 +145,23 @@ const AddBlog = () => {
                     {...register('title')}
                   />
                   {errors?.title && <ErrorText message={errors?.title?.message} />}
+                </FormControl>
+                <FormControl mx="auto">
+                  <FormLabel color="#232323" fontSize="md" mb={3}>
+                    Featured?
+                  </FormLabel>
+                  <ChakraSelect
+                    borderColor="#DFEAF2"
+                    borderRadius={12}
+                    bg="#F5F6FA"
+                    _placeholder={{ color: '#718EBF' }}
+                    placeholder="Enter featured status"
+                    {...register('featured')}
+                  >
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </ChakraSelect>
+                  {errors?.featured && <ErrorText message={errors?.featured?.message} />}
                 </FormControl>
                 <FormControl>
                   <FormLabel color="#232323" fontSize="md" mb={3}>
