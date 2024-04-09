@@ -70,9 +70,9 @@ const AddBlog = () => {
     const categories = data?.categories?.map((category: { label: string; value: string }) => category.value)
 
     try {
-      // const featuredValue = data?.featured === 'true' ? true : false
+      const featured = data?.featured === 'true' ? true : false
 
-      const values = { ...data, categories, published, coverImage, featured: true } as IAddBlog
+      const values = { ...data, categories, published, coverImage, featured } as IAddBlog
       const response = await addBlog(values)
       if (response) {
         showToast(response?.message, 'success')

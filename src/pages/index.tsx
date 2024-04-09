@@ -24,7 +24,7 @@ export async function getStaticProps() {
       return {
         props: {
           blogs,
-          featuredPost: {}
+          featuredPost: null
         },
         revalidate: 3600
       }
@@ -49,7 +49,7 @@ export default function Home({ blogs, featuredBlog }: { blogs: IBlog[]; featured
       />
       <MainLayout>
         <Box>
-          <BlogCard card={featuredBlog} imagHeight={300} imageLoadFast={true} />
+          {featuredBlog && <BlogCard card={featuredBlog} imagHeight={300} imageLoadFast={true} />}
           <RecentBlogs blogs={blogs} />
         </Box>
       </MainLayout>
