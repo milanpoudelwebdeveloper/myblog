@@ -52,7 +52,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
           <Box>
             <Image
               src={blogDetail?.coverimage}
-              alt="featured"
+              alt="blog-image"
               borderRadius={10}
               my={4}
               width="100%"
