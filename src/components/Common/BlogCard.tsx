@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import 'react-quill/dist/quill.core.css'
@@ -6,8 +6,6 @@ import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-light.css'
 import { convertDate } from '@/src/utils/convertDate'
 import Markdown from 'markdown-to-jsx'
-import Image from 'next/image'
-import { base64File } from '@constants/files'
 
 interface Props {
   card: IBlog
@@ -21,13 +19,21 @@ const BlogCard = ({ card, imagHeight, imageLoadFast = false }: Props) => {
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
   const contentColor = useColorModeValue('#232323', '#C0C5D0')
   const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
-
+  const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL
   return (
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={`/blog/${id}`}>
-        <Box maxW="full" h={imagHeight ? imagHeight : 200} maxH="full" position="relative">
-          <Image src={coverimage} placeholder="blur" blurDataURL={base64File} alt="post" objectFit="cover" fill priority={imageLoadFast} />
-        </Box>
+        <Image
+          src={`${imageBaseURL}/${coverimage}`}
+          srcSet={`${imageBaseURL}/${coverimage}?tr=w-200 200w, ${imageBaseURL}/${coverimage}?tr=w-380 400w, ${imageBaseURL}/${coverimage}?tr=w-800 800w`}
+          alt="post"
+          objectFit="cover"
+          loading={imageLoadFast ? 'eager' : 'lazy'}
+          w="full"
+          maxW="full"
+          h={imagHeight ? imagHeight : 200}
+          maxH="full"
+        />
 
         <Box px={6}>
           <Text color="#6941C6" fontSize={{ base: 'xs', lg: 'sm' }} fontWeight="600" my={4}>
