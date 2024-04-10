@@ -8,34 +8,14 @@ import { getBlogs, getFeaturedBlog } from '../services/blog'
 const RecentBlogs = dynamic(() => import('../components/HomePage/RecentBlogs'))
 
 export async function getStaticProps() {
-  try {
-    const blogs = await getBlogs()
-    const featuredBlog = await getFeaturedBlog()
-
-    if (featuredBlog) {
-      return {
-        props: {
-          blogs,
-          featuredBlog
-        },
-        revalidate: 3600
-      }
-    } else {
-      return {
-        props: {
-          blogs,
-          featuredPost: null
-        },
-        revalidate: 3600
-      }
-    }
-  } catch (error) {
-    return {
-      props: {
-        blogs: [],
-        featuredPost: {}
-      }
-    }
+  const blogs = await getBlogs()
+  const featuredBlog = await getFeaturedBlog()
+  return {
+    props: {
+      blogs,
+      featuredBlog
+    },
+    revalidate: 3600
   }
 }
 
