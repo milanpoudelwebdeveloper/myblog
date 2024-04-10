@@ -2,7 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost', 'myblogserver.s3.ap-south-1.amazonaws.com']
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: "'https://myblogserver.s3.ap-south-1.amazonaws.com/*'",
+        port: ''
+      }
+    ]
   }
 }
 
