@@ -1,10 +1,11 @@
-import { Box, Divider, Flex, Image, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, Flex, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getPopularBlogs } from '@/src/services/blog'
 import { convertDate } from '@/src/utils/convertDate'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 
 const CategoryComponent = dynamic(() => import('./Categories'))
 
@@ -35,20 +36,17 @@ const SideBar = () => {
         {data?.map((blog: IBlog) => (
           <Box key={blog?.id} mb={4}>
             <Flex alignItems="start" gap={{ base: 4, lg: 6 }}>
-              <Image
-                src={blog?.coverimage}
-                alt="popular"
+              <Box
+                position="relative"
                 w={{ base: 12, md: 16 }}
                 h={{ base: 12, md: 16 }}
                 maxW="full"
                 maxH="full"
-                objectFit="cover"
                 borderRadius="full"
-                loading="lazy"
-                fallbackSrc="/images/default-background.webp"
-                fallbackStrategy="beforeLoadOrError"
-              />
-
+                overflow="hidden"
+              >
+                <Image src={blog?.coverimage} alt="popular" objectFit="cover" fill />
+              </Box>
               <Box>
                 <Text fontSize={{ base: 'sm', lg: 'md' }} mb={1} fontWeight="600">
                   {blog.title}
