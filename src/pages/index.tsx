@@ -10,6 +10,7 @@ const RecentBlogs = dynamic(() => import('../components/HomePage/RecentBlogs'))
 export async function getStaticProps() {
   const blogs = await getBlogs()
   const featuredBlog = await getFeaturedBlog()
+
   return {
     props: {
       blogs,
