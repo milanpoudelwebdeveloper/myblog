@@ -17,7 +17,6 @@ interface Props {
 
 const BlogCard = ({ card, imagHeight, imageLoadFast = false }: Props) => {
   const { title, content, coverimage, categories, createdat, id } = card
-
   const bgColor = useColorModeValue('white', '#1a1a1a')
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
   const contentColor = useColorModeValue('#232323', '#C0C5D0')
