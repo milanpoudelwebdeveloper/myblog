@@ -50,7 +50,7 @@ const NavBar = () => {
     >
       <Box position="relative">
         {isMobile && isModalOpen && (
-          <Box>
+          <Box ref={divRef}>
             <MobileNavBar logOutHandler={logOutHandler} />
           </Box>
         )}
