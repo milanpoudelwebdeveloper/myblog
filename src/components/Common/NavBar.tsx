@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, useColorModeValue, useMediaQuery, useOutsideClick } from '@chakra-ui/react'
+import { Box, Button, Flex, useColorModeValue, useMediaQuery, useOutsideClick } from '@chakra-ui/react'
 import { useContext, useRef, useState } from 'react'
 import ThemeToggle from './ThemeToggle'
 import Link from 'next/link'
@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import { navLinks } from '@constants/navbar'
 import MobileNavBar from './MobileNavBar'
 import { RxHamburgerMenu } from 'react-icons/rx'
+import Image from 'next/image'
 
 const NavBar = () => {
   const { setLogOut, isLoggedIn } = useContext(AuthContext)
@@ -57,10 +58,18 @@ const NavBar = () => {
       </Box>
       <Flex justifyContent="space-between" py={{ base: 4, xl: 7 }} width="full" maxW={{ base: 1090, '1xl': 1230 }}>
         <Flex gap={48}>
-          <Text fontSize={{ base: 'sm', md: 'md', '1xl': 'xl' }} fontWeight="medium">
-            Milan
-          </Text>
-
+          <Box position="relative" w={{ base: 10, md: 12 }} h={{ base: 10, md: 12 }} borderRadius="full" overflow="hidden">
+            <Image
+              src="/images/logo.webp"
+              alt="logo"
+              width={50}
+              height={50}
+              fill
+              style={{
+                objectFit: 'cover'
+              }}
+            />
+          </Box>
           <Flex
             display={{ base: 'none', md: 'flex' }}
             fontSize={{ md: 'sm', xl: 'md', '1xl': 'lg' }}
