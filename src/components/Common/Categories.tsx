@@ -43,7 +43,14 @@ const Categories = () => {
               <Flex alignItems="center" justifyContent="space-between">
                 <Flex alignItems="center" gap={4}>
                   <Box position="relative" w={10} h={10} maxW="full" maxH="full" borderRadius="full" overflow="hidden">
-                    <Image src={category?.image} alt={category?.name} objectFit="cover" fill />
+                    <Image
+                      src={category?.image}
+                      alt={category?.name}
+                      style={{
+                        objectFit: 'cover'
+                      }}
+                      fill
+                    />
                   </Box>
 
                   <Box width="max-content" fontSize={{ base: 'sm', lg: 'md' }} fontWeight="600">

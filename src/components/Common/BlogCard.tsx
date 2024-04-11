@@ -26,7 +26,17 @@ const BlogCard = ({ card, imagHeight, imageLoadFast = false }: Props) => {
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={`/blog/${id}`}>
         <Box maxW="full" h={imagHeight ? imagHeight : 200} maxH="full" position="relative">
-          <Image src={coverimage} placeholder="blur" blurDataURL={base64File} alt="post" objectFit="cover" fill priority={imageLoadFast} />
+          <Image
+            src={coverimage}
+            placeholder="blur"
+            blurDataURL={base64File}
+            alt="post"
+            style={{
+              objectFit: 'cover'
+            }}
+            fill
+            priority={imageLoadFast}
+          />
         </Box>
 
         <Box px={6}>

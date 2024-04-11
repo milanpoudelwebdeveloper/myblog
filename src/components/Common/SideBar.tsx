@@ -45,7 +45,14 @@ const SideBar = () => {
                 borderRadius="full"
                 overflow="hidden"
               >
-                <Image src={blog?.coverimage} alt="popular" objectFit="cover" fill />
+                <Image
+                  src={blog?.coverimage}
+                  alt="popular"
+                  style={{
+                    objectFit: 'cover'
+                  }}
+                  fill
+                />
               </Box>
               <Box>
                 <Text fontSize={{ base: 'sm', lg: 'md' }} mb={1} fontWeight="600">
