@@ -39,7 +39,7 @@ const NavBar = () => {
           <Text fontSize={{ base: 'sm', md: 'md', '1xl': 'xl' }} fontWeight="medium">
             Milan
           </Text>
-          <Flex fontSize={{ md: 'sm', xl: 'lg' }} gap={{ base: 5, '1xl': 9 }} alignItems="center">
+          <Flex fontSize={{ md: 'sm', xl: 'md', '1xl': 'lg' }} gap={{ base: 5, '1xl': 9 }} alignItems="center">
             {navLinks.map(({ title, link }) => (
               <Link key={link} href={link}>
                 <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={2}>
