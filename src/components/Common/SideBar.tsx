@@ -14,7 +14,7 @@ const SideBar = () => {
   const { showToast } = useCustomToast()
   const bgColor = useColorModeValue('white', '#1a1a1a')
   const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
-  const dividerColor = useColorModeValue('rgba(0, 0, 0, 0.15)', 'rgba(255, 255, 255, 0.15)')
+  const dividerColor = useColorModeValue('#D9D9D9', 'rgba(255, 255, 255, 0.15)')
 
   const { error, data, isLoading } = useQuery({
     queryKey: ['getPopularPosts'],
@@ -28,16 +28,16 @@ const SideBar = () => {
 
   return (
     <Box w="full">
-      <Box py={7} px={{ base: 5, '1xl': 6 }} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
-        <Text as="h2" textAlign="center" mb={2} color={headingColor} fontSize="xl" fontWeight="700">
+      <Box p={7} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
+        <Text as="h2" textAlign="center" mb={1} color={headingColor} fontSize="xl" fontWeight="700">
           Popular Posts
         </Text>
-        <Divider borderColor="#6941C6" w={10} borderWidth={2} mx="auto" mb={8} />
+        <Divider borderColor="#6941C6" w={10} borderWidth={2} mx="auto" mb={7} />
         {isLoading && <Skeleton h={470} borderRadius={20} mb={6} />}
         {data?.map((blog: IBlog) => (
           <Box key={blog?.id} mb={4}>
-            <Flex alignItems="center" gap={{ base: 4, '1xl': 6 }}>
-              <Box position="relative" w={14} h={14} maxW="full" maxH="full" borderRadius="full" overflow="hidden" flexShrink={0}>
+            <Flex alignItems="center" gap={{ base: 5, '1xl': 6 }}>
+              <Box position="relative" w={59} h={59} maxW="full" maxH="full" borderRadius="full" overflow="hidden" flexShrink={0}>
                 <Image
                   src={blog?.coverimage}
                   alt="popular"
@@ -50,11 +50,11 @@ const SideBar = () => {
                 />
               </Box>
               <Box>
-                <Text fontSize={{ base: 'sm', '1xl': 'md' }} mb={1} fontWeight="700">
+                <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="700" mb={1} lineHeight="1.3">
                   {blog?.title}
                 </Text>
 
-                <Text color="#6941C6" fontSize="xs">
+                <Text color="rgb(35, 35, 35)" fontSize="xs" fontWeight="300">
                   {convertDate(blog?.createdat)}
                 </Text>
               </Box>
