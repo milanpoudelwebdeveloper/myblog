@@ -30,7 +30,7 @@ export default function Home({ blogs, featuredBlog }: { blogs: IBlog[]; featured
       />
       <MainLayout>
         <Box>
-          {featuredBlog && <BlogCard card={featuredBlog} imagHeight={300} imageLoadFast={true} />}
+          {featuredBlog && <BlogCard card={featuredBlog} imageHeight={300} imageLoadFast={true} />}
           <RecentBlogs blogs={blogs} />
         </Box>
       </MainLayout>

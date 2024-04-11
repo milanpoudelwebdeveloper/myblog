@@ -6,6 +6,7 @@ interface IBlog {
   createdat: string
   categories: string[]
   published: boolean
+  featured: boolean
 }
 
 interface ICategory {

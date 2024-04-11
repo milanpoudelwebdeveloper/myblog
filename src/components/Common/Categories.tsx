@@ -35,10 +35,10 @@ const Categories = () => {
   return (
     <Box w="full">
       <Box p={{ base: 5, lg: 8 }} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10}>
-        <Text as={isBlogPage ? 'h1' : 'h2'} textAlign="center" color={headingColor} fontSize={{ base: 'lg', lg: 'xl' }} fontWeight="700">
+        <Text as={isBlogPage ? 'h1' : 'h2'} textAlign="center" color={headingColor} fontSize="xl" fontWeight="700">
           Coding Topics
         </Text>
-        <Divider borderColor="#6941C6" w={20} borderWidth={2} mx="auto" mb={6} mt={2} />
+        <Divider borderColor="#6941C6" w={14} borderWidth={2} mx="auto" mb={7} mt={2} />
         <Box px={2}>
           {isLoading && <Skeleton h={500} borderRadius={20} mb={6} />}
           {categories?.map((category: ICategory) => (
@@ -58,7 +58,7 @@ const Categories = () => {
                     />
                   </Box>
 
-                  <Box width="max-content" fontSize={{ base: 'sm', lg: 'md' }} fontWeight="600">
+                  <Box width="max-content" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600">
                     {category?.name}
                   </Box>
                 </Flex>

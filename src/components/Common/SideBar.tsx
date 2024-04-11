@@ -28,23 +28,24 @@ const SideBar = () => {
 
   return (
     <Box w="full">
-      <Box pt={4} pb={4} px={6} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
-        <Text as="h2" textAlign="center" mb={2} color={headingColor} fontSize={{ base: 'lg', lg: 'xl' }} fontWeight="700">
+      <Box py={7} px={{ base: 5, '1xl': 6 }} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
+        <Text as="h2" textAlign="center" mb={2} color={headingColor} fontSize="xl" fontWeight="700">
           Popular Posts
         </Text>
-        <Divider borderColor="#6941C6" w={12} borderWidth={2} mx="auto" mb={8} />
+        <Divider borderColor="#6941C6" w={10} borderWidth={2} mx="auto" mb={8} />
         {isLoading && <Skeleton h={470} borderRadius={20} mb={6} />}
         {data?.map((blog: IBlog) => (
           <Box key={blog?.id} mb={4}>
-            <Flex alignItems="start" gap={{ base: 4, lg: 6 }}>
+            <Flex alignItems="start" gap={{ base: 4, '1xl': 6 }}>
               <Box
                 position="relative"
-                w={{ base: 12, md: 16 }}
-                h={{ base: 12, md: 16 }}
+                w={{ base: 12, md: 14 }}
+                h={{ base: 12, md: 14 }}
                 maxW="full"
                 maxH="full"
                 borderRadius="full"
                 overflow="hidden"
+                flexShrink={0}
               >
                 <Image
                   src={blog?.coverimage}
@@ -58,8 +59,8 @@ const SideBar = () => {
                 />
               </Box>
               <Box>
-                <Text fontSize={{ base: 'sm', lg: 'md' }} mb={1} fontWeight="600">
-                  {blog.title}
+                <Text fontSize={{ base: 'sm', '1xl': 'md' }} mb={1} fontWeight="700">
+                  {blog?.title}
                 </Text>
 
                 <Text color="#6941C6" fontSize="xs">
