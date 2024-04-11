@@ -1,7 +1,9 @@
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { getCategories } from '@/src/services/category'
-import { Box, Divider, Flex, Image, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, Flex, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
+import { base64File } from '@constants/files'
 import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
 
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -30,7 +32,6 @@ const Categories = () => {
 
   const isBlogPage = pathname.includes('/blogs')
 
-  const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL
   return (
     <Box w="full">
       <Box p={{ base: 5, lg: 8 }} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10}>
@@ -44,18 +45,18 @@ const Categories = () => {
             <Box key={category?.id}>
               <Flex alignItems="center" justifyContent="space-between">
                 <Flex alignItems="center" gap={4}>
-                  <Image
-                    src={`${imageBaseURL}/${category?.image}`}
-                    srcSet={`${imageBaseURL}/${category?.image}?tr=w-200 200w, ${imageBaseURL}/${category?.image}?tr=w-300 400w, ${imageBaseURL}/${category?.image}?tr=w-800 800w`}
-                    alt={category?.name}
-                    objectFit="cover"
-                    w={10}
-                    h={10}
-                    maxW="full"
-                    maxH="full"
-                    borderRadius="full"
-                    loading="lazy"
-                  />
+                  <Box position="relative" w={10} h={10} maxW="full" maxH="full" borderRadius="full" overflow="hidden">
+                    <Image
+                      src={category?.image}
+                      alt={category?.name}
+                      style={{
+                        objectFit: 'cover'
+                      }}
+                      fill
+                      placeholder="blur"
+                      blurDataURL={base64File}
+                    />
+                  </Box>
 
                   <Box width="max-content" fontSize={{ base: 'sm', lg: 'md' }} fontWeight="600">
                     {category?.name}

@@ -1,10 +1,12 @@
-import { Box, Divider, Flex, Image, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, Flex, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getPopularBlogs } from '@/src/services/blog'
 import { convertDate } from '@/src/utils/convertDate'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import { base64File } from '@constants/files'
 
 const CategoryComponent = dynamic(() => import('./Categories'))
 
@@ -24,8 +26,6 @@ const SideBar = () => {
     showToast('Error fetching popular posts', 'error')
   }
 
-  const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL
-
   return (
     <Box w="full">
       <Box pt={4} pb={4} px={6} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
@@ -37,18 +37,26 @@ const SideBar = () => {
         {data?.map((blog: IBlog) => (
           <Box key={blog?.id} mb={4}>
             <Flex alignItems="start" gap={{ base: 4, lg: 6 }}>
-              <Image
-                src={`${imageBaseURL}/${blog?.coverimage}`}
-                srcSet={`${imageBaseURL}/${blog?.coverimage}?tr=w-200 200w, ${imageBaseURL}/${blog?.coverimage}?tr=w-300 400w, ${imageBaseURL}/${blog?.coverimage}?tr=w-800 800w`}
-                alt={blog?.title}
-                objectFit="cover"
+              <Box
+                position="relative"
                 w={{ base: 12, md: 16 }}
                 h={{ base: 12, md: 16 }}
                 maxW="full"
                 maxH="full"
                 borderRadius="full"
-                loading="lazy"
-              />
+                overflow="hidden"
+              >
+                <Image
+                  src={blog?.coverimage}
+                  alt="popular"
+                  style={{
+                    objectFit: 'cover'
+                  }}
+                  fill
+                  placeholder="blur"
+                  blurDataURL={base64File}
+                />
+              </Box>
               <Box>
                 <Text fontSize={{ base: 'sm', lg: 'md' }} mb={1} fontWeight="600">
                   {blog.title}
