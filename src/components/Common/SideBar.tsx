@@ -6,6 +6,7 @@ import { convertDate } from '@/src/utils/convertDate'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import { base64File } from '@constants/files'
 
 const CategoryComponent = dynamic(() => import('./Categories'))
 
@@ -52,6 +53,8 @@ const SideBar = () => {
                     objectFit: 'cover'
                   }}
                   fill
+                  placeholder="blur"
+                  blurDataURL={base64File}
                 />
               </Box>
               <Box>

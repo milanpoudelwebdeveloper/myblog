@@ -6,8 +6,8 @@ import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-light.css'
 import { convertDate } from '@/src/utils/convertDate'
 import Markdown from 'markdown-to-jsx'
-import Image from 'next/image'
 import { base64File } from '@constants/files'
+import Image from 'next/image'
 
 interface Props {
   card: IBlog
@@ -21,7 +21,6 @@ const BlogCard = ({ card, imagHeight, imageLoadFast = false }: Props) => {
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
   const contentColor = useColorModeValue('#232323', '#C0C5D0')
   const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
-
   return (
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={`/blog/${id}`}>

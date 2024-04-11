@@ -1,8 +1,10 @@
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { getCategories } from '@/src/services/category'
 import { Box, Divider, Flex, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
+import { base64File } from '@constants/files'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
+
 import { useRouter } from 'next/router'
 import React from 'react'
 import { FaChevronRight } from 'react-icons/fa'
@@ -29,6 +31,7 @@ const Categories = () => {
   }
 
   const isBlogPage = pathname.includes('/blogs')
+
   return (
     <Box w="full">
       <Box p={{ base: 5, lg: 8 }} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10}>
@@ -50,6 +53,8 @@ const Categories = () => {
                         objectFit: 'cover'
                       }}
                       fill
+                      placeholder="blur"
+                      blurDataURL={base64File}
                     />
                   </Box>
 
