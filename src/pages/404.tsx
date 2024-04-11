@@ -4,6 +4,7 @@ import React from 'react'
 
 const PageNotFound = () => {
   const textColor = useColorModeValue('gray.800', 'white')
+
   return (
     <MainLayout hideSidebar={true}>
       <Flex justifyContent="center" alignItems="center" color={textColor}>
