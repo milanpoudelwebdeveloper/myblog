@@ -51,7 +51,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
             {title}
           </Text>
           <Box color={contentColor} fontSize={{ base: 'sm', '1xl': 'sm' }} fontWeight="300" lineHeight="1.6">
-            <Markdown>{featured ? content?.slice(0, 200) : content?.slice(0, 170)}</Markdown>
+            <Markdown>{featured ? content?.slice(0, 200) : content?.slice(0, 140)}</Markdown>
           </Box>
           <Flex gap={2} fontSize={{ base: 'xs', md: 'sm' }} mt={4}>
             {categories?.map((categoryname) => (
