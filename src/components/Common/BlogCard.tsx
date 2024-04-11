@@ -26,7 +26,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
       <Link href={`/blog/${id}`}>
         <Box
           maxW="full"
-          h={{ base: 190, xl: imageHeight ? 270 : 200, '1xl': imageHeight ? imageHeight : 200 }}
+          h={{ base: 190, xl: imageHeight ? 270 : 190, '1xl': imageHeight ? imageHeight : 200 }}
           maxH="full"
           position="relative"
         >
@@ -50,7 +50,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
           <Text as="h3" color={titleColor} mb={4} fontSize={{ base: 'lg', '1xl': 'xl' }} fontWeight="700" my={2} lineHeight="1.4">
             {title}
           </Text>
-          <Box color={contentColor} fontSize={{ base: 'sm', '1xl': 'sm' }} fontWeight="300" lineHeight="1.7">
+          <Box color={contentColor} fontSize={{ base: 'sm', '1xl': 'sm' }} fontWeight="300" lineHeight="1.6">
             <Markdown>{featured ? content?.slice(0, 200) : content?.slice(0, 170)}</Markdown>
           </Box>
           <Flex gap={2} fontSize={{ base: 'xs', md: 'sm' }} mt={4}>

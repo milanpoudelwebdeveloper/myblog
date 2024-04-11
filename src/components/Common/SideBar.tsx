@@ -36,17 +36,8 @@ const SideBar = () => {
         {isLoading && <Skeleton h={470} borderRadius={20} mb={6} />}
         {data?.map((blog: IBlog) => (
           <Box key={blog?.id} mb={4}>
-            <Flex alignItems="start" gap={{ base: 4, '1xl': 6 }}>
-              <Box
-                position="relative"
-                w={{ base: 12, md: 14 }}
-                h={{ base: 12, md: 14 }}
-                maxW="full"
-                maxH="full"
-                borderRadius="full"
-                overflow="hidden"
-                flexShrink={0}
-              >
+            <Flex alignItems="center" gap={{ base: 4, '1xl': 6 }}>
+              <Box position="relative" w={14} h={14} maxW="full" maxH="full" borderRadius="full" overflow="hidden" flexShrink={0}>
                 <Image
                   src={blog?.coverimage}
                   alt="popular"

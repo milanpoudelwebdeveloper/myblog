@@ -45,7 +45,7 @@ const Categories = () => {
             <Box key={category?.id}>
               <Flex alignItems="center" justifyContent="space-between">
                 <Flex alignItems="center" gap={4}>
-                  <Box position="relative" w={10} h={10} maxW="full" maxH="full" borderRadius="full" overflow="hidden">
+                  <Box position="relative" w={12} h={12} maxW="full" maxH="full" borderRadius="full" overflow="hidden">
                     <Image
                       src={category?.image}
                       alt={category?.name}

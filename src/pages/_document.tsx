@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
+        <meta name="theme-color" content="#ff5c35" />
         <Main />
         <NextScript />
       </body>
