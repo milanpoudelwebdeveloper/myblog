@@ -40,7 +40,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
         link={`https://codewithmilan.com/blog/${id}`}
       />
       <MainLayout>
-        <Box mt={2}>
+        <Box mt={7}>
           <Text color={titleColor} fontSize={{ base: '30px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
             {blogDetail?.title}
           </Text>
@@ -58,7 +58,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
               width="100%"
               maxW="full"
               objectFit="cover"
-              h={380}
+              h={{ base: 220, xl: 330, '1xl': 370 }}
               maxH="full"
             />
           </Box>

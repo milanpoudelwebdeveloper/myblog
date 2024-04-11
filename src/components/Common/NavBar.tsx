@@ -58,24 +58,26 @@ const NavBar = () => {
       </Box>
       <Flex justifyContent="space-between" py={{ base: 4, xl: 7 }} width="full" maxW={{ base: 1090, '1xl': 1230 }}>
         <Flex gap={48}>
-          <Box
-            position="relative"
-            w={{ base: 10, md: 12 }}
-            h={{ base: 10, md: 12 }}
-            maxW="full"
-            maxH="full"
-            borderRadius="full"
-            overflow="hidden"
-          >
-            <Image
-              src="/images/logo.webp"
-              alt="logo"
-              fill
-              style={{
-                objectFit: 'cover'
-              }}
-            />
-          </Box>
+          <Link href="/" shallow passHref>
+            <Box
+              position="relative"
+              w={{ base: 10, md: 12 }}
+              h={{ base: 10, md: 12 }}
+              maxW="full"
+              maxH="full"
+              borderRadius="full"
+              overflow="hidden"
+            >
+              <Image
+                src="/images/logo.webp"
+                alt="logo"
+                fill
+                style={{
+                  objectFit: 'cover'
+                }}
+              />
+            </Box>
+          </Link>
           <Flex
             display={{ base: 'none', md: 'flex' }}
             fontSize={{ md: 'sm', xl: 'md', '1xl': 'lg' }}
