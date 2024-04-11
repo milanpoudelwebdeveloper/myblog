@@ -41,15 +41,15 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
       />
       <MainLayout>
         <Box mt={2}>
-          <Text color={titleColor} fontSize={{ base: '30px', '1xl': '35px' }} fontWeight="bold" lineHeight={1.4}>
+          <Text color={titleColor} fontSize={{ base: '30px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
             {blogDetail?.title}
           </Text>
-          <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600" my={2}>
+          <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600" mt={4} mb={7}>
             Milan Poudel &#x2022;
             {convertDate(blogDetail?.createdat)}
           </Text>
 
-          <Box>
+          <Box mb={10}>
             <Image
               src={blogDetail?.coverimage}
               alt="blog-image"
@@ -65,9 +65,9 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
           <Box ref={parentRef} />
           <Box className="ql-snow">
             <Box
-              className="ql-editor"
+              className="content ql-editor"
               fontSize={{ base: 'md', '1xl': 'lg' }}
-              lineHeight={1.7}
+              lineHeight={1.5}
               dangerouslySetInnerHTML={{
                 __html: blogDetail?.content
               }}

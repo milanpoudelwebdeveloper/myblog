@@ -20,7 +20,7 @@ const MobileNavBar = ({ logOutHandler }: Props) => {
       position="absolute"
       zIndex={10}
       top={14}
-      right={0}
+      right={-4}
       fontSize={{ md: 'sm', xl: 'md', '1xl': 'lg' }}
       gap={{ base: 5, '1xl': 9 }}
       alignItems="center"
