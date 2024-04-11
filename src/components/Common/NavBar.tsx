@@ -37,7 +37,6 @@ const NavBar = () => {
       })
   }
 
-  console.log('ismodal open', isModalOpen)
   return (
     <Box
       bg={bg}
@@ -46,8 +45,9 @@ const NavBar = () => {
       position="fixed"
       zIndex={10}
       top={0}
+      left={0}
       pl={{ base: 4, md: 0 }}
-      pr={{ base: 7, md: 0 }}
+      pr={{ base: 5, md: 0 }}
     >
       <Box position="relative">
         {isMobile && isModalOpen && (

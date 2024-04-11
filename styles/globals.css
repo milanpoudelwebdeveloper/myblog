@@ -18,3 +18,13 @@ a {
 .react .ql-editor {
   height: 200px !important;
 }
+
+.content.ql-editor {
+  padding: 0px !important;
+}
+
+.ql-snow .ql-editor pre.ql-syntax {
+  padding: 30px !important;
+  margin: 0px 10px !important;
+  border-radius: 10px !important;
+}
