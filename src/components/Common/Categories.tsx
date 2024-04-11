@@ -11,6 +11,7 @@ const Categories = () => {
   const { showToast } = useCustomToast()
   const router = useRouter()
   const pathname = router.pathname
+
   const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
   const dividerColor = useColorModeValue('rgba(0, 0, 0, 0.15)', 'rgba(255, 255, 255, 0.15)')
   const {
