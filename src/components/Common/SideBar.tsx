@@ -28,7 +28,7 @@ const SideBar = () => {
 
   return (
     <Box w="full">
-      <Box p={7} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
+      <Box p={8} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
         <Text as="h2" textAlign="center" mb={1} color={headingColor} fontSize="xl" fontWeight="700">
           Popular Posts
         </Text>
