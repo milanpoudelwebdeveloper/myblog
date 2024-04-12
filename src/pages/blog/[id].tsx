@@ -71,6 +71,12 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
       />
       <MainLayout>
         <a href={`https://facebook.com/sharer/sharer.php?u=${shareURL}`}>Share on Facebook</a>
+        <a
+          href={`https://twitter.com/intent/tweet?url=${shareURL}&text=${blogDetail?.title}&via=milan_poudel&hashtags=codewithmilan
+        `}
+        >
+          Share on Twitter
+        </a>
         <Box>
           <Text color={titleColor} fontSize={{ base: '30px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
             {blogDetail?.title}
