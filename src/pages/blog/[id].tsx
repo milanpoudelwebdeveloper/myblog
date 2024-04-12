@@ -1,21 +1,25 @@
 import { Box, Text, useColorModeValue, Image, Flex } from '@chakra-ui/react'
 import MainLayout from '@components/Common/MainLayout'
-import React, { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import { getBlogDetails, getSavedBlogs, saveBlog, updateReadCount } from '@/src/services/blog'
+import { getBlogDetails, saveBlog, unSaveBlog, updateReadCount } from '@/src/services/blog'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-dark.css'
 import { convertDate } from '@/src/utils/convertDate'
 import HeadingSeo from '@components/Common/HeadingSeo'
-
 import { FaRegHeart } from 'react-icons/fa'
 import { AuthContext } from '@/src/context/authContext'
+import { useCustomToast } from '@/src/hooks/useCustomToast'
+import { useQueryClient } from '@tanstack/react-query'
 
 const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
+  const client = useQueryClient()
+  const [isSaved, setIsSaved] = useState(blogDetail?.saved)
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(237, 242, 247)')
   const { user } = useContext(AuthContext)
   const router = useRouter()
+  const { showToast } = useCustomToast()
   const { id } = router.query
 
   const parentRef = useRef<HTMLDivElement>(null)
@@ -37,27 +41,24 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
     }
   }, [parentRef, id])
 
-  const saveBlogHandler = () => {
-    saveBlog(blogDetail?.id, user?.id)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
-  }
-
-  useEffect(() => {
-    if (user?.id) {
-      getSavedBlogs(user?.id)
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((e) => {
-          console.log(e)
-        })
+  const saveOrUnSaveHandler = async () => {
+    if (!user?.id) {
+      return showToast('Please login to save the blog', 'error')
     }
-  }, [user?.id])
+    let res
+    try {
+      if (isSaved) {
+        res = await unSaveBlog(blogDetail?.id, user?.id)
+      } else {
+        res = await saveBlog(blogDetail?.id, user?.id)
+      }
+      client.invalidateQueries({ queryKey: ['getSavedBlogs'] })
+      setIsSaved((prev) => !prev)
+      showToast(res, 'success')
+    } catch (error) {
+      showToast(error, 'error')
+    }
+  }
 
   return (
     <>
@@ -77,7 +78,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
               {convertDate(blogDetail?.createdat)}
             </Text>
             <Flex>
-              <FaRegHeart fill="black" size={24} onClick={saveBlogHandler} />
+              <FaRegHeart fill="black" size={24} onClick={saveOrUnSaveHandler} />
             </Flex>
           </Flex>
 
@@ -113,10 +114,21 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
 
 export default BlogDetails
 
-export async function getServerSideProps(context: { params: { id: string } }) {
+interface IContext {
+  params: {
+    id: string
+  }
+  query: {
+    query: string
+  }
+}
+
+export async function getServerSideProps(context: IContext) {
   const { id } = context.params
+  const userId = context.query.query
+
   try {
-    const blogDetails = await getBlogDetails(id)
+    const blogDetails = await getBlogDetails(id, userId)
 
     if (blogDetails) {
       return {

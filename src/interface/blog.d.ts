@@ -7,6 +7,7 @@ interface IBlog {
   categories: string[]
   published: boolean
   featured: boolean
+  saved: boolean
 }
 
 interface ICategory {

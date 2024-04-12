@@ -23,6 +23,7 @@ import MobileNavBar from './MobileNavBar'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import Image from 'next/image'
 import { FaChevronDown } from 'react-icons/fa'
+import { SAVED_POSTS } from '@constants/routes'
 
 const NavBar = () => {
   const { setLogOut, isLoggedIn, user } = useContext(AuthContext)
@@ -141,7 +142,9 @@ const NavBar = () => {
                     rightIcon={<FaChevronDown color="#232323" fontWeight="300" size={18} />}
                   />
                   <MenuList fontSize="md" fontWeight="500" py={4}>
-                    <MenuItem mb={1}>Saved Post</MenuItem>
+                    <Link href={SAVED_POSTS}>
+                      <MenuItem mb={1}>Saved</MenuItem>
+                    </Link>
                     <MenuItem mb={1}> Settings</MenuItem>
                     <MenuItem mb={1} onClick={logOutHandler}>
                       Logout

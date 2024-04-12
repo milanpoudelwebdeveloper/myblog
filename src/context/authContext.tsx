@@ -46,6 +46,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const setUserData = (data: IUser) => {
     setUser((prev) => ({ ...prev, ...data }))
+    localStorage.setItem('userIdCodeWithMilan', data?.id as string)
   }
 
   const setLogOut = () => {
