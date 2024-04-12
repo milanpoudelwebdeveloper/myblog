@@ -45,7 +45,7 @@ const SignUp = () => {
         link="https://codewithmilan.com/signup"
       />
       <PublicRoute>
-        <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
+        <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center" px={{ base: 6, lg: 4 }}>
           <Box
             borderRadius={24}
             bg="white"

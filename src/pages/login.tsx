@@ -108,13 +108,22 @@ const UserLogin = () => {
                   <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
                   {errors?.password && <ErrorText message={errors.password.message} />}
                 </FormControl>
-                <Text color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }} opacity="0.6" textAlign="right" mt={5}>
+                <Button
+                  variant="unstyled"
+                  ml="auto"
+                  color="#202224"
+                  fontSize={{ base: 'sm', '1xl': 'md' }}
+                  fontWeight="normal"
+                  opacity="0.6"
+                  textAlign="right"
+                  my={{ base: 2, '1xl': 5 }}
+                >
                   Forgot Password?
-                </Text>
+                </Button>
                 {showResendLink && (
                   <Link href="/sendVerification">
                     <Button variant="unstyled">
-                      <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
+                      <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right">
                         Resend verification link
                       </Text>
                     </Button>
