@@ -24,6 +24,8 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
 
   const parentRef = useRef<HTMLDivElement>(null)
 
+  const shareURL = `https://codewithmilan.com/blog/${id}`
+
   useEffect(() => {
     if (!parentRef.current) return
     const options = {
@@ -68,7 +70,8 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
         link={`https://codewithmilan.com/blog/${id}`}
       />
       <MainLayout>
-        <Box mt={7}>
+        <a href={`https://facebook.com/sharer/sharer.php?u=${shareURL}`}>Share on Facebook</a>
+        <Box>
           <Text color={titleColor} fontSize={{ base: '30px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
             {blogDetail?.title}
           </Text>
