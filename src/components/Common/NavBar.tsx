@@ -23,7 +23,7 @@ import MobileNavBar from './MobileNavBar'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import Image from 'next/image'
 import { FaChevronDown } from 'react-icons/fa'
-import { SAVED_POSTS } from '@constants/routes'
+import { SAVED_POSTS, SETTINGS } from '@constants/routes'
 
 const NavBar = () => {
   const { setLogOut, isLoggedIn, user } = useContext(AuthContext)
@@ -73,7 +73,7 @@ const NavBar = () => {
       <Flex
         justifyContent="space-between"
         mx="auto"
-        py={{ base: 4, xl: 7 }}
+        py={{ base: 4, xl: 5, '1xl': 6 }}
         width="full"
         maxW={{ base: 700, lg: 780, xl: 1070, '1xl': 1230 }}
       >
@@ -145,7 +145,9 @@ const NavBar = () => {
                     <Link href={SAVED_POSTS}>
                       <MenuItem mb={1}>Saved</MenuItem>
                     </Link>
-                    <MenuItem mb={1}> Settings</MenuItem>
+                    <Link href={SETTINGS}>
+                      <MenuItem mb={1}> Settings</MenuItem>
+                    </Link>
                     <MenuItem mb={1} onClick={logOutHandler}>
                       Logout
                     </MenuItem>

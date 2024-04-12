@@ -39,7 +39,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
       />
       <MainLayout>
         <Box>
-          <Flex my={1} gap={4}>
+          <Flex gap={4}>
             {finalCategories?.map((category) => (
               <Box
                 key={category?.id}
@@ -48,7 +48,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
                 boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
                 borderRadius={7}
                 fontWeight="500"
-                fontSize={{ base: 'sm' }}
+                fontSize={{ base: 'sm', '1xl': 'md' }}
                 py={{ base: 2, '1xl': 3 }}
                 px={{ base: 4, '1xl': 5 }}
                 cursor="pointer"
