@@ -1,4 +1,16 @@
-import { Box, Button, Flex, useColorModeValue, useMediaQuery, useOutsideClick } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  useColorModeValue,
+  useMediaQuery,
+  useOutsideClick,
+  Image as ChakraImage,
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuButton
+} from '@chakra-ui/react'
 import { useContext, useRef, useState } from 'react'
 import ThemeToggle from './ThemeToggle'
 import Link from 'next/link'
@@ -10,9 +22,10 @@ import { navLinks } from '@constants/navbar'
 import MobileNavBar from './MobileNavBar'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import Image from 'next/image'
+import { FaChevronDown } from 'react-icons/fa'
 
 const NavBar = () => {
-  const { setLogOut, isLoggedIn } = useContext(AuthContext)
+  const { setLogOut, isLoggedIn, user } = useContext(AuthContext)
   const divRef = useRef<HTMLDivElement>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isMobile] = useMediaQuery('(max-width: 768px)')
@@ -108,9 +121,34 @@ const NavBar = () => {
           </Box>
           <Box display={{ base: 'none', md: 'block' }}>
             {isLoggedIn ? (
-              <Button bg="#6941C6" color="#fff" fontSize="md" onClick={logOutHandler}>
-                Logout
-              </Button>
+              <Flex alignItems="center" gap={1}>
+                <ChakraImage
+                  src={user?.profileimage}
+                  fallbackSrc="/images/default-avatar.webp"
+                  alt="profile"
+                  w={10}
+                  h={10}
+                  maxW="full"
+                  maxH="full"
+                  borderRadius="full"
+                  objectFit="cover"
+                />
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    variant="unstyled"
+                    fontWeight="normal"
+                    rightIcon={<FaChevronDown color="#232323" fontWeight="300" size={18} />}
+                  />
+                  <MenuList fontSize="md" fontWeight="500" py={4}>
+                    <MenuItem mb={1}>Saved Post</MenuItem>
+                    <MenuItem mb={1}> Settings</MenuItem>
+                    <MenuItem mb={1} onClick={logOutHandler}>
+                      Logout
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </Flex>
             ) : (
               <Link href="/login">
                 <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', xl: 'lg' }} fontWeight="normal">

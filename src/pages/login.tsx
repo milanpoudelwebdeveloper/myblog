@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { PublicRoute } from '@components/RouteAccess'
 import Link from 'next/link'
 import HeadingSeo from '@components/Common/HeadingSeo'
-import { SIGNUP } from '@constants/routes'
+import { SEND_VERIFICATION, SIGNUP } from '@constants/routes'
 
 const UserLogin = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -108,18 +108,20 @@ const UserLogin = () => {
                   <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
                   {errors?.password && <ErrorText message={errors.password.message} />}
                 </FormControl>
-                <Button
-                  variant="unstyled"
-                  ml="auto"
-                  color="#202224"
-                  fontSize={{ base: 'sm', '1xl': 'md' }}
-                  fontWeight="normal"
-                  opacity="0.6"
-                  textAlign="right"
-                  my={{ base: 2, '1xl': 5 }}
-                >
-                  Forgot Password?
-                </Button>
+                <Link href={SEND_VERIFICATION}>
+                  <Button
+                    variant="unstyled"
+                    ml="auto"
+                    color="#202224"
+                    fontSize={{ base: 'sm', '1xl': 'md' }}
+                    fontWeight="normal"
+                    opacity="0.6"
+                    textAlign="right"
+                    my={{ base: 2, '1xl': 5 }}
+                  >
+                    Forgot Password?
+                  </Button>
+                </Link>
                 {showResendLink && (
                   <Link href="/sendVerification">
                     <Button variant="unstyled">

@@ -108,3 +108,29 @@ export const getPopularBlogs = async () => {
     throw message
   }
 }
+
+export const getSavedBlogs = async (userId: number | string) => {
+  try {
+    const res = await axiosInstance.get(`/blog/saved/${userId}`)
+    if (res?.data) {
+      return res?.data?.data
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}
+
+export const saveBlog = async (blogId: string | number, userId: number | string) => {
+  try {
+    const res = await axiosInstance.post(`/blog/save/${blogId}`, {
+      userId
+    })
+    if (res?.data) {
+      return res?.data?.message
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}
