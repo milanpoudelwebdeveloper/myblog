@@ -12,6 +12,7 @@ import { FaRegHeart } from 'react-icons/fa'
 import { AuthContext } from '@/src/context/authContext'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { useQueryClient } from '@tanstack/react-query'
+import SocialShares from '@components/Admin/Common/SocialShares'
 
 const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const client = useQueryClient()
@@ -23,7 +24,6 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const { id } = router.query
 
   const parentRef = useRef<HTMLDivElement>(null)
-
   const shareURL = `https://codewithmilan.com/blog/${id}`
 
   useEffect(() => {
@@ -68,35 +68,16 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
         title={blogDetail?.title}
         description={blogDetail?.content?.slice(0, 140)}
         link={`https://codewithmilan.com/blog/${id}`}
+        image={blogDetail?.coverimage}
       />
       <MainLayout>
-        <a href={`https://facebook.com/sharer/sharer.php?u=${shareURL}`}>Share on Facebook</a>
-        <a
-          href={`https://twitter.com/intent/tweet?url=${shareURL}&text=${blogDetail?.title}&via=milan_poudel&hashtags=codewithmilan
-        `}
-        >
-          Share on Twitter
-        </a>
-        <a
-          href={`https://www.linkedin.com/shareArticle?mini=true&url=${shareURL}&title=${blogDetail?.title}&summary=${blogDetail?.content.slice(0, 140)}&source=codewithmilan`}
-        >
-          Share on LinkedIn
-        </a>
-        <a href={`https://wa.me/?text=${shareURL}`}>Share on WhatsApp</a>
-        <a href={`mailto:?subject=${blogDetail?.title}&body=${shareURL}`}>Share via Email</a>
-        <a href={`https://www.reddit.com/submit?url=${shareURL}&title=${blogDetail?.title}`}>Share on Reddit</a>
-        <Box>
+        <Box position="relative">
           <Text color={titleColor} fontSize={{ base: '30px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
             {blogDetail?.title}
           </Text>
-          <Flex alignItems="center" justifyContent="space-between">
-            <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600" mt={4} mb={7}>
-              Milan Poudel &#x2022;
-              {convertDate(blogDetail?.createdat)}
-            </Text>
-            <Flex>
-              <FaRegHeart fill="black" size={24} onClick={saveOrUnSaveHandler} />
-            </Flex>
+          <Flex mt={3} mb={8} alignItems="center" color="rgb(0, 0, 0)" fontSize="sm" fontWeight="300">
+            <Text>Milan Poudel &#x2022;</Text>
+            <Text>{convertDate(blogDetail?.createdat)}</Text>
           </Flex>
 
           <Box mb={10}>
@@ -111,6 +92,10 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
               h={{ base: 220, xl: 330, '1xl': 370 }}
               maxH="full"
             />
+            <Flex alignItems="center" justifyContent="space-between" px={2}>
+              <SocialShares shareURL={shareURL} blogDetail={blogDetail} />
+              <FaRegHeart fill="black" size={24} onClick={saveOrUnSaveHandler} />
+            </Flex>
           </Box>
           <Box ref={parentRef} />
           <Box className="ql-snow">
