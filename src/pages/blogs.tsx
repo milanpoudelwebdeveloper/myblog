@@ -38,7 +38,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         link="https://codewithmilan.com/blogs"
       />
       <MainLayout>
-        <Box mt={{ base: 5, md: 1 }}>
+        <Box>
           <Flex my={1} gap={4}>
             {finalCategories?.map((category) => (
               <Box
@@ -46,9 +46,9 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
                 bg={category?.id === selectedCategory ? 'rgb(165, 94, 234)' : 'white'}
                 color={category?.id === selectedCategory ? 'rgb(255, 255, 255)' : 'rgb(35, 35, 35)'}
                 boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
-                borderRadius={12}
+                borderRadius={7}
                 fontWeight="500"
-                fontSize={{ base: 'sm', md: 'md' }}
+                fontSize={{ base: 'sm' }}
                 py={{ base: 2, '1xl': 3 }}
                 px={{ base: 4, '1xl': 5 }}
                 cursor="pointer"

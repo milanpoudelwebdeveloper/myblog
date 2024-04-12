@@ -15,6 +15,7 @@ const SideBar = () => {
   const bgColor = useColorModeValue('white', '#1a1a1a')
   const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
   const dividerColor = useColorModeValue('#D9D9D9', 'rgba(255, 255, 255, 0.15)')
+  const dateColor = useColorModeValue('rgb(35, 35, 35)', '#C0C5D0')
 
   const { error, data, isLoading } = useQuery({
     queryKey: ['getPopularPosts'],
@@ -28,11 +29,20 @@ const SideBar = () => {
 
   return (
     <Box w="full">
-      <Box p={8} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10} bgColor={bgColor}>
-        <Text as="h2" textAlign="center" mb={1} color={headingColor} fontSize="xl" fontWeight="700">
-          Popular Posts
+      <Box
+        maxW={{ base: 570, lg: 'initial' }}
+        p={8}
+        boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
+        borderRadius={14}
+        mb={10}
+        bgColor={bgColor}
+        mx="auto"
+        pl={{ md: 20, xl: 8 }}
+      >
+        <Text as="h2" textAlign="center" mb={1} color={headingColor} fontSize="22px" fontWeight="700">
+          Most Read
         </Text>
-        <Divider borderColor="#6941C6" w={10} borderWidth={2} mx="auto" mb={7} />
+        <Divider borderColor="#6941C6" w={12} borderWidth={2} mx="auto" mb={9} />
         {isLoading && <Skeleton h={470} borderRadius={20} mb={6} />}
         {data?.map((blog: IBlog) => (
           <Box key={blog?.id} mb={4}>
@@ -54,7 +64,7 @@ const SideBar = () => {
                   {blog?.title}
                 </Text>
 
-                <Text color="rgb(35, 35, 35)" fontSize="xs" fontWeight="300">
+                <Text color={dateColor} fontSize="xs" fontWeight="300">
                   {convertDate(blog?.createdat)}
                 </Text>
               </Box>

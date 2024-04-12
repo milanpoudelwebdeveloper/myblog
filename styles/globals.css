@@ -40,5 +40,9 @@ a {
 
 .ql-editor p {
   line-height: 30px !important;
-  color: rgb(0, 0, 0) !important;
+  color: #232323 !important;
+}
+
+html[data-theme='dark'] .ql-editor p {
+  color: #c0c5d0 !important;
 }

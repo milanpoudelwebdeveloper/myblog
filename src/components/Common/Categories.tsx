@@ -33,13 +33,13 @@ const Categories = () => {
   const isBlogPage = pathname.includes('/blogs')
 
   return (
-    <Box w="full">
+    <Box maxW={{ base: 570, lg: 'auto' }} mx="auto">
       <Box p={{ base: 5, lg: 8 }} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10}>
         <Text as={isBlogPage ? 'h1' : 'h2'} textAlign="center" color={headingColor} fontSize="xl" fontWeight="700">
           Coding Topics
         </Text>
-        <Divider borderColor="#6941C6" w={14} borderWidth={2} mx="auto" mb={7} mt={2} />
-        <Box px={2}>
+        <Divider borderColor="#6941C6" w={14} borderWidth={2} mx="auto" mb={7} mt={4} />
+        <Box px={{ base: 2, md: 14, xl: 2 }}>
           {isLoading && <Skeleton h={500} borderRadius={20} mb={6} />}
           {categories?.map((category: ICategory) => (
             <Box key={category?.id}>

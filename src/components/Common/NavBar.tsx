@@ -56,7 +56,13 @@ const NavBar = () => {
           </Box>
         )}
       </Box>
-      <Flex justifyContent="space-between" py={{ base: 4, xl: 7 }} width="full" maxW={{ base: 1090, '1xl': 1230 }}>
+      <Flex
+        justifyContent="space-between"
+        mx="auto"
+        py={{ base: 4, xl: 7 }}
+        width="full"
+        maxW={{ base: 700, lg: 780, xl: 1070, '1xl': 1230 }}
+      >
         <Flex gap={48}>
           <Link href="/" shallow passHref>
             <Box

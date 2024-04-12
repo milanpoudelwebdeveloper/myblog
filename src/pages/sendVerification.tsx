@@ -32,18 +32,18 @@ const SendVerificationLink = () => {
   return (
     <PublicRoute>
       <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
-        <Flex w={500} mx="auto">
-          <Box borderRadius={24} w="full" bg="white" px={14} py={20} textAlign="center">
-            <Text color="#202224" fontSize="24px" fontWeight="600">
+        <Flex w={{ base: 440, '1xl': 490 }} mx="auto">
+          <Box borderRadius={24} w="full" bg="white" px={{ base: 8, xl: 12 }} py={{ base: 9, '1xl': 20 }} textAlign="center">
+            <Text color="#202224" fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="bold">
               Send Verification Link
             </Text>
-            <Text fontSize="md" fontWeight="500" mt={4}>
+            <Text fontSize={{ base: 'xs', md: 'md' }} mt={4}>
               Please enter your email to continue
             </Text>
             <form onSubmit={handleSubmit(resendLink)}>
               <Box mt={6}>
                 <FormControl mb={5}>
-                  <FormLabel opacity={0.8} color="#202224">
+                  <FormLabel opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
                     Email
                   </FormLabel>
                   <Input
@@ -60,11 +60,12 @@ const SendVerificationLink = () => {
                         message: 'Please enter a valid email address'
                       }
                     })}
+                    fontSize={{ base: 'sm', '1xl': 'md' }}
                   />
                   {errors?.email && <ErrorText message={errors.email.message} />}
                 </FormControl>
                 <Button variant="unstyled" isDisabled={timer > 0} type="submit">
-                  <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
+                  <Text color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }} opacity="0.6" textAlign="right" mt={5}>
                     Send verification link {timer > 0 ? `in ${realTimer}` : ''}
                   </Text>
                 </Button>
