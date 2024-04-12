@@ -26,7 +26,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
       <Link href={`/blog/${id}`}>
         <Box
           maxW="full"
-          h={{ base: 190, xl: imageHeight ? 270 : 190, '1xl': imageHeight ? imageHeight : 200 }}
+          h={{ base: 190, md: imageHeight ? 270 : 210, xl: imageHeight ? 270 : 190, '1xl': imageHeight ? imageHeight : 200 }}
           maxH="full"
           position="relative"
         >

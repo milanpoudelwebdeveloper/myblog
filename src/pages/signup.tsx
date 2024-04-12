@@ -46,17 +46,26 @@ const SignUp = () => {
       />
       <PublicRoute>
         <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
-          <Box borderRadius={24} bg="white" px={14} py={20} textAlign="center" w={580} maxH={540} overflowY="scroll">
-            <Text color="#202224" fontSize="24px" fontWeight="600" as="h1">
+          <Box
+            borderRadius={24}
+            bg="white"
+            px={{ base: 8, xl: 12 }}
+            py={{ base: 12, '1xl': 20 }}
+            textAlign="center"
+            w={{ base: 460, '1xl': 500 }}
+            maxH={{ base: 490, '1xl': 540 }}
+            overflowY="scroll"
+          >
+            <Text color="#202224" fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="bold" as="h1">
               Create an Account
             </Text>
-            <Text fontSize="md" fontWeight="500" mt={4} as="h2">
+            <Text fontSize={{ base: 'xs', md: 'md' }} mt={3} as="h2">
               Create a account to continue
             </Text>
             <form onSubmit={handleSubmit(submitHandler)}>
               <Box mt={6}>
                 <FormControl mb={5}>
-                  <FormLabel opacity={0.8} color="#202224">
+                  <FormLabel opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
                     Email
                   </FormLabel>
                   <Input
@@ -67,11 +76,12 @@ const SignUp = () => {
                     _placeholder={{ color: '#718EBF' }}
                     placeholder="Enter Email"
                     {...register('email')}
+                    fontSize={{ base: 'sm', '1xl': 'md' }}
                   />
                   {errors?.email && <ErrorText message={errors?.email?.message} />}
                 </FormControl>
                 <FormControl mb={5}>
-                  <FormLabel opacity={0.8} color="#202224">
+                  <FormLabel opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
                     Full Name
                   </FormLabel>
                   <Input
@@ -82,11 +92,12 @@ const SignUp = () => {
                     _placeholder={{ color: '#718EBF' }}
                     placeholder="Enter Full Name"
                     {...register('name')}
+                    fontSize={{ base: 'sm', '1xl': 'md' }}
                   />
                   {errors?.name && <ErrorText message={errors?.name?.message} />}
                 </FormControl>
                 <FormControl mb={5}>
-                  <FormLabel opacity={0.8} color="#202224">
+                  <FormLabel opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
                     Country
                   </FormLabel>
                   <Select
@@ -97,6 +108,7 @@ const SignUp = () => {
                     placeholder="Select Country"
                     variant="custom"
                     {...register('country')}
+                    fontSize={{ base: 'sm', '1xl': 'md' }}
                   >
                     {countries?.map(({ name }) => (
                       <option key={name} value={name}>
@@ -107,7 +119,7 @@ const SignUp = () => {
 
                   {errors?.country && <ErrorText message={errors?.country?.message} />}
                 </FormControl>
-                <FormControl mb={5} position="relative">
+                <FormControl mb={5} position="relative" fontSize={{ base: 'sm', '1xl': 'md' }}>
                   <FormLabel opacity={0.8} color="#202224">
                     Password
                   </FormLabel>
@@ -119,12 +131,13 @@ const SignUp = () => {
                     _placeholder={{ color: '#718EBF' }}
                     placeholder="Enter Password"
                     {...register('password')}
+                    fontSize={{ base: 'sm', '1xl': 'md' }}
                   />
                   <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
                   {errors?.password && <ErrorText message={errors?.password?.message} />}
                 </FormControl>
                 <FormControl position="relative">
-                  <FormLabel opacity={0.8} color="#202224">
+                  <FormLabel opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
                     Confirm Password
                   </FormLabel>
                   <Input
@@ -135,20 +148,19 @@ const SignUp = () => {
                     _placeholder={{ color: '#718EBF' }}
                     placeholder="Confirm Password"
                     {...register('confirmPassword')}
+                    fontSize={{ base: 'sm', '1xl': 'md' }}
                   />
                   <PasswordVisibilty visibility={confirmPasswordVisible} toggle={setConfirmPasswordVisible} />
                   {errors?.confirmPassword && <ErrorText message={errors?.confirmPassword?.message} />}
                 </FormControl>
-                <Text as="h2" color="#202224" fontSize="md" opacity="0.6" textAlign="right" mt={5}>
-                  Forgot Password?
-                </Text>
-                <Button bg="#4880FF" color="white" fontWeight="normal" type="submit" w="80%" mt={10}>
+
+                <Button bg="#4880FF" color="white" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="normal" type="submit" w="80%" mt={10}>
                   Sign Up
                 </Button>
-                <Flex justifyContent="center" mt={4}>
+                <Flex justifyContent="center" alignItems="center" mt={4} fontSize={{ base: 'xs', '1xl': 'md' }}>
                   <Text as="h2">Already have an account?</Text>
                   <Link href="/login">
-                    <Button variant="link" color="#4880FF" ml={1} textDecoration="underline">
+                    <Button variant="link" color="#4880FF" ml={1} fontSize={{ base: 'sm', '1xl': 'md' }} textDecoration="underline">
                       Sign In
                     </Button>
                   </Link>

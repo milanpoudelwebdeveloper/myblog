@@ -15,9 +15,14 @@ const LazyLoadedSideBar = dynamic(() => import('./SideBar'))
 const MainLayout = ({ children, hideSidebar = false }: Props) => {
   const [isMobile] = useMediaQuery('(max-width: 768px)')
   return (
-    <Box maxW={{ base: 1080, '1xl': 1220 }} mx="auto" px={{ base: 4, xl: 0 }}>
+    <Box maxW={{ base: 750, xl: 1080, '1xl': 1220 }} mx="auto" px={{ base: 4, sm: 10, lg: 0 }}>
       <NavBar />
-      <Flex gap={{ base: 12, '1xl': 14 }} mt={{ base: 16, xl: 28 }} direction={{ base: 'column', md: 'row' }} justifyContent="center">
+      <Flex
+        gap={{ base: 12, '1xl': 14 }}
+        mt={{ base: 16, sm: 20, md: 24, xl: 28 }}
+        direction={{ base: 'column', xl: 'row' }}
+        justifyContent="center"
+      >
         <Box minW={{ base: 'full', xl: 660, '1xl': 740 }} maxW={{ base: 'full', xl: 660, '1xl': 740 }}>
           {children}
         </Box>
