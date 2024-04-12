@@ -1,6 +1,6 @@
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useContext } from 'react'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-light.css'
@@ -8,6 +8,7 @@ import { convertDate } from '@/src/utils/convertDate'
 import Markdown from 'markdown-to-jsx'
 import { base64File } from '@constants/files'
 import Image from 'next/image'
+import { AuthContext } from '@/src/context/authContext'
 
 interface Props {
   card: IBlog
@@ -17,13 +18,15 @@ interface Props {
 
 const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
   const { title, content, coverimage, categories, createdat, id, featured } = card
+  const { user } = useContext(AuthContext)
   const bgColor = useColorModeValue('white', '#1a1a1a')
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
   const contentColor = useColorModeValue('#232323', '#C0C5D0')
   const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
+  const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
   return (
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
-      <Link href={`/blog/${id}`}>
+      <Link href={dynamicLink}>
         <Box
           maxW="full"
           h={{ base: 190, md: imageHeight ? 270 : 210, xl: imageHeight ? 270 : 190, '1xl': imageHeight ? imageHeight : 200 }}

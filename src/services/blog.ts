@@ -49,9 +49,13 @@ export const getFeaturedBlog = async () => {
   }
 }
 
-export const getBlogDetails = async (blogId: number | string) => {
+export const getBlogDetails = async (blogId: number | string, userId?: string | number) => {
   try {
-    const res = await axiosInstance.get(`/blog/details/${blogId}`)
+    const res = await axiosInstance.get(`/blog/details/${blogId}`, {
+      data: {
+        userId
+      }
+    })
     if (res?.data) {
       return res?.data?.data
     }
@@ -102,6 +106,48 @@ export const getPopularBlogs = async () => {
     const res = await axiosInstance.get('/blog/popular')
     if (res?.data) {
       return res?.data?.data
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}
+
+export const getSavedBlogs = async (userId: number | string) => {
+  try {
+    const res = await axiosInstance.get(`/blog/saved/${userId}`)
+    if (res?.data) {
+      return res?.data?.data
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}
+
+export const saveBlog = async (blogId: string | number, userId: number | string) => {
+  try {
+    const res = await axiosInstance.post(`/blog/save/${blogId}`, {
+      userId
+    })
+    if (res?.data) {
+      return res?.data?.message
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}
+
+export const unSaveBlog = async (blogId: string | number, userId: number | string) => {
+  try {
+    const res = await axiosInstance.delete(`/blog/unsave/${blogId}`, {
+      data: {
+        userId
+      }
+    })
+    if (res?.data) {
+      return res?.data?.message
     }
   } catch (error: any) {
     const message = error?.response?.data?.message || 'Something went wrong. Please try again'
