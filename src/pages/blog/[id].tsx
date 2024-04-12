@@ -71,8 +71,8 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
         image={blogDetail?.coverimage}
       />
       <MainLayout>
-        <Box position="relative">
-          <Text color={titleColor} fontSize={{ base: '30px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
+        <Box position="relative" mt={{ base: 6, md: 0 }}>
+          <Text color={titleColor} fontSize={{ base: '28px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
             {blogDetail?.title}
           </Text>
           <Flex mt={3} mb={8} alignItems="center" color="rgb(0, 0, 0)" fontSize="sm" fontWeight="300">
