@@ -52,7 +52,7 @@ export const getFeaturedBlog = async () => {
 export const getBlogDetails = async (blogId: number | string, userId?: string | number) => {
   try {
     const res = await axiosInstance.get(`/blog/details/${blogId}`, {
-      data: {
+      params: {
         userId
       }
     })
