@@ -4,9 +4,10 @@ interface HeadingSeoProps {
   title: string
   description: string
   link: string
+  image?: string
 }
 
-const HeadingSeo = ({ title, description, link }: HeadingSeoProps) => {
+const HeadingSeo = ({ title, description, link, image = '/images/blogimage.webp' }: HeadingSeoProps) => {
   return (
     <Head>
       <title>{title}</title>
@@ -25,9 +26,9 @@ const HeadingSeo = ({ title, description, link }: HeadingSeoProps) => {
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={link} />
-      <meta property="og:image" content="/images/blogimage.webp" />
+      <meta property="og:image" content={image} />
       <meta property="og:image:alt" content="Nextjs Reactjs Nodejs AWS" />
-      <meta property="og:image:type" content="image/jpg" />
+      <meta property="og:image:type" content="image/webp" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta name="twitter:card" content="summary_large_image" />
@@ -35,7 +36,7 @@ const HeadingSeo = ({ title, description, link }: HeadingSeoProps) => {
       <meta name="twitter:creator" content="@milanpoudel" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content="/images/blogimage.webp" />
+      <meta name="twitter:image" content={image} />
     </Head>
   )
 }
