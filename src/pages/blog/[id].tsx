@@ -77,6 +77,14 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
         >
           Share on Twitter
         </a>
+        <a
+          href={`https://www.linkedin.com/shareArticle?mini=true&url=${shareURL}&title=${blogDetail?.title}&summary=${blogDetail?.content.slice(0, 140)}&source=codewithmilan`}
+        >
+          Share on LinkedIn
+        </a>
+        <a href={`https://wa.me/?text=${shareURL}`}>Share on WhatsApp</a>
+        <a href={`mailto:?subject=${blogDetail?.title}&body=${shareURL}`}>Share via Email</a>
+        <a href={`https://www.reddit.com/submit?url=${shareURL}&title=${blogDetail?.title}`}>Share on Reddit</a>
         <Box>
           <Text color={titleColor} fontSize={{ base: '30px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
             {blogDetail?.title}
