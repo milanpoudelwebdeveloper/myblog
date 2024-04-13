@@ -1,35 +1,22 @@
-import {
-  Box,
-  Button,
-  Flex,
-  useColorModeValue,
-  useMediaQuery,
-  useOutsideClick,
-  Image as ChakraImage,
-  Menu,
-  MenuItem,
-  MenuList,
-  MenuButton
-} from '@chakra-ui/react'
+import { Box, Button, Flex, useColorModeValue, useMediaQuery, useOutsideClick } from '@chakra-ui/react'
 import { useContext, useRef, useState } from 'react'
 import ThemeToggle from './ThemeToggle'
 import Link from 'next/link'
 import { AuthContext } from '@/src/context/authContext'
-import { logoutUser } from '@/src/services/auth'
-import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { useRouter } from 'next/router'
 import { navLinks } from '@constants/navbar'
-import MobileNavBar from './MobileNavBar'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import Image from 'next/image'
-import { BLOGS_BY_USER, SAVED_BLOGS, SETTINGS } from '@constants/routes'
+import dynamic from 'next/dynamic'
+
+const LazyLoadedUserMenu = dynamic(() => import('./NavBar/UserMenu'))
+const LazyLoadedMobileNavBar = dynamic(() => import('./MobileNavBar'))
 
 const NavBar = () => {
-  const { setLogOut, isLoggedIn, user } = useContext(AuthContext)
+  const { isLoggedIn } = useContext(AuthContext)
   const divRef = useRef<HTMLDivElement>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isMobile] = useMediaQuery('(max-width: 768px)')
-  const { showToast } = useCustomToast()
   const bg = useColorModeValue('white', '#141414')
   const router = useRouter()
   const pathname = router.pathname
@@ -38,17 +25,6 @@ const NavBar = () => {
     ref: divRef,
     handler: () => setIsModalOpen(false)
   })
-
-  const logOutHandler = () => {
-    logoutUser()
-      .then((res) => {
-        setLogOut()
-        showToast(res?.message, 'success')
-      })
-      .catch((e) => {
-        showToast(e, 'error')
-      })
-  }
 
   return (
     <Box
@@ -65,7 +41,7 @@ const NavBar = () => {
       <Box position="relative">
         {isMobile && isModalOpen && (
           <Box ref={divRef}>
-            <MobileNavBar logOutHandler={logOutHandler} />
+            <LazyLoadedMobileNavBar />
           </Box>
         )}
       </Box>
@@ -124,36 +100,7 @@ const NavBar = () => {
           <ThemeToggle />
           <Box display="block">
             {isLoggedIn ? (
-              <Menu>
-                <MenuButton as={Button} variant="unstyled" fontWeight="normal">
-                  <ChakraImage
-                    src={user?.profileimage}
-                    fallbackSrc="/images/default-avatar.webp"
-                    fallbackStrategy="beforeLoadOrError"
-                    alt="profile"
-                    w={10}
-                    h={10}
-                    maxW="full"
-                    maxH="full"
-                    borderRadius="full"
-                    objectFit="cover"
-                  />
-                </MenuButton>
-                <MenuList fontSize="md" fontWeight="500" py={4}>
-                  <Link href={SAVED_BLOGS}>
-                    <MenuItem mb={1}>Saved</MenuItem>
-                  </Link>
-                  <Link href={BLOGS_BY_USER}>
-                    <MenuItem mb={1}>Blogs By You</MenuItem>
-                  </Link>
-                  <Link href={SETTINGS}>
-                    <MenuItem mb={1}> Settings</MenuItem>
-                  </Link>
-                  <MenuItem mb={1} onClick={logOutHandler}>
-                    Logout
-                  </MenuItem>
-                </MenuList>
-              </Menu>
+              <LazyLoadedUserMenu />
             ) : (
               <Link href="/login">
                 <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', xl: 'lg' }} fontWeight="normal">
