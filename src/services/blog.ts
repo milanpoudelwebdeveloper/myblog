@@ -125,6 +125,19 @@ export const getSavedBlogs = async (userId: number | string) => {
   }
 }
 
+export const getBlogsByUser = async (category: number | string | null = 'all', userId: number | string) => {
+  if (!userId) return
+  try {
+    const res = await axiosInstance.get(`/blog/user/${userId}?categoryId=${category}`)
+    if (res?.data) {
+      return res?.data?.data
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}
+
 export const saveBlog = async (blogId: string | number, userId: number | string) => {
   try {
     const res = await axiosInstance.post(`/blog/save/${blogId}`, {
