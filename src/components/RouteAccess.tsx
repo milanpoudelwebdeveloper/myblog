@@ -32,7 +32,7 @@ export const PublicRoute = ({ children }: { children: React.ReactNode }) => {
 export const AdminProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useContext(AuthContext)
   const router = useRouter()
-  const isAdmin = user?.role === 'admin' || user?.role === 'superadmin'
+  const isAdmin = user?.role === 'admin' || user?.role === 'superadmin' || user?.role === 'writer'
   const { showToast } = useCustomToast()
 
   useEffect(() => {
