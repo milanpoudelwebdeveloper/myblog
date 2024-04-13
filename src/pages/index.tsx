@@ -4,7 +4,6 @@ import MainLayout from '@components/Common/MainLayout'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import dynamic from 'next/dynamic'
 import { getBlogs, getFeaturedBlog } from '../services/blog'
-import { useEffect } from 'react'
 
 const RecentBlogs = dynamic(() => import('../components/HomePage/RecentBlogs'))
 
@@ -22,15 +21,6 @@ export async function getStaticProps() {
 }
 
 export default function Home({ blogs, featuredBlog }: { blogs: IBlog[]; featuredBlog: IBlog }) {
-  useEffect(() => {
-    getFeaturedBlog()
-      .then((data) => {
-        console.log('hey responsing', data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
   return (
     <>
       <HeadingSeo
