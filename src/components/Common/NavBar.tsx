@@ -78,26 +78,32 @@ const NavBar = () => {
         maxW={{ base: 700, lg: 780, xl: 1070, '1xl': 1230 }}
       >
         <Flex gap={48}>
-          <Link href="/" shallow passHref>
-            <Box
-              position="relative"
-              w={{ base: 10, md: 12 }}
-              h={{ base: 10, md: 12 }}
-              maxW="full"
-              maxH="full"
-              borderRadius="full"
-              overflow="hidden"
-            >
-              <Image
-                src="/images/logo.webp"
-                alt="logo"
-                fill
-                style={{
-                  objectFit: 'cover'
-                }}
-              />
+          <Flex alignItems="center" gap={2}>
+            <Box display={{ base: 'block', md: 'none' }}>
+              <RxHamburgerMenu size={20} onClick={() => setIsModalOpen((prev) => !prev)} />
             </Box>
-          </Link>
+            <Link href="/" shallow passHref>
+              <Box
+                position="relative"
+                w={{ base: 9, md: 12 }}
+                h={{ base: 9, md: 12 }}
+                maxW="full"
+                maxH="full"
+                borderRadius="full"
+                overflow="hidden"
+              >
+                <Image
+                  src="/images/logo.webp"
+                  alt="logo"
+                  fill
+                  style={{
+                    objectFit: 'cover'
+                  }}
+                />
+              </Box>
+            </Link>
+          </Flex>
+
           <Flex
             display={{ base: 'none', md: 'flex' }}
             fontSize={{ md: 'sm', xl: 'md', '1xl': 'lg' }}
@@ -117,10 +123,8 @@ const NavBar = () => {
         </Flex>
         <Flex gap={{ base: 3, md: 5, '1xl': 8 }} alignItems="center">
           <ThemeToggle />
-          <Box display={{ base: 'block', md: 'none' }}>
-            <RxHamburgerMenu size={20} onClick={() => setIsModalOpen((prev) => !prev)} />
-          </Box>
-          <Box display={{ base: 'none', md: 'block' }}>
+
+          <Box display="block">
             {isLoggedIn ? (
               <Flex alignItems="center" gap={1}>
                 <ChakraImage

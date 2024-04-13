@@ -22,6 +22,7 @@ const MainLayout = ({ children, hideSidebar = false }: Props) => {
         mt={{ base: 16, sm: 20, md: 24, xl: 32 }}
         direction={{ base: 'column', xl: 'row' }}
         justifyContent="center"
+        position="relative"
       >
         <Box minW={{ base: 'full', xl: 660, '1xl': 740 }} maxW={{ base: 'full', xl: 660, '1xl': 740 }}>
           {children}
