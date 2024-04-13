@@ -11,6 +11,7 @@ import { useCustomToast } from '../hooks/useCustomToast'
 import Link from 'next/link'
 import { PublicRoute } from '@components/RouteAccess'
 import HeadingSeo from '@components/Common/HeadingSeo'
+import { LOGIN, SIGNUP } from '@constants/routes'
 
 const SignUp = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -42,7 +43,7 @@ const SignUp = () => {
       <HeadingSeo
         title="Sign Up | Code With Milan"
         description="Create an account to explore and dive into different programming blogs and articles."
-        link="https://codewithmilan.com/signup"
+        link={`https://codewithmilan.com/${SIGNUP}`}
       />
       <PublicRoute>
         <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center" px={{ base: 6, lg: 4 }}>
@@ -159,7 +160,7 @@ const SignUp = () => {
                 </Button>
                 <Flex justifyContent="center" alignItems="center" mt={4} fontSize={{ base: 'xs', '1xl': 'md' }}>
                   <Text as="h2">Already have an account?</Text>
-                  <Link href="/login">
+                  <Link href={LOGIN}>
                     <Button variant="link" color="#4880FF" ml={1} fontSize={{ base: 'sm', '1xl': 'md' }} textDecoration="underline">
                       Sign In
                     </Button>

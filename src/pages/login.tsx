@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { PublicRoute } from '@components/RouteAccess'
 import Link from 'next/link'
 import HeadingSeo from '@components/Common/HeadingSeo'
-import { SEND_VERIFICATION, SIGNUP } from '@constants/routes'
+import { LOGIN, SEND_VERIFICATION, SIGNUP } from '@constants/routes'
 
 const UserLogin = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -55,7 +55,7 @@ const UserLogin = () => {
       <HeadingSeo
         title="Login | Code With Milan"
         description="Login to your account to continue reading the blogs"
-        link="https://codewithmilan.com/login"
+        link={`https://codewithmilan.com/${LOGIN}`}
       />
       <PublicRoute>
         <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center" px={{ base: 6, lg: 4 }}>
@@ -123,7 +123,7 @@ const UserLogin = () => {
                   </Button>
                 </Link>
                 {showResendLink && (
-                  <Link href="/sendVerification">
+                  <Link href={SEND_VERIFICATION}>
                     <Button variant="unstyled">
                       <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right">
                         Resend verification link

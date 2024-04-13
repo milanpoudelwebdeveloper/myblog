@@ -6,6 +6,7 @@ import MainLayout from '@components/Common/MainLayout'
 import React, { useEffect, useState } from 'react'
 import { useCustomToast } from '../hooks/useCustomToast'
 import HeadingSeo from '@components/Common/HeadingSeo'
+import { BLOGS } from '@constants/routes'
 
 const Blogs = ({ categories }: { categories: ICategory[] }) => {
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -35,7 +36,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
       <HeadingSeo
         title="Blogs | Code With Milan"
         description="Find different categories and read the latest blogs of your interest"
-        link="https://codewithmilan.com/blogs"
+        link={`https://codewithmilan.com/${BLOGS}`}
       />
       <MainLayout>
         <Box>

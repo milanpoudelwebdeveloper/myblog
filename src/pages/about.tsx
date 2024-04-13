@@ -1,6 +1,7 @@
 import { Box, Button, Text } from '@chakra-ui/react'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import MainLayout from '@components/Common/MainLayout'
+import { ABOUT, CONTACT } from '@constants/routes'
 import Link from 'next/link'
 import React from 'react'
 
@@ -10,7 +11,7 @@ const About = () => {
       <HeadingSeo
         title="About | Code With Milan"
         description="Learn more about the author, purposes and the overall platform"
-        link="https://codewithmilan.com/about"
+        link={`https://codewithmilan.com/${ABOUT}`}
       />
       <MainLayout>
         <Box>
@@ -37,7 +38,7 @@ const About = () => {
             work with you. If there&apos;s something that you want to learn, please let me know. I will try to write a blog on that topic if
             that falls under my domain.
           </Text>
-          <Link href="/contact">
+          <Link href={CONTACT}>
             <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', xl: 'lg' }} fontWeight="normal">
               Contact Us
             </Button>

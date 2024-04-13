@@ -17,7 +17,7 @@ interface Props {
 }
 
 const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
-  const { title, content, coverimage, categories, createdat, id, featured } = card
+  const { title, content, coverimage, categories, createdat, id, featured, name } = card
   const { user } = useContext(AuthContext)
   const bgColor = useColorModeValue('white', '#1a1a1a')
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
@@ -48,13 +48,13 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
 
         <Box px={6}>
           <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600" my={4}>
-            Milan Poudel &#x2022; {convertDate(createdat)}
+            {name} &#x2022; {convertDate(createdat)}
           </Text>
           <Text as="h3" color={titleColor} mb={4} fontSize={{ base: 'lg', '1xl': 'xl' }} fontWeight="700" my={2} lineHeight="1.4">
             {title}
           </Text>
           <Box color={contentColor} fontSize={{ base: 'sm', '1xl': 'sm' }} fontWeight="300" lineHeight="1.6">
-            <Markdown>{featured ? content?.slice(0, 200) : content?.slice(0, 140)}</Markdown>
+            <Markdown>{featured ? content?.slice(0, 190) : content?.slice(0, 140)}</Markdown>
           </Box>
           <Flex gap={2} fontSize={{ base: 'xs', md: 'sm' }} mt={4}>
             {categories?.map((categoryname) => (

@@ -8,6 +8,8 @@ interface IBlog {
   published: boolean
   featured: boolean
   saved: boolean
+  name: string
+  profileimage: string
 }
 
 interface ICategory {
@@ -24,4 +26,5 @@ interface IAddBlog {
   categories: string[] | number[]
   published: boolean
   featured: boolean
+  writtenBy: string | number
 }

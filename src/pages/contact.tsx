@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { contactSchema } from '../validations/authValidations'
 import ErrorText from '@components/Common/ErrorText'
 import HeadingSeo from '@components/Common/HeadingSeo'
+import { CONTACT } from '@constants/routes'
 
 const Contact = () => {
   const subjects = ['General Inquiry', 'Feedback', 'About work', 'Others']
@@ -24,7 +25,7 @@ const Contact = () => {
   return (
     <>
       <HeadingSeo
-        link="https://codewithmilan.com/contact"
+        link={`https://codewithmilan.com/${CONTACT}`}
         title="Contact | Code With Milan"
         description="Contact us for any kind of inquiry, feedback or any other work"
       />

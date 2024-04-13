@@ -76,7 +76,19 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
             {blogDetail?.title}
           </Text>
           <Flex mt={3} mb={8} alignItems="center" color="rgb(0, 0, 0)" fontSize="sm" fontWeight="300">
-            <Text>Milan Poudel &#x2022;</Text>
+            <Flex alignItems="center" gap={3} ml={2}>
+              <Image
+                src={blogDetail?.profileimage}
+                fallbackSrc="/images/default-avatar.webp"
+                alt="profile-image"
+                borderRadius="full"
+                w={10}
+                h={10}
+                objectFit="cover"
+                loading="lazy"
+              />
+              <Text>By {blogDetail?.name} &#x2022;</Text>
+            </Flex>
             <Text>{convertDate(blogDetail?.createdat)}</Text>
           </Flex>
 

@@ -10,6 +10,7 @@ import { useCustomToast } from '../hooks/useCustomToast'
 import { PublicRoute } from '@components/RouteAccess'
 import { useRouter } from 'next/router'
 import HeadingSeo from '@components/Common/HeadingSeo'
+import { CHANGE_PASSWORD, LOGIN } from '@constants/routes'
 
 const ChangePassword = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -31,7 +32,7 @@ const ChangePassword = () => {
       .then((res) => {
         showToast(res?.message, 'success')
         setTimeout(() => {
-          router.push('/login')
+          router.push(LOGIN)
         }, 1000)
       })
       .catch((e) => {
@@ -44,7 +45,7 @@ const ChangePassword = () => {
       <HeadingSeo
         title="Change Password | Code With Milan"
         description="Change your password to continue reading the blogs"
-        link="https://codewithmilan.com/change-password"
+        link={`https://codewithmilan.com/${CHANGE_PASSWORD}`}
       />
       <PublicRoute>
         <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">

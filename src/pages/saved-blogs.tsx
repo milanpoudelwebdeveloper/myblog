@@ -7,6 +7,7 @@ import HeadingSeo from '@components/Common/HeadingSeo'
 import { useQuery } from '@tanstack/react-query'
 import { useCustomToast } from '../hooks/useCustomToast'
 import { AuthContext } from '../context/authContext'
+import { SAVED_BLOGS } from '@constants/routes'
 
 const SavedBlogs = () => {
   const { user } = useContext(AuthContext)
@@ -29,7 +30,7 @@ const SavedBlogs = () => {
       <HeadingSeo
         title="Saved Blogs | Code With Milan"
         description="Find different categories and read the latest blogs of your interest"
-        link="https://codewithmilan.com/savedBlogs"
+        link={`https://codewithmilan.com/${SAVED_BLOGS}`}
       />
       <MainLayout>
         <Text as="h1" color={headingColor} fontSize={{ base: 'lg', md: 'xl', '1xl': '24px' }} fontWeight="600" mb={2} mt={4}>
