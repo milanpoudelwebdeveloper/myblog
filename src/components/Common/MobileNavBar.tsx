@@ -1,18 +1,12 @@
-import { AuthContext } from '@/src/context/authContext'
-import { Box, Button, Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import { navLinks } from '@constants/navbar'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useContext } from 'react'
+import React from 'react'
 
-interface Props {
-  logOutHandler: () => void
-}
-
-const MobileNavBar = ({ logOutHandler }: Props) => {
+const MobileNavBar = () => {
   const router = useRouter()
   const pathname = router.pathname
-  const { isLoggedIn } = useContext(AuthContext)
 
   return (
     <Flex
@@ -44,19 +38,6 @@ const MobileNavBar = ({ logOutHandler }: Props) => {
           </Box>
         </Link>
       ))}
-      <Flex gap={{ base: 3, md: 5, '1xl': 8 }}>
-        {isLoggedIn ? (
-          <Button bg="#6941C6" color="#fff" fontSize="md" onClick={logOutHandler}>
-            Logout
-          </Button>
-        ) : (
-          <Link href="/login">
-            <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', xl: 'lg' }} fontWeight="normal">
-              Login
-            </Button>
-          </Link>
-        )}
-      </Flex>
     </Flex>
   )
 }
