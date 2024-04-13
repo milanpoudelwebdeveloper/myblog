@@ -13,6 +13,8 @@ import { AuthContext } from '@/src/context/authContext'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { useQueryClient } from '@tanstack/react-query'
 import SocialShares from '@components/Admin/Common/SocialShares'
+import { ParsedUrlQuery } from 'querystring'
+import { GetServerSidePropsContext } from 'next'
 
 const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const client = useQueryClient()
@@ -128,21 +130,18 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
 
 export default BlogDetails
 
-interface IContext {
-  params: {
-    id: string
-  }
-  query: {
-    query: string
-  }
+interface Params extends ParsedUrlQuery {
+  id: string
 }
 
-export async function getServerSideProps(context: IContext) {
-  const { id } = context.params
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { id } = context.params as Params
+  const { res } = context
   const userId = context.query.query
+  res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate')
 
   try {
-    const blogDetails = await getBlogDetails(id, userId)
+    const blogDetails = await getBlogDetails(id as string, userId as string)
 
     if (blogDetails) {
       return {
