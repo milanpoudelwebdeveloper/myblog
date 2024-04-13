@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import { Box, Button, Divider, Flex, FormControl, FormLabel, Image, Input, Text, Select as ChakraSelect } from '@chakra-ui/react'
 import MainLayout from '@components/Admin/Common/MainLayout'
 import { getCategories } from '@/src/services/category'
@@ -16,6 +16,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { blogSchema } from '@/src/validations/blogValidations'
 import ErrorText from '@components/Common/ErrorText'
 import { useQuery } from '@tanstack/react-query'
+import { AuthContext } from '@/src/context/authContext'
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],
@@ -42,6 +43,7 @@ hljs.configure({
 
 const AddBlog = () => {
   const [coverImage, setCoverImage] = useState<File | null | string>(null)
+  const { user } = useContext(AuthContext)
   const router = useRouter()
   const { showToast } = useCustomToast()
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
@@ -64,13 +66,17 @@ const AddBlog = () => {
   })
 
   const submitHandler = async (data: FieldValues, published: boolean) => {
+    if (!user) {
+      return showToast('Please login to add blog', 'error')
+    }
+
     if (!coverImage) {
       return showToast('Please add cover image', 'error')
     }
     const categories = data?.categories?.map((category: { label: string; value: string }) => category.value)
 
     try {
-      const values = { ...data, categories, published, coverImage } as IAddBlog
+      const values = { ...data, categories, published, coverImage, writtenBy: user?.id } as IAddBlog
       const response = await addBlog(values)
       if (response) {
         showToast(response?.message, 'success')

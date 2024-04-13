@@ -22,8 +22,7 @@ import { navLinks } from '@constants/navbar'
 import MobileNavBar from './MobileNavBar'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import Image from 'next/image'
-import { FaChevronDown } from 'react-icons/fa'
-import { SAVED_POSTS, SETTINGS } from '@constants/routes'
+import { BLOGS_BY_USER, SAVED_BLOGS, SETTINGS } from '@constants/routes'
 
 const NavBar = () => {
   const { setLogOut, isLoggedIn, user } = useContext(AuthContext)
@@ -123,41 +122,38 @@ const NavBar = () => {
         </Flex>
         <Flex gap={{ base: 3, md: 5, '1xl': 8 }} alignItems="center">
           <ThemeToggle />
-
           <Box display="block">
             {isLoggedIn ? (
-              <Flex alignItems="center" gap={1}>
-                <ChakraImage
-                  src={user?.profileimage}
-                  fallbackSrc="/images/default-avatar.webp"
-                  alt="profile"
-                  w={10}
-                  h={10}
-                  maxW="full"
-                  maxH="full"
-                  borderRadius="full"
-                  objectFit="cover"
-                />
-                <Menu>
-                  <MenuButton
-                    as={Button}
-                    variant="unstyled"
-                    fontWeight="normal"
-                    rightIcon={<FaChevronDown color="#232323" fontWeight="300" size={18} />}
+              <Menu>
+                <MenuButton as={Button} variant="unstyled" fontWeight="normal">
+                  <ChakraImage
+                    src={user?.profileimage}
+                    fallbackSrc="/images/default-avatar.webp"
+                    fallbackStrategy="beforeLoadOrError"
+                    alt="profile"
+                    w={10}
+                    h={10}
+                    maxW="full"
+                    maxH="full"
+                    borderRadius="full"
+                    objectFit="cover"
                   />
-                  <MenuList fontSize="md" fontWeight="500" py={4}>
-                    <Link href={SAVED_POSTS}>
-                      <MenuItem mb={1}>Saved</MenuItem>
-                    </Link>
-                    <Link href={SETTINGS}>
-                      <MenuItem mb={1}> Settings</MenuItem>
-                    </Link>
-                    <MenuItem mb={1} onClick={logOutHandler}>
-                      Logout
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
-              </Flex>
+                </MenuButton>
+                <MenuList fontSize="md" fontWeight="500" py={4}>
+                  <Link href={SAVED_BLOGS}>
+                    <MenuItem mb={1}>Saved</MenuItem>
+                  </Link>
+                  <Link href={BLOGS_BY_USER}>
+                    <MenuItem mb={1}>Blogs By You</MenuItem>
+                  </Link>
+                  <Link href={SETTINGS}>
+                    <MenuItem mb={1}> Settings</MenuItem>
+                  </Link>
+                  <MenuItem mb={1} onClick={logOutHandler}>
+                    Logout
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             ) : (
               <Link href="/login">
                 <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', xl: 'lg' }} fontWeight="normal">
