@@ -87,7 +87,6 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
                 w={10}
                 h={10}
                 objectFit="cover"
-                loading="lazy"
               />
               <Text>By {blogDetail?.name} &#x2022;</Text>
             </Flex>
