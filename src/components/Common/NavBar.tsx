@@ -82,7 +82,7 @@ const NavBar = () => {
           <Flex
             display={{ base: 'none', md: 'flex' }}
             fontSize={{ md: 'sm', xl: 'md', '1xl': 'lg' }}
-            gap={{ base: 5, '1xl': 9 }}
+            gap={{ base: 8, '1xl': 10 }}
             alignItems="center"
           >
             {navLinks?.map(({ title, link }) => (

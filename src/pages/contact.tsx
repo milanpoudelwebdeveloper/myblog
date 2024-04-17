@@ -36,28 +36,28 @@ const Contact = () => {
       />
       <MainLayout>
         <Box>
-          <Text fontSize="40px" fontWeight="700" letterSpacing="2px" mt={3} as="h1">
+          <Text fontSize={{ base: '28px', xl: '30px', '1xl': '40px' }} fontWeight="700" letterSpacing="2px" mt={3} as="h1">
             Contact Us
           </Text>
-          <Text fontSize="md" mt={4} mb={7} as="h2">
+          <Text fontSize={{ base: 'sm', '1xl': 'md' }} mt={4} mb={7} as="h2">
             Please feel out valid contact information
           </Text>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Flex gap={7} mb={7}>
               <FormControl>
-                <FormLabel>Name</FormLabel>
-                <Input type="text" placeholder="Enter your name" {...register('name')} />
+                <FormLabel fontSize={{ base: 'sm', '1xl': 'md' }}>Name</FormLabel>
+                <Input type="text" placeholder="Enter your name" fontSize={{ base: 'sm', '1xl': 'md' }} {...register('name')} />
                 {errors?.name && <ErrorText message={errors?.name?.message} />}
               </FormControl>
               <FormControl>
-                <FormLabel>Email</FormLabel>
-                <Input type="email" placeholder="Enter your email" {...register('email')} />
+                <FormLabel fontSize={{ base: 'sm', '1xl': 'md' }}>Email</FormLabel>
+                <Input type="email" placeholder="Enter your email" fontSize={{ base: 'sm', '1xl': 'md' }} {...register('email')} />
                 {errors?.email && <ErrorText message={errors?.email?.message} />}
               </FormControl>
             </Flex>
             <FormControl mb={7}>
-              <FormLabel>Subject</FormLabel>
-              <Select placeholder="Select subject" {...register('subject')}>
+              <FormLabel fontSize={{ base: 'sm', '1xl': 'md' }}>Subject</FormLabel>
+              <Select placeholder="Select subject" fontSize={{ base: 'sm', '1xl': 'md' }} {...register('subject')}>
                 {subjects?.map((subject) => (
                   <option key={subject} value={subject}>
                     {subject}
@@ -67,8 +67,8 @@ const Contact = () => {
               {errors?.subject && <ErrorText message={errors?.subject?.message} />}
             </FormControl>
             <FormControl>
-              <FormLabel>Message</FormLabel>
-              <Textarea placeholder="Enter your message" rows={6} {...register('message')} />
+              <FormLabel fontSize={{ base: 'sm', '1xl': 'md' }}>Message</FormLabel>
+              <Textarea placeholder="Enter your message" rows={6} fontSize={{ base: 'sm', '1xl': 'md' }} {...register('message')} />
               {errors?.message && <ErrorText message={errors?.message?.message} />}
             </FormControl>
             <Button
@@ -78,7 +78,7 @@ const Contact = () => {
               mt={8}
               bg="#6941C6"
               color="white"
-              fontSize={{ md: 'sm', xl: 'md' }}
+              fontSize={{ md: 'sm', '1xl': 'md' }}
               fontWeight="normal"
             >
               Send Message

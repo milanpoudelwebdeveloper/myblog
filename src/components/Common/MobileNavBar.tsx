@@ -14,7 +14,7 @@ const MobileNavBar = () => {
       position="absolute"
       zIndex={10}
       top={14}
-      right={-4}
+      left={0}
       fontSize={{ md: 'sm', xl: 'md', '1xl': 'lg' }}
       gap={{ base: 5, '1xl': 9 }}
       alignItems="center"

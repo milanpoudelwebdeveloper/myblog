@@ -1,4 +1,5 @@
 import { Box, Button, Flex, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useContext, useState } from 'react'
 import { loginSchema } from '../validations/authValidations'
@@ -57,6 +58,7 @@ const UserLogin = () => {
         description="Login to your account to continue reading the blogs"
         link={`https://codewithmilan.com/${LOGIN}`}
       />
+
       <PublicRoute>
         <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center" px={{ base: 6, lg: 4 }}>
           <Box

@@ -16,9 +16,7 @@ const UserMenu = () => {
         setLogOut()
         showToast(res?.message, 'success')
       })
-      .catch((e) => {
-        showToast(e, 'error')
-      })
+      .catch((e) => showToast(e, 'error'))
   }
 
   return (
@@ -37,7 +35,7 @@ const UserMenu = () => {
           objectFit="cover"
         />
       </MenuButton>
-      <MenuList fontSize="md" fontWeight="500" py={4}>
+      <MenuList fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="500" py={4}>
         <Link href={SAVED_BLOGS}>
           <MenuItem mb={1}>Saved</MenuItem>
         </Link>

@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, Text, useColorModeValue, useMediaQuery } from '@chakra-ui/react'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 import 'react-quill/dist/quill.core.css'
@@ -17,19 +17,22 @@ interface Props {
 }
 
 const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
-  const { title, content, coverimage, categories, createdat, id, featured, name } = card
+  const { title, content, coverimage, categories, createdat, id, name } = card
+  const [isMobile] = useMediaQuery('(max-width: 768px)')
   const { user } = useContext(AuthContext)
   const bgColor = useColorModeValue('white', '#1a1a1a')
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
   const contentColor = useColorModeValue('#232323', '#C0C5D0')
   const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
   const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
+  const contentToDisplay = imageLoadFast ? content?.slice(0, isMobile ? 135 : 240) : content?.slice(0, 130)
+
   return (
     <Box my={4} pb={6} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={dynamicLink}>
         <Box
           maxW="full"
-          h={{ base: 190, md: imageHeight ? 270 : 210, xl: imageHeight ? 270 : 190, '1xl': imageHeight ? imageHeight : 200 }}
+          h={{ base: 190, md: imageHeight ? 250 : 210, xl: imageHeight ? 250 : 190, '1xl': imageHeight ? imageHeight : 200 }}
           maxH="full"
           position="relative"
         >
@@ -54,7 +57,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
             {title}
           </Text>
           <Box color={contentColor} fontSize={{ base: 'sm', '1xl': 'sm' }} fontWeight="300" lineHeight="1.6">
-            <Markdown>{featured ? content?.slice(0, 190) : content?.slice(0, 140)}</Markdown>
+            <Markdown>{`${contentToDisplay}....`}</Markdown>
           </Box>
           <Flex gap={2} fontSize={{ base: 'xs', md: 'sm' }} mt={4}>
             {categories?.map((categoryname) => (

@@ -19,7 +19,7 @@ const MainLayout = ({ children, hideSidebar = false }: Props) => {
       <NavBar />
       <Flex
         gap={{ base: 12, '1xl': 14 }}
-        mt={{ base: 16, sm: 20, md: 24, xl: 32 }}
+        mt={{ base: 24, xl: 28, '1xl': 32 }}
         direction={{ base: 'column', xl: 'row' }}
         justifyContent="center"
         position="relative"
