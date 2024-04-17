@@ -49,10 +49,14 @@ const Messages = ({ messages }: { messages: IMessage[] }) => {
                 <Tr key={list?.id} color="#202224" fontSize="sm" fontWeight="600">
                   <Td paddingY={8}>{list?.id}</Td>
                   <Td>
-                    <Link href={`/admin/messages/${list?.id}`}>{list?.email}</Link>
+                    <Link href={`/admin/messages/${list?.id}`} shallow>
+                      {list?.email}
+                    </Link>
                   </Td>
                   <Td>
-                    <Link href={`/admin/messages/${list?.id}`}>{list?.name}</Link>
+                    <Link href={`/admin/messages/${list?.id}`} shallow>
+                      {list?.name}
+                    </Link>
                   </Td>
                   <Td>{list?.subject}</Td>
 

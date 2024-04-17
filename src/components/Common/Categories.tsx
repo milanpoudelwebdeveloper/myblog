@@ -44,7 +44,7 @@ const Categories = () => {
         <Box px={{ base: 2, md: 14, xl: 2 }}>
           {isLoading && <Skeleton h={500} borderRadius={20} mb={6} />}
           {categories?.map((category: ICategory) => (
-            <Link href={BLOGS + '?category=' + category?.id} key={category?.id}>
+            <Link href={BLOGS + '?category=' + category?.id} key={category?.id} shallow>
               <Flex alignItems="center" justifyContent="space-between">
                 <Flex alignItems="center" gap={4}>
                   <Box position="relative" w={12} h={12} maxW="full" maxH="full" borderRadius="full" overflow="hidden">

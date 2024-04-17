@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image, Link, Spinner, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Image, Spinner, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import { verifyAccount } from '../services/auth'
@@ -6,6 +6,7 @@ import { useCustomToast } from '../hooks/useCustomToast'
 import { PublicRoute } from '@components/RouteAccess'
 import { AuthContext } from '../context/authContext'
 import { LOGIN } from '@constants/routes'
+import Link from 'next/link'
 
 const VerifyAccount = () => {
   const [verifying, setVerifying] = useState(true)
@@ -48,7 +49,7 @@ const VerifyAccount = () => {
           <Box textAlign="center">
             <Image src="/images/success.svg" alt="verified" w={350} h="auto" mx="auto" />
             <Text fontSize="xl">Account verified successfully</Text>
-            <Link href={LOGIN}>
+            <Link href={LOGIN} shallow>
               <Button variant="unstyled" color="blue.500" textDecoration="underline">
                 <Text mt={2}>You can login</Text>
               </Button>

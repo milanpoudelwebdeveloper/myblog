@@ -160,7 +160,7 @@ const SignUp = () => {
                 </Button>
                 <Flex justifyContent="center" alignItems="center" mt={4} fontSize={{ base: 'xs', '1xl': 'md' }}>
                   <Text as="h2">Already have an account?</Text>
-                  <Link href={LOGIN}>
+                  <Link href={LOGIN} shallow>
                     <Button variant="link" color="#4880FF" ml={1} fontSize={{ base: 'sm', '1xl': 'md' }} textDecoration="underline">
                       Sign In
                     </Button>

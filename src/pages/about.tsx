@@ -38,7 +38,7 @@ const About = () => {
             work with you. If there&apos;s something that you want to learn, please let me know. I will try to write a blog on that topic if
             that falls under my domain.
           </Text>
-          <Link href={CONTACT}>
+          <Link href={CONTACT} shallow>
             <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', '1xl': 'md' }} fontWeight="normal">
               Contact Us
             </Button>

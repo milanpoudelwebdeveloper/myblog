@@ -32,7 +32,7 @@ const AdminHome = () => {
           Dashboard
         </Text>
         <Flex gap={9}>
-          <Link href="/admin/users">
+          <Link href="/admin/users" shallow>
             <Flex bg="white" boxShadow="6px 6px 54px 0px rgba(0, 0, 0, 0.05)" p={6} borderRadius={14} gap={20}>
               <Box>
                 <Text fontSize="md" fontWeight="600" opacity={0.7}>
@@ -46,7 +46,7 @@ const AdminHome = () => {
               <Image src="/images/usericon1.png" alt="user" w={14} h="auto" objectFit="contain" />
             </Flex>
           </Link>
-          <Link href="/admin/blogs">
+          <Link href="/admin/blogs" shallow>
             <Flex bg="white" boxShadow="6px 6px 54px 0px rgba(0, 0, 0, 0.05)" p={4} borderRadius={14} gap={20}>
               <Box h="full">
                 <Text fontSize="md" fontWeight="600" opacity={0.7}>
@@ -59,7 +59,7 @@ const AdminHome = () => {
               <Image src="/images/usericon1.png" alt="user" w={14} h="auto" objectFit="contain" />
             </Flex>
           </Link>
-          <Link href="/admin/categories">
+          <Link href="/admin/categories" shallow>
             <Flex bg="white" boxShadow="6px 6px 54px 0px rgba(0, 0, 0, 0.05)" p={4} borderRadius={14} gap={20}>
               <Box>
                 <Text fontSize="md" fontWeight="600" opacity={0.7}>

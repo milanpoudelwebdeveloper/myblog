@@ -45,7 +45,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         <Box>
           <Flex gap={4}>
             {finalCategories?.map((category) => (
-              <Link href={`/blogs?category=${category?.id}`} key={category?.id}>
+              <Link href={`/blogs?category=${category?.id}`} key={category?.id} shallow>
                 <Box
                   key={category?.id}
                   bg={category?.id == search ? 'rgb(165, 94, 234)' : 'white'}
