@@ -3,18 +3,24 @@ import { getCategories } from '@/src/services/category'
 import { Box, Grid, Flex } from '@chakra-ui/react'
 import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useCustomToast } from '../hooks/useCustomToast'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import { BLOGS } from '@constants/routes'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import { useQuery } from '@tanstack/react-query'
 
 const Blogs = ({ categories }: { categories: ICategory[] }) => {
   const searchParams = useSearchParams()
   const search = searchParams.get('category')
-  const [blogs, setBlogs] = useState<IBlog[]>([])
   const { showToast } = useCustomToast()
+  const { data: blogs, error } = useQuery({
+    queryKey: ['getAllBlogs', search],
+    queryFn: () => getBlogs(search),
+    enabled: !!search,
+    staleTime: 60000
+  })
 
   const finalCategories = [
     {
@@ -24,15 +30,9 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
     ...categories
   ]
 
-  useEffect(() => {
-    if (search) {
-      getBlogs(search)
-        .then((data) => setBlogs(data))
-        .catch((e) => {
-          showToast(e, 'error')
-        })
-    }
-  }, [search])
+  if (error) {
+    showToast(error, 'error')
+  }
 
   return (
     <>
@@ -48,8 +48,8 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
               <Link href={`/blogs?category=${category?.id}`} key={category?.id}>
                 <Box
                   key={category?.id}
-                  bg={category?.id === parseInt(search as string) ? 'rgb(165, 94, 234)' : 'white'}
-                  color={category?.id === parseInt(search as string) ? 'rgb(255, 255, 255)' : 'rgb(35, 35, 35)'}
+                  bg={category?.id == search ? 'rgb(165, 94, 234)' : 'white'}
+                  color={category?.id == search ? 'rgb(255, 255, 255)' : 'rgb(35, 35, 35)'}
                   boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
                   borderRadius={7}
                   fontWeight="500"
@@ -65,7 +65,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
           </Flex>
         </Box>
         <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={5}>
-          {blogs?.map((post) => <BlogCard card={post} key={post?.id} />)}
+          {blogs?.map((post: IBlog) => <BlogCard card={post} key={post?.id} />)}
         </Grid>
       </MainLayout>
     </>

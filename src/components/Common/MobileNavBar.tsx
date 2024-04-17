@@ -1,5 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react'
 import { navLinks } from '@constants/navbar'
+import { BLOGS } from '@constants/routes'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -24,7 +25,7 @@ const MobileNavBar = () => {
       h="60vh"
     >
       {navLinks?.map(({ title, link }) => (
-        <Link key={link} href={link}>
+        <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link}>
           <Box
             mb={{ base: 4, md: 0 }}
             borderBottomColor={pathname === link ? '#6941C6' : 'transparent'}
