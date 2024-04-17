@@ -14,8 +14,8 @@ const About = () => {
         link={`https://codewithmilan.com/${ABOUT}`}
       />
       <MainLayout>
-        <Box>
-          <Text fontSize="40px" fontWeight="700" letterSpacing="2px" my={3} as="h1">
+        <Box fontSize={{ base: 'sm', '1xl': 'md' }}>
+          <Text fontSize={{ base: '28px', xl: '30px', '1xl': '40px' }} fontWeight="700" letterSpacing="2px" my={3} as="h1">
             About Us
           </Text>
           <Text lineHeight="1.6" as="h2">
@@ -39,7 +39,7 @@ const About = () => {
             that falls under my domain.
           </Text>
           <Link href={CONTACT}>
-            <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', xl: 'lg' }} fontWeight="normal">
+            <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', '1xl': 'md' }} fontWeight="normal">
               Contact Us
             </Button>
           </Link>

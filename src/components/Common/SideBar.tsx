@@ -31,15 +31,15 @@ const SideBar = () => {
     <Box w="full">
       <Box
         maxW={{ base: 570, lg: 'initial' }}
-        p={8}
         boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
         borderRadius={14}
         mb={10}
         bgColor={bgColor}
         mx="auto"
-        pl={{ md: 20, xl: 8 }}
+        px={{ base: 7, '1xl': 10 }}
+        py={8}
       >
-        <Text as="h2" textAlign="center" mb={1} color={headingColor} fontSize="22px" fontWeight="700">
+        <Text as="h2" textAlign="center" mb={1} color={headingColor} fontSize="xl" fontWeight="700">
           Most Read
         </Text>
         <Divider borderColor="#6941C6" w={12} borderWidth={2} mx="auto" mb={9} />
@@ -60,7 +60,7 @@ const SideBar = () => {
                 />
               </Box>
               <Box>
-                <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="700" mb={1} lineHeight="1.3">
+                <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="700" mb={1} lineHeight="1.4">
                   {blog?.title}
                 </Text>
 
