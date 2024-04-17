@@ -20,6 +20,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const client = useQueryClient()
   const [isSaved, setIsSaved] = useState(blogDetail?.saved)
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(237, 242, 247)')
+  const dateColor = useColorModeValue('rgb(0, 0, 0)', '#c0c5d0')
   const { user } = useContext(AuthContext)
   const router = useRouter()
   const { showToast } = useCustomToast()
@@ -77,7 +78,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
           <Text color={titleColor} fontSize={{ base: '28px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
             {blogDetail?.title}
           </Text>
-          <Flex mt={3} mb={8} alignItems="center" color="rgb(0, 0, 0)" fontSize="sm" fontWeight="300">
+          <Flex mt={3} mb={8} alignItems="center" color={dateColor} fontSize="sm" fontWeight="300">
             <Flex alignItems="center" gap={3} ml={2}>
               <Image
                 src={blogDetail?.profileimage}
