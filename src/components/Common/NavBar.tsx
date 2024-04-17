@@ -8,6 +8,7 @@ import { navLinks } from '@constants/navbar'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import { BLOGS } from '@constants/routes'
 
 const LazyLoadedUserMenu = dynamic(() => import('./NavBar/UserMenu'))
 const LazyLoadedMobileNavBar = dynamic(() => import('./MobileNavBar'))
@@ -86,7 +87,7 @@ const NavBar = () => {
             alignItems="center"
           >
             {navLinks?.map(({ title, link }) => (
-              <Link key={link} href={link} shallow>
+              <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow>
                 <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={2}>
                   <Box cursor="pointer" _hover={{ color: '#1814F3' }}>
                     {title}

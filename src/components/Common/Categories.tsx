@@ -2,8 +2,10 @@ import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { getCategories } from '@/src/services/category'
 import { Box, Divider, Flex, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
 import { base64File } from '@constants/files'
+import { BLOGS } from '@constants/routes'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -42,7 +44,7 @@ const Categories = () => {
         <Box px={{ base: 2, md: 14, xl: 2 }}>
           {isLoading && <Skeleton h={500} borderRadius={20} mb={6} />}
           {categories?.map((category: ICategory) => (
-            <Box key={category?.id}>
+            <Link href={BLOGS + '?category=' + category?.id} key={category?.id}>
               <Flex alignItems="center" justifyContent="space-between">
                 <Flex alignItems="center" gap={4}>
                   <Box position="relative" w={12} h={12} maxW="full" maxH="full" borderRadius="full" overflow="hidden">
@@ -66,7 +68,7 @@ const Categories = () => {
               </Flex>
 
               <Divider my={{ base: 2, '1xl': 3 }} borderColor={dividerColor} />
-            </Box>
+            </Link>
           ))}
         </Box>
       </Box>

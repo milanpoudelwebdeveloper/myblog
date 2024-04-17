@@ -7,9 +7,12 @@ import React, { useEffect, useState } from 'react'
 import { useCustomToast } from '../hooks/useCustomToast'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import { BLOGS } from '@constants/routes'
+import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 
 const Blogs = ({ categories }: { categories: ICategory[] }) => {
-  const [selectedCategory, setSelectedCategory] = useState('all')
+  const searchParams = useSearchParams()
+  const search = searchParams.get('category')
   const [blogs, setBlogs] = useState<IBlog[]>([])
   const { showToast } = useCustomToast()
 
@@ -22,14 +25,14 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
   ]
 
   useEffect(() => {
-    if (selectedCategory) {
-      getBlogs(selectedCategory)
+    if (search) {
+      getBlogs(search)
         .then((data) => setBlogs(data))
         .catch((e) => {
           showToast(e, 'error')
         })
     }
-  }, [selectedCategory])
+  }, [search])
 
   return (
     <>
@@ -42,21 +45,22 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         <Box>
           <Flex gap={4}>
             {finalCategories?.map((category) => (
-              <Box
-                key={category?.id}
-                bg={category?.id === selectedCategory ? 'rgb(165, 94, 234)' : 'white'}
-                color={category?.id === selectedCategory ? 'rgb(255, 255, 255)' : 'rgb(35, 35, 35)'}
-                boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
-                borderRadius={7}
-                fontWeight="500"
-                fontSize={{ base: 'sm', '1xl': 'md' }}
-                py={{ base: 2, '1xl': 3 }}
-                px={{ base: 4, '1xl': 5 }}
-                cursor="pointer"
-                onClick={() => setSelectedCategory(category?.id as string)}
-              >
-                {category?.name}
-              </Box>
+              <Link href={`/blogs?category=${category?.id}`} key={category?.id}>
+                <Box
+                  key={category?.id}
+                  bg={category?.id === parseInt(search as string) ? 'rgb(165, 94, 234)' : 'white'}
+                  color={category?.id === parseInt(search as string) ? 'rgb(255, 255, 255)' : 'rgb(35, 35, 35)'}
+                  boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
+                  borderRadius={7}
+                  fontWeight="500"
+                  fontSize={{ base: 'sm', '1xl': 'md' }}
+                  py={{ base: 2, '1xl': 3 }}
+                  px={{ base: 4, '1xl': 5 }}
+                  cursor="pointer"
+                >
+                  {category?.name}
+                </Box>
+              </Link>
             ))}
           </Flex>
         </Box>
