@@ -51,7 +51,7 @@ const SideBar = () => {
         <Divider borderColor="#6941C6" w={12} borderWidth={2} mx="auto" mb={9} />
         {isLoading && <Skeleton h={470} borderRadius={20} mb={6} />}
         {data?.map((blog: IBlog) => (
-          <Link href={getDynamicLink(blog?.id as string)} key={blog?.id} shallow>
+          <Link href={getDynamicLink(blog?.id as string)} key={blog?.id}>
             <Box mb={4}>
               <Flex alignItems="center" gap={{ base: 5, '1xl': 6 }}>
                 <Box position="relative" w={59} h={59} maxW="full" maxH="full" borderRadius="full" overflow="hidden" flexShrink={0}>
