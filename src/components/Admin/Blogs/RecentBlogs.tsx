@@ -26,7 +26,7 @@ const RecentBlogs = () => {
         <Text fontSize="lg" color="#202224" my={4} fontStyle="24px" fontWeight="bold">
           Recent Blogs
         </Text>
-        <Link href="/admin/blogs/add">
+        <Link href="/admin/blogs/add" shallow>
           <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
             Add blog
           </Button>

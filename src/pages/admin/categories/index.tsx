@@ -14,7 +14,7 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
         <Text fontSize="32px" color="#333B69" fontWeight="bold">
           Categories
         </Text>
-        <Link href="/admin/categories/add">
+        <Link href="/admin/categories/add" shallow>
           <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
             Add category
           </Button>
@@ -45,7 +45,9 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
                 <Tr key={list?.id} color="#202224" fontSize="sm" fontWeight="600">
                   <Td paddingY={8}>{list?.id}</Td>
                   <Td paddingY={8}>
-                    <Link href={`/admin/categories/${list?.id}`}>{list?.name}</Link>
+                    <Link href={`/admin/categories/${list?.id}`} shallow>
+                      {list?.name}
+                    </Link>
                   </Td>
 
                   <Td>

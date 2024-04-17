@@ -37,7 +37,7 @@ const SideBar = () => {
   return (
     <Box bg="#FFF" color="#B1B1B1" fontSize="md" p={4} w={240}>
       {items.map((item) => (
-        <Link href={item?.path} key={item?.name}>
+        <Link href={item?.path} key={item?.name} shallow>
           <Flex
             alignItems="center"
             mb={4}

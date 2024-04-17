@@ -29,7 +29,7 @@ const Blogs = () => {
         <Text fontSize="32px" color="#333B69" fontWeight="bold">
           Blogs
         </Text>
-        <Link href="/admin/blogs/add">
+        <Link href="/admin/blogs/add" shallow>
           <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
             Add blog
           </Button>

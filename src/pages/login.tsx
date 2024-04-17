@@ -110,7 +110,7 @@ const UserLogin = () => {
                   <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
                   {errors?.password && <ErrorText message={errors.password.message} />}
                 </FormControl>
-                <Link href={SEND_VERIFICATION}>
+                <Link href={SEND_VERIFICATION} shallow>
                   <Button
                     variant="unstyled"
                     ml="auto"
@@ -125,7 +125,7 @@ const UserLogin = () => {
                   </Button>
                 </Link>
                 {showResendLink && (
-                  <Link href={SEND_VERIFICATION}>
+                  <Link href={SEND_VERIFICATION} shallow>
                     <Button variant="unstyled">
                       <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right">
                         Resend verification link
@@ -149,7 +149,7 @@ const UserLogin = () => {
                   <Text as="h2" flexShrink={0}>
                     Don&apos;t have an account?
                   </Text>
-                  <Link href={SIGNUP}>
+                  <Link href={SIGNUP} shallow>
                     <Button variant="link" mb={1} fontSize={{ base: 'sm', '1xl': 'md' }} color="#4880FF" ml={1} textDecoration="underline">
                       Create one
                     </Button>

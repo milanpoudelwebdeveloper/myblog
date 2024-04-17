@@ -14,7 +14,7 @@ const Users = ({ users }: { users: IUser[] }) => {
         <Text fontSize="32px" color="#333B69" fontWeight="bold">
           Users
         </Text>
-        <Link href="/admin/users/add">
+        <Link href="/admin/users/add" shallow>
           <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
             Add user
           </Button>
