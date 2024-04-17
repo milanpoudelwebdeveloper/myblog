@@ -23,6 +23,11 @@ const items = [
     name: 'Users',
     path: '/admin/users',
     icon: '/images/usericon.webp'
+  },
+  {
+    name: 'Messages',
+    path: '/admin/messages',
+    icon: '/images/usericon.webp'
   }
 ]
 

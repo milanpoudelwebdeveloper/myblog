@@ -7,21 +7,26 @@ import { contactSchema } from '../validations/authValidations'
 import ErrorText from '@components/Common/ErrorText'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import { CONTACT } from '@constants/routes'
+import { sendMessage } from '../services/messages'
+import { useCustomToast } from '../hooks/useCustomToast'
 
 const Contact = () => {
-  const subjects = ['General Inquiry', 'Feedback', 'About work', 'Others']
-
+  const subjects = ['General Inquiry', 'Feedback', 'About work', 'About writing', 'Others']
+  const { showToast } = useCustomToast()
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isSubmitting }
   } = useForm({
     resolver: yupResolver(contactSchema)
   })
 
   const onSubmit = (data: FieldValues) => {
-    console.log(data)
+    sendMessage(data as IContact)
+      .then((message) => showToast(message, 'success'))
+      .catch((err) => showToast(err, 'error'))
   }
+
   return (
     <>
       <HeadingSeo
@@ -53,7 +58,7 @@ const Contact = () => {
             <FormControl mb={7}>
               <FormLabel>Subject</FormLabel>
               <Select placeholder="Select subject" {...register('subject')}>
-                {subjects.map((subject) => (
+                {subjects?.map((subject) => (
                   <option key={subject} value={subject}>
                     {subject}
                   </option>
@@ -66,7 +71,16 @@ const Contact = () => {
               <Textarea placeholder="Enter your message" rows={6} {...register('message')} />
               {errors?.message && <ErrorText message={errors?.message?.message} />}
             </FormControl>
-            <Button type="submit" mt={8} bg="#6941C6" color="white" fontSize={{ md: 'sm', xl: 'md' }} fontWeight="normal">
+            <Button
+              isLoading={isSubmitting}
+              loadingText="Sending..."
+              type="submit"
+              mt={8}
+              bg="#6941C6"
+              color="white"
+              fontSize={{ md: 'sm', xl: 'md' }}
+              fontWeight="normal"
+            >
               Send Message
             </Button>
           </form>
