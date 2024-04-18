@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Text, Flex } from '@chakra-ui/react'
 import MainLayout from '@components/Admin/Common/MainLayout'
 import Link from 'next/link'
@@ -8,15 +8,6 @@ import { getMessages } from '@/src/services/messages'
 const tableHeadings = ['ID', 'Email', 'Name', 'Subject', 'Created At', 'Status']
 
 const Messages = ({ messages }: { messages: IMessage[] }) => {
-  useEffect(() => {
-    getMessages()
-      .then((data) => {
-        console.log(data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
