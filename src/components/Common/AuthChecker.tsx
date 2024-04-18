@@ -7,8 +7,10 @@ import React, { useContext, useEffect } from 'react'
 const AuthChecker = () => {
   const { setUserData, setIsLoading } = useContext(AuthContext)
   const { isOpen, onClose, onOpen } = useDisclosure()
+  const isLoggedIn = typeof window !== 'undefined' && localStorage.getItem('isLoggedInCodeWithMilan')
 
   useEffect(() => {
+    if (!isLoggedIn) return
     checkLogin()
       .then((res) => {
         if (res?.user) {
@@ -19,9 +21,12 @@ const AuthChecker = () => {
           }
         }
       })
-      .catch((e) => console.log('the error while checking login', e))
+      .catch((e) => {
+        console.log('the error while checking login', e)
+        localStorage.removeItem('isLoggedInCodeWithMilan')
+      })
       .finally(() => setIsLoading(false))
-  }, [])
+  }, [isLoggedIn])
 
   return (
     <>

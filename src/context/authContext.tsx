@@ -46,11 +46,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const setUserData = (data: IUser) => {
     setUser((prev) => ({ ...prev, ...data }))
-    localStorage.setItem('userIdCodeWithMilan', data?.id as string)
+    localStorage.setItem('isLoggedInCodeWithMilan', 'true')
   }
 
   const setLogOut = () => {
     setUser(defaultUserData)
+    localStorage.removeItem('isLoggedInCodeWithMilan')
   }
 
   const setIsLoading = (loading: boolean) => {
