@@ -53,7 +53,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
           <Text color="#6941C6" fontSize="xs" fontWeight="600" mt={5} mb={3}>
             {name} &#x2022; {convertDate(createdat)}
           </Text>
-          <Text as="h3" color={titleColor} fontSize={{ base: 'lg', '1xl': 'xl' }} fontWeight="700" lineHeight="1.4">
+          <Text as="h3" color={titleColor} fontSize={{ base: 'xl', '1xl': 'xl' }} fontWeight="700" lineHeight="1.4">
             {title}
           </Text>
           <Box color={contentColor} fontSize="sm" fontWeight="300" lineHeight="1.6" mt={2}>
