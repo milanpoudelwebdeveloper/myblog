@@ -1,9 +1,9 @@
 import { Box } from '@chakra-ui/react'
+import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import dynamic from 'next/dynamic'
 import { getBlogs, getFeaturedBlog } from '../services/blog'
-import FeaturedBlog from '@components/HomePage/FeaturedBlog'
 
 const RecentBlogs = dynamic(() => import('../components/HomePage/RecentBlogs'))
 
@@ -30,7 +30,7 @@ export default function Home({ blogs, featuredBlog }: { blogs: IBlog[]; featured
       />
       <MainLayout>
         <Box>
-          {featuredBlog && <FeaturedBlog blog={featuredBlog} />}
+          {featuredBlog && <BlogCard card={featuredBlog} imageHeight={300} imageLoadFast={true} />}
           <RecentBlogs blogs={blogs} />
         </Box>
       </MainLayout>
