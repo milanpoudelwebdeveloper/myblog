@@ -40,14 +40,14 @@ const Categories = () => {
         <Text as={isBlogPage ? 'h1' : 'h2'} textAlign="center" color={headingColor} fontSize="xl" fontWeight="700">
           Coding Topics
         </Text>
-        <Divider borderColor="#6941C6" w={14} borderWidth={2} mx="auto" mb={7} mt={4} />
+        <Divider borderColor="#6941C6" w={14} borderWidth={2} mx="auto" mb={9} mt={2} />
         <Box px={{ base: 2, md: 14, xl: 2 }}>
           {isLoading && <Skeleton h={500} borderRadius={20} mb={6} />}
           {categories?.map((category: ICategory) => (
             <Link href={BLOGS + '?category=' + category?.id} key={category?.id} shallow>
               <Flex alignItems="center" justifyContent="space-between">
                 <Flex alignItems="center" gap={4}>
-                  <Box position="relative" w={12} h={12} maxW="full" maxH="full" borderRadius="full" overflow="hidden">
+                  <Box position="relative" w={10} h={10} maxW="full" maxH="full" borderRadius="full" overflow="hidden">
                     <Image
                       src={category?.image}
                       alt={category?.name}
@@ -60,7 +60,7 @@ const Categories = () => {
                     />
                   </Box>
 
-                  <Box width="max-content" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600">
+                  <Box width="max-content" fontSize="sm" fontWeight="600">
                     {category?.name}
                   </Box>
                 </Flex>
