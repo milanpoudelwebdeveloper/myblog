@@ -25,7 +25,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
   const contentColor = useColorModeValue('#232323', '#C0C5D0')
   const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
   const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
-  const contentToDisplay = imageLoadFast ? content?.slice(0, isMobile ? 140 : 270) : content?.slice(0, 150)
+  const contentToDisplay = imageLoadFast ? content?.slice(0, isMobile ? 140 : 240) : content?.slice(0, 140)
 
   return (
     <Box pb={5} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
