@@ -39,7 +39,6 @@ export const getBlogs = async (category: number | string | null = 'all', publish
 export const getFeaturedBlog = async () => {
   try {
     const res = await axiosInstance.get('/blog/featured')
-    console.log('res', res)
     if (res?.data) {
       return res?.data?.data
     }

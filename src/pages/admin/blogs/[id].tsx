@@ -56,7 +56,6 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
     handleSubmit,
     register,
     control,
-    watch,
 
     formState: { errors }
   } = useForm({
@@ -66,8 +65,6 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
       categories: blogDetails?.categories
     }
   })
-  const categorsiWatch = watch('categories')
-  console.log(categorsiWatch, 'watch')
 
   const { showToast } = useCustomToast()
   const router = useRouter()
