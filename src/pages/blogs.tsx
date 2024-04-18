@@ -42,29 +42,28 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         link={`https://codewithmilan.com/${BLOGS}`}
       />
       <MainLayout>
-        <Box>
-          <Flex gap={4}>
-            {finalCategories?.map((category) => (
-              <Link href={`/blogs?category=${category?.id}`} key={category?.id} shallow>
-                <Box
-                  key={category?.id}
-                  bg={category?.id == search ? 'rgb(165, 94, 234)' : 'white'}
-                  color={category?.id == search ? 'rgb(255, 255, 255)' : 'rgb(35, 35, 35)'}
-                  boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
-                  borderRadius={7}
-                  fontWeight="500"
-                  fontSize={{ base: 'sm', '1xl': 'md' }}
-                  py={{ base: 2, '1xl': 3 }}
-                  px={{ base: 4, '1xl': 5 }}
-                  cursor="pointer"
-                >
-                  {category?.name}
-                </Box>
-              </Link>
-            ))}
-          </Flex>
-        </Box>
-        <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={5}>
+        <Flex gap={4}>
+          {finalCategories?.map((category) => (
+            <Link href={`/blogs?category=${category?.id}`} key={category?.id} shallow>
+              <Box
+                key={category?.id}
+                bg={category?.id == search ? 'rgb(165, 94, 234)' : 'white'}
+                color={category?.id == search ? 'rgb(255, 255, 255)' : 'rgb(35, 35, 35)'}
+                boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
+                borderRadius={7}
+                fontWeight="500"
+                fontSize={{ base: 'sm', '1xl': 'md' }}
+                py={{ base: 2, '1xl': 3 }}
+                px={{ base: 4, '1xl': 5 }}
+                cursor="pointer"
+              >
+                {category?.name}
+              </Box>
+            </Link>
+          ))}
+        </Flex>
+
+        <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={8}>
           {blogs?.map((post: IBlog) => <BlogCard card={post} key={post?.id} />)}
         </Grid>
       </MainLayout>

@@ -25,10 +25,10 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
   const contentColor = useColorModeValue('#232323', '#C0C5D0')
   const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
   const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
-  const contentToDisplay = imageLoadFast ? content?.slice(0, isMobile ? 135 : 240) : content?.slice(0, 130)
+  const contentToDisplay = imageLoadFast ? content?.slice(0, isMobile ? 140 : 270) : content?.slice(0, 150)
 
   return (
-    <Box my={4} pb={5} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
+    <Box pb={5} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={dynamicLink} shallow>
         <Box
           maxW="full"
@@ -50,13 +50,13 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
         </Box>
 
         <Box px={6}>
-          <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600" my={4}>
+          <Text color="#6941C6" fontSize="xs" fontWeight="600" mt={5} mb={3}>
             {name} &#x2022; {convertDate(createdat)}
           </Text>
-          <Text as="h3" color={titleColor} mb={4} fontSize={{ base: 'lg', '1xl': 'xl' }} fontWeight="700" my={2} lineHeight="1.4">
+          <Text as="h3" color={titleColor} fontSize={{ base: 'lg', '1xl': 'xl' }} fontWeight="700" lineHeight="1.4">
             {title}
           </Text>
-          <Box color={contentColor} fontSize={{ base: 'sm', '1xl': 'sm' }} fontWeight="300" lineHeight="1.6">
+          <Box color={contentColor} fontSize="sm" fontWeight="300" lineHeight="1.6" mt={2}>
             <Markdown>{`${contentToDisplay}....`}</Markdown>
           </Box>
           <Flex gap={2} fontSize={{ base: 'xs', md: 'sm' }} mt={3}>

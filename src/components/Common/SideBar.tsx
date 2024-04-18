@@ -67,7 +67,7 @@ const SideBar = () => {
                   />
                 </Box>
                 <Box>
-                  <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="700" mb={1} lineHeight="1.4">
+                  <Text fontSize="sm" fontWeight="700" mb={1} lineHeight="1.5">
                     {blog?.title}
                   </Text>
 
