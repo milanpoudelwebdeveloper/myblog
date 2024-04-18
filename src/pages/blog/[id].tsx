@@ -114,7 +114,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
           <Box ref={parentRef} />
           <Box className="ql-snow">
             <Box
-              className="content ql-editor"
+              className="content ql-editor custom-scrollbar"
               fontSize={{ base: 'md', '1xl': 'lg' }}
               lineHeight="30px"
               dangerouslySetInnerHTML={{
