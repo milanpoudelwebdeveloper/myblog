@@ -42,7 +42,7 @@ const Categories = () => {
         </Text>
         <Divider borderColor="#6941C6" w={14} borderWidth={2} mx="auto" mb={9} mt={2} />
         <Box px={{ base: 2, md: 14, xl: 2 }}>
-          {isLoading && <Skeleton h={500} borderRadius={20} mb={6} />}
+          {isLoading && <Skeleton h={390} borderRadius={20} mb={6} />}
           {categories?.map((category: ICategory) => (
             <Link href={BLOGS + '?category=' + category?.id} key={category?.id} shallow>
               <Flex alignItems="center" justifyContent="space-between">
