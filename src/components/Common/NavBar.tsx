@@ -80,12 +80,7 @@ const NavBar = () => {
             </Link>
           </Flex>
 
-          <Flex
-            display={{ base: 'none', md: 'flex' }}
-            fontSize={{ md: 'sm', xl: 'md', '1xl': 'lg' }}
-            gap={{ base: 8, '1xl': 10 }}
-            alignItems="center"
-          >
+          <Flex display={{ base: 'none', md: 'flex' }} fontSize={{ md: 'sm', xl: 'md' }} gap={{ base: 8, '1xl': 10 }} alignItems="center">
             {navLinks?.map(({ title, link }) => (
               <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow>
                 <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={2}>
