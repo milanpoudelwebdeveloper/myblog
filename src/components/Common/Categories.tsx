@@ -57,6 +57,7 @@ const Categories = () => {
                       fill
                       placeholder="blur"
                       blurDataURL={base64File}
+                      loading="lazy"
                     />
                   </Box>
 
