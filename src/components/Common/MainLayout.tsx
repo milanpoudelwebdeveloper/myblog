@@ -1,19 +1,15 @@
-import { Box, Flex, useMediaQuery } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import React from 'react'
 import NavBar from './NavBar'
-import SideBar from './SideBar'
+
 import Footer from './Footer'
-import dynamic from 'next/dynamic'
 
 interface Props {
   children: React.ReactNode
   hideSidebar?: boolean
 }
 
-const LazyLoadedSideBar = dynamic(() => import('./SideBar'))
-
-const MainLayout = ({ children, hideSidebar = false }: Props) => {
-  const [isMobile] = useMediaQuery('(max-width: 768px)')
+const MainLayout = ({ children }: Props) => {
   return (
     <Box maxW={{ base: 750, xl: 1080, '1xl': 1150 }} mx="auto" px={{ base: 5, sm: 10, lg: 0 }}>
       <NavBar />
@@ -26,9 +22,6 @@ const MainLayout = ({ children, hideSidebar = false }: Props) => {
       >
         <Box minW={{ base: 'full', xl: 660, '1xl': 700 }} maxW={{ base: 'full', xl: 660, '1xl': 700 }}>
           {children}
-        </Box>
-        <Box display={hideSidebar ? 'none' : 'block'} flex={1} mt={4}>
-          {isMobile ? <LazyLoadedSideBar /> : <SideBar />}
         </Box>
       </Flex>
       <Footer />
