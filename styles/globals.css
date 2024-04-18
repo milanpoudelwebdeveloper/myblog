@@ -31,10 +31,11 @@ a {
   line-height: 1.8 !important;
   white-space: pre !important;
   overflow: auto !important;
+  font-size: 16px !important;
 }
 
 .ql-snow .ql-editor h2 {
-  font-size: 24px !important;
+  font-size: 20px !important;
   font-weight: 700 !important;
 }
 
