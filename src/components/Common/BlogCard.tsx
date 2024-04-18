@@ -28,7 +28,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
   const contentToDisplay = imageLoadFast ? content?.slice(0, isMobile ? 140 : 240) : content?.slice(0, 140)
 
   return (
-    <Box pb={5} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
+    <Box pb={imageLoadFast ? 7 : 5} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={dynamicLink} shallow>
         <Box
           maxW="full"
@@ -49,7 +49,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
           />
         </Box>
 
-        <Box px={6}>
+        <Box px={imageLoadFast ? 7 : 6}>
           <Text color="#6941C6" fontSize="xs" fontWeight="600" mt={5} mb={3}>
             {name} &#x2022; {convertDate(createdat)}
           </Text>
@@ -59,7 +59,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
           <Box color={contentColor} fontSize="sm" fontWeight="300" lineHeight="1.6" mt={2}>
             <Markdown>{`${contentToDisplay}....`}</Markdown>
           </Box>
-          <Flex gap={2} fontSize={{ base: 'xs', md: 'sm' }} mt={3}>
+          <Flex gap={2} fontSize={{ base: 'xs', md: 'sm' }} mt={3} display={imageLoadFast ? 'none' : 'flex'}>
             {categories?.map((categoryname) => (
               <Box bg="#FDF2FA" color="#C11574" borderRadius={7} px={2} py={1.5} key={categoryname}>
                 <Text>{categoryname}</Text>
