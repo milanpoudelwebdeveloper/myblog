@@ -116,7 +116,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
             <Box
               className="content ql-editor"
               fontSize={{ base: 'md', '1xl': 'lg' }}
-              lineHeight={1.5}
+              lineHeight="30px"
               dangerouslySetInnerHTML={{
                 __html: blogDetail?.content
               }}
