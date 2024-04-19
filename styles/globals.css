@@ -46,13 +46,22 @@ a {
   font-size: 16px !important;
 }
 
-.ql-snow .ql-editor h2 {
+@media (max-width: 768px) {
+  .ql-snow .ql-editor pre.ql-syntax {
+    padding: 20px !important;
+    font-size: 14px !important;
+  }
+}
+
+.ql-snow .ql-editor h2 strong {
   font-size: 18px !important;
   font-weight: 700 !important;
+  color: #000 !important;
 }
+
+html[data-theme='dark'] .ql-editor p,
 .ql-editor p span,
-html[data-theme='dark'] .ql-editor h2 strong,
-html[data-theme='dark'] .ql-editor p {
+.ql-editor h2 strong {
   color: #c0c5d0 !important;
 }
 
