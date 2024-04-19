@@ -3,8 +3,12 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import PopularBlogs from './PopularBlogs'
 
-const CategoryComponent = dynamic(() => import('./Categories'))
-const PopularBlogsComponent = dynamic(() => import('./PopularBlogs'))
+const CategoryComponent = dynamic(() => import('./Categories'), {
+  ssr: false
+})
+const PopularBlogsComponent = dynamic(() => import('./PopularBlogs'), {
+  ssr: false
+})
 
 const SideBar = () => {
   const [isMobile] = useMediaQuery('(max-width: 768px)')

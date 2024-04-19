@@ -36,13 +36,13 @@ const UserMenu = () => {
         />
       </MenuButton>
       <MenuList fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="500" py={4}>
-        <Link href={SAVED_BLOGS} shallow>
+        <Link href={SAVED_BLOGS} shallow prefetch={false}>
           <MenuItem mb={1}>Saved</MenuItem>
         </Link>
-        <Link href={BLOGS_BY_USER} shallow>
+        <Link href={BLOGS_BY_USER} shallow prefetch={false}>
           <MenuItem mb={1}>Blogs By You</MenuItem>
         </Link>
-        <Link href={SETTINGS} shallow>
+        <Link href={SETTINGS} shallow prefetch={false}>
           <MenuItem mb={1}> Settings</MenuItem>
         </Link>
         <MenuItem mb={1} onClick={logOutHandler}>
