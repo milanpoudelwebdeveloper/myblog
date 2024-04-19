@@ -5,7 +5,9 @@ import HeadingSeo from '@components/Common/HeadingSeo'
 import dynamic from 'next/dynamic'
 import { getBlogs, getFeaturedBlog } from '../services/blog'
 
-const RecentBlogs = dynamic(() => import('../components/HomePage/RecentBlogs'))
+const RecentBlogs = dynamic(() => import('../components/HomePage/RecentBlogs'), {
+  ssr: true
+})
 
 export async function getStaticProps() {
   const blogs = await getBlogs()
