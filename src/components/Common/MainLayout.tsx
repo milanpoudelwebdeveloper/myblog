@@ -10,7 +10,9 @@ interface Props {
   hideSidebar?: boolean
 }
 
-const LazyLoadedSideBar = dynamic(() => import('./SideBar'))
+const LazyLoadedSideBar = dynamic(() => import('./SideBar'), {
+  ssr: false
+})
 
 const MainLayout = ({ children, hideSidebar = false }: Props) => {
   const [isMobile] = useMediaQuery('(max-width: 768px)')
