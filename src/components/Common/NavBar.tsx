@@ -80,17 +80,19 @@ const NavBar = () => {
             </Link>
           </Flex>
 
-          <Flex display={{ base: 'none', md: 'flex' }} fontSize={{ md: 'sm', xl: 'md' }} gap={{ base: 8, '1xl': 10 }} alignItems="center">
-            {navLinks?.map(({ title, link }) => (
-              <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow>
-                <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={2}>
-                  <Box cursor="pointer" _hover={{ color: '#1814F3' }}>
-                    {title}
+          {!isMobile && (
+            <Flex fontSize={{ md: 'sm', xl: 'md' }} gap={{ base: 8, '1xl': 10 }} alignItems="center">
+              {navLinks?.map(({ title, link }) => (
+                <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow>
+                  <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={2}>
+                    <Box cursor="pointer" _hover={{ color: '#1814F3' }}>
+                      {title}
+                    </Box>
                   </Box>
-                </Box>
-              </Link>
-            ))}
-          </Flex>
+                </Link>
+              ))}
+            </Flex>
+          )}
         </Flex>
         <Flex gap={{ base: 3, md: 5, '1xl': 8 }} alignItems="center">
           <ThemeToggle />
