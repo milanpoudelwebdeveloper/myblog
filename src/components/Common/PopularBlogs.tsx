@@ -40,7 +40,7 @@ const PopularBlogs = () => {
       bgColor={bgColor}
       mx="auto"
       px={{ base: 7, '1xl': 10 }}
-      py={8}
+      py={6}
     >
       <Text as="h2" textAlign="center" mb={1} color={headingColor} fontSize="xl" fontWeight="700">
         Most Read
@@ -50,7 +50,7 @@ const PopularBlogs = () => {
       {data?.map((blog: IBlog) => (
         <Link href={getDynamicLink(blog?.id as string)} key={blog?.id}>
           <Box mb={4}>
-            <Flex alignItems="center" gap={{ base: 5, '1xl': 6 }}>
+            <Flex alignItems="center" gap={{ base: 4, '1xl': 5 }}>
               <Box position="relative" w={59} h={59} maxW="full" maxH="full" borderRadius="full" overflow="hidden" flexShrink={0}>
                 <Image
                   src={blog?.coverimage}
@@ -65,7 +65,7 @@ const PopularBlogs = () => {
                 />
               </Box>
               <Box>
-                <Text fontSize="sm" fontWeight="700" mb={1} lineHeight="1.5">
+                <Text fontSize="sm" fontWeight="600" mb={1} lineHeight="1.5">
                   {blog?.title}
                 </Text>
 
