@@ -31,8 +31,9 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
     <Box pb={imageLoadFast ? 7 : 5} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={dynamicLink} shallow>
         <Box
+          minW="full"
           maxW="full"
-          h={{ base: 180, md: imageHeight ? 250 : 210, xl: imageHeight ? 250 : 190, '1xl': imageHeight ? imageHeight : 200 }}
+          minH={{ base: 180, md: imageHeight ? 250 : 210, xl: imageHeight ? 250 : 190, '1xl': imageHeight ? imageHeight : 200 }}
           maxH="full"
           position="relative"
         >
@@ -47,6 +48,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
             fill
             priority={imageLoadFast}
             unoptimized={!imageLoadFast}
+            sizes="auto"
           />
         </Box>
 

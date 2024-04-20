@@ -62,6 +62,7 @@ const PopularBlogs = () => {
                   placeholder="blur"
                   blurDataURL={base64File}
                   loading="lazy"
+                  sizes="auto"
                 />
               </Box>
               <Box>
