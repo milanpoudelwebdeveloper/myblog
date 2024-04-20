@@ -1,4 +1,4 @@
-import { Box, Text, useColorModeValue, Image, Flex } from '@chakra-ui/react'
+import { Box, Text, useColorModeValue, Image, Flex, Button } from '@chakra-ui/react'
 import MainLayout from '@components/Common/MainLayout'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -14,11 +14,6 @@ import { useQueryClient } from '@tanstack/react-query'
 import SocialShares from '@components/Admin/Common/SocialShares'
 import { ParsedUrlQuery } from 'querystring'
 import { GetServerSidePropsContext } from 'next'
-import dynamic from 'next/dynamic'
-
-const DynamicFaRegHeart = dynamic(() => import('react-icons/fa').then((icon) => icon.FaRegHeart), {
-  ssr: false
-})
 
 const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const client = useQueryClient()
@@ -112,7 +107,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
             />
             <Flex alignItems="center" justifyContent="space-between" px={2}>
               <SocialShares shareURL={shareURL} blogDetail={blogDetail} />
-              <DynamicFaRegHeart fill="black" size={24} onClick={saveOrUnSaveHandler} />
+              <Button onClick={saveOrUnSaveHandler}>Heart Icon</Button>
             </Flex>
           </Box>
           <Box ref={parentRef} />
