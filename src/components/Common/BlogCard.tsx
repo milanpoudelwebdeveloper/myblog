@@ -9,6 +9,7 @@ import { base64File } from '@constants/files'
 import Image from 'next/image'
 import { AuthContext } from '@/src/context/authContext'
 import dynamic from 'next/dynamic'
+import { BLOGS } from '@constants/routes'
 
 const DynamicMarkdown = dynamic(() => import('markdown-to-jsx'), {
   ssr: true
@@ -30,7 +31,23 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
   const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
   const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
   const contentToDisplay = imageLoadFast ? content?.slice(0, isMobile ? 140 : 240) : content?.slice(0, 110)
-
+  const categoryColors = [
+    {
+      key: 1,
+      bgColor: '#FDF2FA',
+      titleColor: '#C11574'
+    },
+    {
+      key: 2,
+      bgColor: '#F9F5FF',
+      titleColor: '#6941C6'
+    },
+    {
+      key: 3,
+      bgColor: '#ECFDF3',
+      titleColor: '#027A48'
+    }
+  ]
   return (
     <Box pb={imageLoadFast ? 7 : 5} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
       <Link href={dynamicLink} shallow>
@@ -57,14 +74,14 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
         </Box>
 
         <Box px={6}>
-          <Text color="#6941C6" fontSize="xs" fontWeight="600" mt={5} mb={3}>
+          <Text color="#6941C6" fontSize="sm" fontWeight="400" mt={5} mb={3}>
             {name} &#x2022; {convertDate(createdat)}
           </Text>
           <Text
             as={imageLoadFast ? 'h1' : 'h2'}
             color={titleColor}
             fontSize={{ base: 'lg', '1xl': 'xl' }}
-            fontWeight="700"
+            fontWeight="600"
             lineHeight="1.4"
           >
             {title}
@@ -72,15 +89,25 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
           <Box color={contentColor} fontSize="sm" fontWeight="300" lineHeight="1.6" mt={2}>
             <DynamicMarkdown>{`${contentToDisplay}....`}</DynamicMarkdown>
           </Box>
-          <Flex gap={2} fontSize="xs" mt={3} display={imageLoadFast ? 'none' : 'flex'}>
-            {categories?.map((categoryname) => (
-              <Box bg="#FDF2FA" color="#C11574" borderRadius={7} px={2} py={1.5} key={categoryname}>
-                <Text>{categoryname}</Text>
-              </Box>
-            ))}
-          </Flex>
         </Box>
       </Link>
+      <Flex gap={2} fontSize="xs" mt={4} display={imageLoadFast ? 'none' : 'flex'} px={6}>
+        {categories?.map((category, index) => (
+          <Link href={BLOGS + '?category=' + category?.value} key={index} shallow>
+            <Box
+              bg={categoryColors[index]?.bgColor}
+              color={categoryColors[index]?.titleColor}
+              borderRadius={7}
+              px={2}
+              py={1.5}
+              fontWeight="500"
+              key={category?.value}
+            >
+              {category?.label}
+            </Box>
+          </Link>
+        ))}
+      </Flex>
     </Box>
   )
 }

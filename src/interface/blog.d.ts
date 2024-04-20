@@ -4,7 +4,10 @@ interface IBlog {
   content: string
   coverimage: string
   createdat: string
-  categories: string[]
+  categories: {
+    label: number | string
+    value: string | number
+  }[]
   published: boolean
   featured: boolean
   saved: boolean
