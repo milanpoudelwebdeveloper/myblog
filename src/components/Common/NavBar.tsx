@@ -9,8 +9,12 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { BLOGS } from '@constants/routes'
 
-const LazyLoadedUserMenu = dynamic(() => import('./NavBar/UserMenu'))
-const LazyLoadedMobileNavBar = dynamic(() => import('./MobileNavBar'))
+const LazyLoadedUserMenu = dynamic(() => import('./NavBar/UserMenu'), {
+  ssr: false
+})
+const LazyLoadedMobileNavBar = dynamic(() => import('./MobileNavBar'), {
+  ssr: false
+})
 const DynamicRxHamburgerMenu = dynamic(() => import('react-icons/rx').then((icon) => icon.RxHamburgerMenu), {
   ssr: false
 })
@@ -58,7 +62,7 @@ const NavBar = () => {
         <Flex gap={48}>
           <Flex alignItems="center" gap={2}>
             <Box display={{ base: 'block', md: 'none' }}>
-              {isMobile && <DynamicRxHamburgerMenu size={20} onClick={() => setIsModalOpen((prev) => !prev)} />}
+              <DynamicRxHamburgerMenu size={20} onClick={() => setIsModalOpen((prev) => !prev)} />
             </Box>
             <Link href="/" shallow passHref>
               <Box
@@ -83,19 +87,17 @@ const NavBar = () => {
             </Link>
           </Flex>
 
-          {!isMobile && (
-            <Flex fontSize={{ md: 'sm', xl: 'md' }} gap={{ base: 8, '1xl': 10 }} alignItems="center">
-              {navLinks?.map(({ title, link }) => (
-                <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow>
-                  <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={2}>
-                    <Box cursor="pointer" _hover={{ color: '#1814F3' }}>
-                      {title}
-                    </Box>
+          <Flex display={{ base: 'none', md: 'flex' }} fontSize={{ md: 'sm', xl: 'md' }} gap={{ base: 8, '1xl': 10 }} alignItems="center">
+            {navLinks?.map(({ title, link }) => (
+              <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow>
+                <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={2}>
+                  <Box cursor="pointer" _hover={{ color: '#1814F3' }}>
+                    {title}
                   </Box>
-                </Link>
-              ))}
-            </Flex>
-          )}
+                </Box>
+              </Link>
+            ))}
+          </Flex>
         </Flex>
         <Flex gap={{ base: 3, md: 5, '1xl': 8 }} alignItems="center">
           <ThemeToggle />
