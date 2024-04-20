@@ -12,6 +12,7 @@ const generateSiteMap = (blogs: IBlog[]) => {
         <loc>${domain}/${page}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>weekly</changefreq>
+        <priority>${page === '/' ? 1 : 0.8}</priority>
       </url>
       `
   })}
@@ -22,6 +23,7 @@ const generateSiteMap = (blogs: IBlog[]) => {
         <loc>${`${domain}/blog/${blog.id}`}</loc>
         <lastmod>${blog.createdat}</lastmod>
         <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
       </url>
     `
     })
