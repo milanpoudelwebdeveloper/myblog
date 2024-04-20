@@ -11,7 +11,7 @@ import { AuthContext } from '@/src/context/authContext'
 import dynamic from 'next/dynamic'
 
 const DynamicMarkdown = dynamic(() => import('markdown-to-jsx'), {
-  ssr: true
+  ssr: false
 })
 
 interface Props {
