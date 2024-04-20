@@ -1,12 +1,12 @@
 import { Box, Divider, Grid, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
-import BlogCard from '../Common/BlogCard'
+import BlogCard from './Common/BlogCard'
 
 const RecentBlogs = ({ blogs }: { blogs: IBlog[] }) => {
   const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
   return (
     <Box mt={{ base: 9, '1xl': 12 }}>
-      <Text as="h1" color={headingColor} fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="700">
+      <Text color={headingColor} fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="700">
         Recent Blogs
       </Text>
       <Divider borderColor="#6941C6" w={9} borderWidth={2} mt={1} />

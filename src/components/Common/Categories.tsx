@@ -6,13 +6,10 @@ import { BLOGS } from '@constants/routes'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import React from 'react'
 
 const Categories = () => {
   const { showToast } = useCustomToast()
-  const router = useRouter()
-  const pathname = router.pathname
 
   const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
   const dividerColor = useColorModeValue('rgba(0, 0, 0, 0.15)', 'rgba(255, 255, 255, 0.15)')
@@ -30,12 +27,10 @@ const Categories = () => {
     showToast('Error fetching categories', 'error')
   }
 
-  const isBlogPage = pathname.includes('/blogs')
-
   return (
     <Box maxW={{ base: 570, lg: 'auto' }} mx="auto">
       <Box p={{ base: 5, lg: 8 }} boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px" borderRadius={14} mb={10}>
-        <Text as={isBlogPage ? 'h1' : 'h2'} textAlign="center" color={headingColor} fontSize="xl" fontWeight="700">
+        <Text textAlign="center" as="h3" color={headingColor} fontSize="xl" fontWeight="700">
           Coding Topics
         </Text>
         <Divider borderColor="#6941C6" w={14} borderWidth={2} mx="auto" mb={9} mt={2} />

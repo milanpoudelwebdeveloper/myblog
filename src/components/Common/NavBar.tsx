@@ -117,7 +117,7 @@ const NavBar = () => {
             {isLoggedIn ? (
               <LazyLoadedUserMenu />
             ) : (
-              <Link href="/login" shallow prefetch={false}>
+              <Link href="/login" shallow>
                 <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', xl: 'lg' }} fontWeight="normal">
                   Login
                 </Button>

@@ -5,10 +5,14 @@ import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-light.css'
 import { convertDate } from '@/src/utils/convertDate'
-import Markdown from 'markdown-to-jsx'
 import { base64File } from '@constants/files'
 import Image from 'next/image'
 import { AuthContext } from '@/src/context/authContext'
+import dynamic from 'next/dynamic'
+
+const DynamicMarkdown = dynamic(() => import('markdown-to-jsx'), {
+  ssr: false
+})
 
 interface Props {
   card: IBlog
@@ -56,11 +60,17 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
           <Text color="#6941C6" fontSize="xs" fontWeight="600" mt={5} mb={3}>
             {name} &#x2022; {convertDate(createdat)}
           </Text>
-          <Text as="h3" color={titleColor} fontSize={{ base: 'lg', '1xl': 'xl' }} fontWeight="700" lineHeight="1.4">
+          <Text
+            as={imageLoadFast ? 'h1' : 'h2'}
+            color={titleColor}
+            fontSize={{ base: 'lg', '1xl': 'xl' }}
+            fontWeight="700"
+            lineHeight="1.4"
+          >
             {title}
           </Text>
           <Box color={contentColor} fontSize="sm" fontWeight="300" lineHeight="1.6" mt={2}>
-            <Markdown>{`${contentToDisplay}....`}</Markdown>
+            <DynamicMarkdown className="blogcontent">{`${contentToDisplay}....`}</DynamicMarkdown>
           </Box>
           <Flex gap={2} fontSize="xs" mt={4} display={imageLoadFast ? 'none' : 'flex'}>
             {categories?.map((categoryname) => (

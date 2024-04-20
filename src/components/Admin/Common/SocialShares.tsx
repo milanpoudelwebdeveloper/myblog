@@ -54,6 +54,7 @@ const SocialShares = ({ shareURL, blogDetail }: Props) => {
                 style={{
                   objectFit: 'cover'
                 }}
+                sizes="auto"
               />
             </Box>
           </a>

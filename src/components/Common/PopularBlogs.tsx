@@ -8,12 +8,16 @@ import Image from 'next/image'
 import { base64File } from '@constants/files'
 import { AuthContext } from '@/src/context/authContext'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const PopularBlogs = () => {
   const { user } = useContext(AuthContext)
+  const router = useRouter()
   const { showToast } = useCustomToast()
   const dividerColor = useColorModeValue('#D9D9D9', 'rgba(255, 255, 255, 0.15)')
   const dateColor = useColorModeValue('rgb(35, 35, 35)', '#C0C5D0')
+  const isHomePage = router.pathname === '/'
+  const isBlogPage = router.pathname.includes('/blogs')
 
   const { error, data, isLoading } = useQuery({
     queryKey: ['getPopularPosts'],
@@ -51,10 +55,9 @@ const PopularBlogs = () => {
                 />
               </Box>
               <Box>
-                <Text fontSize="sm" fontWeight="600" mb={1} lineHeight="1.5">
+                <Text fontSize="sm" fontWeight="600" mb={1} lineHeight="1.5" as={isHomePage ? 'h3' : isBlogPage ? 'h1' : 'h2'}>
                   {blog?.title}
                 </Text>
-
                 <Text color={dateColor} fontSize="xs" fontWeight="300">
                   {convertDate(blog?.createdat)}
                 </Text>

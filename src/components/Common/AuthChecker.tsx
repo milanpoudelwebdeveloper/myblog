@@ -10,7 +10,7 @@ const AuthChecker = () => {
   const isLoggedIn = typeof window !== 'undefined' && localStorage.getItem('isLoggedInCodeWithMilan')
 
   useEffect(() => {
-    if (!isLoggedIn) return
+    if (!isLoggedIn) return setIsLoading(false)
     checkLogin()
       .then((res) => {
         if (res?.user) {
