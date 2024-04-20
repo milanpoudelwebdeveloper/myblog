@@ -72,7 +72,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
           <Box color={contentColor} fontSize="sm" fontWeight="300" lineHeight="1.6" mt={2}>
             <DynamicMarkdown>{`${contentToDisplay}....`}</DynamicMarkdown>
           </Box>
-          <Flex gap={2} fontSize="xs" mt={4} display={imageLoadFast ? 'none' : 'flex'}>
+          <Flex gap={2} fontSize="xs" mt={3} display={imageLoadFast ? 'none' : 'flex'}>
             {categories?.map((categoryname) => (
               <Box bg="#FDF2FA" color="#C11574" borderRadius={7} px={2} py={1.5} key={categoryname}>
                 <Text>{categoryname}</Text>

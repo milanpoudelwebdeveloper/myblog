@@ -54,11 +54,11 @@ const NavBar = () => {
         mx="auto"
         py={{ base: 4, xl: 5, '1xl': 6 }}
         width="full"
-        maxW={{ base: 700, lg: 780, xl: 1070, '1xl': 1230 }}
+        maxW={{ base: 700, lg: 780, xl: 1080, '1xl': 1200 }}
       >
         <Flex gap={48}>
           <Flex alignItems="center" gap={2}>
-            <Box display={{ base: 'block', md: 'block' }} onClick={() => setIsModalOpen((prev) => !prev)}>
+            <Box display={{ base: 'block', md: 'none' }} onClick={() => setIsModalOpen((prev) => !prev)}>
               <svg
                 stroke="currentColor"
                 fill="none"
