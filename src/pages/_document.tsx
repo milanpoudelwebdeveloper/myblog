@@ -6,6 +6,7 @@ export default function Document() {
       <Head />
       <body>
         <meta name="theme-color" content="#ff5c35" />
+        <link rel="icon" href="/favicon.ico" />
         <Main />
         <NextScript />
       </body>
