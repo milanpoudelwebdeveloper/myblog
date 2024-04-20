@@ -58,7 +58,7 @@ const NavBar = () => {
         <Flex gap={48}>
           <Flex alignItems="center" gap={2}>
             <Box display={{ base: 'block', md: 'none' }}>
-              <DynamicRxHamburgerMenu size={20} onClick={() => setIsModalOpen((prev) => !prev)} />
+              {isMobile && <DynamicRxHamburgerMenu size={20} onClick={() => setIsModalOpen((prev) => !prev)} />}
             </Box>
             <Link href="/" shallow passHref>
               <Box

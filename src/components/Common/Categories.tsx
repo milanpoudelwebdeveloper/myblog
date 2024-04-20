@@ -6,14 +6,8 @@ import { BLOGS } from '@constants/routes'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-
 import { useRouter } from 'next/router'
 import React from 'react'
-import dynamic from 'next/dynamic'
-
-const DynamicFaChevronRight = dynamic(() => import('react-icons/fa').then((icon) => icon.FaChevronRight), {
-  ssr: false
-})
 
 const Categories = () => {
   const { showToast } = useCustomToast()
@@ -69,7 +63,7 @@ const Categories = () => {
                     {category?.name}
                   </Box>
                 </Flex>
-                <DynamicFaChevronRight color="rgb(165, 94, 234)" />
+                <Image src="/images/chevronright.svg" alt="chevron-right" width={16} height={16} />
               </Flex>
 
               <Divider my={{ base: 2, '1xl': 3 }} borderColor={dividerColor} />
