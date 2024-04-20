@@ -22,6 +22,7 @@ const ThemeToggle = () => {
         bg={colorMode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'none'}
         onClick={toggleColorMode}
         h={8}
+        aria-label="Toggle color mode"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -54,6 +55,7 @@ const ThemeToggle = () => {
         fontSize="sm"
         bg={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'none'}
         h={8}
+        aria-label="Toggle color mode"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -77,6 +77,7 @@ const NavBar = () => {
                   style={{
                     objectFit: 'cover'
                   }}
+                  priority
                 />
               </Box>
             </Link>

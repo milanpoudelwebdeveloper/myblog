@@ -48,7 +48,7 @@ const Categories = () => {
                   <Box position="relative" w={10} h={10} maxW="full" maxH="full" borderRadius="full" overflow="hidden">
                     <Image
                       src={category?.image}
-                      alt={category?.name}
+                      alt="category-image"
                       style={{
                         objectFit: 'cover'
                       }}
