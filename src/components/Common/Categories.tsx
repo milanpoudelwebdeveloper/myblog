@@ -9,7 +9,11 @@ import Link from 'next/link'
 
 import { useRouter } from 'next/router'
 import React from 'react'
-import { FaChevronRight } from 'react-icons/fa'
+import dynamic from 'next/dynamic'
+
+const DynamicFaChevronRight = dynamic(() => import('react-icons/fa').then((icon) => icon.FaChevronRight), {
+  ssr: false
+})
 
 const Categories = () => {
   const { showToast } = useCustomToast()
@@ -65,7 +69,7 @@ const Categories = () => {
                     {category?.name}
                   </Box>
                 </Flex>
-                <FaChevronRight color="rgb(165, 94, 234)" />
+                <DynamicFaChevronRight color="rgb(165, 94, 234)" />
               </Flex>
 
               <Divider my={{ base: 2, '1xl': 3 }} borderColor={dividerColor} />

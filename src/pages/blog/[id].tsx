@@ -8,13 +8,17 @@ import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-dark.css'
 import { convertDate } from '@/src/utils/convertDate'
 import HeadingSeo from '@components/Common/HeadingSeo'
-import { FaRegHeart } from 'react-icons/fa'
 import { AuthContext } from '@/src/context/authContext'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { useQueryClient } from '@tanstack/react-query'
 import SocialShares from '@components/Admin/Common/SocialShares'
 import { ParsedUrlQuery } from 'querystring'
 import { GetServerSidePropsContext } from 'next'
+import dynamic from 'next/dynamic'
+
+const DynamicFaRegHeart = dynamic(() => import('react-icons/fa').then((icon) => icon.FaRegHeart), {
+  ssr: false
+})
 
 const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const client = useQueryClient()
@@ -108,7 +112,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
             />
             <Flex alignItems="center" justifyContent="space-between" px={2}>
               <SocialShares shareURL={shareURL} blogDetail={blogDetail} />
-              <FaRegHeart fill="black" size={24} onClick={saveOrUnSaveHandler} />
+              <DynamicFaRegHeart fill="black" size={24} onClick={saveOrUnSaveHandler} />
             </Flex>
           </Box>
           <Box ref={parentRef} />
