@@ -7,7 +7,7 @@ const CategoryComponent = dynamic(() => import('./Categories'), {
 })
 const PopularBlogsComponent = dynamic(() => import('./PopularBlogs'), {
   ssr: false,
-  loading: () => <Skeleton h={390} borderRadius={20} mb={6} />
+  loading: () => <Skeleton className="skeleton-loader" h={390} borderRadius={20} mb={6} />
 })
 
 const SideBar = () => {
