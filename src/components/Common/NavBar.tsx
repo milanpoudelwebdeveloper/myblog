@@ -5,13 +5,15 @@ import Link from 'next/link'
 import { AuthContext } from '@/src/context/authContext'
 import { useRouter } from 'next/router'
 import { navLinks } from '@constants/navbar'
-import { RxHamburgerMenu } from 'react-icons/rx'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { BLOGS } from '@constants/routes'
 
 const LazyLoadedUserMenu = dynamic(() => import('./NavBar/UserMenu'))
 const LazyLoadedMobileNavBar = dynamic(() => import('./MobileNavBar'))
+const DynamicRxHamburgerMenu = dynamic(() => import('react-icons/rx').then((icon) => icon.RxHamburgerMenu), {
+  ssr: false
+})
 
 const NavBar = () => {
   const { isLoggedIn } = useContext(AuthContext)
@@ -56,7 +58,7 @@ const NavBar = () => {
         <Flex gap={48}>
           <Flex alignItems="center" gap={2}>
             <Box display={{ base: 'block', md: 'none' }}>
-              <RxHamburgerMenu size={20} onClick={() => setIsModalOpen((prev) => !prev)} />
+              <DynamicRxHamburgerMenu size={20} onClick={() => setIsModalOpen((prev) => !prev)} />
             </Box>
             <Link href="/" shallow passHref>
               <Box
