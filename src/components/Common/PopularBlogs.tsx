@@ -35,7 +35,7 @@ const PopularBlogs = () => {
 
   return (
     <>
-      {isLoading && <Skeleton className="skeleton-loader" h={390} borderRadius={20} mb={6} />}
+      {isLoading && <Skeleton className="skeleton-loader" transform="auto" h={390} borderRadius={20} mb={6} />}
       {data?.map((blog: IBlog) => (
         <Link href={getDynamicLink(blog?.id as string)} key={blog?.id}>
           <Box mb={4}>
