@@ -4,7 +4,7 @@ import HeadingSeo from '@components/Common/HeadingSeo'
 import dynamic from 'next/dynamic'
 import { getBlogs, getFeaturedBlog } from '../services/blog'
 
-const RecentBlogs = dynamic(() => import('../components/HomePage/RecentBlogs'), {
+const RecentBlogs = dynamic(() => import('../components/RecentBlogs'), {
   ssr: true
 })
 

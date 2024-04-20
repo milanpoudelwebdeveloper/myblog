@@ -106,6 +106,7 @@ const UserLogin = () => {
                     placeholder="Enter Password"
                     {...register('password')}
                     fontSize={{ base: 'sm', '1xl': 'md' }}
+                    autoComplete="off"
                   />
                   <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
                   {errors?.password && <ErrorText message={errors.password.message} />}
