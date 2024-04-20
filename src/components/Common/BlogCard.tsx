@@ -11,7 +11,7 @@ import { AuthContext } from '@/src/context/authContext'
 import dynamic from 'next/dynamic'
 
 const DynamicMarkdown = dynamic(() => import('markdown-to-jsx'), {
-  ssr: false
+  ssr: true
 })
 
 interface Props {
@@ -70,7 +70,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
             {title}
           </Text>
           <Box color={contentColor} fontSize="sm" fontWeight="300" lineHeight="1.6" mt={2}>
-            <DynamicMarkdown className="blogcontent">{`${contentToDisplay}....`}</DynamicMarkdown>
+            <DynamicMarkdown>{`${contentToDisplay}....`}</DynamicMarkdown>
           </Box>
           <Flex gap={2} fontSize="xs" mt={4} display={imageLoadFast ? 'none' : 'flex'}>
             {categories?.map((categoryname) => (

@@ -55,9 +55,9 @@ const Categories = () => {
                     />
                   </Box>
 
-                  <Box width="max-content" fontSize="sm" fontWeight="600">
+                  <Text fontSize="sm" fontWeight="600">
                     {category?.name}
-                  </Box>
+                  </Text>
                 </Flex>
                 <Image src="/images/chevronright.svg" alt="chevron-right" width={16} height={16} />
               </Flex>
