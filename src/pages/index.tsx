@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react'
 import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
 import HeadingSeo from '@components/Common/HeadingSeo'
@@ -31,10 +30,8 @@ export default function Home({ blogs, featuredBlog }: { blogs: IBlog[]; featured
         description="Code With Milan is a blog site where you can find programming tutorials"
       />
       <MainLayout>
-        <Box>
-          {featuredBlog && <BlogCard card={featuredBlog} imageHeight={300} imageLoadFast={true} />}
-          <RecentBlogs blogs={blogs} />
-        </Box>
+        {featuredBlog && <BlogCard card={featuredBlog} imageHeight={300} imageLoadFast={true} />}
+        <RecentBlogs blogs={blogs} />
       </MainLayout>
     </>
   )
