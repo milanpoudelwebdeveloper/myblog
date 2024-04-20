@@ -15,9 +15,6 @@ const LazyLoadedUserMenu = dynamic(() => import('./NavBar/UserMenu'), {
 const LazyLoadedMobileNavBar = dynamic(() => import('./MobileNavBar'), {
   ssr: false
 })
-const DynamicRxHamburgerMenu = dynamic(() => import('react-icons/rx').then((icon) => icon.RxHamburgerMenu), {
-  ssr: false
-})
 
 const NavBar = () => {
   const { isLoggedIn } = useContext(AuthContext)
@@ -62,7 +59,7 @@ const NavBar = () => {
         <Flex gap={48}>
           <Flex alignItems="center" gap={2}>
             <Box display={{ base: 'block', md: 'none' }}>
-              <DynamicRxHamburgerMenu size={20} onClick={() => setIsModalOpen((prev) => !prev)} />
+              <Box onClick={() => setIsModalOpen((prev) => !prev)}>Ham</Box>
             </Box>
             <Link href="/" shallow passHref>
               <Box
