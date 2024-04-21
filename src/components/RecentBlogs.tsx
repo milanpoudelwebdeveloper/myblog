@@ -1,5 +1,4 @@
 import { Box, Divider, Grid, Text, useColorModeValue } from '@chakra-ui/react'
-import React from 'react'
 import BlogCard from './Common/BlogCard'
 
 const RecentBlogs = ({ blogs }: { blogs: IBlog[] }) => {

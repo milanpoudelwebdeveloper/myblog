@@ -10,7 +10,6 @@ import { deleteBlog, getBlogDetails, updateBlog } from '@/src/services/blog'
 import hljs from 'highlight.js'
 import ImageUploader from '@components/Admin/Common/ImageUploader'
 import { useRouter } from 'next/router'
-import DeleteModal from '@components/Admin/Common/DeleteModal'
 import 'highlight.js/styles/monokai-sublime.css'
 import { Controller, FieldValues, useForm } from 'react-hook-form'
 import ErrorText from '@components/Common/ErrorText'
@@ -42,6 +41,8 @@ const modules = {
 hljs.configure({
   languages: ['javascript', 'HTML', 'css']
 })
+
+const LazyLoadedDeleteModal = dynamic(() => import('@components/Admin/Common/DeleteModal'))
 
 const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
   const [coverImage, setCoverImage] = useState<File | null | string>(blogDetails?.coverimage || null)
@@ -212,7 +213,7 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
           </Box>
         </Box>
       </Box>
-      <DeleteModal type="blog" isOpen={isOpen} onClose={onClose} action={deleteHandler} />
+      <LazyLoadedDeleteModal type="blog" isOpen={isOpen} onClose={onClose} action={deleteHandler} />
     </MainLayout>
   )
 }

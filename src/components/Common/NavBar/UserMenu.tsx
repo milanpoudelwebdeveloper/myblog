@@ -42,7 +42,7 @@ const UserMenu = () => {
         <Link href={BLOGS_BY_USER} shallow>
           <MenuItem mb={1}>Blogs By You</MenuItem>
         </Link>
-        <Link href={SETTINGS} shallow>
+        <Link href={SETTINGS} shallow prefetch={false}>
           <MenuItem mb={1}> Settings</MenuItem>
         </Link>
         <MenuItem mb={1} onClick={logOutHandler}>

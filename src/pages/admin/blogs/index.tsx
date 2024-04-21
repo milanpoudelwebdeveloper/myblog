@@ -65,9 +65,9 @@ const Blogs = () => {
                 </Td>
                 <Td>
                   <Flex gap={2} fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }} mt={4}>
-                    {list?.categories?.map((categoryname) => (
-                      <Box bg="#FDF2FA" color="#C11574" borderRadius={10} p={2} key={categoryname}>
-                        <Text>{categoryname}</Text>
+                    {list?.categories?.map((category) => (
+                      <Box bg="#FDF2FA" color="#C11574" borderRadius={10} p={2} key={category?.value}>
+                        <Text>{category?.label}</Text>
                       </Box>
                     ))}
                   </Flex>
