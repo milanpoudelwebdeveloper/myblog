@@ -9,10 +9,8 @@ import { BLOGS } from '@constants/routes'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
 
 const Blogs = ({ categories }: { categories: ICategory[] }) => {
-  const [loading, setLoading] = useState<boolean>(true)
   const searchParams = useSearchParams()
   const search = searchParams.get('category')
   const { showToast } = useCustomToast()
@@ -23,7 +21,6 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
   } = useQuery({
     queryKey: ['getAllBlogs', search],
     queryFn: () => getBlogs(search),
-    enabled: !!search,
     staleTime: 60000
   })
 
@@ -38,10 +35,6 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
   if (error) {
     showToast(error, 'error')
   }
-
-  useEffect(() => {
-    if (!isLoading) setLoading(false)
-  }, [isLoading])
 
   return (
     <>
@@ -73,7 +66,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         </Flex>
 
         <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={8}>
-          {loading &&
+          {isLoading &&
             Array.from({ length: 6 }).map((_, index) => (
               <Skeleton h={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
             ))}
