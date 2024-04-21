@@ -24,8 +24,8 @@ const MobileNavBar = () => {
       px={20}
       h="60vh"
     >
-      {navLinks?.map(({ title, link }) => (
-        <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow>
+      {navLinks?.map(({ title, link, prefetch }) => (
+        <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow prefetch={prefetch}>
           <Box
             mb={{ base: 4, md: 0 }}
             borderBottomColor={pathname === link ? '#6941C6' : 'transparent'}

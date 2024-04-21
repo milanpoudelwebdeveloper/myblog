@@ -1,5 +1,5 @@
 import { Box, Divider, Flex, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getPopularBlogs } from '@/src/services/blog'
 import { convertDate } from '@/src/utils/convertDate'

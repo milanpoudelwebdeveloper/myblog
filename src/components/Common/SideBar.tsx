@@ -1,5 +1,4 @@
 import { Box, Divider, Text, useColorModeValue } from '@chakra-ui/react'
-import React from 'react'
 import dynamic from 'next/dynamic'
 import PopularBlogs from './PopularBlogs'
 
