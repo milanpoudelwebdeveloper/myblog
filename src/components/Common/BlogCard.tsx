@@ -68,7 +68,8 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
             }}
             fill
             priority={imageLoadFast}
-            sizes="auto"
+            unoptimized={!imageLoadFast}
+            sizes="(min-width: 1440px) 740px, (min-width: 1280px) 660px, (min-width: 1000px) 750px, (min-width: 800px) 670px, (min-width: 480px) calc(90vw - 32px), calc(100vw - 40px)"
           />
         </Box>
 
