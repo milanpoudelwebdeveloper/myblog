@@ -3,15 +3,16 @@ import { getCategories } from '@/src/services/category'
 import { Box, Grid, Flex, Skeleton } from '@chakra-ui/react'
 import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
-import React from 'react'
 import { useCustomToast } from '../hooks/useCustomToast'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import { BLOGS } from '@constants/routes'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 
 const Blogs = ({ categories }: { categories: ICategory[] }) => {
+  const [loading, setLoading] = useState<boolean>(true)
   const searchParams = useSearchParams()
   const search = searchParams.get('category')
   const { showToast } = useCustomToast()
@@ -37,6 +38,10 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
   if (error) {
     showToast(error, 'error')
   }
+
+  useEffect(() => {
+    if (!isLoading) setLoading(false)
+  }, [isLoading])
 
   return (
     <>
@@ -68,7 +73,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         </Flex>
 
         <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={8}>
-          {isLoading &&
+          {loading &&
             Array.from({ length: 6 }).map((_, index) => (
               <Skeleton h={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
             ))}
