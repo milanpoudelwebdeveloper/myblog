@@ -19,8 +19,8 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
     error,
     isLoading
   } = useQuery({
-    queryKey: ['getAllBlogs', search],
-    queryFn: () => getBlogs(search),
+    queryKey: ['getAllBlogs'],
+    queryFn: () => getBlogs('all'),
     staleTime: 60000
   })
 
@@ -68,7 +68,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={8}>
           {isLoading &&
             Array.from({ length: 6 }).map((_, index) => (
-              <Skeleton h={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
+              <Skeleton minH={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
             ))}
           {blogs?.map((post: IBlog, index: number) => <BlogCard card={post} key={post?.id} imageLoadFast={index === 0} />)}
         </Grid>
