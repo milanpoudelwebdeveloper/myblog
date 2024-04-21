@@ -68,7 +68,6 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
             }}
             fill
             priority={imageLoadFast}
-            unoptimized={!imageLoadFast}
             sizes="auto"
           />
         </Box>
