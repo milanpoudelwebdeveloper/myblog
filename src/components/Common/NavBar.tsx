@@ -93,7 +93,7 @@ const NavBar = () => {
                   style={{
                     objectFit: 'cover'
                   }}
-                  sizes="auto"
+                  sizes="(min-width: 780px) 48px, 36px"
                 />
               </Box>
             </Link>
