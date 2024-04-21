@@ -22,6 +22,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
   } = useQuery({
     queryKey: ['getAllBlogs', search],
     queryFn: () => getBlogs(search),
+    enabled: !!search,
     staleTime: 60000
   })
 
