@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useColorModeValue, useMediaQuery } from '@chakra-ui/react'
+import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 import 'react-quill/dist/quill.core.css'
@@ -23,14 +23,13 @@ interface Props {
 
 const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
   const { title, content, coverimage, categories, createdat, id, name } = card
-  const [isMobile] = useMediaQuery('(max-width: 768px)')
   const { user } = useContext(AuthContext)
   const bgColor = useColorModeValue('white', '#1a1a1a')
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
   const contentColor = useColorModeValue('#232323', '#C0C5D0')
   const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
   const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
-  const contentToDisplay = imageLoadFast ? content?.slice(0, isMobile ? 140 : 240) : content?.slice(0, 110)
+  const contentToDisplay = content?.slice(0, 160)
   const categoryColors = [
     {
       key: 1,
@@ -49,7 +48,14 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
     }
   ]
   return (
-    <Box pb={imageLoadFast ? 7 : 5} overflow="hidden" boxShadow={boxShadowColor} borderRadius={10} bg={bgColor}>
+    <Box
+      minH={{ base: 390, '1xl': 477 }}
+      pb={imageLoadFast ? 7 : 5}
+      overflow="hidden"
+      boxShadow={boxShadowColor}
+      borderRadius={10}
+      bg={bgColor}
+    >
       <Link href={dynamicLink} shallow>
         <Box
           minW="full"

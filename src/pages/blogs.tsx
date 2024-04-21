@@ -14,13 +14,10 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
   const searchParams = useSearchParams()
   const search = searchParams.get('category')
   const { showToast } = useCustomToast()
-  const {
-    data: blogs,
-    error,
-    isLoading
-  } = useQuery({
-    queryKey: ['getAllBlogs'],
+  const { data: blogs, error } = useQuery({
+    queryKey: ['getAllBlogs', search],
     queryFn: () => getBlogs('all'),
+    enabled: !!search,
     staleTime: 60000
   })
 
@@ -66,7 +63,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         </Flex>
 
         <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={8}>
-          {isLoading &&
+          {!blogs &&
             Array.from({ length: 6 }).map((_, index) => (
               <Skeleton minH={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
             ))}
