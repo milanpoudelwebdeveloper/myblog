@@ -1,6 +1,6 @@
 import { getBlogs } from '@/src/services/blog'
 import { getCategories } from '@/src/services/category'
-import { Box, Grid, Flex } from '@chakra-ui/react'
+import { Box, Grid, Flex, Skeleton } from '@chakra-ui/react'
 import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
 import React from 'react'
@@ -15,10 +15,13 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
   const searchParams = useSearchParams()
   const search = searchParams.get('category')
   const { showToast } = useCustomToast()
-  const { data: blogs, error } = useQuery({
+  const {
+    data: blogs,
+    error,
+    isLoading
+  } = useQuery({
     queryKey: ['getAllBlogs', search],
     queryFn: () => getBlogs(search),
-    enabled: !!search,
     staleTime: 60000
   })
 
@@ -64,6 +67,10 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         </Flex>
 
         <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={8}>
+          {isLoading &&
+            Array.from({ length: 6 }).map((_, index) => (
+              <Skeleton h={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
+            ))}
           {blogs?.map((post: IBlog) => <BlogCard card={post} key={post?.id} />)}
         </Grid>
       </MainLayout>
