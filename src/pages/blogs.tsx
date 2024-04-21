@@ -71,7 +71,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
             Array.from({ length: 6 }).map((_, index) => (
               <Skeleton h={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
             ))}
-          {blogs?.map((post: IBlog) => <BlogCard card={post} key={post?.id} />)}
+          {blogs?.map((post: IBlog, index: number) => <BlogCard card={post} key={post?.id} imageLoadFast={index === 0} />)}
         </Grid>
       </MainLayout>
     </>
