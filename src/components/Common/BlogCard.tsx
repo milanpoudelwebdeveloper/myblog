@@ -75,7 +75,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
             fill
             priority={imageLoadFast}
             unoptimized={!imageLoadFast}
-            sizes="(min-width: 1440px) 740px, (min-width: 1280px) 660px, (min-width: 1000px) 750px, (min-width: 800px) 670px, (min-width: 480px) calc(90vw - 38px), calc(100vw - 45px)"
+            sizes="(min-width: 1440px) 800px, (min-width: 1280px) 660px, (min-width: 1000px) 750px, (min-width: 800px) 670px, (min-width: 480px) calc(90vw - 38px), calc(100vw - 45px)"
           />
         </Box>
 
@@ -83,13 +83,7 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
           <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="400" mt={5} mb={3}>
             {name} &#x2022; {convertDate(createdat)}
           </Text>
-          <Text
-            as={imageLoadFast ? 'h1' : 'h2'}
-            color={titleColor}
-            fontSize={{ base: 'lg', '1xl': 'xl' }}
-            fontWeight="700"
-            lineHeight="1.5"
-          >
+          <Text as={imageLoadFast ? 'h1' : 'h2'} color={titleColor} fontSize="lg" fontWeight="700" lineHeight="1.5">
             {title}
           </Text>
           <Box color={contentColor} fontSize="sm" fontWeight="300" lineHeight="1.6" mt={2}>

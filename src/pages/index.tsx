@@ -30,7 +30,7 @@ export default function Home({ blogs, featuredBlog }: { blogs: IBlog[]; featured
         description="Code With Milan is a blog site where you can find programming tutorials"
       />
       <MainLayout>
-        <BlogCard card={featuredBlog} imageHeight={300} imageLoadFast={true} />
+        <BlogCard card={featuredBlog} imageHeight={320} imageLoadFast={true} />
         <RecentBlogs blogs={blogs} />
       </MainLayout>
     </>

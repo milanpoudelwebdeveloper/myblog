@@ -74,10 +74,10 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
       />
       <MainLayout>
         <Box position="relative">
-          <Text color={titleColor} fontSize={{ base: '28px', '1xl': '38px' }} fontWeight="bold" lineHeight={1.4}>
+          <Text color={titleColor} fontSize={{ base: '28px', '1xl': '34px' }} fontWeight="bold" lineHeight={1.5}>
             {blogDetail?.title}
           </Text>
-          <Flex mt={3} mb={8} alignItems="center" color={dateColor} fontSize="sm" fontWeight="300">
+          <Flex mt={5} mb={7} alignItems="center" color={dateColor} fontSize="sm" fontWeight="300">
             <Flex alignItems="center" gap={3} ml={2}>
               <Image
                 src={blogDetail?.profileimage}
@@ -102,7 +102,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
               width="100%"
               maxW="full"
               objectFit="cover"
-              h={{ base: 220, xl: 330, '1xl': 370 }}
+              h={{ base: 220, xl: 330, '1xl': 360 }}
               maxH="full"
             />
             <Flex alignItems="center" justifyContent="space-between" px={2}>

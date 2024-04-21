@@ -14,13 +14,13 @@ const MainLayout = ({ children, hideSidebar = false }: Props) => {
     <Box maxW={{ base: 750, xl: 1080, '1xl': 1200 }} mx="auto" px={{ base: 5, sm: 10, lg: 0 }}>
       <NavBar />
       <Flex
-        gap={{ base: 12, '1xl': 14 }}
+        gap={12}
         mt={{ base: 90, xl: 28, '1xl': 32 }}
         direction={{ base: 'column', xl: 'row' }}
         justifyContent="center"
         position="relative"
       >
-        <Box minW={{ base: 'full', xl: 660, '1xl': 740 }} maxW={{ base: 'full', xl: 660, '1xl': 740 }}>
+        <Box minW={{ base: 'full', xl: 660, '1xl': 720 }} maxW={{ base: 'full', xl: 660, '1xl': 720 }}>
           {children}
         </Box>
         <Box display={hideSidebar ? 'none' : 'block'} flex={1} mt={4}>
