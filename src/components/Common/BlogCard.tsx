@@ -10,7 +10,6 @@ import Image from 'next/image'
 import { AuthContext } from '@/src/context/authContext'
 import { BLOGS } from '@constants/routes'
 import { categoryColors } from '@constants/categories'
-import { inter } from '@pages/_app'
 
 interface Props {
   card: IBlog
