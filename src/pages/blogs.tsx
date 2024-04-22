@@ -62,7 +62,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
           ))}
         </Flex>
 
-        <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={8}>
+        <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }} gap={6} mt={8}>
           {!blogs &&
             Array.from({ length: 6 }).map((_, index) => (
               <Skeleton minH={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
