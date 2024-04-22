@@ -1,33 +1,19 @@
-import { Box, Divider, Flex, Skeleton, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import React, { useContext } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { getPopularBlogs } from '@/src/services/blog'
 import { convertDate } from '@/src/utils/convertDate'
-import { useCustomToast } from '@/src/hooks/useCustomToast'
 import Image from 'next/image'
 import { base64File } from '@constants/files'
 import { AuthContext } from '@/src/context/authContext'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-const PopularBlogs = () => {
+const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
   const { user } = useContext(AuthContext)
   const router = useRouter()
-  const { showToast } = useCustomToast()
   const dividerColor = useColorModeValue('#D9D9D9', 'rgba(255, 255, 255, 0.15)')
   const dateColor = useColorModeValue('rgb(35, 35, 35)', '#C0C5D0')
   const isHomePage = router.pathname === '/'
   const isBlogPage = router.pathname.includes('/blogs')
-
-  const { error, data, isLoading } = useQuery({
-    queryKey: ['getPopularPosts'],
-    queryFn: getPopularBlogs,
-    staleTime: 60000
-  })
-
-  if (error) {
-    showToast('Error fetching popular posts', 'error')
-  }
 
   const getDynamicLink = (id: string) => {
     return user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
@@ -35,12 +21,11 @@ const PopularBlogs = () => {
 
   return (
     <Box>
-      {isLoading && <Skeleton className="skeleton-loader" transform="auto" h={390} borderRadius={20} mb={6} />}
       <Text fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="600" mb={4}>
         Popular Read
       </Text>
       <Divider mb={4} borderColor={dividerColor} />
-      {data?.slice(0, 4).map((blog: IBlog) => (
+      {blogs?.slice(0, 4).map((blog: IBlog) => (
         <Link href={getDynamicLink(blog?.id as string)} key={blog?.id}>
           <Box mb={{ base: 4, '1xl': 6 }}>
             <Flex alignItems="center" gap={{ base: 4, '1xl': 5 }}>
