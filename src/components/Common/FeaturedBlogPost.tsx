@@ -31,6 +31,7 @@ const FeaturedBlogPost = ({ card, imageLoadFast = false }: Props) => {
         bgPosition="center"
         bgRepeat="no-repeat"
         position="relative"
+        minW={{ base: 'full', md: 600, '1xl': 700 }}
       >
         <Box
           position="absolute"
