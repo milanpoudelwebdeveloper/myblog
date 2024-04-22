@@ -1,10 +1,10 @@
 import MainLayout from '@components/Common/MainLayout'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import dynamic from 'next/dynamic'
-import { getBlogs, getFeaturedBlog } from '../services/blog'
+import { getBlogs, getFeaturedBlog, getPopularBlogs } from '../services/blog'
 import FeaturedBlogPost from '@components/Common/FeaturedBlogPost'
 import PopularBlogs from '@components/Common/PopularBlogs'
-import { Box, Flex } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 
 const RecentBlogs = dynamic(() => import('../components/RecentBlogs'), {
   ssr: true
@@ -13,17 +13,25 @@ const RecentBlogs = dynamic(() => import('../components/RecentBlogs'), {
 export async function getStaticProps() {
   const blogs = await getBlogs()
   const featuredBlog = await getFeaturedBlog()
+  const popularBlogs = await getPopularBlogs()
 
   return {
     props: {
       blogs,
-      featuredBlog: featuredBlog || null
+      featuredBlog: featuredBlog || null,
+      popularBlogs: popularBlogs || null
     },
     revalidate: 3600
   }
 }
 
-export default function Home({ blogs, featuredBlog }: { blogs: IBlog[]; featuredBlog: IBlog }) {
+interface Props {
+  blogs: IBlog[]
+  featuredBlog: IBlog
+  popularBlogs: IBlog[]
+}
+
+export default function Home({ blogs, featuredBlog, popularBlogs }: Props) {
   return (
     <>
       <HeadingSeo
@@ -33,10 +41,8 @@ export default function Home({ blogs, featuredBlog }: { blogs: IBlog[]; featured
       />
       <MainLayout>
         <Flex gap={10} direction={{ base: 'column', md: 'row' }}>
-          <Box minW={{ base: 'full', md: 600, '1xl': 700 }}>
-            <FeaturedBlogPost card={featuredBlog} />
-          </Box>
-          <PopularBlogs />
+          <FeaturedBlogPost card={featuredBlog} />
+          <PopularBlogs blogs={popularBlogs} />
         </Flex>
         <RecentBlogs blogs={blogs} />
       </MainLayout>
