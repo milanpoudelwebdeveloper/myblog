@@ -34,13 +34,26 @@ const PopularBlogs = () => {
   }
 
   return (
-    <>
+    <Box>
       {isLoading && <Skeleton className="skeleton-loader" transform="auto" h={390} borderRadius={20} mb={6} />}
-      {data?.map((blog: IBlog) => (
+      <Text fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="600" mb={4}>
+        Popular Read
+      </Text>
+      <Divider mb={4} borderColor={dividerColor} />
+      {data?.slice(0, 4).map((blog: IBlog) => (
         <Link href={getDynamicLink(blog?.id as string)} key={blog?.id}>
-          <Box mb={4}>
+          <Box mb={{ base: 4, '1xl': 6 }}>
             <Flex alignItems="center" gap={{ base: 4, '1xl': 5 }}>
-              <Box position="relative" w={59} h={59} maxW="full" maxH="full" borderRadius="full" overflow="hidden" flexShrink={0}>
+              <Box
+                position="relative"
+                w={{ base: 12, '1xl': 55 }}
+                h={{ base: 12, '1xl': 55 }}
+                maxW="full"
+                maxH="full"
+                borderRadius="10px"
+                overflow="hidden"
+                flexShrink={0}
+              >
                 <Image
                   src={blog?.coverimage}
                   alt="popular"
@@ -55,7 +68,13 @@ const PopularBlogs = () => {
                 />
               </Box>
               <Box>
-                <Text fontSize="sm" fontWeight="600" mb={1} lineHeight="1.5" as={isHomePage ? 'h3' : isBlogPage ? 'h1' : 'h2'}>
+                <Text
+                  fontSize={{ base: 'sm', '1xl': 'md' }}
+                  fontWeight="600"
+                  mb={1}
+                  lineHeight="1.5"
+                  as={isHomePage ? 'h3' : isBlogPage ? 'h1' : 'h2'}
+                >
                   {blog?.title}
                 </Text>
                 <Text color={dateColor} fontSize="xs" fontWeight="300">
@@ -67,7 +86,7 @@ const PopularBlogs = () => {
           </Box>
         </Link>
       ))}
-    </>
+    </Box>
   )
 }
 
