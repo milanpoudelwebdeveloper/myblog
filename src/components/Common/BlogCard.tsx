@@ -10,6 +10,7 @@ import Image from 'next/image'
 import { AuthContext } from '@/src/context/authContext'
 import { BLOGS } from '@constants/routes'
 import { categoryColors } from '@constants/categories'
+import { inter } from '@pages/_app'
 
 interface Props {
   card: IBlog
@@ -84,7 +85,7 @@ const BlogCard = ({ card, imageLoadFast = false }: Props) => {
             color={titleColor}
             fontSize={{ base: 'sm', '1xl': 'lg' }}
             fontWeight="600"
-            lineHeight={{ base: '22px', '1xl': '28px' }}
+            lineHeight={{ base: '23px', '1xl': '28px' }}
           >
             {title}
           </Text>

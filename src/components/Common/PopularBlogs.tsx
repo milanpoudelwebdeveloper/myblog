@@ -27,7 +27,7 @@ const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
       <Divider mb={4} borderColor={dividerColor} />
       {blogs?.slice(0, 4).map((blog: IBlog) => (
         <Link href={getDynamicLink(blog?.id as string)} key={blog?.id}>
-          <Box mb={{ base: 4, '1xl': 6 }}>
+          <Box mb={{ base: 3, '1xl': 7 }}>
             <Flex alignItems="center" gap={{ base: 4, '1xl': 5 }}>
               <Box
                 position="relative"

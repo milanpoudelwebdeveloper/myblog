@@ -30,9 +30,9 @@ const FeaturedBlogPost = ({ card }: Props) => {
         borderRadius={10}
         bgSize="cover"
         position="relative"
-        minW={{ base: 'full', md: 600, '1xl': 700 }}
+        minW={{ base: 'full', md: 580, '1xl': 700 }}
       >
-        <Flex position="absolute" top={7} zIndex={12} left={7} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }}>
+        <Flex position="absolute" top={8} zIndex={12} left={7} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }}>
           {categories?.map((category, index) => (
             // <Link href={BLOGS + '?category=' + category?.value} key={index} shallow>
             <Box
@@ -56,19 +56,19 @@ const FeaturedBlogPost = ({ card }: Props) => {
           backgroundImage="linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(27, 27, 27, 0.7))"
           zIndex={10}
         />
-        <Box w="full" minH={{ base: 300, md: 370, '1xl': 450 }} overflow="hidden" position="relative">
+        <Box w="full" minH={{ base: 280, md: 370, '1xl': 450 }} overflow="hidden" position="relative">
           <Image src={coverimage} alt={title} layout="fill" objectFit="cover" priority />
         </Box>
 
         <Box
           position="absolute"
-          bottom={{ base: 7, '1xl': 10 }}
+          bottom={{ base: 8, '1xl': 12 }}
           left={{ base: 6, '1xl': 10 }}
           color="white"
           fontSize={{ base: 'lg', '1xl': '24px' }}
           fontWeight="bold"
           zIndex={110}
-          maxW={{ base: '94%', '1xl': '90%' }}
+          maxW={{ base: '84%', '1xl': '90%' }}
         >
           <Text>{title}</Text>
         </Box>
