@@ -4,11 +4,11 @@ import theme from '@/theme'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from '../context/authContext'
 import AuthChecker from '@components/Common/AuthChecker'
-import { Manrope } from 'next/font/google'
+import { Manrope, Inter } from 'next/font/google'
 import dynamic from 'next/dynamic'
 
 const manrope = Manrope({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] })
-
+export const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] })
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

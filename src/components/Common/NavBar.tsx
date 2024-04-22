@@ -56,7 +56,7 @@ const NavBar = () => {
         width="full"
         maxW={{ base: 700, lg: 780, xl: 1080, '1xl': 1200 }}
       >
-        <Flex gap={48}>
+        <Flex gap={80}>
           <Flex alignItems="center" gap={2}>
             <Box display={{ base: 'block', md: 'none' }} onClick={() => setIsModalOpen((prev) => !prev)}>
               <svg
