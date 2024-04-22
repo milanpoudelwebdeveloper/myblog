@@ -8,12 +8,7 @@ import { convertDate } from '@/src/utils/convertDate'
 import { base64File } from '@constants/files'
 import Image from 'next/image'
 import { AuthContext } from '@/src/context/authContext'
-import dynamic from 'next/dynamic'
 import { BLOGS } from '@constants/routes'
-
-const DynamicMarkdown = dynamic(() => import('markdown-to-jsx'), {
-  ssr: true
-})
 
 interface Props {
   card: IBlog
@@ -21,15 +16,11 @@ interface Props {
   imageLoadFast?: boolean
 }
 
-const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
-  const { title, content, coverimage, categories, createdat, id, name } = card
+const BlogCard = ({ card, imageLoadFast = false }: Props) => {
+  const { title, coverimage, categories, createdat, id, name } = card
   const { user } = useContext(AuthContext)
-  const bgColor = useColorModeValue('white', '#1a1a1a')
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
-  const contentColor = useColorModeValue('#232323', '#C0C5D0')
-  const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
   const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
-  const contentToDisplay = content?.slice(0, 160)
   const categoryColors = [
     {
       key: 1,
@@ -48,22 +39,17 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
     }
   ]
   return (
-    <Box
-      minH={{ base: 390, '1xl': 477 }}
-      pb={imageLoadFast ? 7 : 5}
-      overflow="hidden"
-      boxShadow={boxShadowColor}
-      borderRadius={10}
-      bg={bgColor}
-    >
-      <Link href={dynamicLink} shallow>
-        <Box
-          minW="full"
-          maxW="full"
-          minH={{ base: 180, md: imageHeight ? 250 : 210, xl: imageHeight ? 250 : 190, '1xl': imageHeight ? imageHeight : 200 }}
-          maxH="full"
-          position="relative"
-        >
+    <Box pb={imageLoadFast ? 7 : 5} overflow="hidden" borderRadius={10}>
+      <Box
+        minW="full"
+        maxW="full"
+        minH={{ base: 230, '1xl': 280 }}
+        maxH="full"
+        position="relative"
+        borderRadius="0.75rem"
+        overflow="hidden"
+      >
+        <Link href={dynamicLink} shallow>
           <Image
             src={coverimage}
             placeholder="blur"
@@ -77,37 +63,51 @@ const BlogCard = ({ card, imageHeight, imageLoadFast = false }: Props) => {
             unoptimized={!imageLoadFast}
             sizes="(min-width: 1440px) 800px, (min-width: 1280px) 660px, (min-width: 1000px) 750px, (min-width: 800px) 670px, (min-width: 480px) calc(90vw - 38px), calc(100vw - 45px)"
           />
-        </Box>
-
-        <Box px={6}>
-          <Text color="#6941C6" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="400" mt={5} mb={3}>
-            {name} &#x2022; {convertDate(createdat)}
-          </Text>
-          <Text as={imageLoadFast ? 'h1' : 'h2'} color={titleColor} fontSize="lg" fontWeight="700" lineHeight="1.5">
+        </Link>
+        <Flex
+          position="absolute"
+          bottom={4}
+          left={4}
+          gap={2}
+          fontSize={{ base: '10px', '1xl': 'xs' }}
+          mt={4}
+          display={imageLoadFast ? 'none' : 'flex'}
+        >
+          {categories?.map((category, index) => (
+            <Link href={BLOGS + '?category=' + category?.value} key={index} shallow>
+              <Box
+                bg={categoryColors[index]?.bgColor}
+                color={categoryColors[index]?.titleColor}
+                borderRadius={7}
+                px={3}
+                py={1.5}
+                fontWeight="500"
+                key={category?.value}
+              >
+                {category?.label}
+              </Box>
+            </Link>
+          ))}
+        </Flex>
+      </Box>
+      <Link href={dynamicLink} shallow>
+        <Box>
+          <Text
+            mt={4}
+            mb={2}
+            as={imageLoadFast ? 'h1' : 'h2'}
+            color={titleColor}
+            fontSize={{ base: 'sm', '1xl': 'lg' }}
+            fontWeight="600"
+            lineHeight={{ base: '22px', '1xl': '28px' }}
+          >
             {title}
           </Text>
-          <Box color={contentColor} fontSize="sm" fontWeight="300" lineHeight="1.6" mt={2}>
-            <DynamicMarkdown>{`${contentToDisplay}....`}</DynamicMarkdown>
-          </Box>
+          <Text color="rgb(116, 116, 116)" fontSize={{ base: 'xs', '1xl': 'md' }} fontWeight="600">
+            {name} &#x2022; {convertDate(createdat)}
+          </Text>
         </Box>
       </Link>
-      <Flex gap={2} fontSize="xs" mt={4} display={imageLoadFast ? 'none' : 'flex'} px={6}>
-        {categories?.map((category, index) => (
-          <Link href={BLOGS + '?category=' + category?.value} key={index} shallow>
-            <Box
-              bg={categoryColors[index]?.bgColor}
-              color={categoryColors[index]?.titleColor}
-              borderRadius={7}
-              px={2}
-              py={1.5}
-              fontWeight="500"
-              key={category?.value}
-            >
-              {category?.label}
-            </Box>
-          </Link>
-        ))}
-      </Flex>
     </Box>
   )
 }

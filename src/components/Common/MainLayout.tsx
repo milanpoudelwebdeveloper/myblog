@@ -1,7 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react'
 import React from 'react'
 import NavBar from './NavBar'
-import SideBar from './SideBar'
 import Footer from './Footer'
 
 interface Props {
@@ -9,9 +8,9 @@ interface Props {
   hideSidebar?: boolean
 }
 
-const MainLayout = ({ children, hideSidebar = false }: Props) => {
+const MainLayout = ({ children }: Props) => {
   return (
-    <Box maxW={{ base: 750, xl: 1080, '1xl': 1200 }} mx="auto" px={{ base: 5, sm: 10, lg: 0 }}>
+    <Box maxW={{ base: 750, xl: 1000, '1xl': 1240 }} mx="auto" px={{ base: 5, sm: 10, lg: 0 }}>
       <NavBar />
       <Flex
         gap={12}
@@ -20,12 +19,7 @@ const MainLayout = ({ children, hideSidebar = false }: Props) => {
         justifyContent="center"
         position="relative"
       >
-        <Box minW={{ base: 'full', xl: 660, '1xl': 720 }} maxW={{ base: 'full', xl: 660, '1xl': 720 }}>
-          {children}
-        </Box>
-        <Box display={hideSidebar ? 'none' : 'block'} flex={1} mt={4}>
-          <SideBar />
-        </Box>
+        <Box>{children}</Box>
       </Flex>
       <Footer />
     </Box>
