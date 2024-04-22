@@ -19,8 +19,6 @@ import { inter } from '@pages/_app'
 const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const client = useQueryClient()
   const [isSaved, setIsSaved] = useState(blogDetail?.saved)
-  const titleColor = useColorModeValue('#1A1A1A', 'rgb(237, 242, 247)')
-  const dateColor = useColorModeValue('rgb(0, 0, 0)', '#c0c5d0')
   const bookMarkBg = useColorModeValue(isSaved ? 'black' : 'white', isSaved ? 'white' : 'black')
   const bookMarkStroke = useColorModeValue(isSaved ? 'white' : 'black', isSaved ? 'black' : 'white')
   const { user } = useContext(AuthContext)
