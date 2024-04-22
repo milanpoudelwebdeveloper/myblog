@@ -3,8 +3,9 @@ import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Text, Button, Flex, Bo
 import Link from 'next/link'
 import { getBlogs } from '@/src/services/blog'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
+import { ADMIN_BLOGS } from '@constants/routes'
 
-const tableHeadings = ['Title', 'Description', 'Cover Image', 'Category', 'Created At']
+const tableHeadings = ['ID', 'Title', 'Description', 'Cover Image', 'Category', 'Created At']
 
 const RecentBlogs = () => {
   const [blogs, setBlogs] = useState<IBlog[]>([])
@@ -46,7 +47,10 @@ const RecentBlogs = () => {
           <Tbody>
             {blogs?.map((list) => (
               <Tr key={list?.id} fontSize="sm" fontWeight="500">
-                <Td>{list.title}</Td>
+                <Td>{list?.id}</Td>
+                <Td>
+                  <Link href={ADMIN_BLOGS + '/' + list?.id}>{list?.title}</Link>
+                </Td>
                 <Td>{list?.content?.slice(0, 8)}</Td>
                 <Td>
                   <Image src={list?.coverimage} alt="avatar" w={10} h="auto" borderRadius="full" objectFit="cover" />

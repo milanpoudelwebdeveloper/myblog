@@ -2,13 +2,14 @@ import { AuthContext } from '@/src/context/authContext'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { logoutUser } from '@/src/services/auth'
 import { Button, Menu, MenuButton, MenuItem, MenuList, Image as ChakraImage } from '@chakra-ui/react'
-import { BLOGS_BY_USER, SAVED_BLOGS, SETTINGS } from '@constants/routes'
+import { ADMIN, BLOGS_BY_USER, SAVED_BLOGS, SETTINGS } from '@constants/routes'
 import Link from 'next/link'
 import { useContext } from 'react'
 
 const UserMenu = () => {
   const { setLogOut, user } = useContext(AuthContext)
   const { showToast } = useCustomToast()
+  const hasDashboardAccess = user?.role === 'superadmin' || user?.role === 'admin' || user?.role === 'writer'
 
   const logOutHandler = () => {
     logoutUser()
@@ -36,6 +37,11 @@ const UserMenu = () => {
         />
       </MenuButton>
       <MenuList fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="500" py={4}>
+        {hasDashboardAccess && (
+          <Link href={ADMIN} shallow prefetch={false}>
+            <MenuItem mb={1}>Dashboard</MenuItem>
+          </Link>
+        )}
         <Link href={SAVED_BLOGS} shallow>
           <MenuItem mb={1}>Saved</MenuItem>
         </Link>

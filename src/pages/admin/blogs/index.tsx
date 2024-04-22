@@ -5,8 +5,9 @@ import Link from 'next/link'
 import { getBlogs } from '@/src/services/blog'
 import BlogFilter from '@components/Admin/Blogs/BlogFilter'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
+import { ADMIN_BLOGS } from '@constants/routes'
 
-const tableHeadings = ['ID', 'Title', 'Description', 'Cover Image', 'Category', 'Created At', 'Published Status']
+const tableHeadings = ['ID', 'Title', 'Cover Image', 'Category', 'Created At', 'Published Status']
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<IBlog[]>([])
@@ -58,8 +59,11 @@ const Blogs = () => {
             {blogs?.map((list) => (
               <Tr key={list?.id}>
                 <Td>{list?.id}</Td>
-                <Td paddingY={8}>{list.title}</Td>
-                <Td paddingY={8}>{list?.content?.slice(0, 8)}</Td>
+
+                <Td paddingY={8}>
+                  <Link href={ADMIN_BLOGS + '/' + list?.id}>{list?.title}</Link>
+                </Td>
+
                 <Td>
                   <Image src={list?.coverimage} alt="avatar" w={12} borderRadius="full" h={12} objectFit="cover" />
                 </Td>
