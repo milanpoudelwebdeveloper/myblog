@@ -57,11 +57,15 @@ a {
 .ql-snow .ql-editor h2 span {
   font-size: 18px !important;
   font-weight: 700 !important;
+}
+
+.ql-snow .ql-editor h2 strong,
+.ql-snow .ql-editor h2 span {
   color: rgb(0, 0, 0) !important;
 }
 
 html[data-theme='dark'] .ql-snow .ql-editor h2 strong,
-.ql-snow .ql-editor h2 span {
+html[data-theme='dark'] .ql-snow .ql-editor h2 span {
   color: #c0c5d0 !important;
 }
 
