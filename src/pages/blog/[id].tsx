@@ -20,6 +20,8 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const [isSaved, setIsSaved] = useState(blogDetail?.saved)
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(237, 242, 247)')
   const dateColor = useColorModeValue('rgb(0, 0, 0)', '#c0c5d0')
+  const bookMarkBg = useColorModeValue(isSaved ? 'black' : 'white', isSaved ? 'white' : 'black')
+  const bookMarkStroke = useColorModeValue(isSaved ? 'white' : 'black', isSaved ? 'black' : 'white')
   const { user } = useContext(AuthContext)
   const router = useRouter()
   const { showToast } = useCustomToast()
@@ -74,9 +76,11 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
       />
       <MainLayout>
         <Box position="relative">
-          <Text color={titleColor} fontSize={{ base: '28px', '1xl': '34px' }} fontWeight="bold" lineHeight={1.5}>
-            {blogDetail?.title}
-          </Text>
+          <Flex>
+            <Text color={titleColor} fontSize={{ base: '28px', '1xl': '34px' }} fontWeight="bold" lineHeight={1.5}>
+              {blogDetail?.title}
+            </Text>
+          </Flex>
           <Flex mt={5} mb={7} alignItems="center" color={dateColor} fontSize="sm" fontWeight="300">
             <Flex alignItems="center" gap={3} ml={2}>
               <Image
@@ -107,7 +111,17 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
             />
             <Flex alignItems="center" justifyContent="space-between" px={2}>
               <SocialShares shareURL={shareURL} blogDetail={blogDetail} />
-              <Button onClick={saveOrUnSaveHandler}>Save</Button>
+              <Button variant="unstyled" onClick={saveOrUnSaveHandler} minW="max-content">
+                <svg width="25" height="25" viewBox="0 0 20 20" fill={bookMarkBg} xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M15 19L8 14L1 19V3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H13C13.5304 1 14.0391 1.21071 14.4142 1.58579C14.7893 1.96086 15 2.46957 15 3V19Z"
+                    stroke={bookMarkStroke}
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Button>
             </Flex>
           </Box>
           <Box ref={parentRef} />

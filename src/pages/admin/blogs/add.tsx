@@ -20,7 +20,7 @@ import { AuthContext } from '@/src/context/authContext'
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],
-  ['blockquote', 'code-block'],
+  ['blockquote', 'code-block', 'color', 'background'],
 
   [{ list: 'ordered' }, { list: 'bullet' }],
   ['link'],

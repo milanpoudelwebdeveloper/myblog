@@ -53,10 +53,16 @@ a {
   }
 }
 
-.ql-snow .ql-editor h2 strong {
+.ql-snow .ql-editor h2 strong,
+.ql-snow .ql-editor h2 span {
   font-size: 18px !important;
   font-weight: 700 !important;
-  color: #000 !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+html[data-theme='dark'] .ql-snow .ql-editor h2 strong,
+.ql-snow .ql-editor h2 span {
+  color: #c0c5d0 !important;
 }
 
 html[data-theme='dark'] .ql-editor p,
@@ -67,7 +73,7 @@ html[data-theme='dark'] .ql-editor p,
 
 html[data-theme='light'] .ql-editor p span {
   line-height: 30px !important;
-  color: #000 !important;
+  color: rgb(0, 0, 0) !important;
 }
 
 .ql-syntax::-webkit-scrollbar {

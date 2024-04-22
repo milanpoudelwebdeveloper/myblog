@@ -17,7 +17,7 @@ const queryClient = new QueryClient({
     }
   }
 })
-const ChakraProvider = dynamic(() => import('@chakra-ui/provider').then((mod) => mod.ChakraProvider))
+const ChakraProvider = dynamic(() => import('@chakra-ui/react').then((mod) => mod.ChakraProvider))
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
