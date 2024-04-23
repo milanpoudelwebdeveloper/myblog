@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Input, Text } from '@chakra-ui/react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 
@@ -42,7 +43,15 @@ const Footer = () => {
         gap={4}
       >
         <Text fontSize={{ base: 'xs', md: 'sm', xl: 'md', '1xl': 'lg' }}>&copy; {currentYear} Code With Milan. All rights reserved.</Text>
-        <Text fontSize={{ base: 'xs', md: 'sm', xl: 'md', '1xl': 'lg' }}>Made with &#x2764; by Milan Poudel</Text>
+
+        <Flex fontSize={{ base: 'xs', md: 'sm', xl: 'md', '1xl': 'lg' }}>
+          <Text>Made with &#x2764; by </Text>
+          <Link href="https://milanpoudel1.com.np" target="_blank">
+            <Text color="#FFD700" ml={1} cursor="pointer">
+              Milan Poudel
+            </Text>
+          </Link>
+        </Flex>
       </Flex>
     </Box>
   )
