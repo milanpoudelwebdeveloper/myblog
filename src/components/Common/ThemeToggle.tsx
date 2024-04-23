@@ -18,15 +18,14 @@ const ThemeToggle = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        fontSize="sm"
         bg={colorMode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'none'}
         onClick={toggleColorMode}
-        h={8}
+        h={{ base: 7, '1xl': 8 }}
         aria-label="Toggle color mode"
       >
         <svg
-          width="16"
-          height="16"
+          width="14"
+          height="14"
           fill="none"
           stroke="currentColor"
           strokeLinecap="round"
@@ -52,15 +51,14 @@ const ThemeToggle = () => {
         justifyContent="center"
         alignItems="center"
         onClick={toggleColorMode}
-        fontSize="sm"
         bg={colorMode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'none'}
-        h={8}
+        h={{ base: 7, '1xl': 8 }}
         aria-label="Toggle color mode"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
+          width="14"
+          height="14"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"

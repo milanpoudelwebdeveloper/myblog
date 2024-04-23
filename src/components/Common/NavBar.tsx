@@ -56,7 +56,7 @@ const NavBar = () => {
         width="full"
         maxW={{ base: 700, lg: 780, xl: 1080, '1xl': 1200 }}
       >
-        <Flex gap={80}>
+        <Flex gap={{ base: 24, xl: 80 }}>
           <Flex alignItems="center" gap={2}>
             <Box display={{ base: 'block', md: 'none' }} onClick={() => setIsModalOpen((prev) => !prev)}>
               <svg
@@ -79,30 +79,27 @@ const NavBar = () => {
             <Link href="/" shallow passHref>
               <Box
                 position="relative"
-                minW={{ base: 9, md: 12 }}
-                minH={{ base: 9, md: 12 }}
+                minW={{ base: 9, '1xl': 12 }}
+                minH={{ base: 9, '1xl': 12 }}
                 maxW="full"
                 maxH="full"
                 borderRadius="full"
                 overflow="hidden"
               >
-                <Image
-                  src="/images/logo.webp"
-                  alt="logo"
-                  fill
-                  style={{
-                    objectFit: 'cover'
-                  }}
-                  sizes="(min-width: 780px) 48px, 36px"
-                />
+                <Image src="/images/logo.webp" alt="logo" fill sizes="(min-width: 780px) 48px, 36px" objectFit="cover" />
               </Box>
             </Link>
           </Flex>
 
-          <Flex display={{ base: 'none', md: 'flex' }} fontSize={{ md: 'sm', xl: 'md' }} gap={{ base: 8, '1xl': 10 }} alignItems="center">
+          <Flex
+            display={{ base: 'none', md: 'flex' }}
+            fontSize={{ md: 'sm', '1xl': 'md' }}
+            gap={{ base: 8, '1xl': 10 }}
+            alignItems="center"
+          >
             {navLinks?.map(({ title, link, prefetch }) => (
               <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow prefetch={prefetch}>
-                <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={2}>
+                <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={{ base: 1, xl: 2 }}>
                   <Box cursor="pointer" _hover={{ color: '#1814F3' }}>
                     {title}
                   </Box>
@@ -118,7 +115,7 @@ const NavBar = () => {
               <LazyLoadedUserMenu />
             ) : (
               <Link href="/login" shallow>
-                <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', xl: 'lg' }} fontWeight="normal">
+                <Button bg="#6941C6" color="white" fontSize={{ md: 'sm', '1xl': 'lg' }} fontWeight="normal" h={{ base: 9, '1xl': 10 }}>
                   Login
                 </Button>
               </Link>

@@ -24,7 +24,7 @@ const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
       <Text fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="600" mb={4}>
         Popular Read
       </Text>
-      <Divider mb={4} borderColor={dividerColor} />
+      <Divider mb={{ base: 4, lg: 3, xl: 4 }} borderColor={dividerColor} />
       {blogs?.slice(0, 4).map((blog: IBlog) => (
         <Link href={getDynamicLink(blog?.id as string)} key={blog?.id}>
           <Box mb={{ base: 3, '1xl': 7 }}>
@@ -56,7 +56,7 @@ const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
                 <Text
                   fontSize={{ base: 'sm', '1xl': 'md' }}
                   fontWeight="600"
-                  mb={1}
+                  mb={{ base: 1, lg: 0, xl: 1 }}
                   lineHeight="1.5"
                   as={isHomePage ? 'h3' : isBlogPage ? 'h1' : 'h2'}
                 >

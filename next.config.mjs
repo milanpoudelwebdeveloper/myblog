@@ -3,6 +3,7 @@ import bundleAnalyzer from '@next/bundle-analyzer'
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

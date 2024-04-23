@@ -41,7 +41,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         link={`https://codewithmilan.com/${BLOGS}`}
       />
       <MainLayout>
-        <Flex gap={4}>
+        <Flex gap={4} flexWrap="wrap">
           {finalCategories?.map((category) => (
             <Link href={`/blogs?category=${category?.id}`} key={category?.id} shallow>
               <Box
@@ -62,7 +62,11 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
           ))}
         </Flex>
 
-        <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }} gap={6} mt={8}>
+        <Grid
+          templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }}
+          gap={{ base: 6, lg: 12, xl: 8 }}
+          mt={8}
+        >
           {!blogs &&
             Array.from({ length: 6 }).map((_, index) => (
               <Skeleton minH={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />

@@ -42,32 +42,13 @@ const SocialShares = ({ shareURL, blogDetail }: Props) => {
   ]
 
   return (
-    <Flex direction={{ base: 'row', lg: 'row' }} top="30vh" left={-24} gap={{ base: 3, lg: 4 }} mt={2}>
+    <Flex top="30vh" left={-24} gap={{ base: 3, lg: 4 }}>
       {links.map(({ name, icon, link }) => (
-        <Box key={name}>
-          <a href={link} target="_blank" rel="noreferrer">
-            <Box
-              position="relative"
-              w={{ base: 6, '1xl': 7 }}
-              h={{ base: 6, '1xl': 7 }}
-              maxW="full"
-              maxH="full"
-              cursor="pointer"
-              borderRadius="full"
-              overflow="hidden"
-            >
-              <Image
-                src={`/images/${icon}.webp`}
-                alt={name}
-                fill
-                style={{
-                  objectFit: 'cover'
-                }}
-                sizes="auto"
-              />
-            </Box>
-          </a>
-        </Box>
+        <a key={name} href={link} target="_blank" rel="noreferrer">
+          <Box position="relative" w={7} h={7} maxW="full" cursor="pointer" borderRadius="full" overflow="hidden">
+            <Image src={`/images/${icon}.webp`} alt={name} fill sizes="auto" objectFit="cover" />
+          </Box>
+        </a>
       ))}
     </Flex>
   )
