@@ -35,7 +35,7 @@ const Contact = () => {
         description="Contact us for any kind of inquiry, feedback or any other work"
       />
       <MainLayout>
-        <Box>
+        <Box w={{ base: 'full', md: 700, '1xl': 870 }} mx="auto">
           <Text fontSize={{ base: '28px', xl: '30px', '1xl': '40px' }} fontWeight="700" letterSpacing="2px" mt={3} as="h1">
             Contact Us
           </Text>

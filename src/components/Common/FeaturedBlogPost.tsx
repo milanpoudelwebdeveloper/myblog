@@ -30,7 +30,7 @@ const FeaturedBlogPost = ({ card }: Props) => {
         borderRadius={10}
         bgSize="cover"
         position="relative"
-        minW={{ base: 'full', md: 500, '1xl': 700 }}
+        minW={{ base: 'full', md: 500, xl: 560, '1xl': 700 }}
       >
         <Flex position="absolute" top={8} zIndex={12} left={{ base: 7, xl: 9 }} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }}>
           {categories?.map((category, index) => (
@@ -56,7 +56,7 @@ const FeaturedBlogPost = ({ card }: Props) => {
           backgroundImage="linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(27, 27, 27, 0.7))"
           zIndex={10}
         />
-        <Box w="full" minH={{ base: 280, md: 345, xl: 370, '1xl': 450 }} overflow="hidden" position="relative">
+        <Box w="full" minH={{ base: 280, md: 345, xl: 365, '1xl': 440 }} overflow="hidden" position="relative">
           <Image src={coverimage} alt={title} layout="fill" objectFit="cover" priority />
         </Box>
 
