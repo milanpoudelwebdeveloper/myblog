@@ -36,7 +36,7 @@ const NavBar = () => {
       boxShadow="rgba(0, 0, 0, 0.05) 0px 2px 4px 0px"
       w="full"
       position="fixed"
-      zIndex={10}
+      zIndex={20}
       top={0}
       left={0}
       pl={{ base: 4, md: 0 }}
