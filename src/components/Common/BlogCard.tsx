@@ -28,7 +28,7 @@ const BlogCard = ({ card, imageLoadFast = false }: Props) => {
       <Box
         minW="full"
         maxW="full"
-        minH={{ base: 230, '1xl': 280 }}
+        minH={{ base: 220, lg: 250, '1xl': 280 }}
         maxH="full"
         position="relative"
         borderRadius="0.75rem"

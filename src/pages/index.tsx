@@ -40,7 +40,7 @@ export default function Home({ blogs, featuredBlog, popularBlogs }: Props) {
         description="Code With Milan is a blog site where you can find programming tutorials"
       />
       <MainLayout>
-        <Flex gap={10} direction={{ base: 'column', md: 'row' }}>
+        <Flex gap={{ base: 7, xl: 10 }} direction={{ base: 'column', lg: 'row' }} mt={{ base: 2, '1xl': 4 }}>
           <FeaturedBlogPost card={featuredBlog} />
           <PopularBlogs blogs={popularBlogs} />
         </Flex>

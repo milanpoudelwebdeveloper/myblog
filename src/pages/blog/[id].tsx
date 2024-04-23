@@ -1,4 +1,4 @@
-import { Box, Text, useColorModeValue, Image, Flex, Button, Divider } from '@chakra-ui/react'
+import { Box, Text, useColorModeValue, Image, Flex, Button } from '@chakra-ui/react'
 import MainLayout from '@components/Common/MainLayout'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -15,6 +15,7 @@ import SocialShares from '@components/Admin/Common/SocialShares'
 import { ParsedUrlQuery } from 'querystring'
 import { GetServerSidePropsContext } from 'next'
 import { inter } from '@pages/_app'
+import TableOfContent from '@components/BlogDetails/TableOfContent'
 
 const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const client = useQueryClient()
@@ -75,71 +76,68 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
       />
       <MainLayout pxMobile={0}>
         <Flex className={inter.className} gap={10} direction={{ base: 'column', md: 'row' }}>
-          <Flex
-            minW={{ base: 360, '1xl': 420 }}
-            h={{ base: 370, '1xl': 470 }}
-            position="sticky"
-            display={{ base: 'none', md: 'flex' }}
-            left={0}
-            top={32}
-            overflow="auto"
-            px={4}
-            direction="column"
-            fontSize={{ base: 'sm', '1xl': 'md' }}
-            gap={4}
-            borderWidth={1}
-            borderColor="rgb(27, 27, 27)"
-            borderRadius={8}
-            py={4}
-            zIndex={10}
-          >
-            <Text fontSize="lg" fontWeight="600">
-              Table Of Contents
-            </Text>
-            <Divider borderColor="rgb(27, 27, 27)" />
-            <Text>&#8226; What to expect from here on out</Text>
-            <Text>&#8226; Typography should be easy</Text>
-            <Text>&#8226; What if we stack headings?</Text>
-            <Text>&#8226; When a heading comes after a paragraph …</Text>
-            <Text>&#8226; Sometimes I even use code in headings</Text>
-            <Text>&#8226; Typography should be easy</Text>
-            <Text>&#8226; What if we stack headings?</Text>
-            <Text>&#8226; When a heading comes after a paragraph …</Text>
-            <Text>&#8226; When a heading comes after a paragraph …</Text>
-            <Text>&#8226; When a heading comes after a paragraph …</Text>
-          </Flex>
+          <TableOfContent displayOnMobile={false} minW={{ base: 360, '1xl': 420 }} />
           <Box position="relative">
-            <Box h={{ base: 270, xl: 300, '1xl': 360 }} position="relative" overflow="hidden">
+            <Box h={{ base: 300, xl: 330, '1xl': 420 }} position="relative" overflow="hidden">
               <Box
                 position="absolute"
                 w="full"
                 h="full"
-                backgroundImage="linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(27, 27, 27, 0.8))"
+                backgroundImage="linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(27, 27, 27, 0.9))"
                 zIndex={10}
+                borderRadius={{ base: 0, md: 10 }}
+                overflow="hidden"
               />
-              <Image src={blogDetail?.coverimage} alt="blog-image" my={4} width="100%" maxW="full" objectFit="cover" maxH="full" />
+              <Image
+                borderRadius={{ base: 0, md: 10 }}
+                src={blogDetail?.coverimage}
+                alt="blog-image"
+                width="100%"
+                h="full"
+                maxW="full"
+                objectFit="cover"
+                maxH="full"
+              />
 
-              <Flex position="absolute" bottom={{ base: 6, '1xl': 9 }} left={{ base: 6, '1xl': 10 }} zIndex={12}>
+              <Flex
+                position="absolute"
+                bottom={{ base: 3, '1xl': 0 }}
+                zIndex={12}
+                w="full"
+                h="full"
+                justifyContent="center"
+                alignItems="center"
+              >
                 <Box>
                   <Text
                     color="white"
-                    maxW={{ base: 300, '1xl': '700' }}
-                    fontSize={{ base: 'lg', '1xl': '24px' }}
+                    maxW={{ base: 340, xl: 490, '1xl': '700' }}
+                    fontSize={{ base: '21px', md: '24px', '1xl': '28px' }}
                     fontWeight="bold"
-                    lineHeight={1.7}
+                    lineHeight={1.8}
                     textAlign="center"
+                    letterSpacing={1.4}
                   >
                     {blogDetail?.title}
                   </Text>
-                  <Flex justifyContent="center" my={3} alignItems="center" color="white" fontSize="sm" fontWeight="300">
+                  <Flex
+                    position="absolute"
+                    bottom={{ base: 1, xl: 2, '1xl': 4 }}
+                    right={9}
+                    justifyContent="center"
+                    my={3}
+                    alignItems="center"
+                    color="white"
+                    fontSize="sm"
+                  >
                     <Flex alignItems="center" gap={3} ml={2}>
                       <Image
                         src={blogDetail?.profileimage}
                         fallbackSrc="/images/default-avatar.webp"
                         alt="profile-image"
                         borderRadius="full"
-                        w={{ base: 8, '1xl': 10 }}
-                        h={{ base: 8, '1xl': 10 }}
+                        w={{ base: 7, '1xl': 10 }}
+                        h={{ base: 7, '1xl': 10 }}
                         objectFit="cover"
                       />
                       <Text>{blogDetail?.name} &#x2022;</Text>
@@ -149,63 +147,35 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
                 </Box>
               </Flex>
             </Box>
+            <Box px={4}>
+              <Flex alignItems="center" justifyContent="space-between" mt={5}>
+                <SocialShares shareURL={shareURL} blogDetail={blogDetail} />
+                <Button variant="unstyled" onClick={saveOrUnSaveHandler} minW="max-content">
+                  <svg width="23" height="23" viewBox="0 0 20 20" fill={bookMarkBg} xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M15 19L8 14L1 19V3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H13C13.5304 1 14.0391 1.21071 14.4142 1.58579C14.7893 1.96086 15 2.46957 15 3V19Z"
+                      stroke={bookMarkStroke}
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Button>
+              </Flex>
 
-            <Flex alignItems="center" justifyContent="space-between" px={2} mt={4}>
-              <SocialShares shareURL={shareURL} blogDetail={blogDetail} />
-              <Button variant="unstyled" onClick={saveOrUnSaveHandler} minW="max-content">
-                <svg width="23" height="23" viewBox="0 0 20 20" fill={bookMarkBg} xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M15 19L8 14L1 19V3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H13C13.5304 1 14.0391 1.21071 14.4142 1.58579C14.7893 1.96086 15 2.46957 15 3V19Z"
-                    stroke={bookMarkStroke}
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Button>
-            </Flex>
+              <Box ref={parentRef} mb={7} />
+              <TableOfContent displayOnMobile minW={{ base: 'full', md: 400 }} />
 
-            <Box ref={parentRef} />
-            <Flex
-              minW={{ base: 'full', md: 400 }}
-              h={430}
-              position={{ base: 'static', md: 'sticky' }}
-              left={0}
-              top={32}
-              overflow="auto"
-              px={4}
-              direction="column"
-              fontSize="md"
-              gap={4}
-              borderWidth={1}
-              borderColor="rgb(27, 27, 27)"
-              borderRadius={8}
-              py={4}
-              zIndex={10}
-              display={{ base: 'flex', md: 'none' }}
-            >
-              <Text>Table Of Contents</Text>
-              <Divider borderColor="rgb(27, 27, 27)" />
-              <Text>&#8226; What to expect from here on out</Text>
-              <Text>&#8226; Typography should be easy</Text>
-              <Text>&#8226; What if we stack headings?</Text>
-              <Text>&#8226; When a heading comes after a paragraph …</Text>
-              <Text>&#8226; Sometimes I even use code in headings</Text>
-              <Text>&#8226; Typography should be easy</Text>
-              <Text>&#8226; What if we stack headings?</Text>
-              <Text>&#8226; When a heading comes after a paragraph …</Text>
-              <Text>&#8226; When a heading comes after a paragraph …</Text>
-              <Text>&#8226; When a heading comes after a paragraph …</Text>
-            </Flex>
-            <Box className="ql-snow" mt={10} maxW={{ base: 670, '1xl': 900 }}>
-              <Box
-                className="content ql-editor custom-scrollbar"
-                fontSize={{ base: 'sm', '1xl': 'lg' }}
-                lineHeight="30px"
-                dangerouslySetInnerHTML={{
-                  __html: blogDetail?.content
-                }}
-              />
+              <Box className="ql-snow" mt={{ base: 10, md: 14, xl: 4 }} maxW={{ base: 670, '1xl': 900 }}>
+                <Box
+                  className="content ql-editor custom-scrollbar"
+                  fontSize={{ base: 'md', '1xl': 'lg' }}
+                  lineHeight="28px"
+                  dangerouslySetInnerHTML={{
+                    __html: blogDetail?.content
+                  }}
+                />
+              </Box>
             </Box>
           </Box>
         </Flex>
