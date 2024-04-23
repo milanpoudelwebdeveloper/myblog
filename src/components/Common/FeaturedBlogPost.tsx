@@ -57,7 +57,14 @@ const FeaturedBlogPost = ({ card }: Props) => {
           zIndex={10}
         />
         <Box w="full" minH={{ base: 280, md: 345, xl: 365, '1xl': 440 }} overflow="hidden" position="relative">
-          <Image src={coverimage} alt={title} layout="fill" objectFit="cover" priority />
+          <Image
+            src={coverimage}
+            alt={title}
+            layout="fill"
+            objectFit="cover"
+            priority
+            sizes="(min-width: 1440px) 700px, (min-width: 1280px) 560px, (min-width: 1000px) 500px, (min-width: 780px) 654px, (min-width: 600px) 450px, (min-width: 480px) calc(50vw + 160px), calc(100vw - 40px)"
+          />
         </Box>
 
         <Box

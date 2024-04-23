@@ -28,7 +28,7 @@ const BlogCard = ({ card, imageLoadFast = false }: Props) => {
       <Box
         minW="full"
         maxW="full"
-        minH={{ base: 220, lg: 250, xl: 230, '1xl': 280 }}
+        minH={{ base: 220, lg: 250, xl: 220, '1xl': 280 }}
         maxH="full"
         position="relative"
         borderRadius="0.75rem"
@@ -40,13 +40,10 @@ const BlogCard = ({ card, imageLoadFast = false }: Props) => {
             placeholder="blur"
             blurDataURL={base64File}
             alt="post"
-            style={{
-              objectFit: 'cover'
-            }}
+            objectFit="cover"
             fill
             priority={imageLoadFast}
-            unoptimized={!imageLoadFast}
-            sizes="(min-width: 1440px) 800px, (min-width: 1280px) 660px, (min-width: 1000px) 750px, (min-width: 800px) 670px, (min-width: 480px) calc(90vw - 38px), calc(100vw - 45px)"
+            sizes="(min-width: 1440px) 490px, (min-width: 1280px) 410px, (min-width: 1000px) 499px, (min-width: 780px) 407px, (min-width: 600px) 550px, (min-width: 480px) calc(50vw + 270px), calc(100vw - 10px)"
           />
         </Link>
         <Flex
