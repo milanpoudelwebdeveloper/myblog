@@ -75,7 +75,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
         image={blogDetail?.coverimage}
       />
       <MainLayout pxMobile={0}>
-        <Flex className={inter.className} gap={{ base: 10, '1xl': 14 }} direction={{ base: 'column', md: 'row' }}>
+        <Flex mt={{ base: 0, md: 4 }} className={inter.className} gap={{ base: 10, '1xl': 14 }} direction={{ base: 'column', md: 'row' }}>
           <TableOfContent displayOnMobile={false} minW={{ base: 360, '1xl': 420 }} />
           <Box position="relative">
             <Box h={{ base: 300, xl: 330, '1xl': 440 }} position="relative" overflow="hidden">

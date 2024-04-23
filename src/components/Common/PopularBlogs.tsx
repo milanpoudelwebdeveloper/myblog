@@ -42,14 +42,12 @@ const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
                 <Image
                   src={blog?.coverimage}
                   alt="popular"
-                  style={{
-                    objectFit: 'cover'
-                  }}
                   fill
+                  objectFit="cover"
                   placeholder="blur"
                   blurDataURL={base64File}
                   loading="lazy"
-                  sizes="270px"
+                  sizes="(min-width: 1440px) 280px, 240px"
                 />
               </Box>
               <Box>
