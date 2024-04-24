@@ -38,7 +38,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
       <HeadingSeo
         title="Blogs | Code With Milan"
         description="Find different categories and read the latest blogs of your interest"
-        link={`https://codewithmilan.com/${BLOGS}`}
+        link={`https://www.codewithmilan.com/${BLOGS}`}
       />
       <MainLayout>
         <Flex gap={4} flexWrap="wrap">

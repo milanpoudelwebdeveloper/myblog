@@ -30,7 +30,7 @@ const SavedBlogs = () => {
       <HeadingSeo
         title="Saved Blogs | Code With Milan"
         description="Find different categories and read the latest blogs of your interest"
-        link={`https://codewithmilan.com/${SAVED_BLOGS}`}
+        link={`https://www.codewithmilan.com/${SAVED_BLOGS}`}
       />
       <MainLayout>
         <Text as="h1" color={headingColor} fontSize={{ base: 'lg', md: 'xl', '1xl': '24px' }} fontWeight="600" mb={2} mt={4}>

@@ -56,7 +56,7 @@ const UserLogin = () => {
       <HeadingSeo
         title="Login | Code With Milan"
         description="Login to your account to continue reading the blogs"
-        link={`https://codewithmilan.com/${LOGIN}`}
+        link={`https://www.codewithmilan.com/${LOGIN}`}
       />
 
       <PublicRoute>

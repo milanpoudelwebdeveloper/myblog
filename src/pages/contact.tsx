@@ -30,7 +30,7 @@ const Contact = () => {
   return (
     <>
       <HeadingSeo
-        link={`https://codewithmilan.com/${CONTACT}`}
+        link={`https://www.codewithmilan.com/${CONTACT}`}
         title="Contact | Code With Milan"
         description="Contact us for any kind of inquiry, feedback or any other work"
       />

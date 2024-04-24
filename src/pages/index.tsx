@@ -35,7 +35,7 @@ export default function Home({ blogs, featuredBlog, popularBlogs }: Props) {
   return (
     <>
       <HeadingSeo
-        link="https://codewithmilan.com/"
+        link="https://www.codewithmilan.com/"
         title="Home | Code With Milan"
         description="Code With Milan is a blog site where you can find programming tutorials"
       />

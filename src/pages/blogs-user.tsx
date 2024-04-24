@@ -40,7 +40,7 @@ const BlogsByYou = ({ categories }: { categories: ICategory[] }) => {
       <HeadingSeo
         title="Blogs By You | Code With Milan"
         description="Find different categories and read the latest blogs of your interest"
-        link={`https://codewithmilan.com/${BLOGS_BY_USER}`}
+        link={`https://www.codewithmilan.com/${BLOGS_BY_USER}`}
       />
       <MainLayout>
         <Text as="h1" color={headingColor} fontSize={{ base: 'lg', '1xl': 'xl' }} fontWeight="600" mb={2}>

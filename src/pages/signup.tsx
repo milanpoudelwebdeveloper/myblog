@@ -43,7 +43,7 @@ const SignUp = () => {
       <HeadingSeo
         title="Sign Up | Code With Milan"
         description="Create an account to explore and dive into different programming blogs and articles."
-        link={`https://codewithmilan.com/${SIGNUP}`}
+        link={`https://www.codewithmilan.com/${SIGNUP}`}
       />
       <PublicRoute>
         <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center" px={{ base: 6, lg: 4 }}>

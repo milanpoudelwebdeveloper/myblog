@@ -11,7 +11,7 @@ const About = () => {
       <HeadingSeo
         title="About | Code With Milan"
         description="Learn more about the author, purposes and the overall platform"
-        link={`https://codewithmilan.com/${ABOUT}`}
+        link={`https://www.codewithmilan.com/${ABOUT}`}
       />
       <MainLayout>
         <Box fontSize={{ base: 'sm', '1xl': 'lg' }} maxW={{ base: 700, '1xl': 870 }} mx="auto">
