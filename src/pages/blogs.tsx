@@ -16,7 +16,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
   const { showToast } = useCustomToast()
   const { data: blogs, error } = useQuery({
     queryKey: ['getAllBlogs', search],
-    queryFn: () => getBlogs('all'),
+    queryFn: () => getBlogs(search),
     enabled: !!search,
     staleTime: 60000
   })
@@ -66,6 +66,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
           templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }}
           gap={{ base: 6, lg: 12, xl: 8 }}
           mt={8}
+          w="full"
         >
           {!blogs &&
             Array.from({ length: 6 }).map((_, index) => (
