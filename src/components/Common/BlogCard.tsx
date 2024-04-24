@@ -24,7 +24,7 @@ const BlogCard = ({ card, imageLoadFast = false }: Props) => {
   const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
 
   return (
-    <Box pb={imageLoadFast ? 7 : 5} overflow="hidden" borderRadius={10}>
+    <Box pb={imageLoadFast ? 7 : 5} overflow="hidden" borderRadius={10} w="full">
       <Box
         minW="full"
         maxW="full"
