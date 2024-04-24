@@ -2,7 +2,7 @@ import axios from 'axios'
 import { NextApiResponse } from 'next'
 
 const generateSiteMap = (blogs: IBlog[]) => {
-  const domain = 'https://codewithmilan.com'
+  const domain = 'https://www.codewithmilan.com'
   const pages = ['/', 'blogs?category=all', 'about', 'contact', 'login', 'signup']
   const siteMap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
