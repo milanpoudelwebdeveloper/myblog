@@ -10,21 +10,24 @@ import Image from 'next/image'
 import { AuthContext } from '@/src/context/authContext'
 import { BLOGS } from '@constants/routes'
 import { categoryColors } from '@constants/categories'
+import { useRouter } from 'next/router'
 
 interface Props {
   card: IBlog
   imageHeight?: number
-  imageLoadFast?: boolean
 }
 
-const BlogCard = ({ card, imageLoadFast = false }: Props) => {
+const BlogCard = ({ card }: Props) => {
   const { title, coverimage, categories, createdat, id, name } = card
+  const router = useRouter()
   const { user } = useContext(AuthContext)
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
   const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
 
+  const isHomePage = router.pathname === '/'
+
   return (
-    <Box pb={imageLoadFast ? 7 : 5} overflow="hidden" borderRadius={10} w="full">
+    <Box pb={5} overflow="hidden" borderRadius={10} w="full">
       <Box
         minW="full"
         maxW="full"
@@ -40,23 +43,16 @@ const BlogCard = ({ card, imageLoadFast = false }: Props) => {
             placeholder="blur"
             blurDataURL={base64File}
             alt="post"
-            objectFit="cover"
+            style={{
+              objectFit: 'cover'
+            }}
             fill
-            priority={imageLoadFast}
             sizes="(min-width: 1440px) 490px, (min-width: 1280px) 410px, (min-width: 1000px) 499px, (min-width: 780px) 407px, (min-width: 600px) 550px, (min-width: 480px) calc(50vw + 270px), calc(100vw - 10px)"
           />
         </Link>
-        <Flex
-          position="absolute"
-          bottom={4}
-          left={4}
-          gap={2}
-          fontSize={{ base: '10px', '1xl': 'xs' }}
-          mt={4}
-          display={imageLoadFast ? 'none' : 'flex'}
-        >
+        <Flex position="absolute" bottom={4} left={4} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }} mt={4}>
           {categories?.map((category, index) => (
-            <Link href={BLOGS + '?category=' + category?.value} key={index} shallow>
+            <Link href={BLOGS + '?category=' + category?.value + '&page=1'} key={index} shallow>
               <Box
                 bg={categoryColors[index]?.bgColor}
                 color={categoryColors[index]?.titleColor}
@@ -77,11 +73,11 @@ const BlogCard = ({ card, imageLoadFast = false }: Props) => {
           <Text
             mt={4}
             mb={2}
-            as={imageLoadFast ? 'h1' : 'h2'}
             color={titleColor}
             fontSize={{ base: 'sm', '1xl': 'lg' }}
             fontWeight="600"
             lineHeight={{ base: '23px', '1xl': '28px' }}
+            as={isHomePage ? 'h3' : 'h2'}
           >
             {title}
           </Text>

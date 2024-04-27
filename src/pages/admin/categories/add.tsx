@@ -1,7 +1,7 @@
 import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { addCategory } from '@/src/services/category'
 import { Box, Button, Center, Divider, FormControl, FormLabel, Image, Input, Text } from '@chakra-ui/react'
-import ImageUploader from '@components/Admin/Common/ImageUploader'
+import ImageUploader from '@components/Admin/Common/ImageUploaderComponent'
 import MainLayout from '@components/Admin/Common/MainLayout'
 import React, { useState } from 'react'
 

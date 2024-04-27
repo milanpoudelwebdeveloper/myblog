@@ -1,5 +1,7 @@
-import { Box, Grid, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Button, Center, Grid, Text, useColorModeValue } from '@chakra-ui/react'
 import BlogCard from './Common/BlogCard'
+import Link from 'next/link'
+import { BLOGS } from '@constants/routes'
 
 const RecentBlogs = ({ blogs }: { blogs: IBlog[] }) => {
   const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
@@ -16,6 +18,13 @@ const RecentBlogs = ({ blogs }: { blogs: IBlog[] }) => {
       >
         {blogs?.map((blog: IBlog) => <BlogCard card={blog} key={blog?.id} />)}
       </Grid>
+      <Center mt={5}>
+        <Link href={BLOGS + '?page=1'}>
+          <Button variant="unstyled" color="white" fontSize={{ base: 'sm', '1xl': 'md' }} bg="#6941C8" px={4}>
+            View All
+          </Button>
+        </Link>
+      </Center>
     </Box>
   )
 }

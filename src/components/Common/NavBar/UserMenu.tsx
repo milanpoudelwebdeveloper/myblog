@@ -38,7 +38,7 @@ const UserMenu = () => {
       </MenuButton>
       <MenuList fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="500" py={4}>
         {hasDashboardAccess && (
-          <Link href={ADMIN} shallow prefetch={false}>
+          <Link href={ADMIN} shallow>
             <MenuItem mb={1}>Dashboard</MenuItem>
           </Link>
         )}
@@ -48,7 +48,7 @@ const UserMenu = () => {
         <Link href={BLOGS_BY_USER} shallow>
           <MenuItem mb={1}>Blogs By You</MenuItem>
         </Link>
-        <Link href={SETTINGS} shallow prefetch={false}>
+        <Link href={SETTINGS} shallow>
           <MenuItem mb={1}> Settings</MenuItem>
         </Link>
         <MenuItem mb={1} onClick={logOutHandler}>

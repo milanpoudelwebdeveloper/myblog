@@ -5,7 +5,7 @@ interface ImageUploaderProps {
   setCoverImage: React.Dispatch<React.SetStateAction<File | string | null>>
 }
 
-const ImageUploader = ({ setCoverImage }: ImageUploaderProps) => {
+const ImageUploaderComponent = ({ setCoverImage }: ImageUploaderProps) => {
   const fileInput = React.createRef<HTMLInputElement>()
   const handleOndragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault()
@@ -48,4 +48,4 @@ const ImageUploader = ({ setCoverImage }: ImageUploaderProps) => {
   )
 }
 
-export default ImageUploader
+export default ImageUploaderComponent

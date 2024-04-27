@@ -7,9 +7,9 @@ import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import { Select } from 'chakra-react-select'
-import { addBlog } from '@/src/services/blog'
+import { addBlog, uploadBlogImage } from '@/src/services/blog'
 import hljs from 'highlight.js'
-import ImageUploader from '@components/Admin/Common/ImageUploader'
+import ImageUploader from '@components/Admin/Common/ImageUploaderComponent'
 import { useRouter } from 'next/router'
 import { Controller, FieldValues, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -28,14 +28,10 @@ const toolbarOptions = [
 
   [{ header: [1, 2, 3, false] }],
 
-  [{ align: [] }]
+  [{ align: [] }],
+  ['clean'],
+  ['image']
 ]
-const modules = {
-  syntax: {
-    highlight: (text: string) => hljs.highlightAuto(text).value
-  },
-  toolbar: toolbarOptions
-}
 
 hljs.configure({
   languages: ['javascript', 'HTML', 'css']
@@ -47,6 +43,7 @@ const AddBlog = () => {
   const router = useRouter()
   const { showToast } = useCustomToast()
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
+
   const { data: categories } = useQuery({
     queryKey: ['getPopularPosts'],
     queryFn: getCategories,
@@ -65,16 +62,44 @@ const AddBlog = () => {
     }
   })
 
+  function imageHandler(this: any) {
+    const input = document.createElement('input')
+    input.setAttribute('type', 'file')
+    input.setAttribute('accept', 'image/*')
+    input.setAttribute('multiple', 'false')
+    input.click()
+    input.onchange = async () => {
+      if (!input.files) return
+      const cursorPosition = this.quill.selection.cursor.selection.lastRange.index
+      const res = await uploadBlogImage(input.files[0])
+      const link = res?.imageUrl
+      this.quill.editor.insertEmbed(cursorPosition, 'image', link)
+    }
+  }
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: toolbarOptions,
+        syntax: {
+          highlight: (text: string) => hljs.highlightAuto(text).value
+        },
+        handlers: {
+          image: imageHandler
+        }
+      }
+    }),
+    []
+  )
+
   const submitHandler = async (data: FieldValues, published: boolean) => {
     if (!user) {
       return showToast('Please login to add blog', 'error')
     }
-
     if (!coverImage) {
       return showToast('Please add cover image', 'error')
     }
     const categories = data?.categories?.map((category: { label: string; value: string }) => category.value)
-
     try {
       const values = { ...data, categories, published, coverImage, writtenBy: user?.id } as IAddBlog
       const response = await addBlog(values)
