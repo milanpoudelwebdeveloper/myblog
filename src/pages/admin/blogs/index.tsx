@@ -15,7 +15,7 @@ const Blogs = () => {
   const [publishedStatus, setPublishedStatus] = useState<boolean | undefined>()
 
   useEffect(() => {
-    getBlogs('all', publishedStatus)
+    getBlogs(1, 'all', publishedStatus)
       .then((data) => {
         setBlogs(data)
       })
