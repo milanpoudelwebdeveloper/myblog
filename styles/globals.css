@@ -99,3 +99,9 @@ html[data-theme='light'] .ql-editor p span {
 .ql-editor ul {
   padding-left: 17px !important;
 }
+
+.page-link {
+  background: white;
+  border: 1px solid red;
+  padding: 20px;
+}

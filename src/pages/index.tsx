@@ -17,7 +17,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      blogs,
+      blogs: blogs?.data,
       featuredBlog: featuredBlog || null,
       popularBlogs: popularBlogs || null
     },

@@ -1,6 +1,6 @@
 import { getBlogs } from '@/src/services/blog'
 import { getCategories } from '@/src/services/category'
-import { Box, Grid, Flex, Skeleton } from '@chakra-ui/react'
+import { Box, Grid, Flex, Skeleton, Button, Center, useColorModeValue, GridItem } from '@chakra-ui/react'
 import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
 import { useCustomToast } from '../hooks/useCustomToast'
@@ -9,17 +9,30 @@ import { BLOGS } from '@constants/routes'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect, useMemo, useState } from 'react'
 
 const Blogs = ({ categories }: { categories: ICategory[] }) => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const buttonColor = useColorModeValue('white', '#1B1B1B')
   const searchParams = useSearchParams()
-  const search = searchParams.get('category')
+  const search = searchParams.get('category') || 'all'
+  const page = searchParams.get('page')
+
   const { showToast } = useCustomToast()
   const { data: blogs, error } = useQuery({
-    queryKey: ['getAllBlogs', search],
-    queryFn: () => getBlogs(search),
-    enabled: !!search,
+    queryKey: ['getAllBlogs', search, page],
+    queryFn: () => getBlogs(parseInt(page as string), search),
+    enabled: !!search && !!page,
     staleTime: 60000
   })
+
+  useEffect(() => {
+    if (search) {
+      setCurrentPage(1)
+    }
+  }, [search])
+
+  const memoizedPageCount = useMemo(() => blogs?.totalPages ?? 0, [blogs?.totalPages, search])
 
   const finalCategories = [
     {
@@ -43,7 +56,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
       <MainLayout>
         <Flex gap={4} flexWrap="wrap">
           {finalCategories?.map((category) => (
-            <Link href={`/blogs?category=${category?.id}`} key={category?.id} shallow>
+            <Link href={`/blogs?category=${category?.id}&page=${currentPage}`} key={category?.id} shallow>
               <Box
                 key={category?.id}
                 bg={category?.id == search ? 'rgb(165, 94, 234)' : 'white'}
@@ -63,17 +76,40 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         </Flex>
 
         <Grid
+          minW="full"
           templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }}
           gap={{ base: 6, lg: 12, xl: 8 }}
           mt={8}
-          w="full"
         >
-          {!blogs &&
+          {!blogs?.data &&
             Array.from({ length: 6 }).map((_, index) => (
-              <Skeleton minH={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
+              <GridItem key={index} minW="100%">
+                <Skeleton minW="full" minH={{ base: 424, '1xl': 400 }} className="skeleton-loader" key={index} transform="auto" />
+              </GridItem>
             ))}
-          {blogs?.map((post: IBlog, index: number) => <BlogCard card={post} key={post?.id} imageLoadFast={index === 0} />)}
+          {blogs?.data?.map((post: IBlog) => <BlogCard card={post} key={post?.id} />)}
         </Grid>
+        <Center>
+          {Array.from({ length: memoizedPageCount }).map((_, index) => (
+            <Link href={`/blogs?category=${search}&page=${index + 1}`} key={index} shallow>
+              <Button
+                variant="unstyled"
+                key={index}
+                bg={buttonColor}
+                borderRadius={4}
+                borderWidth={1}
+                borderColor="#DFE3E8"
+                fontWeight={parseInt(page as string) == index + 1 ? '700' : '500'}
+                fontSize="md"
+                mr={2}
+                color={parseInt(page as string) == index + 1 ? 'rgb(165, 94, 234)' : 'rgb(35, 35, 35)'}
+                display={memoizedPageCount > 1 ? 'block' : 'none'}
+              >
+                {index + 1}
+              </Button>
+            </Link>
+          ))}
+        </Center>
       </MainLayout>
     </>
   )

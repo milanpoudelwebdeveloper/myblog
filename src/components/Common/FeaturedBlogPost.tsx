@@ -7,7 +7,7 @@ import 'highlight.js/styles/atom-one-light.css'
 import { AuthContext } from '@/src/context/authContext'
 import Image from 'next/image'
 import { categoryColors } from '@constants/categories'
-// import { BLOGS } from '@constants/routes'
+import { BLOGS } from '@constants/routes'
 
 interface Props {
   card: IBlog
@@ -22,19 +22,18 @@ const FeaturedBlogPost = ({ card }: Props) => {
   const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
 
   return (
-    <Link href={dynamicLink} shallow>
-      <Box
-        minH="min-content"
-        overflow="hidden"
-        boxShadow={boxShadowColor}
-        borderRadius={10}
-        bgSize="cover"
-        position="relative"
-        minW={{ base: 'full', md: 500, xl: 560, '1xl': 700 }}
-      >
-        <Flex position="absolute" top={8} zIndex={12} left={{ base: 7, xl: 9 }} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }}>
-          {categories?.map((category, index) => (
-            // <Link href={BLOGS + '?category=' + category?.value} key={index} shallow>
+    <Box
+      minH="min-content"
+      overflow="hidden"
+      boxShadow={boxShadowColor}
+      borderRadius={10}
+      bgSize="cover"
+      position="relative"
+      minW={{ base: 'full', md: 500, xl: 560, '1xl': 700 }}
+    >
+      <Flex position="absolute" top={8} zIndex={12} left={{ base: 7, xl: 9 }} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }}>
+        {categories?.map((category, index) => (
+          <Link href={BLOGS + '?category=' + category?.value} key={index} shallow>
             <Box
               bg={categoryColors[index]?.bgColor}
               color={categoryColors[index]?.titleColor}
@@ -46,9 +45,10 @@ const FeaturedBlogPost = ({ card }: Props) => {
             >
               {category?.label}
             </Box>
-            // </Link>
-          ))}
-        </Flex>
+          </Link>
+        ))}
+      </Flex>
+      <Link href={dynamicLink} shallow>
         <Box
           position="absolute"
           w="full"
@@ -56,12 +56,14 @@ const FeaturedBlogPost = ({ card }: Props) => {
           backgroundImage="linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(27, 27, 27, 0.7))"
           zIndex={10}
         />
-        <Box w="full" minH={{ base: 280, md: 345, xl: 365, '1xl': 440 }} overflow="hidden" position="relative">
+        <Box w="full" h="full" maxW="full" maxH="full" overflow="hidden" position="relative">
           <Image
             src={coverimage}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{
+              objectFit: 'cover'
+            }}
             priority
             sizes="(min-width: 1440px) 700px, (min-width: 1280px) 560px, (min-width: 1000px) 500px, (min-width: 780px) 654px, (min-width: 600px) 450px, (min-width: 480px) calc(50vw + 160px), calc(100vw - 40px)"
           />
@@ -78,10 +80,10 @@ const FeaturedBlogPost = ({ card }: Props) => {
           maxW={{ base: '80%', '1xl': '90%' }}
           letterSpacing={1}
         >
-          <Text>{title}</Text>
+          <Text as="h1">{title}</Text>
         </Box>
-      </Box>
-    </Link>
+      </Link>
+    </Box>
   )
 }
 

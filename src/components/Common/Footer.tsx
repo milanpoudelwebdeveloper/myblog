@@ -44,7 +44,7 @@ const Footer = () => {
       >
         <Text fontSize={{ base: 'xs', md: 'sm', xl: 'md', '1xl': 'lg' }}>&copy; {currentYear} Code With Milan. All rights reserved.</Text>
 
-        <Flex fontSize={{ base: 'xs', md: 'sm', xl: 'md', '1xl': 'lg' }}>
+        <Flex fontSize={{ base: 'xs', md: 'sm', xl: 'md', '1xl': 'lg' }} justifyContent="center">
           <Text>Made with &#x2764; by </Text>
           <Link href="https://milanpoudel1.com.np" target="_blank">
             <Text color="#FFD700" ml={1} cursor="pointer">

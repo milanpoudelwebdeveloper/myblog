@@ -86,7 +86,15 @@ const NavBar = () => {
                 borderRadius="full"
                 overflow="hidden"
               >
-                <Image src="/images/logo.webp" alt="logo" fill sizes="(min-width: 780px) 48px, 36px" objectFit="cover" />
+                <Image
+                  src="/images/logo.webp"
+                  alt="logo"
+                  fill
+                  sizes="(min-width: 780px) 48px, 36px"
+                  style={{
+                    objectFit: 'cover'
+                  }}
+                />
               </Box>
             </Link>
           </Flex>
@@ -97,8 +105,8 @@ const NavBar = () => {
             gap={{ base: 8, '1xl': 10 }}
             alignItems="center"
           >
-            {navLinks?.map(({ title, link, prefetch }) => (
-              <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' : link} shallow prefetch={prefetch}>
+            {navLinks?.map(({ title, link }) => (
+              <Link key={link} href={link === BLOGS ? BLOGS + '?category=all' + '&page=1' : link} shallow>
                 <Box borderBottomColor={pathname === link ? '#6941C6' : 'transparent'} borderBottomWidth={3} px={2} pb={{ base: 1, xl: 2 }}>
                   <Box cursor="pointer" _hover={{ color: '#1814F3' }}>
                     {title}
