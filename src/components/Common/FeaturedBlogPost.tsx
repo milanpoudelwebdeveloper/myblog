@@ -56,7 +56,7 @@ const FeaturedBlogPost = ({ card }: Props) => {
           backgroundImage="linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(27, 27, 27, 0.7))"
           zIndex={10}
         />
-        <Box w="full" h="full" maxW="full" maxH="full" overflow="hidden" position="relative">
+        <Box w="full" minH={{ base: 280, md: 345, xl: 365, '1xl': 440 }} overflow="hidden" position="relative">
           <Image
             src={coverimage}
             alt={title}
