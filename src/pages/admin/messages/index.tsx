@@ -4,6 +4,7 @@ import MainLayout from '@components/Admin/Common/MainLayout'
 import Link from 'next/link'
 import MessagesFilter from '@components/Admin/Messages/MessagesFilter'
 import { getMessages } from '@/src/services/messages'
+import { convertDate } from '@/src/utils/convertDate'
 
 const tableHeadings = ['ID', 'Email', 'Name', 'Subject', 'Created At', 'Status']
 
@@ -51,7 +52,7 @@ const Messages = ({ messages }: { messages: IMessage[] }) => {
                   </Td>
                   <Td>{list?.subject}</Td>
 
-                  <Td>{list.createdat}</Td>
+                  <Td>{convertDate(list.createdat)}</Td>
                   <Td>{list?.solved ? 'Solved' : 'Pending'}</Td>
                 </Tr>
               ))}
