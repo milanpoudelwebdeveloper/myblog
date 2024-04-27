@@ -1,34 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Text, Button, Flex, Box, Image } from '@chakra-ui/react'
 import Link from 'next/link'
 import { getBlogs } from '@/src/services/blog'
-import { useCustomToast } from '@/src/hooks/useCustomToast'
 import { ADMIN_BLOGS } from '@constants/routes'
+import { useQuery } from '@tanstack/react-query'
+import { convertDate } from '@/src/utils/convertDate'
 
-const tableHeadings = ['ID', 'Title', 'Description', 'Cover Image', 'Category', 'Created At']
+const tableHeadings = ['ID', 'Title', 'Cover Image', 'Category', 'Created At']
 
 const RecentBlogs = () => {
-  const [blogs, setBlogs] = useState<IBlog[]>([])
-  const { showToast } = useCustomToast()
-
-  useEffect(() => {
-    getBlogs()
-      .then((data) => {
-        setBlogs(data)
-      })
-      .catch((e) => {
-        showToast(e, 'error')
-      })
-  }, [])
+  const { data: blogs } = useQuery({
+    queryKey: ['getRecentBlogsAdmin'],
+    queryFn: () => getBlogs(1, 'all'),
+    staleTime: 60000
+  })
 
   return (
-    <Box bg="white" mt={8} p={7}>
+    <Box bg="white" mt={{ base: 5, '1xl': 8 }} p={{ base: 5, '1xl': 7 }}>
       <Flex justifyContent="space-between">
-        <Text fontSize="lg" color="#202224" my={4} fontStyle="24px" fontWeight="bold">
+        <Text fontSize={{ base: 'md', '1xl': 'lg' }} color="#202224" my={4} fontStyle="24px" fontWeight="bold">
           Recent Blogs
         </Text>
         <Link href="/admin/blogs/add" shallow>
-          <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
+          <Button bg="#1814F3" ml="auto" color="#fff" fontSize={{ base: 'sm', '1xl': 'md' }}>
             Add blog
           </Button>
         </Link>
@@ -45,18 +39,18 @@ const RecentBlogs = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {blogs?.map((list) => (
-              <Tr key={list?.id} fontSize="sm" fontWeight="500">
+            {blogs?.data?.map((list: IBlog) => (
+              <Tr key={list?.id} fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="500">
                 <Td>{list?.id}</Td>
                 <Td>
-                  <Link href={ADMIN_BLOGS + '/' + list?.id}>{list?.title}</Link>
+                  <Link href={ADMIN_BLOGS + '/' + list?.id}>{`${list?.title?.slice(0, 37)}...`}</Link>
                 </Td>
-                <Td>{list?.content?.slice(0, 8)}</Td>
+
                 <Td>
-                  <Image src={list?.coverimage} alt="avatar" w={10} h="auto" borderRadius="full" objectFit="cover" />
+                  <Image src={list?.coverimage} alt="avatar" w={10} h={10} borderRadius="full" objectFit="cover" />
                 </Td>
                 <Td>
-                  <Flex gap={2} fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }} mt={4}>
+                  <Flex gap={2} fontSize={{ base: 'xs', md: 'sm' }}>
                     {list?.categories?.map((category) => (
                       <Box bg="#FDF2FA" color="#C11574" borderRadius={10} p={2} key={category?.value}>
                         <Text>{category?.label}</Text>
@@ -64,7 +58,7 @@ const RecentBlogs = () => {
                     ))}
                   </Flex>
                 </Td>
-                <Td>{list?.createdat}</Td>
+                <Td>{convertDate(list?.createdat)}</Td>
               </Tr>
             ))}
           </Tbody>

@@ -28,17 +28,17 @@ const AdminHome = () => {
   return (
     <MainLayout>
       <Box color="#202224">
-        <Text fontSize="32px" fontWeight="bold" mb={7}>
+        <Text fontSize={{ base: '24px', '1xl': '32px' }} fontWeight="bold" mb={7}>
           Dashboard
         </Text>
         <Flex gap={9}>
           <Link href="/admin/users" shallow>
             <Flex bg="white" boxShadow="6px 6px 54px 0px rgba(0, 0, 0, 0.05)" p={6} borderRadius={14} gap={20}>
               <Box>
-                <Text fontSize="md" fontWeight="600" opacity={0.7}>
+                <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600" opacity={0.7}>
                   Total Users
                 </Text>
-                <Text fontSize="28px" fontWeight="bold" mt={4}>
+                <Text fontSize={{ base: '24px', '1xl': '28px' }} fontWeight="bold" mt={4}>
                   {statsData?.totalUsers}
                 </Text>
               </Box>
@@ -47,12 +47,12 @@ const AdminHome = () => {
             </Flex>
           </Link>
           <Link href="/admin/blogs" shallow>
-            <Flex bg="white" boxShadow="6px 6px 54px 0px rgba(0, 0, 0, 0.05)" p={4} borderRadius={14} gap={20}>
+            <Flex bg="white" boxShadow="6px 6px 54px 0px rgba(0, 0, 0, 0.05)" p={6} borderRadius={14} gap={20}>
               <Box h="full">
-                <Text fontSize="md" fontWeight="600" opacity={0.7}>
+                <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600" opacity={0.7}>
                   Total Blogs
                 </Text>
-                <Text fontSize="28px" fontWeight="bold" mt={4}>
+                <Text fontSize={{ base: '24px', '1xl': '28px' }} fontWeight="bold" mt={4}>
                   {statsData?.totalBlogs}
                 </Text>
               </Box>
@@ -60,12 +60,12 @@ const AdminHome = () => {
             </Flex>
           </Link>
           <Link href="/admin/categories" shallow>
-            <Flex bg="white" boxShadow="6px 6px 54px 0px rgba(0, 0, 0, 0.05)" p={4} borderRadius={14} gap={20}>
+            <Flex bg="white" boxShadow="6px 6px 54px 0px rgba(0, 0, 0, 0.05)" p={6} borderRadius={14} gap={20}>
               <Box>
-                <Text fontSize="md" fontWeight="600" opacity={0.7}>
+                <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600" opacity={0.7}>
                   Total Categories
                 </Text>
-                <Text fontSize="28px" fontWeight="bold" mt={4}>
+                <Text fontSize={{ base: '24px', '1xl': '28px' }} fontWeight="bold" mt={4}>
                   {statsData?.totalCategories}
                 </Text>
               </Box>

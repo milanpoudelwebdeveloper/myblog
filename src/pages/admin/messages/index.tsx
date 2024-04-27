@@ -4,6 +4,7 @@ import MainLayout from '@components/Admin/Common/MainLayout'
 import Link from 'next/link'
 import MessagesFilter from '@components/Admin/Messages/MessagesFilter'
 import { getMessages } from '@/src/services/messages'
+import { convertDate } from '@/src/utils/convertDate'
 
 const tableHeadings = ['ID', 'Email', 'Name', 'Subject', 'Created At', 'Status']
 
@@ -11,7 +12,7 @@ const Messages = ({ messages }: { messages: IMessage[] }) => {
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
-        <Text fontSize="32px" color="#333B69" fontWeight="bold">
+        <Text fontSize={{ base: '24px', '1xl': '32px' }} color="#333B69" fontWeight="bold">
           Messages
         </Text>
       </Flex>
@@ -37,8 +38,8 @@ const Messages = ({ messages }: { messages: IMessage[] }) => {
           <Tbody bg="white">
             {messages &&
               messages?.map((list) => (
-                <Tr key={list?.id} color="#202224" fontSize="sm" fontWeight="600">
-                  <Td paddingY={8}>{list?.id}</Td>
+                <Tr key={list?.id} color="#202224" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600">
+                  <Td paddingY={{ base: 5, '1xl': 7 }}>{list?.id}</Td>
                   <Td>
                     <Link href={`/admin/messages/${list?.id}`} shallow>
                       {list?.email}
@@ -51,7 +52,7 @@ const Messages = ({ messages }: { messages: IMessage[] }) => {
                   </Td>
                   <Td>{list?.subject}</Td>
 
-                  <Td>{list.createdat}</Td>
+                  <Td>{convertDate(list.createdat)}</Td>
                   <Td>{list?.solved ? 'Solved' : 'Pending'}</Td>
                 </Tr>
               ))}

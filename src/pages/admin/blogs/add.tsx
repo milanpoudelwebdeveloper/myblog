@@ -15,7 +15,7 @@ import { Controller, FieldValues, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { blogSchema } from '@/src/validations/blogValidations'
 import ErrorText from '@components/Common/ErrorText'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { AuthContext } from '@/src/context/authContext'
 
 const toolbarOptions = [
@@ -41,6 +41,7 @@ const AddBlog = () => {
   const [coverImage, setCoverImage] = useState<File | null | string>(null)
   const { user } = useContext(AuthContext)
   const router = useRouter()
+  const client = useQueryClient()
   const { showToast } = useCustomToast()
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
 
@@ -110,6 +111,7 @@ const AddBlog = () => {
         } else {
           router.push('/admin/blogs')
         }
+        client.invalidateQueries({ queryKey: ['getRecentBlogsAdmin', 'getBlogsListAdmin'] })
       }
     } catch (error: any) {
       showToast(error, 'error')

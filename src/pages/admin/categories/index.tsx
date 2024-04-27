@@ -4,18 +4,19 @@ import MainLayout from '@components/Admin/Common/MainLayout'
 import Link from 'next/link'
 import { getCategories } from '@/src/services/category'
 import CategoryFilter from '@components/Admin/Category/CategoryFilter'
+import { convertDate } from '@/src/utils/convertDate'
 
 const tableHeadings = ['ID', 'Name', 'Image', 'Created At']
 
 const Categories = ({ categories }: { categories: ICategory[] }) => {
   return (
     <MainLayout>
-      <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
-        <Text fontSize="32px" color="#333B69" fontWeight="bold">
+      <Flex justifyContent="space-between" bg="#F5F7FA" mb={5}>
+        <Text fontSize={{ base: '24px', '1xl': '32px' }} color="#333B69" fontWeight="bold">
           Categories
         </Text>
         <Link href="/admin/categories/add" shallow>
-          <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
+          <Button bg="#1814F3" ml="auto" color="#fff" fontSize={{ base: 'sm', '1xl': 'md' }}>
             Add category
           </Button>
         </Link>
@@ -42,19 +43,26 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
           <Tbody bg="white">
             {categories &&
               categories?.map((list) => (
-                <Tr key={list?.id} color="#202224" fontSize="sm" fontWeight="600">
-                  <Td paddingY={8}>{list?.id}</Td>
-                  <Td paddingY={8}>
+                <Tr key={list?.id} color="#202224" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600">
+                  <Td paddingY={{ base: 5, '1xl': 6 }}>{list?.id}</Td>
+                  <Td paddingY={{ base: 5, '1xl': 6 }}>
                     <Link href={`/admin/categories/${list?.id}`} shallow>
                       {list?.name}
                     </Link>
                   </Td>
 
                   <Td>
-                    <Image src={list?.image} alt="avatar" w={12} h={12} borderRadius="full" objectFit="cover" />
+                    <Image
+                      src={list?.image}
+                      alt="avatar"
+                      w={{ base: 9, '1xl': 12 }}
+                      h={{ base: 9, '1xl': 12 }}
+                      borderRadius="full"
+                      objectFit="cover"
+                    />
                   </Td>
                   <Td>
-                    <Image src={list?.createdat} alt="avatar" w={10} h="auto" borderRadius="full" />
+                    <Text>{convertDate(list?.createdat)}</Text>
                   </Td>
                 </Tr>
               ))}

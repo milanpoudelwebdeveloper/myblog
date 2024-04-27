@@ -54,22 +54,24 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
         link={`https://www.codewithmilan.com/${BLOGS}`}
       />
       <MainLayout>
-        <Flex gap={4} flexWrap="wrap">
+        <Flex gap={4} flexWrap="wrap" borderTopWidth={1} borderBottomWidth={1} py={6}>
           {finalCategories?.map((category) => (
             <Link href={`/blogs?category=${category?.id}&page=${currentPage}`} key={category?.id} shallow>
               <Box
                 key={category?.id}
-                bg={category?.id == search ? 'rgb(165, 94, 234)' : 'white'}
+                bg={category?.id == search ? 'rgb(27, 27, 27)' : 'rgb(255, 255, 255)'}
                 color={category?.id == search ? 'rgb(255, 255, 255)' : 'rgb(35, 35, 35)'}
                 boxShadow="rgba(32, 54, 86, 0.15) 0px 8px 20px"
-                borderRadius={7}
+                borderRadius={{ base: 14, '1xl': 20 }}
                 fontWeight="500"
                 fontSize={{ base: 'sm', '1xl': 'md' }}
-                py={{ base: 2, '1xl': 3 }}
-                px={{ base: 4, '1xl': 5 }}
+                py={{ base: 1.5, '1xl': 2 }}
+                px={{ base: 5, '1xl': 7 }}
                 cursor="pointer"
+                borderWidth={1}
+                borderColor="rgb(27, 27, 27)"
               >
-                {category?.name}
+                #{category?.name}
               </Box>
             </Link>
           ))}
@@ -79,7 +81,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
           minW="full"
           templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }}
           gap={{ base: 6, lg: 12, xl: 8 }}
-          mt={8}
+          mt={{ base: 8, '1xl': 10 }}
         >
           {!blogs?.data &&
             Array.from({ length: 6 }).map((_, index) => (
@@ -89,7 +91,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
             ))}
           {blogs?.data?.map((post: IBlog) => <BlogCard card={post} key={post?.id} />)}
         </Grid>
-        <Center>
+        <Center mt={7}>
           {Array.from({ length: memoizedPageCount }).map((_, index) => (
             <Link href={`/blogs?category=${search}&page=${index + 1}`} key={index} shallow>
               <Button
@@ -100,7 +102,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
                 borderWidth={1}
                 borderColor="#DFE3E8"
                 fontWeight={parseInt(page as string) == index + 1 ? '700' : '500'}
-                fontSize="md"
+                fontSize={{ base: 'sm', '1xl': 'md' }}
                 mr={2}
                 color={parseInt(page as string) == index + 1 ? 'rgb(165, 94, 234)' : 'rgb(35, 35, 35)'}
                 display={memoizedPageCount > 1 ? 'block' : 'none'}
