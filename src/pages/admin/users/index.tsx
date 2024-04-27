@@ -11,11 +11,11 @@ const Users = ({ users }: { users: IUser[] }) => {
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
-        <Text fontSize="32px" color="#333B69" fontWeight="bold">
+        <Text fontSize={{ base: '24px', '1xl': '32px' }} color="#333B69" fontWeight="bold">
           Users
         </Text>
         <Link href="/admin/users/add" shallow>
-          <Button bg="#1814F3" ml="auto" color="#fff" fontSize="md">
+          <Button bg="#1814F3" ml="auto" color="#fff" fontSize={{ base: 'sm', '1xl': 'md' }}>
             Add user
           </Button>
         </Link>
@@ -39,7 +39,7 @@ const Users = ({ users }: { users: IUser[] }) => {
               ))}
             </Tr>
           </Thead>
-          <Tbody bg="white">
+          <Tbody bg="white" fontSize={{ base: 'xs', '1xl': 'sm' }}>
             {users?.map((user) => (
               <Tr key={user?.id}>
                 <Td>{user?.id}</Td>

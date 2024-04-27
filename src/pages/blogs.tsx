@@ -89,7 +89,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
             ))}
           {blogs?.data?.map((post: IBlog) => <BlogCard card={post} key={post?.id} />)}
         </Grid>
-        <Center>
+        <Center mt={7}>
           {Array.from({ length: memoizedPageCount }).map((_, index) => (
             <Link href={`/blogs?category=${search}&page=${index + 1}`} key={index} shallow>
               <Button
@@ -100,7 +100,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
                 borderWidth={1}
                 borderColor="#DFE3E8"
                 fontWeight={parseInt(page as string) == index + 1 ? '700' : '500'}
-                fontSize="md"
+                fontSize={{ base: 'sm', '1xl': 'md' }}
                 mr={2}
                 color={parseInt(page as string) == index + 1 ? 'rgb(165, 94, 234)' : 'rgb(35, 35, 35)'}
                 display={memoizedPageCount > 1 ? 'block' : 'none'}
