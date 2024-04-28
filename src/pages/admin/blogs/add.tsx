@@ -69,13 +69,15 @@ const AddBlog = () => {
     input.setAttribute('accept', 'image/*')
     input.setAttribute('multiple', 'false')
     input.click()
-    input.onchange = async () => {
+    input.onchange = async function (this: any) {
       if (!input.files) return
-      const cursorPosition = this.quill.selection.cursor.selection.lastRange.index
-      const res = await uploadBlogImage(input.files[0])
+      const file = input.files[0]
+      const res = await uploadBlogImage(file)
+      const range = this.quill.getSelection()
       const link = res?.imageUrl
-      this.quill.editor.insertEmbed(cursorPosition, 'image', link)
-    }
+      this.quill.insertEmbed(range.index, 'image', link)
+    }.bind(this)
+    input.value = ''
   }
 
   const modules = useMemo(
@@ -233,6 +235,7 @@ const AddBlog = () => {
                       field.onChange(text)
                     }}
                     className="react-quill"
+                    formats={['image']}
                   />
                 )}
               />
