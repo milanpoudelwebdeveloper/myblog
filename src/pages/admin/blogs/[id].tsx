@@ -6,7 +6,7 @@ import { useCustomToast } from '@/src/hooks/useCustomToast'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
-import { deleteBlog, getBlogDetails, updateBlog } from '@/src/services/blog'
+import { deleteBlog, getBlogDetails, updateBlog, uploadBlogImage } from '@/src/services/blog'
 import hljs from 'highlight.js'
 import ImageUploader from '@components/Admin/Common/ImageUploaderComponent'
 import { useRouter } from 'next/router'
@@ -19,24 +19,19 @@ import { blogSchema } from '@/src/validations/blogValidations'
 import { Select } from 'chakra-react-select'
 
 const toolbarOptions = [
-  [{ header: [1, 2, 3, 4, 5, 6, false] }],
   ['bold', 'italic', 'underline', 'strike'],
-  [{ color: [] }, { background: [] }],
-  [{ script: 'sub' }, { script: 'super' }],
-  ['blockquote', 'code-block'],
+  ['blockquote', 'code-block', 'color', 'background'],
+
   [{ list: 'ordered' }, { list: 'bullet' }],
-  [{ indent: '-1' }, { indent: '+1' }, { align: [] }],
-  ['link', 'image']
+  ['link'],
+  [{ indent: '-1' }, { indent: '+1' }],
+
+  [{ header: [1, 2, 3, false] }],
+
+  [{ align: [] }],
+  ['clean'],
+  ['image']
 ]
-const modules = {
-  syntax: {
-    highlight: (text: string) => hljs.highlightAuto(text).value
-  },
-  toolbar: toolbarOptions,
-  clipboard: {
-    matchVisual: false
-  }
-}
 
 hljs.configure({
   languages: ['javascript', 'HTML', 'css']
@@ -46,6 +41,10 @@ const LazyLoadedDeleteModal = dynamic(() => import('@components/Admin/Common/Del
 
 const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
   const [coverImage, setCoverImage] = useState<File | null | string>(blogDetails?.coverimage || null)
+  const router = useRouter()
+  const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
+  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { showToast } = useCustomToast()
 
   const { data: categories } = useQuery({
     queryKey: ['getCategoryInDetails'],
@@ -57,7 +56,7 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
     handleSubmit,
     register,
     control,
-
+    watch,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(blogSchema),
@@ -67,10 +66,40 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
     }
   })
 
-  const { showToast } = useCustomToast()
-  const router = useRouter()
-  const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  function imageHandler(this: any) {
+    const input = document.createElement('input')
+    input.setAttribute('type', 'file')
+    input.setAttribute('accept', 'image/*')
+    input.setAttribute('multiple', 'false')
+    input.click()
+    input.onchange = async function (this: any) {
+      if (!input.files) return
+      const file = input.files[0]
+      const res = await uploadBlogImage(file)
+      const range = this.quill.getSelection()
+      const link = res?.imageUrl
+      this.quill.insertEmbed(range.index, 'image', link)
+    }.bind(this)
+    input.value = ''
+  }
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: toolbarOptions,
+        syntax: {
+          highlight: (text: string) => hljs.highlightAuto(text).value
+        },
+        clipboard: {
+          matchVisual: false
+        },
+        handlers: {
+          image: imageHandler
+        }
+      }
+    }),
+    []
+  )
 
   const submitHandler = async (data: FieldValues, published: boolean) => {
     if (!coverImage) {
@@ -112,6 +141,8 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
     value: category.id,
     label: category.name
   }))
+
+  console.log('warch content', watch('content'))
 
   return (
     <MainLayout>
@@ -203,9 +234,11 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
                   placeholder="Write Content Here"
                   onChange={(text) => {
                     field.onChange(text)
+                    console.log('quill text', text)
                   }}
                   className="react-quill"
                   value={field?.value as string}
+                  formats={['image']}
                 />
               )}
             />

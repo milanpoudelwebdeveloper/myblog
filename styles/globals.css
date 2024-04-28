@@ -13,6 +13,18 @@ a {
   height: 200px !important;
 }
 
+.quill.react-quill {
+  overflow: visible;
+}
+
+.ql-toolbar.ql-snow {
+  position: sticky;
+  background: #fff;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
 .content.ql-editor {
   padding: 0 !important;
 }

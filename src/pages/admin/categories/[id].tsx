@@ -4,7 +4,9 @@ import { Box, Button, Center, Divider, FormControl, FormLabel, Image, Input, Tex
 import DeleteModal from '@components/Admin/Common/DeleteModal'
 import ImageUploader from '@components/Admin/Common/ImageUploaderComponent'
 import MainLayout from '@components/Admin/Common/MainLayout'
+import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
+import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
 
 const CategoryDetails = ({ categoryDetails }: { categoryDetails: ICategory }) => {
@@ -101,8 +103,12 @@ const CategoryDetails = ({ categoryDetails }: { categoryDetails: ICategory }) =>
 
 export default CategoryDetails
 
-export async function getServerSideProps(context: any) {
-  const { id } = context.params
+interface Params extends ParsedUrlQuery {
+  id: string
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { id } = context.params as Params
   try {
     const categoryDetails = await getCategoryDetails(id)
 
