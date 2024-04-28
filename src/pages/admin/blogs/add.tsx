@@ -235,7 +235,6 @@ const AddBlog = () => {
                       field.onChange(text)
                     }}
                     className="react-quill"
-                    formats={['image']}
                   />
                 )}
               />
