@@ -75,7 +75,13 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
         image={blogDetail?.coverimage}
       />
       <MainLayout pxMobile={0}>
-        <Flex mt={{ base: 0, md: 4 }} className={inter.className} gap={{ base: 10, '1xl': 14 }} direction={{ base: 'column', md: 'row' }}>
+        <Flex
+          justifyContent="center"
+          mt={{ base: 0, md: 4 }}
+          className={inter.className}
+          gap={{ base: 10, '1xl': 14 }}
+          direction={{ base: 'column', md: 'row' }}
+        >
           <TableOfContent displayOnMobile={false} minW={{ base: 360, '1xl': 420 }} />
           <Box position="relative">
             <Box h={{ base: 300, xl: 330, '1xl': 440 }} position="relative" overflow="hidden">
@@ -91,7 +97,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
               <Image
                 borderRadius={{ base: 0, md: 10 }}
                 src={blogDetail?.coverimage}
-                alt="blog-image"
+                alt={blogDetail?.title}
                 width="100%"
                 h="full"
                 maxW="full"
@@ -112,7 +118,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
                   <Text
                     color="white"
                     maxW={{ base: 340, xl: 490, '1xl': '700' }}
-                    fontSize={{ base: '21px', md: '24px', '1xl': '28px' }}
+                    fontSize={{ base: '22px', md: '26px', '1xl': '28px' }}
                     fontWeight="bold"
                     lineHeight={1.8}
                     textAlign="center"
@@ -166,10 +172,10 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
               <Box ref={parentRef} mb={7} />
               <TableOfContent displayOnMobile minW={{ base: 'full', md: 400 }} />
 
-              <Box className="ql-snow" mt={{ base: 10, md: 14, xl: 4 }} maxW={{ base: 670, '1xl': 940 }}>
+              <Box className="ql-snow" mt={{ base: 10, md: 14, xl: 4 }} maxW={{ base: 670, '1xl': 900 }}>
                 <Box
                   className="content ql-editor custom-scrollbar"
-                  fontSize={{ base: 'md', '1xl': 'lg' }}
+                  fontSize={{ base: 'sm', '1xl': 'lg' }}
                   lineHeight="28px"
                   dangerouslySetInnerHTML={{
                     __html: blogDetail?.content

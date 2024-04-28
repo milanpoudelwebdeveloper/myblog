@@ -42,7 +42,7 @@ const BlogCard = ({ card }: Props) => {
             src={coverimage}
             placeholder="blur"
             blurDataURL={base64File}
-            alt="post"
+            alt={title}
             style={{
               objectFit: 'cover'
             }}
