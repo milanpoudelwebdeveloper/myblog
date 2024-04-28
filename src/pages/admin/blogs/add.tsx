@@ -82,10 +82,13 @@ const AddBlog = () => {
 
   const modules = useMemo(
     () => ({
+      syntax: {
+        highlight: (text: string) => hljs.highlightAuto(text).value
+      },
       toolbar: {
         container: toolbarOptions,
-        syntax: {
-          highlight: (text: string) => hljs.highlightAuto(text).value
+        clipboard: {
+          matchVisual: false
         },
         handlers: {
           image: imageHandler

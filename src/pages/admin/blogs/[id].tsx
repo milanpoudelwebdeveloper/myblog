@@ -84,11 +84,11 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
 
   const modules = useMemo(
     () => ({
+      syntax: {
+        highlight: (text: string) => hljs.highlightAuto(text).value
+      },
       toolbar: {
         container: toolbarOptions,
-        syntax: {
-          highlight: (text: string) => hljs.highlightAuto(text).value
-        },
         clipboard: {
           matchVisual: false
         },
