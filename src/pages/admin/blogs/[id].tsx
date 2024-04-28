@@ -234,7 +234,6 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
                   }}
                   className="react-quill"
                   value={field?.value as string}
-                  formats={['image']}
                 />
               )}
             />
