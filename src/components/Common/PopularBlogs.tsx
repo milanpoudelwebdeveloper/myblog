@@ -37,7 +37,7 @@ const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
               >
                 <Image
                   src={blog?.coverimage}
-                  alt="popular"
+                  alt={blog?.title}
                   fill
                   style={{
                     objectFit: 'cover'

@@ -12,7 +12,6 @@ const TableOfContent = ({ displayOnMobile, minW = { base: 360, '1xl': 420 } }: P
       minW={minW}
       h={{ base: 370, '1xl': 480 }}
       position={{ base: 'static', md: 'sticky' }}
-      left={0}
       top={{ base: 32, xl: 28, '1xl': 32 }}
       overflow="auto"
       px={4}
@@ -26,7 +25,7 @@ const TableOfContent = ({ displayOnMobile, minW = { base: 360, '1xl': 420 } }: P
       zIndex={10}
       display={{ base: displayOnMobile ? 'flex' : 'none', lg: !displayOnMobile ? 'flex' : 'none' }}
     >
-      <Text fontSize="lg" fontWeight="600" pl={3}>
+      <Text fontSize={{ base: 'md', '1xl': 'lg' }} fontWeight="600" pl={3}>
         Table Of Contents
       </Text>
       <Divider borderColor="rgb(27, 27, 27)" />
