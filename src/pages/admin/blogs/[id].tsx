@@ -56,7 +56,6 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
     handleSubmit,
     register,
     control,
-    watch,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(blogSchema),
@@ -141,8 +140,6 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
     value: category.id,
     label: category.name
   }))
-
-  console.log('warch content', watch('content'))
 
   return (
     <MainLayout>
@@ -234,7 +231,6 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
                   placeholder="Write Content Here"
                   onChange={(text) => {
                     field.onChange(text)
-                    console.log('quill text', text)
                   }}
                   className="react-quill"
                   value={field?.value as string}

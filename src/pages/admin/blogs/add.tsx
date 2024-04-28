@@ -54,7 +54,6 @@ const AddBlog = () => {
     handleSubmit,
     register,
     control,
-    watch,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(blogSchema),
@@ -134,7 +133,6 @@ const AddBlog = () => {
     label: category.name
   }))
 
-  console.log('warch content', watch('content'))
   return (
     <MainLayout>
       <Box>
