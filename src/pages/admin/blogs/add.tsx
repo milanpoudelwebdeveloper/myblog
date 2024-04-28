@@ -33,17 +33,30 @@ const toolbarOptions = [
   ['image']
 ]
 
-hljs.configure({
-  languages: ['javascript', 'HTML', 'css']
-})
-
 const AddBlog = () => {
   const [coverImage, setCoverImage] = useState<File | null | string>(null)
   const { user } = useContext(AuthContext)
   const router = useRouter()
   const client = useQueryClient()
   const { showToast } = useCustomToast()
-  const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
+  const ReactQuill = useMemo(
+    () =>
+      dynamic(
+        () => {
+          hljs.configure({
+            languages: ['javascript', 'HTML', 'css', 'python', 'typescript', 'go', 'sql', 'plaintext']
+          })
+          // @ts-ignore
+          window.hljs = hljs
+          return import('react-quill')
+        },
+        {
+          ssr: false,
+          loading: () => <p>Loading Editor...</p>
+        }
+      ),
+    []
+  )
 
   const { data: categories } = useQuery({
     queryKey: ['getPopularPosts'],
@@ -82,9 +95,7 @@ const AddBlog = () => {
 
   const modules = useMemo(
     () => ({
-      syntax: {
-        highlight: (text: string) => hljs.highlightAuto(text).value
-      },
+      syntax: true,
       toolbar: {
         container: toolbarOptions,
         clipboard: {

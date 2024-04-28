@@ -33,18 +33,32 @@ const toolbarOptions = [
   ['image']
 ]
 
-hljs.configure({
-  languages: ['javascript', 'HTML', 'css']
-})
-
 const LazyLoadedDeleteModal = dynamic(() => import('@components/Admin/Common/DeleteModal'))
 
 const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
   const [coverImage, setCoverImage] = useState<File | null | string>(blogDetails?.coverimage || null)
   const router = useRouter()
-  const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
   const { isOpen, onClose, onOpen } = useDisclosure()
   const { showToast } = useCustomToast()
+
+  const ReactQuill = useMemo(
+    () =>
+      dynamic(
+        () => {
+          hljs.configure({
+            languages: ['javascript', 'HTML', 'css', 'python', 'typescript', 'go', 'sql', 'plaintext']
+          })
+          // @ts-ignore
+          window.hljs = hljs
+          return import('react-quill')
+        },
+        {
+          ssr: false,
+          loading: () => <p>Loading Editor...</p>
+        }
+      ),
+    []
+  )
 
   const { data: categories } = useQuery({
     queryKey: ['getCategoryInDetails'],
