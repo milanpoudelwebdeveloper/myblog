@@ -1,13 +1,12 @@
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React from 'react'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-light.css'
 import { convertDate } from '@/src/utils/convertDate'
 import { base64File } from '@constants/files'
 import Image from 'next/image'
-import { AuthContext } from '@/src/context/authContext'
 import { BLOGS } from '@constants/routes'
 import { categoryColors } from '@constants/categories'
 import { useRouter } from 'next/router'
@@ -20,9 +19,7 @@ interface Props {
 const BlogCard = ({ card }: Props) => {
   const { title, coverimage, categories, createdat, id, name } = card
   const router = useRouter()
-  const { user } = useContext(AuthContext)
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
-  const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
 
   const isHomePage = router.pathname === '/'
 
@@ -37,7 +34,7 @@ const BlogCard = ({ card }: Props) => {
         borderRadius="0.75rem"
         overflow="hidden"
       >
-        <Link href={dynamicLink} shallow>
+        <Link href={`/blog/${id}`} shallow>
           <Image
             src={coverimage}
             placeholder="blur"
@@ -68,7 +65,7 @@ const BlogCard = ({ card }: Props) => {
           ))}
         </Flex>
       </Box>
-      <Link href={dynamicLink} shallow>
+      <Link href={`/blog/${id}`} shallow>
         <Box>
           <Text
             mt={4}
