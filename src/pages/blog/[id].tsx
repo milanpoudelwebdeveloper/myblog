@@ -207,7 +207,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate')
   console.log('the parsed cookie is', parsedCookie)
   try {
-    const blogDetails = await getBlogDetails(id as string, cookie)
+    const blogDetails = await getBlogDetails(id as string)
 
     if (parsedCookie) {
       return {
