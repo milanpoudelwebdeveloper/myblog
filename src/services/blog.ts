@@ -53,6 +53,7 @@ export const getBlogDetails = async (blogId: number | string, headers?: any) => 
     const res = await axiosInstance.get(`/blog/details/${blogId}`, {
       withCredentials: true,
       headers: {
+        'Access-Control-Allow-Credentials': true,
         Cookie: headers
       }
     })
