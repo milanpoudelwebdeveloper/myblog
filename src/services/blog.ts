@@ -51,6 +51,7 @@ export const getFeaturedBlog = async () => {
 export const getBlogDetails = async (blogId: number | string, headers?: any) => {
   try {
     const res = await axiosInstance.get(`/blog/details/${blogId}`, {
+      withCredentials: true,
       headers: {
         Cookie: headers
       }
