@@ -205,10 +205,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const parsedCookie = parse(cookie as string)
   res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate')
+  console.log('the parsed cookie is', parsedCookie)
   try {
     const blogDetails = await getBlogDetails(id as string, cookie)
 
-    if (blogDetails) {
+    if (parsedCookie) {
       return {
         props: {
           blogDetail: blogDetails,
@@ -218,11 +219,36 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     } else {
       return {
         props: {
-          blogDetail: {},
-          cookie: parsedCookie
+          blogDetail: blogDetails,
+          cookie: {
+            accessToken: '',
+            refreshToken: ''
+          }
         }
       }
     }
+
+    // if (blogDetails) {
+    //   return {
+    //     props: {
+    //       blogDetail: blogDetails,
+    //       cookie: parsedCookie || {
+    //         accessToken: '',
+    //         refreshToken: ''
+    //       }
+    //     }
+    //   }
+    // } else {
+    //   return {
+    //     props: {
+    //       blogDetail: {},
+    //       cookie: parsedCookie || {
+    //         accessToken: '',
+    //         refreshToken: ''
+    //       }
+    //     }
+    //   }
+    // }
   } catch (error) {
     return {
       props: {
