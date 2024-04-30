@@ -16,8 +16,9 @@ import { ParsedUrlQuery } from 'querystring'
 import { GetServerSidePropsContext } from 'next'
 import { inter } from '@pages/_app'
 import TableOfContent from '@components/BlogDetails/TableOfContent'
+import { parse } from 'cookie'
 
-const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
+const BlogDetails = ({ blogDetail, cookie }: { blogDetail: IBlog; cookie: any }) => {
   const client = useQueryClient()
   const [isSaved, setIsSaved] = useState(blogDetail?.saved)
   const bookMarkBg = useColorModeValue(isSaved ? 'black' : 'white', isSaved ? 'white' : 'black')
@@ -83,6 +84,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
           direction={{ base: 'column', md: 'row' }}
         >
           <TableOfContent displayOnMobile={false} minW={{ base: 360, '1xl': 420 }} />
+          {JSON.stringify(cookie?.accessToken)}
           <Box position="relative">
             <Box h={{ base: 300, xl: 330, '1xl': 440 }} position="relative" overflow="hidden">
               <Box
@@ -199,27 +201,33 @@ interface Params extends ParsedUrlQuery {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as Params
   const { req, res } = context
+  const { cookie } = req.headers
+
+  const parsedCookie = parse(cookie as string)
   res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate')
   try {
-    const blogDetails = await getBlogDetails(id as string, req.headers.cookie)
+    const blogDetails = await getBlogDetails(id as string, cookie)
 
     if (blogDetails) {
       return {
         props: {
-          blogDetail: blogDetails
+          blogDetail: blogDetails,
+          cookie: parsedCookie
         }
       }
     } else {
       return {
         props: {
-          blogDetail: {}
+          blogDetail: {},
+          cookie: parsedCookie
         }
       }
     }
   } catch (error) {
     return {
       props: {
-        blogDetail: {}
+        blogDetail: {},
+        cookie: parsedCookie
       }
     }
   }
