@@ -203,7 +203,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req, res } = context
   const { cookie } = req?.headers
 
-  const parsedCookie = parse(cookie as string)
+  const parsedCookie = cookie && parse(cookie as string)
   res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate')
   console.log('the parsed cookie is', parsedCookie)
   try {
