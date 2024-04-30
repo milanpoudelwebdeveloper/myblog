@@ -198,13 +198,10 @@ interface Params extends ParsedUrlQuery {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as Params
-  const { req, res } = context
-  const userId = req.cookies.codeWithMilanId
-
+  const { res } = context
   res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate')
-
   try {
-    const blogDetails = await getBlogDetails(id as string, userId as string)
+    const blogDetails = await getBlogDetails(id as string)
 
     if (blogDetails) {
       return {
