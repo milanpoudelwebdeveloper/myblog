@@ -84,7 +84,7 @@ const BlogDetails = ({ blogDetail, cookie }: { blogDetail: IBlog; cookie: any })
           direction={{ base: 'column', md: 'row' }}
         >
           <TableOfContent displayOnMobile={false} minW={{ base: 360, '1xl': 420 }} />
-          {JSON.stringify(cookie?.accessToken)}
+          {cookie?.accessToken && <Text>{cookie?.accessToken}</Text>}
           <Box position="relative">
             <Box h={{ base: 300, xl: 330, '1xl': 440 }} position="relative" overflow="hidden">
               <Box
@@ -201,7 +201,7 @@ interface Params extends ParsedUrlQuery {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as Params
   const { req, res } = context
-  const { cookie } = req.headers
+  const { cookie } = req?.headers
 
   const parsedCookie = parse(cookie as string)
   res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate')
