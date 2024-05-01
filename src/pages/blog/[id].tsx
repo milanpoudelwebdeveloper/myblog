@@ -1,8 +1,8 @@
-import { Box, Text, useColorModeValue, Image, Flex, Button } from '@chakra-ui/react'
+import { Box, Text, useColorModeValue, Flex, Button, Image as NextChakraImage } from '@chakra-ui/react'
 import MainLayout from '@components/Common/MainLayout'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import { saveBlog, unSaveBlog, updateReadCount } from '@/src/services/blog'
+import { getBlogDetails, isBlogLiked, saveBlog, unSaveBlog, updateReadCount } from '@/src/services/blog'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-dark.css'
@@ -10,20 +10,27 @@ import { convertDate } from '@/src/utils/convertDate'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import { AuthContext } from '@/src/context/authContext'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
-import { useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import SocialShares from '@components/Admin/Common/SocialShares'
 import { ParsedUrlQuery } from 'querystring'
 import { GetServerSidePropsContext } from 'next'
 import { inter } from '@pages/_app'
 import TableOfContent from '@components/BlogDetails/TableOfContent'
-import { parse } from 'cookie'
+import Image from 'next/image'
 
-const BlogDetails = ({ blogDetail, cookie }: { blogDetail: IBlog; cookie: any }) => {
+const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const client = useQueryClient()
-  const [isSaved, setIsSaved] = useState(blogDetail?.saved)
+  const [isSaved, setIsSaved] = useState(false)
+  const { user } = useContext(AuthContext)
   const bookMarkBg = useColorModeValue(isSaved ? 'black' : 'white', isSaved ? 'white' : 'black')
   const bookMarkStroke = useColorModeValue(isSaved ? 'white' : 'black', isSaved ? 'black' : 'white')
-  const { user } = useContext(AuthContext)
+  const { data } = useQuery({
+    queryKey: ['isBlogLiked', blogDetail?.id, user?.id],
+    queryFn: () => isBlogLiked(blogDetail?.id),
+    staleTime: 1000 * 60 * 60,
+    enabled: !!blogDetail?.id && !!user?.id
+  })
+
   const router = useRouter()
   const { showToast } = useCustomToast()
   const { id } = router.query
@@ -48,6 +55,12 @@ const BlogDetails = ({ blogDetail, cookie }: { blogDetail: IBlog; cookie: any })
     }
   }, [parentRef, id])
 
+  useEffect(() => {
+    if (typeof data === 'boolean') {
+      setIsSaved(data)
+    }
+  }, [data])
+
   const saveOrUnSaveHandler = async () => {
     if (!user?.id) {
       return showToast('Please login to save the blog', 'error')
@@ -60,7 +73,7 @@ const BlogDetails = ({ blogDetail, cookie }: { blogDetail: IBlog; cookie: any })
         res = await saveBlog(blogDetail?.id, user?.id)
       }
       client.invalidateQueries({ queryKey: ['getSavedBlogs'] })
-      setIsSaved((prev) => !prev)
+      client.invalidateQueries({ queryKey: ['isBlogLiked'] })
       showToast(res, 'success')
     } catch (error) {
       showToast(error, 'error')
@@ -84,7 +97,6 @@ const BlogDetails = ({ blogDetail, cookie }: { blogDetail: IBlog; cookie: any })
           direction={{ base: 'column', md: 'row' }}
         >
           <TableOfContent displayOnMobile={false} minW={{ base: 360, '1xl': 420 }} />
-          {cookie?.accessToken && <Text>{cookie?.accessToken}</Text>}
           <Box position="relative">
             <Box h={{ base: 300, xl: 330, '1xl': 440 }} position="relative" overflow="hidden">
               <Box
@@ -96,16 +108,17 @@ const BlogDetails = ({ blogDetail, cookie }: { blogDetail: IBlog; cookie: any })
                 borderRadius={{ base: 0, md: 10 }}
                 overflow="hidden"
               />
-              <Image
-                borderRadius={{ base: 0, md: 10 }}
-                src={blogDetail?.coverimage}
-                alt={blogDetail?.title}
-                width="100%"
-                h="full"
-                maxW="full"
-                objectFit="cover"
-                maxH="full"
-              />
+              <Box position="relative" borderRadius={{ base: 0, md: 10 }} w="full" maxW="full" h="full">
+                <Image
+                  src={blogDetail?.coverimage}
+                  alt={blogDetail?.title}
+                  style={{
+                    objectFit: 'cover'
+                  }}
+                  fill
+                  priority
+                />
+              </Box>
 
               <Flex
                 position="absolute"
@@ -139,7 +152,7 @@ const BlogDetails = ({ blogDetail, cookie }: { blogDetail: IBlog; cookie: any })
                     fontSize="sm"
                   >
                     <Flex alignItems="center" gap={3} ml={2}>
-                      <Image
+                      <NextChakraImage
                         src={blogDetail?.profileimage}
                         fallbackSrc="/images/default-avatar.webp"
                         alt="profile-image"
@@ -200,26 +213,14 @@ interface Params extends ParsedUrlQuery {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as Params
-  const { req, res } = context
-  const { cookie } = req?.headers
+  const { res } = context
 
-  const parsedCookie = cookie && parse(cookie as string)
   res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate')
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/details/${id}`, {
-    headers: {
-      'Access-Control-Allow-Credentials': 'true',
-      Cookie: cookie as string
-    },
-    credentials: 'include',
-    method: 'GET'
-  })
-  const blogDetails = await response.json()
-
+  const blogDetails = await getBlogDetails(id as string)
   return {
     props: {
-      blogDetail: blogDetails?.data,
-      cookie: parsedCookie
+      blogDetail: blogDetails
     }
   }
 }

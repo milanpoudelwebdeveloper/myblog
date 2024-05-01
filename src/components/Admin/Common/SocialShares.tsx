@@ -46,7 +46,16 @@ const SocialShares = ({ shareURL, blogDetail }: Props) => {
       {links.map(({ name, icon, link }) => (
         <a key={name} href={link} target="_blank" rel="noreferrer">
           <Box position="relative" w={7} h={7} maxW="full" cursor="pointer" borderRadius="full" overflow="hidden">
-            <Image src={`/images/${icon}.webp`} alt={name} fill sizes="auto" objectFit="cover" />
+            <Image
+              src={`/images/${icon}.webp`}
+              alt={name}
+              fill
+              sizes="auto"
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
+            />
           </Box>
         </a>
       ))}

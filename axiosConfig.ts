@@ -29,7 +29,7 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error?.config
     if (error?.response?.status === 401 && !originalRequest.sent) {
       originalRequest.sent = true
-      const response = await axios.get('/auth/checklogin', {
+      const response = await axios.get(`${baseURL}/auth/checklogin`, {
         withCredentials: true
       })
       if (response.status === 200) {
@@ -57,7 +57,7 @@ axiosInstanceFile.interceptors.response.use(
     if (error?.response?.status === 401 && !originalRequest.sent) {
       console.log('yes the response is', error.response.status)
       originalRequest.sent = true
-      const response = await axios.get('/auth/checklogin', {
+      const response = await axios.get(`${baseURL}/auth/checklogin`, {
         withCredentials: true
       })
       if (response.status === 200) {

@@ -182,3 +182,15 @@ export const uploadBlogImage = async (image: File) => {
     throw message
   }
 }
+
+export const isBlogLiked = async (blogId: string | number) => {
+  try {
+    const res = await axiosInstance.get(`/blog/isliked/${blogId}`)
+    if (res?.data) {
+      return res?.data?.data
+    }
+  } catch (error: any) {
+    const message = error?.response?.data?.message || 'Something went wrong. Please try again'
+    throw message
+  }
+}
