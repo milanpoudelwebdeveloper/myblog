@@ -19,7 +19,7 @@ const RecentBlogs = ({ blogs }: { blogs: IBlog[] }) => {
         {blogs?.map((blog: IBlog) => <BlogCard card={blog} key={blog?.id} />)}
       </Grid>
       <Center mt={5}>
-        <Link href={BLOGS + '?page=1'}>
+        <Link href={BLOGS + 'category=all' + '?page=1'}>
           <Button variant="unstyled" color="white" fontSize={{ base: 'sm', '1xl': 'md' }} bg="#6941C8" px={4}>
             View All
           </Button>

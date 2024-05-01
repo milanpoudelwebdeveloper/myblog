@@ -36,8 +36,8 @@ const generateSiteMap = (blogs: IBlog[]) => {
     .map((blog) => {
       return `
       <url>
-        <loc>${`${domain}/blog/${blog.id}/${blog.metatitle}`}</loc>
-        <lastmod>${blog.createdat}</lastmod>
+        <loc>${`${domain}/blog/${blog?.id}/${blog?.metatitle}`}</loc>
+        <lastmod>${blog?.createdat}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
       </url>
