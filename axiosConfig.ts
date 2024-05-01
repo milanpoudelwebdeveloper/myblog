@@ -12,6 +12,34 @@ export const axiosInstance = axios.create({
   headers
 })
 
+axiosInstance.interceptors.request.use(
+  (config) => {
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  async (error) => {
+    const originalRequest = error?.config
+    if (error?.response?.status === 401 && !originalRequest.sent) {
+      originalRequest.sent = true
+      const response = await axios.get('/auth/checklogin', {
+        withCredentials: true
+      })
+      if (response.status === 200) {
+        return axiosInstance(originalRequest)
+      }
+    }
+    return Promise.reject(error)
+  }
+)
+
 export const axiosInstanceFile = axios.create({
   baseURL,
   headers: {
@@ -19,3 +47,23 @@ export const axiosInstanceFile = axios.create({
     accept: 'application/json, text/plain, */*'
   }
 })
+
+axiosInstanceFile.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  async (error) => {
+    const originalRequest = error?.config
+    if (error?.response?.status === 401 && !originalRequest.sent) {
+      console.log('yes the response is', error.response.status)
+      originalRequest.sent = true
+      const response = await axios.get('/auth/checklogin', {
+        withCredentials: true
+      })
+      if (response.status === 200) {
+        return axiosInstanceFile(originalRequest)
+      }
+    }
+    return Promise.reject(error)
+  }
+)
