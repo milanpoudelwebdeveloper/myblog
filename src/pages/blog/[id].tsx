@@ -2,7 +2,7 @@ import { Box, Text, useColorModeValue, Image, Flex, Button } from '@chakra-ui/re
 import MainLayout from '@components/Common/MainLayout'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import { getBlogDetails, saveBlog, unSaveBlog, updateReadCount } from '@/src/services/blog'
+import { saveBlog, unSaveBlog, updateReadCount } from '@/src/services/blog'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-dark.css'
@@ -206,11 +206,19 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const parsedCookie = cookie && parse(cookie as string)
   res.setHeader('Cache-Control', 's-maxage=20, stale-while-revalidate')
 
-  const blogDetails = await getBlogDetails(id as string, cookie as string)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/details/${id}`, {
+    headers: {
+      'Access-Control-Allow-Credentials': 'true',
+      Cookie: cookie as string
+    },
+    credentials: 'include',
+    method: 'GET'
+  })
+  const blogDetails = await response.json()
 
   return {
     props: {
-      blogDetail: blogDetails,
+      blogDetail: blogDetails?.data,
       cookie: parsedCookie
     }
   }
