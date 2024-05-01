@@ -1,10 +1,9 @@
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React from 'react'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-light.css'
-import { AuthContext } from '@/src/context/authContext'
 import Image from 'next/image'
 import { categoryColors } from '@constants/categories'
 import { BLOGS } from '@constants/routes'
@@ -16,10 +15,8 @@ interface Props {
 }
 
 const FeaturedBlogPost = ({ card }: Props) => {
-  const { title, coverimage, id, categories } = card
-  const { user } = useContext(AuthContext)
+  const { title, coverimage, id, categories, metatitle } = card
   const boxShadowColor = useColorModeValue('rgba(32, 54, 86, 0.15) 0px 8px 20px', 'rgba(255, 255, 255, 0.8)')
-  const dynamicLink = user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
 
   return (
     <Box
@@ -48,7 +45,7 @@ const FeaturedBlogPost = ({ card }: Props) => {
           </Link>
         ))}
       </Flex>
-      <Link href={dynamicLink} shallow>
+      <Link href={`/blog/${id}/${metatitle}`} shallow>
         <Box
           position="absolute"
           w="full"

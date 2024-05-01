@@ -13,6 +13,7 @@ interface IBlog {
   saved: boolean
   name: string
   profileimage: string
+  metatitle: string
 }
 
 interface ICategory {

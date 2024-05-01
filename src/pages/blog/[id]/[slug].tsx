@@ -85,7 +85,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
       <HeadingSeo
         title={blogDetail?.title}
         description={blogDetail?.content?.slice(0, 140)}
-        link={`https://codewithmilan.com/blog/${id}`}
+        link={`https://codewithmilan.com/blog/${id}/${blogDetail?.metatitle}`}
         image={blogDetail?.coverimage}
       />
       <MainLayout pxMobile={0}>

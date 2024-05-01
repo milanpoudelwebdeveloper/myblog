@@ -17,7 +17,7 @@ interface Props {
 }
 
 const BlogCard = ({ card }: Props) => {
-  const { title, coverimage, categories, createdat, id, name } = card
+  const { title, coverimage, categories, createdat, id, name, metatitle } = card
   const router = useRouter()
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
 
@@ -34,7 +34,7 @@ const BlogCard = ({ card }: Props) => {
         borderRadius="0.75rem"
         overflow="hidden"
       >
-        <Link href={`/blog/${id}`} shallow>
+        <Link href={`/blog/${id}/${metatitle}`} shallow>
           <Image
             src={coverimage}
             placeholder="blur"

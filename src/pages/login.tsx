@@ -55,7 +55,7 @@ const UserLogin = () => {
     <>
       <HeadingSeo
         title="Login | Code With Milan"
-        description="Login to your account to continue reading the blogs"
+        description="Login to your account to continue reading all the blogs and articles on Code With Milan"
         link={`https://www.codewithmilan.com/${LOGIN}`}
       />
 

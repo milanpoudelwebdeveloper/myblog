@@ -10,7 +10,7 @@ const About = () => {
     <>
       <HeadingSeo
         title="About | Code With Milan"
-        description="Learn more about the author, purposes and the overall platform"
+        description="Learn more about the author, purposes and the overall platform of Code With Milan"
         link={`https://www.codewithmilan.com/${ABOUT}`}
       />
       <MainLayout>

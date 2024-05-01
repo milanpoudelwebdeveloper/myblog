@@ -50,7 +50,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
     <>
       <HeadingSeo
         title="Blogs | Code With Milan"
-        description="Find different categories and read the latest blogs of your interest"
+        description="Find different categories of programming and read the latest blogs of your interest"
         link={`https://www.codewithmilan.com/${BLOGS}`}
       />
       <MainLayout>

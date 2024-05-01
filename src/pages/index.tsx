@@ -37,7 +37,8 @@ export default function Home({ blogs, featuredBlog, popularBlogs }: Props) {
       <HeadingSeo
         link="https://www.codewithmilan.com/"
         title="Home | Code With Milan"
-        description="Code With Milan is a blog site where you can find programming tutorials"
+        description="Code With Milan is a blog site where you can find programming tutorials and blogs on various topics
+        like ReactJS, NextJS, NodeJS, ExpressJS, JavaScript, TypeScript, AWS and many more."
       />
       <MainLayout>
         <Flex gap={{ base: 7, xl: 10 }} direction={{ base: 'column', lg: 'row' }} mt={{ base: 2, '1xl': 4 }}>

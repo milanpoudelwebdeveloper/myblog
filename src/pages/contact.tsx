@@ -32,7 +32,7 @@ const Contact = () => {
       <HeadingSeo
         link={`https://www.codewithmilan.com/${CONTACT}`}
         title="Contact | Code With Milan"
-        description="Contact us for any kind of inquiry, feedback or any other work"
+        description="Contact us and stay connected for any kind of inquiry, feedback or any other work"
       />
       <MainLayout>
         <Box w={{ base: 'full', md: 700, '1xl': 870 }} mx="auto">
