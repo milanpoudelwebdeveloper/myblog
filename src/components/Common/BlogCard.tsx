@@ -28,7 +28,7 @@ const BlogCard = ({ card }: Props) => {
       <Box
         minW="full"
         maxW="full"
-        minH={{ base: 220, lg: 250, xl: 220, '1xl': 280 }}
+        minH={{ base: 220, lg: 250, xl: 240, '1xl': 280 }}
         maxH="full"
         position="relative"
         borderRadius="0.75rem"
@@ -66,19 +66,19 @@ const BlogCard = ({ card }: Props) => {
         </Flex>
       </Box>
       <Link href={`/blog/${id}`} shallow>
-        <Box>
+        <Box mt={3}>
           <Text
-            mt={4}
-            mb={2}
+            mb={1}
             color={titleColor}
-            fontSize={{ base: 'sm', '1xl': 'lg' }}
+            fontSize={{ base: 'md', '1xl': 'lg' }}
             fontWeight="600"
             lineHeight={{ base: '23px', '1xl': '28px' }}
             as={isHomePage ? 'h3' : 'h2'}
           >
             {title}
           </Text>
-          <Text color="rgb(116, 116, 116)" fontSize={{ base: 'xs', '1xl': 'md' }} fontWeight="600">
+
+          <Text color="rgb(116, 116, 116)" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600">
             {name} &#x2022; {convertDate(createdat)}
           </Text>
         </Box>
