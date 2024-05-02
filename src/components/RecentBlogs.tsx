@@ -13,13 +13,13 @@ const RecentBlogs = ({ blogs }: { blogs: IBlog[] }) => {
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }}
         columnGap={{ base: 8, md: 10, lg: 12 }}
-        rowGap={{ base: 6, '1xl': 8 }}
+        rowGap={{ base: 8, '1xl': 10 }}
         mt={8}
       >
         {blogs?.map((blog: IBlog) => <BlogCard card={blog} key={blog?.id} />)}
       </Grid>
       <Center mt={10}>
-        <Link href={BLOGS + 'category=all' + '?page=1'}>
+        <Link href={BLOGS + '?category=all' + '&page=1'}>
           <Button variant="unstyled" color="white" fontSize={{ base: 'sm', '1xl': 'md' }} bg="#6941C8" px={4}>
             View All
           </Button>

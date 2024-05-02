@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, Text, useColorModeValue, Image as ChakraImage } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import 'react-quill/dist/quill.core.css'
@@ -68,19 +68,21 @@ const BlogCard = ({ card }: Props) => {
       <Link href={`/blog/${id}`} shallow>
         <Box mt={3}>
           <Text
-            mb={1}
+            mb={2}
             color={titleColor}
             fontSize={{ base: 'md', '1xl': 'lg' }}
             fontWeight="600"
-            lineHeight={{ base: '28px', '1xl': '28px' }}
+            lineHeight={{ base: '25px', '1xl': '28px' }}
             as={isHomePage ? 'h3' : 'h2'}
           >
             {title}
           </Text>
-
-          <Text color="rgb(116, 116, 116)" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600">
-            {name} &#x2022; {convertDate(createdat)}
-          </Text>
+          <Flex alignItems="center" gap={2}>
+            <ChakraImage src="/images/default-avatar.webp" alt="avatar" borderRadius="full" boxSize="20px" objectFit="cover" />
+            <Text color="rgb(116, 116, 116)" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600">
+              {name} &#x2022; {convertDate(createdat)}
+            </Text>
+          </Flex>
         </Box>
       </Link>
     </Box>

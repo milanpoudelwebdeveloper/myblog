@@ -14,6 +14,7 @@ import { useEffect, useMemo, useState } from 'react'
 const Blogs = ({ categories }: { categories: ICategory[] }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const buttonColor = useColorModeValue('white', '#1B1B1B')
+  const textColor = useColorModeValue('rgb(35, 35, 35)', '#FFFFFF')
   const searchParams = useSearchParams()
   const search = searchParams.get('category')
   const page = searchParams.get('page')
@@ -104,7 +105,7 @@ const Blogs = ({ categories }: { categories: ICategory[] }) => {
                 fontWeight={parseInt(page as string) == index + 1 ? '700' : currentPage == index + 1 ? 700 : '500'}
                 fontSize={{ base: 'sm', '1xl': 'md' }}
                 mr={2}
-                color={parseInt(page as string) == index + 1 ? 'rgb(165, 94, 234)' : 'rgb(35, 35, 35)'}
+                color={parseInt(page as string) == index + 1 ? 'rgb(165, 94, 234)' : textColor}
                 display={memoizedPageCount > 1 ? 'block' : 'none'}
               >
                 {index + 1 || 1}
