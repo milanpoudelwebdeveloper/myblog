@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Box, Button, Divider, Flex, FormControl, FormLabel, Image, Input, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Center, Divider, Flex, FormControl, FormLabel, Image, Input, Text, useDisclosure } from '@chakra-ui/react'
 import MainLayout from '@components/Admin/Common/MainLayout'
 import { getCategories } from '@/src/services/category'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
@@ -186,8 +186,13 @@ const BlogDetails = ({ blogDetails }: { blogDetails: IBlog }) => {
         <Box mt={7} bg="white" pt={10} pb={16} borderRadius={14}>
           <Box px={20} gap={16} mx="auto">
             <Box>
-              {imageUrl ? (
-                <Image borderRadius="full" w={20} h={20} src={imageUrl} alt="placeholder" mx="auto" />
+              {imageUrl || coverImage ? (
+                <Center flexDirection="column" gap={3}>
+                  <Image borderRadius="full" w={20} h={20} src={imageUrl} alt="placeholder" />
+                  <Button onClick={() => setCoverImage('')} fontWeight="normal">
+                    Delete Photo
+                  </Button>
+                </Center>
               ) : (
                 <ImageUploader setCoverImage={setCoverImage} />
               )}

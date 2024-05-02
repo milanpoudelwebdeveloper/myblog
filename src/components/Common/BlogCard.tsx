@@ -28,7 +28,7 @@ const BlogCard = ({ card }: Props) => {
       <Box
         minW="full"
         maxW="full"
-        minH={{ base: 220, lg: 250, xl: 240, '1xl': 280 }}
+        minH={{ base: 220, lg: 250, xl: 224, '1xl': 280 }}
         maxH="full"
         position="relative"
         borderRadius="0.75rem"
@@ -47,7 +47,7 @@ const BlogCard = ({ card }: Props) => {
             sizes="(min-width: 1440px) 490px, (min-width: 1280px) 410px, (min-width: 1000px) 499px, (min-width: 780px) 407px, (min-width: 600px) 550px, (min-width: 480px) calc(50vw + 270px), calc(100vw - 10px)"
           />
         </Link>
-        <Flex position="absolute" bottom={4} left={4} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }} mt={4}>
+        <Flex position="absolute" bottom={5} left={4} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }} mt={4}>
           {categories?.map((category, index) => (
             <Link href={BLOGS + '?category=' + category?.value + '&page=1'} key={index} shallow>
               <Box
@@ -72,7 +72,7 @@ const BlogCard = ({ card }: Props) => {
             color={titleColor}
             fontSize={{ base: 'md', '1xl': 'lg' }}
             fontWeight="600"
-            lineHeight={{ base: '23px', '1xl': '28px' }}
+            lineHeight={{ base: '28px', '1xl': '28px' }}
             as={isHomePage ? 'h3' : 'h2'}
           >
             {title}

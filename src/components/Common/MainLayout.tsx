@@ -11,7 +11,7 @@ interface Props {
 
 const MainLayout = ({ children, pxMobile = 5 }: Props) => {
   return (
-    <Box maxW={{ base: 530, md: 750, lg: 850, xl: 1000, '1xl': 1260 }} mx="auto" px={{ base: pxMobile, sm: 10, md: 12, lg: 0 }}>
+    <Box maxW={{ base: 530, md: 750, lg: 850, xl: 1020, '1xl': 1260 }} mx="auto" px={{ base: pxMobile, sm: 10, md: 12, lg: 0 }}>
       <NavBar />
       <Flex gap={12} mt={{ base: 75, md: 24, '1xl': 28 }} direction={{ base: 'column', xl: 'row' }} justifyContent="center">
         <Box w="full">{children}</Box>
