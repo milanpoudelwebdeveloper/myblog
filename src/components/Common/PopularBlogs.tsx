@@ -1,19 +1,12 @@
 import { Box, Divider, Flex, Text, useColorModeValue } from '@chakra-ui/react'
-import React, { useContext } from 'react'
 import { convertDate } from '@/src/utils/convertDate'
 import Image from 'next/image'
 import { base64File } from '@constants/files'
-import { AuthContext } from '@/src/context/authContext'
 import Link from 'next/link'
 
 const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
-  const { user } = useContext(AuthContext)
   const dividerColor = useColorModeValue('#D9D9D9', 'rgba(255, 255, 255, 0.15)')
   const dateColor = useColorModeValue('rgb(35, 35, 35)', '#C0C5D0')
-
-  const getDynamicLink = (id: string) => {
-    return user?.id ? `/blog/${id}?query=${user?.id}` : `/blog/${id}`
-  }
 
   return (
     <Box>
@@ -22,7 +15,7 @@ const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
       </Text>
       <Divider mb={{ base: 4, lg: 3, xl: 4 }} borderColor={dividerColor} />
       {blogs?.map((blog: IBlog) => (
-        <Link href={getDynamicLink(blog?.id as string)} key={blog?.id}>
+        <Link href={`/blog/${blog?.id}/${blog?.metatitle}`} key={blog?.id}>
           <Box mb={{ base: 3, '1xl': 7 }}>
             <Flex alignItems="center" gap={{ base: 4, '1xl': 5 }}>
               <Box

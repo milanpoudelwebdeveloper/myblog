@@ -9,7 +9,7 @@ interface Props {
   pxMobile?: number
 }
 
-const MainLayout = ({ children, pxMobile = 5 }: Props) => {
+const MainLayout = ({ children, pxMobile = 4 }: Props) => {
   return (
     <Box maxW={{ base: 530, md: 750, lg: 850, xl: 1020, '1xl': 1260 }} mx="auto" px={{ base: pxMobile, sm: 10, md: 12, lg: 0 }}>
       <NavBar />

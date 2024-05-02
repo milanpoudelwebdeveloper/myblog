@@ -1,6 +1,5 @@
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
-import React from 'react'
 import 'react-quill/dist/quill.core.css'
 import 'react-quill/dist/quill.snow.css'
 import 'highlight.js/styles/atom-one-light.css'
