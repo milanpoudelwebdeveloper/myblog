@@ -45,9 +45,7 @@ const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
                 <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600" mb={{ base: 1, lg: 0, xl: 1 }} lineHeight="1.5" as="h2">
                   {blog?.title}
                 </Text>
-                <Text color={dateColor} fontSize="xs" fontWeight="300">
-                  {convertDate(blog?.createdat)}
-                </Text>
+                
               </Box>
             </Flex>
             <Divider my={3} borderColor={dividerColor} />
