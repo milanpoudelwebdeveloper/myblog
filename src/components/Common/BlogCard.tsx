@@ -66,11 +66,11 @@ const BlogCard = ({ card }: Props) => {
         </Flex>
       </Box>
       <Link href={`/blog/${id}`} shallow>
-        <Box mt={3}>
+        <Box mt={4}>
           <Text
-            mb={{ base: 4, md: 2 }}
+            mb={{ base: 3, md: 3 }}
             color={titleColor}
-            fontSize={{ base: 'lg', '1xl': 'lg' }}
+            fontSize={{ base: 'lg', md: 'md', '1xl': 'xl' }}
             fontWeight="700"
             lineHeight={{ base: '25px', '1xl': '28px' }}
             as={isHomePage ? 'h3' : 'h2'}
