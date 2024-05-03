@@ -1,12 +1,12 @@
 import { Box, Divider, Flex, Text, useColorModeValue } from '@chakra-ui/react'
-import { convertDate } from '@/src/utils/convertDate'
+//import { convertDate } from '@/src/utils/convertDate'
 import Image from 'next/image'
 import { base64File } from '@constants/files'
 import Link from 'next/link'
 
 const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
   const dividerColor = useColorModeValue('#D9D9D9', 'rgba(255, 255, 255, 0.15)')
-  const dateColor = useColorModeValue('rgb(35, 35, 35)', '#C0C5D0')
+  //const dateColor = useColorModeValue('rgb(35, 35, 35)', '#C0C5D0')
 
   return (
     <Box>
@@ -45,9 +45,7 @@ const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
                 <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600" mb={{ base: 1, lg: 0, xl: 1 }} lineHeight="1.5" as="h2">
                   {blog?.title}
                 </Text>
-                <Text color={dateColor} fontSize="xs" fontWeight="300">
-                  {convertDate(blog?.createdat)}
-                </Text>
+                
               </Box>
             </Flex>
             <Divider my={3} borderColor={dividerColor} />
