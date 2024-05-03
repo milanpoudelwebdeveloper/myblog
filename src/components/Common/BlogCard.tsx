@@ -71,7 +71,7 @@ const BlogCard = ({ card }: Props) => {
             mb={2}
             color={titleColor}
             fontSize={{ base: 'md', '1xl': 'lg' }}
-            fontWeight="600"
+            fontWeight="700"
             lineHeight={{ base: '25px', '1xl': '28px' }}
             as={isHomePage ? 'h3' : 'h2'}
           >
@@ -79,7 +79,7 @@ const BlogCard = ({ card }: Props) => {
           </Text>
           <Flex alignItems="center" gap={2}>
             <ChakraImage src="/images/default-avatar.webp" alt="avatar" borderRadius="full" boxSize="20px" objectFit="cover" />
-            <Text color="rgb(116, 116, 116)" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="600">
+            <Text color="rgb(116, 116, 116)" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="500">
               {name} &#x2022; {convertDate(createdat)}
             </Text>
           </Flex>
