@@ -20,11 +20,12 @@ const BlogCard = ({ card }: Props) => {
   const { title, coverimage, categories, createdat, id, name, metatitle } = card
   const router = useRouter()
   const titleColor = useColorModeValue('#1A1A1A', 'rgb(255, 255, 255)')
+  const borderColor = useColorModeValue('#E5E5E5', 'rgba(255, 255, 255, 0.15)')
 
   const isHomePage = router.pathname === '/'
 
   return (
-    <Box pb={5} overflow="hidden" w="full" borderBottom={{ base: '1px solid #E5E5E5', md: 'none' }} borderColor="#E5E5E5">
+    <Box pb={5} overflow="hidden" w="full" borderBottomWidth={{ base: 1, md: 0 }} borderColor={borderColor}>
       <Box
         minW="full"
         maxW="full"
@@ -72,7 +73,7 @@ const BlogCard = ({ card }: Props) => {
             color={titleColor}
             fontSize={{ base: 'lg', md: 'md', '1xl': 'xl' }}
             fontWeight="700"
-            lineHeight={{ base: '25px', '1xl': '28px' }}
+            lineHeight="28px"
             as={isHomePage ? 'h3' : 'h2'}
           >
             {title}
