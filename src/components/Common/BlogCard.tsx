@@ -24,14 +24,14 @@ const BlogCard = ({ card }: Props) => {
   const isHomePage = router.pathname === '/'
 
   return (
-    <Box pb={5} overflow="hidden" borderRadius={10} w="full">
+    <Box pb={5} overflow="hidden" w="full" borderBottom={{ base: '1px solid #E5E5E5', md: 'none' }} borderColor="#E5E5E5">
       <Box
         minW="full"
         maxW="full"
-        minH={{ base: 220, lg: 250, xl: 224, '1xl': 280 }}
+        minH={{ base: 228, lg: 250, xl: 224, '1xl': 280 }}
         maxH="full"
         position="relative"
-        borderRadius="0.75rem"
+        borderRadius={10}
         overflow="hidden"
       >
         <Link href={`/blog/${id}/${metatitle}`} shallow>
@@ -68,9 +68,9 @@ const BlogCard = ({ card }: Props) => {
       <Link href={`/blog/${id}`} shallow>
         <Box mt={3}>
           <Text
-            mb={2}
+            mb={{ base: 4, md: 2 }}
             color={titleColor}
-            fontSize={{ base: 'md', '1xl': 'lg' }}
+            fontSize={{ base: 'lg', '1xl': 'lg' }}
             fontWeight="700"
             lineHeight={{ base: '25px', '1xl': '28px' }}
             as={isHomePage ? 'h3' : 'h2'}
@@ -79,7 +79,7 @@ const BlogCard = ({ card }: Props) => {
           </Text>
           <Flex alignItems="center" gap={2}>
             <ChakraImage src="/images/default-avatar.webp" alt="avatar" borderRadius="full" boxSize="20px" objectFit="cover" />
-            <Text color="rgb(116, 116, 116)" fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="500">
+            <Text color="rgb(116, 116, 116)" fontSize={{ base: 'xs', '1xl': 'md' }} fontWeight="500">
               {name} &#x2022; {convertDate(createdat)}
             </Text>
           </Flex>
