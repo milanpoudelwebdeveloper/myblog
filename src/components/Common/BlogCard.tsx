@@ -48,7 +48,7 @@ const BlogCard = ({ card }: Props) => {
             sizes="(min-width: 1440px) 490px, (min-width: 1280px) 410px, (min-width: 1000px) 499px, (min-width: 780px) 407px, (min-width: 600px) 550px, (min-width: 480px) calc(50vw + 270px), calc(100vw - 10px)"
           />
         </Link>
-        <Flex position="absolute" bottom={5} left={4} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }} mt={4}>
+        <Flex position="absolute" bottom={6} left={6} gap={2} fontSize={{ base: '10px', '1xl': 'xs' }} mt={4}>
           {categories?.map((category, index) => (
             <Link href={BLOGS + '?category=' + category?.value + '&page=1'} key={index} shallow>
               <Box

@@ -67,15 +67,15 @@ const FeaturedBlogPost = ({ card }: Props) => {
 
         <Box
           position="absolute"
-          bottom={{ base: 8, xl: 9, '1xl': 12 }}
+          bottom={{ base: 6, xl: 9, '1xl': 12 }}
           left={{ base: 6, xl: 8, '1xl': 10 }}
           color="white"
-          fontSize={{ base: 'xl', '1xl': '28px' }}
+          fontSize={{ base: 'lg', '1xl': '26px' }}
           fontWeight="bold"
           zIndex={110}
-          maxW={{ base: '80%', '1xl': '90%' }}
+          maxW={{ base: '83%', '1xl': '85%' }}
           letterSpacing={1}
-          lineHeight={{ base: '30px', '1xl': '32px' }}
+          lineHeight={{ base: '28px', '1xl': '42px' }}
         >
           <Text as="h1">{title}</Text>
         </Box>

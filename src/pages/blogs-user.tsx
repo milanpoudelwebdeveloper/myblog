@@ -68,7 +68,11 @@ const BlogsByYou = ({ categories }: { categories: ICategory[] }) => {
           ))}
         </Flex>
 
-        <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={6} mt={5}>
+        <Grid
+          templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }}
+          gap={{ base: 6, lg: 12, xl: 8 }}
+          mt={{ base: 8, '1xl': 10 }}
+        >
           {data?.map((post: IBlog) => <BlogCard card={post} key={post?.id} />)}
         </Grid>
       </MainLayout>
