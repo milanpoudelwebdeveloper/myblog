@@ -71,7 +71,7 @@ const BlogCard = ({ card }: Props) => {
           <Text
             mb={{ base: 3, md: 3 }}
             color={titleColor}
-            fontSize={{ base: 'lg', md: 'md', '1xl': 'xl' }}
+            fontSize={{ base: 'md', '1xl': 'xl' }}
             fontWeight="700"
             lineHeight="28px"
             as={isHomePage ? 'h3' : 'h2'}

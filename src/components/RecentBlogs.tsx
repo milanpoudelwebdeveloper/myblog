@@ -12,7 +12,7 @@ const RecentBlogs = ({ blogs }: { blogs: IBlog[] }) => {
       </Text>
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }}
-        columnGap={{ base: 8, md: 10 }}
+        columnGap={{ base: 8, '1xl': 10 }}
         rowGap={{ base: 8, '1xl': 10 }}
         mt={8}
       >
