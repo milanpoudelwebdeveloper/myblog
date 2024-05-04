@@ -67,18 +67,18 @@ const BlogCard = ({ card }: Props) => {
         </Flex>
       </Box>
       <Link href={`/blog/${id}`} shallow>
-        <Box mt={2}>
+        <Box mt={{ base: 2, '1xl': 3 }}>
           <Text
-            mb={1.5}
+            mb={{ base: 2, '1xl': 3 }}
             color={titleColor}
             fontSize={{ base: 'md', '1xl': 'lg' }}
-            fontWeight="600"
+            fontWeight="700"
             lineHeight="28px"
             as={isHomePage ? 'h3' : 'h2'}
           >
             {title}
           </Text>
-          <Flex alignItems="center" gap={2}>
+          <Flex alignItems="center" gap={3}>
             <ChakraImage src="/images/default-avatar.webp" alt="avatar" borderRadius="full" boxSize="20px" objectFit="cover" />
             <Text color="rgb(116, 116, 116)" fontSize={{ base: 'xs', '1xl': 'md' }} fontWeight="500">
               {name} &#x2022; {convertDate(createdat)}

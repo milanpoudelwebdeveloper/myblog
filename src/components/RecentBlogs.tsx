@@ -13,7 +13,7 @@ const RecentBlogs = ({ blogs }: { blogs: IBlog[] }) => {
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }}
         columnGap={{ base: 8, '1xl': 10 }}
-        rowGap={{ base: 8, '1xl': 10 }}
+        rowGap={10}
         mt={8}
       >
         {blogs?.map((blog: IBlog) => <BlogCard card={blog} key={blog?.id} />)}
