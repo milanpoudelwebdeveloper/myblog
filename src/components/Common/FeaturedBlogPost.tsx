@@ -70,7 +70,7 @@ const FeaturedBlogPost = ({ card }: Props) => {
           bottom={{ base: 6, xl: 9, '1xl': 12 }}
           left={{ base: 6, xl: 8, '1xl': 10 }}
           color="white"
-          fontSize={{ base: 'lg', '1xl': '26px' }}
+          fontSize={{ base: 'lg', '1xl': '24px' }}
           fontWeight="bold"
           zIndex={110}
           maxW={{ base: '83%', '1xl': '85%' }}

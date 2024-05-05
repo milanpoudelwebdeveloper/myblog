@@ -6,7 +6,7 @@ import { BLOGS } from '@constants/routes'
 const RecentBlogs = ({ blogs }: { blogs: IBlog[] }) => {
   const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
   return (
-    <Box mt={{ base: 7, '1xl': 12 }}>
+    <Box mt={{ base: 7, '1xl': 10 }}>
       <Text color={headingColor} fontSize={{ base: 'xl', '1xl': '26px' }} fontWeight="700">
         Recent Blogs
       </Text>
