@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { HOME } from '@constants/routes'
 
 const InformationSettings = () => {
-  const { user } = useContext(AuthContext)
+  const { user, setUserData } = useContext(AuthContext)
   const { showToast } = useCustomToast()
   const router = useRouter()
   const genders = ['Male', 'Female', 'Others']
@@ -35,7 +35,9 @@ const InformationSettings = () => {
   const submitHabndler = (data: FieldValues) => {
     updateInformation(data as IUpdateUser)
       .then((res) => {
-        if (res?.message) {
+        if (res?.user) {
+          const user = { ...res?.user }
+          setUserData(user)
           showToast(res?.message, 'success')
           router.push(HOME)
         }
