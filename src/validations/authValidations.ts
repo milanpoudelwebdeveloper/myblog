@@ -4,7 +4,9 @@ export const nameSchema = yup.object().shape({
   name: yup
     .string()
     .trim()
-    .required('Full name is required')
+    .required('Please write your full name')
+    .min(3, 'Name must be at least 3 characters long')
+    .max(50, 'Name must be at most 50 characters long')
     .matches(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/, 'Please enter a valid name')
 })
 
@@ -12,8 +14,8 @@ export const emailSchema = yup.object().shape({
   email: yup
     .string()
     .trim()
-    .required('Email is required')
-    .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 'Invalid email address')
+    .required('Please write your email address')
+    .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 'Please provide valid email address')
 })
 
 export const passwordSchema = yup.object().shape({
@@ -45,11 +47,11 @@ export const countrySchema = yup.object().shape({
 })
 
 export const subjectSchema = yup.object().shape({
-  subject: yup.string().required('Subject is required')
+  subject: yup.string().required('Please select a subject')
 })
 
 export const messageSchema = yup.object().shape({
-  message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters long')
+  message: yup.string().required('Please provide your message').min(10, 'Message must be at least 10 characters long')
 })
 
 export const signUpSchema = yup.object().shape({
@@ -86,4 +88,10 @@ export const contactSchema = yup.object().shape({
   ...emailSchema.fields,
   ...subjectSchema.fields,
   ...messageSchema.fields
+})
+
+export const changePasswordSchema = yup.object().shape({
+  ...oldPasswordSchema.fields,
+  ...passwordSchema.fields,
+  ...confirmPasswordSchema.fields
 })

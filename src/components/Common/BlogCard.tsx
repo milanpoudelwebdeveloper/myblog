@@ -67,7 +67,7 @@ const BlogCard = ({ card }: Props) => {
         </Flex>
       </Box>
       <Link href={`/blog/${id}`} shallow>
-        <Box mt={{ base: 2, '1xl': 3 }}>
+        <Box mt={3}>
           <Text
             mb={{ base: 2, '1xl': 3 }}
             color={titleColor}

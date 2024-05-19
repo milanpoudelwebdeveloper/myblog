@@ -28,9 +28,12 @@ export interface IUpdateUser {
   id: string
   name: string
   country: string
+  gender: string
+  email: string
+  bio: string
 }
 
-export const updateInformation = async (data: { id: string; name: string; country: string }) => {
+export const updateInformation = async (data: IUpdateUser) => {
   try {
     const res = await axiosInstance.put(`/users/${data?.id}`, data)
     if (res?.data) {

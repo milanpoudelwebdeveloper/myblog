@@ -94,3 +94,15 @@ export const changePassword = async (password: string, token: string) => {
     throw message
   }
 }
+
+export const updatePassword = async (oldPassword: string, password: string) => {
+  try {
+    const res = await axiosInstance.put('/auth/updatePassword', { oldPassword, password })
+    if (res?.data) {
+      return res.data
+    }
+  } catch (e: any) {
+    const message = e?.response?.data?.message || 'Something went wrong while verifying account. Please try again'
+    throw message
+  }
+}
