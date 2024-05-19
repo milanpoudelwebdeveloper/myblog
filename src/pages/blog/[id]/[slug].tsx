@@ -24,6 +24,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
   const { user } = useContext(AuthContext)
   const bookMarkBg = useColorModeValue(isSaved ? 'black' : 'white', isSaved ? 'white' : 'black')
   const bookMarkStroke = useColorModeValue(isSaved ? 'white' : 'black', isSaved ? 'black' : 'white')
+
   const { data } = useQuery({
     queryKey: ['isBlogLiked', blogDetail?.id, user?.id],
     queryFn: () => isBlogLiked(blogDetail?.id),
