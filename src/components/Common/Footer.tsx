@@ -1,12 +1,34 @@
+import { emailSchema } from '@/src/validations/authValidations'
 import { Box, Button, Flex, Input, Text } from '@chakra-ui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useForm } from 'react-hook-form'
+import ErrorText from './ErrorText'
+import { addSubscription } from '@/src/services/subscriptions'
+import { useCustomToast } from '@/src/hooks/useCustomToast'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
   const router = useRouter()
+  const { showToast } = useCustomToast()
   const isBlogDetailPage = router.pathname.includes('/blog/')
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(emailSchema)
+  })
+
+  const submitHandler = (data: { email: string }) => {
+    addSubscription(data?.email)
+      .then((res) => {
+        showToast(res?.message, 'success')
+      })
+      .catch((e) => showToast(e, 'error'))
+  }
 
   return (
     <Box mx={isBlogDetailPage ? 4 : 0} borderRadius={10} bg="#1B1B1B" color="white" textAlign="center" mt={{ base: 10, lg: 20 }} mb={7}>
@@ -22,14 +44,20 @@ const Footer = () => {
           maxW={{ base: 580, '1xl': 900 }}
           textAlign="center"
         >
-          Subscribe to learn about new technology and updates. Join over 5000+ members community to stay up to date with latest news.
+          Subscribe to learn about new technology and updates. Join over 1000+ members community to stay up to date with latest articles.
         </Text>
-        <Flex borderRadius={8} py={1} px={1} bg="white" color="black" w={{ base: '80%', lg: '40%' }} mx="auto">
-          <Input type="email" placeholder="Enter your email" fontSize={{ base: 'sm', '1xl': 'md' }} />
-          <Button bg="#1B1B1B" color="white" fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }} h={10}>
-            Subscribe
-          </Button>
-        </Flex>
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <Box w={{ base: '80%', lg: '40%' }} mx="auto">
+            <Flex borderRadius={8} py={1} px={1} bg="white" color="black">
+              <Input type="email" placeholder="Enter your email" fontSize={{ base: 'sm', '1xl': 'md' }} {...register('email')} />
+
+              <Button type="submit" bg="#1B1B1B" color="white" fontSize={{ base: 'xs', md: 'sm', '1xl': 'md' }} h={10}>
+                Subscribe
+              </Button>
+            </Flex>
+            {errors.email && <ErrorText message={errors.email.message} />}
+          </Box>
+        </form>
       </Box>
       <Flex
         justifyContent="space-between"
