@@ -5,10 +5,17 @@ import Link from 'next/link'
 import MessagesFilter from '@components/Admin/Messages/MessagesFilter'
 import { getMessages } from '@/src/services/messages'
 import { convertDate } from '@/src/utils/convertDate'
+import { useQuery } from '@tanstack/react-query'
 
 const tableHeadings = ['ID', 'Email', 'Name', 'Subject', 'Created At', 'Status']
 
-const Messages = ({ messages }: { messages: IMessage[] }) => {
+const Messages = () => {
+  const { data } = useQuery({
+    queryKey: ['getAdminMessages'],
+    queryFn: getMessages,
+    staleTime: Infinity
+  })
+
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
@@ -36,8 +43,8 @@ const Messages = ({ messages }: { messages: IMessage[] }) => {
             </Tr>
           </Thead>
           <Tbody bg="white">
-            {messages &&
-              messages?.map((list) => (
+            {data &&
+              data?.map((list: IMessage) => (
                 <Tr key={list?.id} color="#202224" fontSize={{ base: 'xs', '1xl': 'sm' }} fontWeight="600">
                   <Td paddingY={{ base: 5, '1xl': 7 }}>{list?.id}</Td>
                   <Td>
@@ -64,28 +71,3 @@ const Messages = ({ messages }: { messages: IMessage[] }) => {
 }
 
 export default Messages
-
-export async function getServerSideProps() {
-  try {
-    const messages = await getMessages()
-    if (messages) {
-      return {
-        props: {
-          messages: messages
-        }
-      }
-    } else {
-      return {
-        props: {
-          messages: []
-        }
-      }
-    }
-  } catch (error) {
-    return {
-      props: {
-        messages: []
-      }
-    }
-  }
-}
