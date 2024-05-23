@@ -4,10 +4,16 @@ import MainLayout from '@components/Admin/Common/MainLayout'
 import Link from 'next/link'
 import UserFilter from '@components/Admin/Users/UserFilter'
 import { getAllUsers } from '@/src/services/user'
+import { useQuery } from '@tanstack/react-query'
 
 const tableHeadings = ['ID', 'Name', 'Email', 'Role', 'Avatar', 'Status']
 
-const Users = ({ users }: { users: IUser[] }) => {
+const Users = () => {
+  const { data } = useQuery({
+    queryKey: ['getAdminUsers'],
+    queryFn: getAllUsers,
+    staleTime: Infinity
+  })
   return (
     <MainLayout>
       <Flex justifyContent="space-between" bg="#F5F7FA" my={4}>
@@ -40,7 +46,7 @@ const Users = ({ users }: { users: IUser[] }) => {
             </Tr>
           </Thead>
           <Tbody bg="white" fontSize={{ base: 'xs', '1xl': 'sm' }}>
-            {users?.map((user) => (
+            {data?.map((user: IUser) => (
               <Tr key={user?.id}>
                 <Td>{user?.id}</Td>
                 <Td>{user?.name}</Td>
@@ -62,28 +68,3 @@ const Users = ({ users }: { users: IUser[] }) => {
 }
 
 export default Users
-
-export async function getServerSideProps() {
-  try {
-    const users = await getAllUsers()
-    if (users) {
-      return {
-        props: {
-          users: users
-        }
-      }
-    } else {
-      return {
-        props: {
-          users: []
-        }
-      }
-    }
-  } catch (error) {
-    return {
-      props: {
-        users: []
-      }
-    }
-  }
-}
