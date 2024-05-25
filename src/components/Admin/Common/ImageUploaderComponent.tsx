@@ -2,7 +2,7 @@ import { Center, Flex, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 
 interface ImageUploaderProps {
-  setCoverImage: React.Dispatch<React.SetStateAction<File | string | null>>
+  setCoverImage: React.Dispatch<React.SetStateAction<File | string | null | undefined>>
 }
 
 const ImageUploaderComponent = ({ setCoverImage }: ImageUploaderProps) => {
