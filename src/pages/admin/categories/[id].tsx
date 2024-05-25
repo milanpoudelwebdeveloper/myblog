@@ -4,19 +4,28 @@ import { Box, Button, Center, Divider, FormControl, FormLabel, Image, Input, Tex
 import DeleteModal from '@components/Admin/Common/DeleteModal'
 import ImageUploader from '@components/Admin/Common/ImageUploaderComponent'
 import MainLayout from '@components/Admin/Common/MainLayout'
-import { GetServerSidePropsContext } from 'next'
+import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import { ParsedUrlQuery } from 'querystring'
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const CategoryDetails = ({ categoryDetails }: { categoryDetails: ICategory }) => {
-  const [name, setName] = React.useState(categoryDetails?.name)
-  const [image, setImage] = React.useState<File | null | string>(categoryDetails?.image)
+const CategoryDetails = () => {
+  const [name, setName] = React.useState('')
+  const [image, setImage] = React.useState<File | null | string>()
   let imageUrl = ''
   const router = useRouter()
   const { id } = router.query
   const { showToast } = useCustomToast()
   const { isOpen, onClose, onOpen } = useDisclosure()
+
+  const { data: categoryDetails } = useQuery({
+    queryKey: ['category', id],
+    queryFn: () => getCategoryDetails(id as string)
+  })
+
+  useEffect(() => {
+    setName(categoryDetails?.name)
+    setImage(categoryDetails?.image)
+  }, [categoryDetails])
 
   const editHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -102,34 +111,3 @@ const CategoryDetails = ({ categoryDetails }: { categoryDetails: ICategory }) =>
 }
 
 export default CategoryDetails
-
-interface Params extends ParsedUrlQuery {
-  id: string
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { id } = context.params as Params
-  try {
-    const categoryDetails = await getCategoryDetails(id)
-
-    if (categoryDetails) {
-      return {
-        props: {
-          categoryDetails: categoryDetails
-        }
-      }
-    } else {
-      return {
-        props: {
-          categories: []
-        }
-      }
-    }
-  } catch (error) {
-    return {
-      props: {
-        categories: []
-      }
-    }
-  }
-}
