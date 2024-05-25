@@ -26,10 +26,11 @@ const About = () => {
           </Text>
           <Text mt={7} lineHeight="1.7" as="h2">
             About me, I am dedicated full time developer and in it&apos;s in my free time, I write blogs and share my knowledge with the
-            community. I have proficient knowledge in React, Node/Express and other database and cloud technologies. With this platform, I
-            want to share all the knowledge I have gained in these domains. I hope you will find my blogs helpful and informative. If
-            there&apos;s any information that you find here is wrong or outdated, please let me know. Please write &quot;Feedback&quot; as a
-            subject while filling the form. I will try to correct it as soon as possible.
+            community. I have proficient knowledge in frontend development using React and NextJS, backend development using Node/Express
+            and other database and cloud technologies. With this platform, I want to share all the knowledge I have gained in these domains.
+            I hope you will find my blogs helpful and informative. If there&apos;s any information that you find here is wrong or outdated,
+            please let me know. Please write &quot;Feedback&quot; as a subject while filling the form. I will try to correct it as soon as
+            possible.
           </Text>
           <Text mt={7} mb={8} lineHeight="1.7" as="h2">
             Likewise, if you want to contribute to this platform, you can always contact me. I am open to any kind of contribution. If you
