@@ -79,7 +79,7 @@ const UserLogin = () => {
                 </Text>
 
                 <form onSubmit={handleSubmit(loginHandler)}>
-                  <Box mt={14}>
+                  <Box mt={{ base: 10, '1xl': 14 }}>
                     <FormControl mb={8}>
                       <FormLabel opacity={0.8} mb={3} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
                         Email
