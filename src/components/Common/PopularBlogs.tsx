@@ -10,10 +10,10 @@ const PopularBlogs = ({ blogs }: { blogs: IBlog[] }) => {
 
   return (
     <Box>
-      <Text fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="600" mb={4}>
+      <Text fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="600" mb={{ base: 4, md: 6 }}>
         Popular Read
       </Text>
-      <Divider mb={{ base: 4, lg: 3, xl: 4 }} borderColor={dividerColor} />
+      <Divider mb={4} borderColor={dividerColor} />
       {blogs?.map((blog: IBlog) => (
         <Link href={`/blog/${blog?.id}/${blog?.metatitle}`} key={blog?.id}>
           <Box mb={{ base: 3, '1xl': 7 }}>
