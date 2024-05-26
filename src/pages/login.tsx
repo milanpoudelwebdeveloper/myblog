@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormLabel, GlobalStyle, Image, Input, LightMode, Text } from '@chakra-ui/react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useContext, useState } from 'react'
@@ -60,106 +60,119 @@ const UserLogin = () => {
       />
 
       <PublicRoute>
-        <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center" px={{ base: 6, lg: 4 }}>
-          <Box
-            borderRadius={24}
-            bg="white"
-            px={{ base: 8, xl: 12 }}
-            py={{ base: 9, '1xl': 20 }}
-            textAlign="center"
-            w={{ base: 440, '1xl': 490 }}
-          >
-            <Text color="#202224" fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="bold" as="h1">
-              Login to Account
-            </Text>
-            <Text fontSize={{ base: 'xs', md: 'md' }} mt={4} as="h2">
-              Please enter your credentials to continue
-            </Text>
-            <form onSubmit={handleSubmit(loginHandler)}>
-              <Box mt={6}>
-                <FormControl mb={5}>
-                  <FormLabel opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
-                    Email
-                  </FormLabel>
-                  <Input
-                    type="email"
-                    borderColor="#DFEAF2"
-                    borderRadius={8}
-                    bg="#F1F4F9"
-                    _placeholder={{ color: '#718EBF' }}
-                    placeholder="Enter Email"
-                    {...register('email')}
-                    fontSize={{ base: 'sm', '1xl': 'md' }}
-                  />
-                  {errors?.email && <ErrorText message={errors.email.message} />}
-                </FormControl>
-                <FormControl position="relative">
-                  <FormLabel opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
-                    Password
-                  </FormLabel>
-                  <Input
-                    type={passwordVisible ? 'text' : 'password'}
-                    borderColor="#DFEAF2"
-                    borderRadius={8}
-                    bg="#F1F4F9"
-                    _placeholder={{ color: '#718EBF' }}
-                    placeholder="Enter Password"
-                    {...register('password')}
-                    fontSize={{ base: 'sm', '1xl': 'md' }}
-                    autoComplete="off"
-                  />
-                  <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
-                  {errors?.password && <ErrorText message={errors.password.message} />}
-                </FormControl>
-                <Link href={SEND_VERIFICATION} shallow>
-                  <Button
-                    variant="unstyled"
-                    ml="auto"
-                    color="#202224"
-                    fontSize={{ base: 'sm', '1xl': 'md' }}
-                    fontWeight="normal"
-                    opacity="0.6"
-                    textAlign="right"
-                    my={{ base: 2, '1xl': 5 }}
-                  >
-                    Forgot Password?
-                  </Button>
-                </Link>
-                {showResendLink && (
-                  <Link href={SEND_VERIFICATION} shallow>
-                    <Button variant="unstyled">
-                      <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right">
-                        Resend verification link
-                      </Text>
-                    </Button>
-                  </Link>
-                )}
+        <LightMode>
+          <GlobalStyle />
+          <Flex h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
+            <Box
+              w={{ base: 'full', md: '50%' }}
+              minH={{ md: '100dvh', lg: 'full' }}
+              overflow="hidden"
+              maxH="full"
+              display={{ base: 'none', md: 'block' }}
+            >
+              <Image src="/images/login.svg" alt="Login" w="full" h="full" objectFit="cover" objectPosition="center" />
+            </Box>
+            <Box flex={1} borderRadius={24} bg="white" px={{ base: 7, md: 14, xl: 20 }} py={{ base: 9, '1xl': 20 }} textAlign="center">
+              <Box mx="auto" maxW={{ base: 480, '1xl': 570 }}>
+                <Text color="#202224" fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="bold" as="h1">
+                  Nice to see you back!
+                </Text>
 
-                <Button
-                  bg="#4880FF"
-                  color="white"
-                  fontWeight="normal"
-                  type="submit"
-                  w="80%"
-                  mt={{ base: 7, '1xl': 10 }}
-                  fontSize={{ base: 'sm', '1xl': 'md' }}
-                >
-                  Sign In
-                </Button>
-                <Flex justifyContent="center" alignItems="center" mt={5} fontSize={{ base: 'xs', '1xl': 'md' }}>
-                  <Text as="h2" flexShrink={0}>
-                    Don&apos;t have an account?
-                  </Text>
-                  <Link href={SIGNUP} shallow>
-                    <Button variant="link" mb={1} fontSize={{ base: 'sm', '1xl': 'md' }} color="#4880FF" ml={1} textDecoration="underline">
-                      Create one
+                <form onSubmit={handleSubmit(loginHandler)}>
+                  <Box mt={14}>
+                    <FormControl mb={8}>
+                      <FormLabel opacity={0.8} mb={3} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
+                        Email
+                      </FormLabel>
+                      <Input
+                        type="email"
+                        borderColor="#DFEAF2"
+                        borderRadius={8}
+                        bg="#F1F4F9"
+                        _placeholder={{ color: '#718EBF' }}
+                        placeholder="Enter Email"
+                        {...register('email')}
+                        fontSize={{ base: 'sm', '1xl': 'md' }}
+                        py={5}
+                      />
+                      {errors?.email && <ErrorText message={errors.email.message} />}
+                    </FormControl>
+                    <FormControl position="relative">
+                      <FormLabel mb={3} opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
+                        Password
+                      </FormLabel>
+                      <Input
+                        type={passwordVisible ? 'text' : 'password'}
+                        borderColor="#DFEAF2"
+                        borderRadius={8}
+                        bg="#F1F4F9"
+                        _placeholder={{ color: '#718EBF' }}
+                        placeholder="Enter Password"
+                        {...register('password')}
+                        fontSize={{ base: 'sm', '1xl': 'md' }}
+                        autoComplete="off"
+                        py={5}
+                      />
+                      <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
+                      {errors?.password && <ErrorText message={errors.password.message} />}
+                    </FormControl>
+                    <Link href={SEND_VERIFICATION} shallow>
+                      <Button
+                        variant="unstyled"
+                        ml="auto"
+                        color="#007AFF"
+                        fontSize={{ base: 'sm', '1xl': 'md' }}
+                        fontWeight="normal"
+                        textAlign="right"
+                        my={{ base: 2, '1xl': 5 }}
+                      >
+                        Forgot Password?
+                      </Button>
+                    </Link>
+                    {showResendLink && (
+                      <Link href={SEND_VERIFICATION} shallow>
+                        <Button variant="unstyled">
+                          <Text color="#202224" fontSize="md" opacity="0.6" textAlign="right">
+                            Resend verification link
+                          </Text>
+                        </Button>
+                      </Link>
+                    )}
+
+                    <Button
+                      bg="#4880FF"
+                      color="white"
+                      fontWeight="normal"
+                      type="submit"
+                      w="80%"
+                      mt={{ base: 7, '1xl': 9 }}
+                      fontSize={{ base: 'sm', '1xl': 'md' }}
+                    >
+                      Sign In
                     </Button>
-                  </Link>
-                </Flex>
+                    <Flex justifyContent="center" alignItems="center" mt={5} fontSize={{ base: 'xs', '1xl': 'md' }}>
+                      <Text as="h2" flexShrink={0}>
+                        Don&apos;t have an account?
+                      </Text>
+                      <Link href={SIGNUP} shallow>
+                        <Button
+                          variant="link"
+                          mb={1}
+                          fontSize={{ base: 'sm', '1xl': 'md' }}
+                          color="#4880FF"
+                          ml={1}
+                          textDecoration="underline"
+                        >
+                          Create one
+                        </Button>
+                      </Link>
+                    </Flex>
+                  </Box>
+                </form>
               </Box>
-            </form>
-          </Box>
-        </Flex>
+            </Box>
+          </Flex>
+        </LightMode>
       </PublicRoute>
     </>
   )
