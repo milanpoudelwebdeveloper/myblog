@@ -41,7 +41,7 @@ const SendVerificationLink = () => {
         >
           <Image src="/images/login.svg" alt="Login" w="full" h="full" objectFit="cover" objectPosition="center" />
         </Box>
-        <Flex w={{ base: 440, '1xl': 490 }} mx="auto">
+        <Flex w={{ base: 440, '1xl': 570 }} mx="auto">
           <Box borderRadius={24} w="full" bg="white" px={{ base: 8, xl: 12 }} py={{ base: 9, '1xl': 20 }} textAlign="center">
             <Text color="#202224" fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="bold">
               Send Verification Link

@@ -1,5 +1,5 @@
 import { getBlogsByUser } from '@/src/services/blog'
-import { Box, Divider, Flex, Grid, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, Flex, Grid, Image, Text, useColorModeValue } from '@chakra-ui/react'
 import BlogCard from '@components/Common/BlogCard'
 import MainLayout from '@components/Common/MainLayout'
 import React, { useContext, useState } from 'react'
@@ -15,7 +15,7 @@ const BlogsByYou = ({ categories }: { categories: ICategory[] }) => {
   const { user } = useContext(AuthContext)
   const headingColor = useColorModeValue('#1A1A1A', '#FFFFFF')
 
-  const { data, error } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ['getBlogsByUser', user?.id, selectedCategory],
     queryFn: () => getBlogsByUser(selectedCategory, user?.id),
     staleTime: Infinity,
@@ -75,6 +75,14 @@ const BlogsByYou = ({ categories }: { categories: ICategory[] }) => {
         >
           {data?.map((post: IBlog) => <BlogCard card={post} key={post?.id} />)}
         </Grid>
+        {!data && !isLoading && (
+          <Box textAlign="center">
+            <Image src="/images/notfound.webp" alt="No blogs" w={400} objectFit="cover" mx="auto" mt={-16} mb={-10} />
+            <Text fontSize="xl" fontWeight="300">
+              Oops! Looks like you haven&apos;t written anything yet.
+            </Text>
+          </Box>
+        )}
       </MainLayout>
     </>
   )
