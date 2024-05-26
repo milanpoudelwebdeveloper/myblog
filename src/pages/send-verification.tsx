@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormLabel, Image, Input, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import ErrorText from '@components/Common/ErrorText'
 import { FieldValues, useForm } from 'react-hook-form'
@@ -31,19 +31,25 @@ const SendVerificationLink = () => {
 
   return (
     <PublicRoute>
-      <Flex bg="#568AFF" h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
+      <Flex h="100vh" overflowY="scroll" justifyContent="center" alignItems="center">
+        <Box
+          w={{ base: 'full', md: '50%' }}
+          minH={{ md: '100dvh', lg: 'full' }}
+          overflow="hidden"
+          maxH="full"
+          display={{ base: 'none', md: 'block' }}
+        >
+          <Image src="/images/login.svg" alt="Login" w="full" h="full" objectFit="cover" objectPosition="center" />
+        </Box>
         <Flex w={{ base: 440, '1xl': 490 }} mx="auto">
           <Box borderRadius={24} w="full" bg="white" px={{ base: 8, xl: 12 }} py={{ base: 9, '1xl': 20 }} textAlign="center">
             <Text color="#202224" fontSize={{ base: 'xl', '1xl': '24px' }} fontWeight="bold">
               Send Verification Link
             </Text>
-            <Text fontSize={{ base: 'xs', md: 'md' }} mt={4}>
-              Please enter your email to continue
-            </Text>
             <form onSubmit={handleSubmit(resendLink)}>
-              <Box mt={6}>
-                <FormControl mb={5}>
-                  <FormLabel opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
+              <Box mt={12}>
+                <FormControl mb={10}>
+                  <FormLabel mb={4} opacity={0.8} color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }}>
                     Email
                   </FormLabel>
                   <Input
@@ -61,6 +67,7 @@ const SendVerificationLink = () => {
                       }
                     })}
                     fontSize={{ base: 'sm', '1xl': 'md' }}
+                    py={{ base: 5, '1xl': 6 }}
                   />
                   {errors?.email && <ErrorText message={errors.email.message} />}
                 </FormControl>
