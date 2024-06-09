@@ -38,7 +38,7 @@ const TableOfContent = ({ toc, displayOnMobile, minW = { base: 360, '1xl': 420 }
       <Divider borderColor="rgb(27, 27, 27)" mb={3} />
       <Box pl={4}>
         {toc?.map((item) => (
-          <Box mb={5} key={item?.id}>
+          <Box mb={5} key={item?.id} display={item?.text ? 'block' : 'none'}>
             <a href={`#${item?.id}`}>
               <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="500">
                 &#8226; {item?.text}
