@@ -41,6 +41,18 @@ a {
   overflow: auto !important;
   font-size: 18px !important;
 }
+.ql-snow .ql-editor h2,
+.ql-snow .ql-editor h2 span,
+.ql-snow .ql-editor h3,
+.ql-snow .ql-editor h3 span {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+}
+
+.ql-snow .ql-editor h2 strong,
+.ql-snow .ql-editor h3 strong {
+  font-weight: 600 !important;
+}
 
 @media (max-width: 1280px) {
   .ql-snow .ql-editor pre.ql-syntax {
@@ -50,7 +62,7 @@ a {
 
 .ql-snow .ql-editor h2 strong,
 .ql-snow .ql-editor h2 span {
-  font-size: 24px !important;
+  font-size: 20px !important;
   font-weight: 700 !important;
 }
 
@@ -105,8 +117,9 @@ html[data-theme='light'] .ql-editor p span {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left: 4px solid rgb(123, 0, 211) !important;
-  font-weight: 500;
-  line-height: 32px;
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 14px;
 }
 
 .ql-editor ol,

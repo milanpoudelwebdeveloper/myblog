@@ -97,7 +97,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
           gap={{ base: 10, '1xl': 14 }}
           direction={{ base: 'column', md: 'row' }}
         >
-          <TableOfContent toc={blogDetail?.toc} displayOnMobile={false} minW={{ base: 360, '1xl': 420 }} />
+          <TableOfContent toc={blogDetail?.toc} displayOnMobile={false} minW={{ base: 360, md: 330, '1xl': 420 }} />
           <Box position="relative">
             <Box h={{ base: 300, xl: 330, '1xl': 440 }} position="relative" overflow="hidden">
               <Box
@@ -192,7 +192,7 @@ const BlogDetails = ({ blogDetail }: { blogDetail: IBlog }) => {
                 <Box
                   className="content ql-editor custom-scrollbar"
                   fontSize={{ base: 'sm', '1xl': 'lg' }}
-                  lineHeight="28px"
+                  lineHeight="32px"
                   dangerouslySetInnerHTML={{
                     __html: blogDetail?.content
                   }}
