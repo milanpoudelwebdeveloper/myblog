@@ -1,3 +1,8 @@
+interface IToc {
+  id: string
+  tag: string
+  text: string
+}
 interface IBlog {
   id: number | string
   title: string
@@ -14,6 +19,7 @@ interface IBlog {
   name: string
   profileimage: string
   metatitle: string
+  toc: IToc[]
 }
 
 interface ICategory {
