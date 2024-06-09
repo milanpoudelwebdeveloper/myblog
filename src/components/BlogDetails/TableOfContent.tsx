@@ -17,7 +17,7 @@ const TableOfContent = ({ toc, displayOnMobile, minW = { base: 360, '1xl': 420 }
   return (
     <Flex
       minW={minW}
-      h={{ base: 370, '1xl': 400 }}
+      h={{ base: 370, '1xl': 420 }}
       position={{ base: 'static', md: 'sticky' }}
       top={{ base: 32, xl: 28, '1xl': 32 }}
       overflow="auto"
@@ -40,7 +40,7 @@ const TableOfContent = ({ toc, displayOnMobile, minW = { base: 360, '1xl': 420 }
         {toc?.map((item) => (
           <Box mb={5} key={item?.id}>
             <a href={`#${item?.id}`}>
-              <Text fontSize="md" fontWeight="500">
+              <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="500">
                 &#8226; {item?.text}
               </Text>
             </a>
