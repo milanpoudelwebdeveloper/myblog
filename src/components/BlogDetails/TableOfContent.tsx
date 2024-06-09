@@ -1,5 +1,6 @@
 import React from 'react'
 import { Flex, Text, Divider, Box } from '@chakra-ui/react'
+import Link from 'next/link'
 
 interface IToc {
   id: string
@@ -40,11 +41,11 @@ const TableOfContent = ({ toc, displayOnMobile, minW = { base: 360, '1xl': 420 }
       <Box pl={4}>
         {toc?.map((item) => (
           <Box mb={5} key={item?.id} display={item?.text ? 'block' : 'none'}>
-            <a href={`#${item?.id}`}>
+            <Link href={`#${item?.id}`}>
               <Text fontSize={{ base: 'sm', '1xl': 'md' }} fontWeight="500">
                 &#8226; {item?.text}
               </Text>
-            </a>
+            </Link>
           </Box>
         ))}
       </Box>
