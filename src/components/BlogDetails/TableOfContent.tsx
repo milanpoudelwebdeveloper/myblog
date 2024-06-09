@@ -17,7 +17,7 @@ const TableOfContent = ({ toc, displayOnMobile, minW = { base: 360, '1xl': 420 }
   return (
     <Flex
       minW={minW}
-      h={{ base: 370, '1xl': 420 }}
+      h={{ base: 390, '1xl': 420 }}
       position={{ base: 'static', md: 'sticky' }}
       top={{ base: 32, xl: 28, '1xl': 32 }}
       overflow="auto"

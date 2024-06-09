@@ -41,18 +41,6 @@ a {
   overflow: auto !important;
   font-size: 18px !important;
 }
-.ql-snow .ql-editor h2,
-.ql-snow .ql-editor h2 span,
-.ql-snow .ql-editor h3,
-.ql-snow .ql-editor h3 span {
-  font-size: 24px !important;
-  font-weight: 600 !important;
-}
-
-.ql-snow .ql-editor h2 strong,
-.ql-snow .ql-editor h3 strong {
-  font-weight: 600 !important;
-}
 
 @media (max-width: 1280px) {
   .ql-snow .ql-editor pre.ql-syntax {
@@ -60,29 +48,37 @@ a {
   }
 }
 
+.ql-snow .ql-editor h2,
 .ql-snow .ql-editor h2 strong,
-.ql-snow .ql-editor h2 span {
+.ql-snow .ql-editor h2 span,
+.ql-snow .ql-editor h3,
+.ql-snow .ql-editor h3 strong,
+.ql-snow .ql-editor h3 span {
   font-size: 20px !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
+  color: rgb(0, 0, 0) !important;
 }
 
 @media (max-width: 1280px) {
+  .ql-snow .ql-editor h2,
   .ql-snow .ql-editor h2 strong,
-  .ql-snow .ql-editor h2 span {
-    font-size: 20px !important;
+  .ql-snow .ql-editor h2 span,
+  .ql-snow .ql-editor h3,
+  .ql-snow .ql-editor h3 strong,
+  .ql-snow .ql-editor h3 span {
+    font-size: 18px !important;
   }
-}
-
-.ql-snow .ql-editor h2 strong,
-.ql-snow .ql-editor h2 span {
-  color: rgb(0, 0, 0) !important;
 }
 
 html[data-theme='dark'] .ql-snow .ql-editor h2 strong,
 html[data-theme='dark'] .ql-snow .ql-editor h2 span,
 html[data-theme='dark'] .ql-snow .ql-editor p,
 html[data-theme='dark'] .ql-snow .ql-editor p span,
-html[data-theme='dark'] .ql-snow .ql-editor h2 strong {
+html[data-theme='dark'] .ql-snow .ql-editor h2 strong,
+html[data-theme='dark'] .ql-snow .ql-editor h2,
+html[data-theme='dark'] .ql-snow .ql-editor h3,
+html[data-theme='dark'] .ql-snow .ql-editor h3 strong,
+html[data-theme='dark'] .ql-snow .ql-editor h3 span {
   color: #c0c5d0 !important;
 }
 
