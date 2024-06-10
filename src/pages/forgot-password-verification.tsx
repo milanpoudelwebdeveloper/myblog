@@ -2,17 +2,14 @@ import { Box, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/rea
 import React, { useState } from 'react'
 import ErrorText from '@components/Common/ErrorText'
 import { FieldValues, useForm } from 'react-hook-form'
-import { sendVerificationLink } from '../services/auth'
+import { sendForgotPasswordLink } from '../services/auth'
 import { useCustomToast } from '../hooks/useCustomToast'
 import { PublicRoute } from '@components/RouteAccess'
 import { useTimer } from '../hooks/useTimer'
 import AuthFormWrapper from '@components/Common/AuthFormWrapper'
-import { useRouter } from 'next/router'
-import { LOGIN } from '@constants/routes'
 
-const SendVerificationLink = () => {
+const SendForgotPasswordLink = () => {
   const { showToast } = useCustomToast()
-  const router = useRouter()
   const [enabled, setEnabled] = useState(false)
   const { realTimer, timer, resetTimer } = useTimer(0, enabled)
   const {
@@ -22,7 +19,7 @@ const SendVerificationLink = () => {
   } = useForm()
 
   const resendLink = (data: FieldValues) => {
-    sendVerificationLink(data?.email)
+    sendForgotPasswordLink(data?.email)
       .then((message) => {
         !enabled && setEnabled(true)
         resetTimer(120)
@@ -30,9 +27,6 @@ const SendVerificationLink = () => {
       })
       .catch((e) => {
         showToast(e?.data?.message, 'error')
-        if (e?.status === 403) {
-          router.push(LOGIN)
-        }
       })
   }
 
@@ -66,7 +60,7 @@ const SendVerificationLink = () => {
             </FormControl>
             <Button variant="unstyled" isDisabled={timer > 0} type="submit">
               <Text color="#202224" fontSize={{ base: 'sm', '1xl': 'md' }} opacity="0.6" textAlign="right" mt={5}>
-                Send verification link {timer > 0 ? `in ${realTimer}` : ''}
+                Send password reset link {timer > 0 ? `in ${realTimer}` : ''}
               </Text>
             </Button>
           </Box>
@@ -76,4 +70,4 @@ const SendVerificationLink = () => {
   )
 }
 
-export default SendVerificationLink
+export default SendForgotPasswordLink

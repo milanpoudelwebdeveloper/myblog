@@ -12,11 +12,13 @@ import Link from 'next/link'
 import HeadingSeo from '@components/Common/HeadingSeo'
 import { LOGIN, SIGNUP } from '@constants/routes'
 import AuthFormWrapper from '@components/Common/AuthFormWrapper'
+import { useRouter } from 'next/router'
 
 const SignUp = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
   const { showToast } = useCustomToast()
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -32,6 +34,7 @@ const SignUp = () => {
     signUpUser(data as ISignUp)
       .then((res) => {
         showToast(res?.message, 'success')
+        router.push(LOGIN)
       })
       .catch((e) => {
         showToast(e, 'error')

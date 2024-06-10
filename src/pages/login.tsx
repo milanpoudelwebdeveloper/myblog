@@ -11,7 +11,7 @@ import { AuthContext } from '../context/authContext'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import HeadingSeo from '@components/Common/HeadingSeo'
-import { LOGIN, SEND_VERIFICATION, SIGNUP } from '@constants/routes'
+import { ADMIN, HOME, LOGIN, SEND_PASSWORD_VERIFICATION, SEND_VERIFICATION, SIGNUP } from '@constants/routes'
 import AuthFormWrapper from '@components/Common/AuthFormWrapper'
 
 const UserLogin = () => {
@@ -37,13 +37,13 @@ const UserLogin = () => {
           setUserData(user)
           const isAdmin = user.role === 'admin' || user.role === 'superadmin'
           setTimeout(() => {
-            isAdmin ? router.push('/admin') : router.push('/')
+            isAdmin ? router.push(ADMIN) : router.push(HOME)
           }, 700)
         }
       })
       .catch((e) => {
         showToast(e?.data?.message, 'error')
-        if (e.status) {
+        if (e.status === 403) {
           setShowResetLink(true)
         }
       })
@@ -96,7 +96,7 @@ const UserLogin = () => {
               <PasswordVisibilty visibility={passwordVisible} toggle={setPasswordVisible} />
               {errors?.password && <ErrorText message={errors.password.message} />}
             </FormControl>
-            <Link href={SEND_VERIFICATION} shallow>
+            <Link href={SEND_PASSWORD_VERIFICATION} shallow>
               <Button
                 variant="unstyled"
                 ml="auto"
@@ -105,6 +105,7 @@ const UserLogin = () => {
                 fontWeight="normal"
                 textAlign="right"
                 my={{ base: 2, '1xl': 5 }}
+                display="block"
               >
                 Forgot Password?
               </Button>
