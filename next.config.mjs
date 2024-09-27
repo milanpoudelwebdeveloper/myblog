@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 import bundleAnalyzer from '@next/bundle-analyzer'
 const nextConfig = {
-  output: 'export',
   reactStrictMode: true,
   images: {
     remotePatterns: [
