@@ -30,6 +30,18 @@ export const verifyAccount = async (token: string) => {
   }
 }
 
+export const verifyPasswordReset = async (token: string) => {
+  try {
+    const res = await axiosInstance.post('/auth/verifypasswordreset', { token })
+    if (res?.data) {
+      return res.data
+    }
+  } catch (e: any) {
+    const message = e?.response?.data?.message || 'Something went wrong while verifying account. Please try again'
+    throw message
+  }
+}
+
 export interface ILogin {
   email: string
   password: string
@@ -78,7 +90,19 @@ export const sendVerificationLink = async (email: string) => {
       return res?.data?.message
     }
   } catch (e: any) {
-    const message = e?.response?.data?.message || 'Something went wrong while verifying account. Please try again'
+    const message = e?.response || 'Something went wrong while verifying account. Please try again'
+    throw message
+  }
+}
+
+export const sendForgotPasswordLink = async (email: string) => {
+  try {
+    const res = await axiosInstance.post('/auth/sendforgotpasswordlink', { email })
+    if (res?.data) {
+      return res?.data?.message
+    }
+  } catch (e: any) {
+    const message = e?.response || 'Something went wrong while verifying account. Please try again'
     throw message
   }
 }

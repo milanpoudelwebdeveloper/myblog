@@ -117,6 +117,9 @@ const AddBlog = () => {
       return showToast('Please add cover image', 'error')
     }
     const categories = data?.categories?.map((category: { label: string; value: string }) => category.value)
+    const { updatedContent, headings } = extractHeadings(data?.content)
+    data.tableofcontents = JSON.stringify(headings)
+    data.content = updatedContent
     try {
       const values = { ...data, categories, published, coverImage, writtenBy: user?.id } as IAddBlog
       const response = await addBlog(values)
@@ -146,6 +149,27 @@ const AddBlog = () => {
     value: category.id,
     label: category.name
   }))
+
+  const generateId = (text: string) => {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/gi, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with dashes
+      .trim()
+  }
+
+  const extractHeadings = (content: string) => {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(content, 'text/html')
+    const headings = Array.from(doc.querySelectorAll('h2, h3')).map((heading, index) => {
+      const text = heading.textContent || ''
+      const id = generateId(text) || `heading-${index}`
+      heading.id = id
+      return { tag: heading.tagName.toLowerCase(), text, id }
+    })
+    const updatedContent = doc.body.innerHTML
+    return { updatedContent, headings }
+  }
 
   return (
     <MainLayout>
@@ -246,7 +270,8 @@ const AddBlog = () => {
                     modules={modules}
                     placeholder="Write Content Here"
                     onChange={(text) => {
-                      field.onChange(text)
+                      const updatedContent = extractHeadings(text)
+                      field.onChange(updatedContent)
                     }}
                     className="react-quill"
                   />

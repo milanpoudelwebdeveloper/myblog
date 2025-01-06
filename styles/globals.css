@@ -3,10 +3,33 @@
   padding: 0;
   margin: 0;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+}
+
+html[data-theme='dark'] .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme='light'] .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .react .ql-editor {
@@ -46,29 +69,38 @@ a {
   }
 }
 
+.ql-snow .ql-editor h2,
 .ql-snow .ql-editor h2 strong,
-.ql-snow .ql-editor h2 span {
-  font-size: 24px !important;
-  font-weight: 700 !important;
+.ql-snow .ql-editor h2 span,
+.ql-snow .ql-editor h3,
+.ql-snow .ql-editor h3 strong,
+.ql-snow .ql-editor h3 span {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: rgb(0, 0, 0) !important;
+  scroll-margin-top: 100px;
 }
 
 @media (max-width: 1280px) {
+  .ql-snow .ql-editor h2,
   .ql-snow .ql-editor h2 strong,
-  .ql-snow .ql-editor h2 span {
-    font-size: 20px !important;
+  .ql-snow .ql-editor h2 span,
+  .ql-snow .ql-editor h3,
+  .ql-snow .ql-editor h3 strong,
+  .ql-snow .ql-editor h3 span {
+    font-size: 18px !important;
   }
-}
-
-.ql-snow .ql-editor h2 strong,
-.ql-snow .ql-editor h2 span {
-  color: rgb(0, 0, 0) !important;
 }
 
 html[data-theme='dark'] .ql-snow .ql-editor h2 strong,
 html[data-theme='dark'] .ql-snow .ql-editor h2 span,
 html[data-theme='dark'] .ql-snow .ql-editor p,
 html[data-theme='dark'] .ql-snow .ql-editor p span,
-html[data-theme='dark'] .ql-snow .ql-editor h2 strong {
+html[data-theme='dark'] .ql-snow .ql-editor h2 strong,
+html[data-theme='dark'] .ql-snow .ql-editor h2,
+html[data-theme='dark'] .ql-snow .ql-editor h3,
+html[data-theme='dark'] .ql-snow .ql-editor h3 strong,
+html[data-theme='dark'] .ql-snow .ql-editor h3 span {
   color: #c0c5d0 !important;
 }
 
@@ -103,8 +135,9 @@ html[data-theme='light'] .ql-editor p span {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left: 4px solid rgb(123, 0, 211) !important;
-  font-weight: 500;
-  line-height: 32px;
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 14px;
 }
 
 .ql-editor ol,
